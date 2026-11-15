@@ -169,13 +169,13 @@ export function EmptyState({ icon, title, body, action }: { icon: ReactNode; tit
 
 export function Toggle({ checked, onChange, label }: { checked: boolean; onChange: (v: boolean) => void; label?: ReactNode }) {
   return (
-    <label className="inline-flex cursor-pointer items-center gap-2.5 text-sm text-ink-200 select-none">
-      <span onClick={() => onChange(!checked)} role="switch" aria-checked={checked}
-        className={cx('relative inline-block h-5 w-9 rounded-full transition-colors', checked ? 'bg-emerald-400/80' : 'bg-white/15')}>
+    <button type="button" role="switch" aria-checked={checked} onClick={() => onChange(!checked)}
+      className="inline-flex cursor-pointer items-center gap-2.5 rounded-lg text-left text-sm text-ink-200 select-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-violet-400/60">
+      <span className={cx('relative inline-block h-5 w-9 shrink-0 rounded-full transition-colors', checked ? 'bg-emerald-400/80' : 'bg-white/15')}>
         <span className={cx('absolute top-0.5 size-4 rounded-full bg-white shadow transition-all', checked ? 'left-[18px]' : 'left-0.5')} />
       </span>
       {label}
-    </label>
+    </button>
   )
 }
 

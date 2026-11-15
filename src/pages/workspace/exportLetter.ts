@@ -3,6 +3,8 @@ import type { CaseFile, MatchRow, PolicyVersion } from '../../lib/types'
 import { blocksToHtml, type Block } from '../../lib/letter'
 import { fmtDate } from '../../lib/rules'
 
+const esc = (s: string) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+
 const BASE_CSS = `
   @page { size: letter; margin: 0.8in; }
   body { font-family: Georgia, 'Times New Roman', serif; color: #111; font-size: 11.5pt; line-height: 1.5; margin: 0; }
@@ -23,7 +25,7 @@ const BASE_CSS = `
 `
 
 function openPrint(title: string, body: string) {
-  const html = `<!doctype html><html><head><meta charset="utf-8"><title>${title}</title><style>${BASE_CSS}</style></head><body>${body}</body></html>`
+  const html = `<!doctype html><html><head><meta charset="utf-8"><title>${esc(title)}</title><style>${BASE_CSS}</style></head><body>${body}</body></html>`
   // Print through a hidden iframe (no pop-up blocker); the browser dialog offers "Save as PDF".
   const frame = document.createElement('iframe')
   frame.setAttribute('aria-hidden', 'true')
@@ -45,14 +47,14 @@ function openPrint(title: string, body: string) {
   }, 350)
 }
 
-const esc = (s: string) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
 
 /** The denial letter as a printable page — print it, then snap it with a phone to demo capture. */
 export function printSampleLetter(c: CaseFile) {
   openPrint('Denial letter (synthetic)', `<div class="watermark">SYNTHETIC — DEMO</div><div class="wrap"><pre style="font-family: Georgia, serif; font-size: 11pt">${esc(c.denialText)}</pre></div>`)
 }
 
-export function exportAppeal(c: CaseFile, blocks: Block[], effective: PolicyVersion, rows: MatchRow[]) {
+export function exportAppeal(c: CaseFile, blocks: Block[], effective: PolicyVersion, allRows: MatchRow[], isVerified: (r: MatchRow) => boolean = () => true) {
+  const rows = allRows.filter(isVerified)
   const d = c.denial!
   const today = new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })
   const verifiedRows = rows.filter(r => r.status === 'met' && r.chart_quote)
@@ -79,7 +81,7 @@ export function exportAppeal(c: CaseFile, blocks: Block[], effective: PolicyVers
     ${rows.map(r => `<div class="quote"><b>${esc(r.criterion_label)}</b><br/>“${esc(r.policy_quote)}”</div>`).join('')}
     <h3>Exhibit B — Medical record excerpts</h3>
     ${verifiedRows.map(r => `<div class="quote">Line ${r.chart_line}: “${esc(r.chart_quote || '')}” <span class="cite">— supports: ${esc(r.criterion_label)}</span></div>`).join('')}
-    <p><span class="stamp">${verifiedRows.length + rows.length} QUOTES VERIFIED VERBATIM</span></p>
+    <p><span class="stamp">${verifiedRows.length + rows.length} QUOTES VERIFIED — PROVENANCE + SUPPORT</span></p>
   </div>
   <div class="wrap exhibit"><h3>Exhibit C — Denial notice</h3><pre>${esc(c.denialText)}</pre></div>`
   openPrint(`Appeal — ${d.member_name}`, body)

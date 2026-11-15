@@ -270,7 +270,7 @@ Facts:
 - Denial reason (verbatim): "${denial.denial_reason_text}"
 - Governing policy: ${effective.id} ${effective.title}, version effective ${effective.effective_date}.
 - Criterion-by-criterion findings (only verified rows):
-${rows.map(r => `  ${r.id} [${r.status}] ${r.criterion_label}: ${r.reasoning}`).join('\n')}
+${rows.map(r => `  ${r.id} [${r.status}] (chart evidence: ${r.chart_quote ? 'yes' : 'NONE — never use :chart for this row'}) ${r.criterion_label}: ${r.reasoning}`).join('\n')}
 - Compliance issues found:
 ${flags.map(f => `  - ${f.title}: ${f.detail}${f.citation ? ` (${f.citation})` : ''}`).join('\n') || '  (none)'}
 
@@ -342,9 +342,9 @@ Issues: ${args.flags.map(f => `${f.title}${f.citation ? ` (${f.citation})` : ''}
 // ------------------------------------------------------------- embeddings
 export async function embed(texts: string[]) {
   return run('embed', async (model) => {
-    const r = await ai().models.embedContent({ model, contents: texts })
+    const r = await ai().models.embedContent({ model, contents: texts.map(t => ({ role: 'user', parts: [{ text: t }] })) })
     const v = r.embeddings?.map(e => e.values || [])
-    if (!v?.length) throw new Error('empty response')
+    if (!v || v.length !== texts.length) throw new Error(`embedding count mismatch (${v?.length ?? 0}/${texts.length})`)
     return v
   })
 }

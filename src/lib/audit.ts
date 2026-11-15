@@ -78,7 +78,12 @@ export function simulateTamper(): number | null {
 }
 
 /** Repair a tampered demo chain by re-signing from the first broken entry. */
-export async function resealChain(): Promise<void> {
+export function resealChain(): Promise<void> {
+  const p = queue.then(resealNow)
+  queue = p.catch(() => undefined)
+  return p
+}
+async function resealNow(): Promise<void> {
   const entries = loadAudit()
   let prevHash = GENESIS
   for (const e of entries) {

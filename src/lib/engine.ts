@@ -6,11 +6,11 @@
 import { useEffect, useState } from 'react'
 import { AllModelsFailed, getUseCache, friendlyError } from './gemini'
 import * as P from './pipeline'
-import { caseStore } from './store'
+import { caseStore, seedById } from './store'
 import { audit } from './audit'
 import { familyById, getFamilies, versionOf } from './policies'
 import { evaluate } from './rules'
-import { verifyQuote } from './verifier'
+import { lineOfOffset, verifyQuote } from './verifier'
 import type { CaseFile, Entailment, Flag, MatchRow, PolicyFamily, PolicyVersion, TraceEntry } from './types'
 import { pushTrace } from '../ui/TracePanel'
 
@@ -29,6 +29,7 @@ const blank = (): Steps => ({ extract: { status: 'idle' }, locate: { status: 'id
 
 // ------------------------------------------------------------- step state bus
 const stepState = new Map<string, Steps>()
+export function resetSteps(caseId: string) { stepState.delete(caseId); subs.forEach(f => f()) }
 const running = new Set<string>()
 const subs = new Set<() => void>()
 function setStep(caseId: string, k: StepKey, s: StepState) {
@@ -90,13 +91,36 @@ export function rowKeys(row: MatchRow, policy: PolicyVersion | null, chartText: 
   const k1c = row.chart_quote ? verifyQuote(row.chart_quote, chartText) : null
   return { k1p, k1c }
 }
+/** The Key 2 verdict for a row — only if it was issued for the row's CURRENT chart quote. */
+export function entFor(c: CaseFile, row: MatchRow): Entailment | undefined {
+  const e = c.entailments?.find(x => x.row_id === row.id)
+  if (!e) return undefined
+  if (e.chart_quote === undefined) return row.swapped_from ? undefined : e // legacy/saved verdicts: valid only for untouched rows
+  return (e.chart_quote ?? null) === (row.chart_quote ?? null) ? e : undefined
+}
 export function rowIsVerified(c: CaseFile, row: MatchRow, policy: PolicyVersion | null): boolean {
   const { k1p, k1c } = rowKeys(row, policy, c.chartText)
   if (k1p.status !== 'verified') return false
   if (row.status !== 'met') return true // unmet/missing rows only need the policy quote
   if (!k1c || k1c.status !== 'verified') return false
-  const e = c.entailments?.find(x => x.row_id === row.id)
-  return !!e && e.verdict === 'supports'
+  return entFor(c, row)?.verdict === 'supports'
+}
+/** Saved runs may only stand in for the exact documents they were recorded from. */
+export function docsMatchSeed(c: CaseFile): boolean {
+  const seed = seedById(c.id)
+  return !!seed && !!saved[c.id] && c.denialText === seed.denialText && c.chartText === seed.chartText
+}
+/** Line numbers come from where the verified quote actually is, never from the model. */
+function fixLines(rows: MatchRow[], chartText: string): MatchRow[] {
+  return rows.map(r => {
+    if (!r.chart_quote) return r
+    const k = verifyQuote(r.chart_quote, chartText)
+    return k.status === 'verified' ? { ...r, chart_line: lineOfOffset(chartText, k.start) } : r
+  })
+}
+/** Remove chart citations for rows that have no chart evidence (they could never verify). */
+export function stripImpossibleTokens(letter: string, rows: MatchRow[]): string {
+  return letter.replace(/\[\[Q:([a-z0-9]+):chart\]\]/gi, (m, id) => (rows.find(r => r.id === id)?.chart_quote ? m : ''))
 }
 
 export function caseContext(c: CaseFile): { family: PolicyFamily | null; effective: PolicyVersion | null } {
@@ -120,11 +144,12 @@ export async function runCase(caseId: string, opts: { replay?: boolean; from?: S
   running.add(caseId)
   stepState.set(caseId, blank())
   subs.forEach(f => f())
-  const forceSaved = !!opts.replay
   const sv = () => saved[caseId]
   try {
     let c = caseStore.get(caseId)!
-    caseStore.update(caseId, { status: 'analyzing' })
+    const allowSaved = docsMatchSeed(c)
+    const forceSaved = !!opts.replay && allowSaved
+    caseStore.update(caseId, { status: 'analyzing', signedBy: null, confirmed: {}, patientExplainer: null, outcome: null })
     await audit('overturn', 'case.run', caseId, { mode: forceSaved ? 'replay' : 'live' })
 
     // 1 — extract (reuse a previous extraction if the letter text hasn't changed — retries start where they failed)
@@ -133,10 +158,10 @@ export async function runCase(caseId: string, opts: { replay?: boolean; from?: S
       ? { value: { letter_transcript: c.denialText, denial: c.denial }, model: 'previous extraction', ms: 0, cached: false }
       : await liveOrSaved(caseId, 'extract', 'extract',
       () => P.extractDenial(c.denialText ? { text: c.denialText } : c.denialFile ? { file: dataUrlToPart(c.denialFile.dataUrl) } : { text: '' }),
-      () => (sv()?.extract as { letter_transcript: string; denial: NonNullable<CaseFile['denial']> } | undefined), forceSaved)
+      () => (allowSaved ? (sv()?.extract as { letter_transcript: string; denial: NonNullable<CaseFile['denial']> } | undefined) : undefined), forceSaved)
     const denial = ex.value.denial!
     const denialText = c.denialText || ex.value.letter_transcript
-    caseStore.update(caseId, { denial, denialText, extractedText: denialText, title: c.hero || c.id.startsWith('wl-') ? c.title : `${denial.member_name || 'Patient'} — ${denial.service_description}`.slice(0, 80) })
+    caseStore.update(caseId, { denial, denialText, extractedText: ex.cached ? undefined : denialText, title: c.hero || c.id.startsWith('wl-') ? c.title : `${denial.member_name || 'Patient'} — ${denial.service_description}`.slice(0, 80) })
     setStep(caseId, 'extract', { status: ex.cached ? 'cached' : 'done', model: ex.model, ms: ex.ms, note: `${denial.codes.length} codes · ${denial.cited_requirements.length} cited requirements` })
     await audit(ex.model, 'extract', caseId, { payer: denial.payer, plan_type: denial.plan_type, codes: denial.codes.map(x => x.code), cached: ex.cached })
 
@@ -162,7 +187,8 @@ export async function runCase(caseId: string, opts: { replay?: boolean; from?: S
     c = caseStore.get(caseId)!
     const mt = await liveOrSaved(caseId, 'match', 'match',
       () => P.matchCriteria({ denial, denialText, family: family!, effective, chartText: c.chartText }),
-      () => sv()?.match || undefined, forceSaved)
+      () => (allowSaved ? sv()?.match || undefined : undefined), forceSaved)
+    mt.value = { ...mt.value!, rows: fixLines(mt.value!.rows, c.chartText) }
     caseStore.update(caseId, { match: mt.value, confirmed: {}, entailments: null })
     setStep(caseId, 'match', { status: mt.cached ? 'cached' : 'done', model: mt.model, ms: mt.ms, note: `${mt.value!.rows.length} criteria` })
     await audit(mt.model, 'match', caseId, { rows: mt.value!.rows.map(r => ({ id: r.criterion_id, status: r.status })), cached: mt.cached })
@@ -174,8 +200,9 @@ export async function runCase(caseId: string, opts: { replay?: boolean; from?: S
     await audit('verifier', 'verify.provenance', caseId, { checked: rows.length, verified: k1ok })
     const en = await liveOrSaved(caseId, 'verify', 'entail',
       async () => { const r = await P.entail({ rows, chartText: c.chartText, denial }); return r },
-      () => sv()?.entail, forceSaved)
-    caseStore.update(caseId, { entailments: en.value })
+      () => (allowSaved && mt.cached ? sv()?.entail : undefined), forceSaved)
+    const stamped = en.value.map(e => ({ ...e, chart_quote: rows.find(r => r.id === e.row_id)?.chart_quote ?? null }))
+    caseStore.update(caseId, { entailments: stamped })
     const supports = en.value.filter(e => e.verdict === 'supports').length
     setStep(caseId, 'verify', { status: en.cached ? 'cached' : 'done', model: en.model, ms: en.ms, note: `key 1: ${k1ok}/${rows.length} · key 2: ${supports}/${en.value.length}` })
     await audit(en.model, 'verify.support', caseId, { results: en.value.map(e => `${e.row_id}:${e.verdict}`), cached: en.cached })
@@ -191,7 +218,8 @@ export async function runCase(caseId: string, opts: { replay?: boolean; from?: S
     const verifiedRows = rows.filter(r => k1[rows.indexOf(r)].k1p.status === 'verified')
     const dr = await liveOrSaved(caseId, 'draft', 'letter',
       () => P.draftLetter({ denial, effective, rows: verifiedRows, flags: flags.filter(f => f.severity !== 'info' || f.id === 'ma-bound'), providerName: denial.provider_name }),
-      () => sv()?.letter, forceSaved)
+      () => (allowSaved && mt.cached && en.cached ? sv()?.letter : undefined), forceSaved)
+    dr.value = stripImpossibleTokens(dr.value, rows)
     caseStore.update(caseId, { letter: dr.value, status: 'ready' })
     setStep(caseId, 'draft', { status: dr.cached ? 'cached' : 'done', model: dr.model, ms: dr.ms, note: `${(dr.value.match(/\[\[Q:/g) || []).length} cited quotes` })
     await audit(dr.model, 'letter.draft', caseId, { tokens: (dr.value.match(/\[\[Q:[^\]]+\]\]/g) || []), cached: dr.cached })
@@ -219,7 +247,7 @@ export async function reverifyRow(caseId: string, rowId: string) {
   const r = await P.entail({ rows: [row], chartText: c.chartText, denial: c.denial })
   const res = r.value.find(x => x.row_id === rowId) || r.value[0]
   if (!res) return
-  const next = (c.entailments || []).filter(e => e.row_id !== rowId).concat({ ...res, row_id: rowId })
+  const next = (c.entailments || []).filter(e => e.row_id !== rowId).concat({ ...res, row_id: rowId, chart_quote: row.chart_quote ?? null })
   caseStore.update(caseId, { entailments: next })
   await audit(r.model, 'verify.support', caseId, { row: rowId, verdict: res.verdict, reason: res.reason_code })
   return { ...res, model: r.model, ms: r.ms }

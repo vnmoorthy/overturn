@@ -5,7 +5,7 @@ import type { CaseFile, MatchRow, PolicyVersion } from '../../lib/types'
 import { caseStore } from '../../lib/store'
 import { policyText } from '../../lib/pipeline'
 import { tamper, toLines } from '../../lib/verifier'
-import { reverifyRow, rowKeys } from '../../lib/engine'
+import { entFor, reverifyRow, rowKeys } from '../../lib/engine'
 import { audit } from '../../lib/audit'
 import { friendlyError } from '../../lib/gemini'
 import { fmtDate } from '../../lib/rules'
@@ -20,7 +20,7 @@ const REASON: Record<string, string> = {
 /** Real-but-wrong chart lines for the on-stage "Swap evidence" test. */
 function decoyLine(c: CaseFile, row: MatchRow): { line: number; text: string } | null {
   const lines = toLines(c.chartText)
-  const pref = [/family history|brother|mother|sister|father/i, /^(?!.*\b2026\b).*\b(20[01]\d|202[0-5])\b/, /\bnot\b|\bno\b|denies/i, /knee|unrelated/i]
+  const pref = [/family history|brother|mother|sister|father/i, /knee|unrelated|fall\b/i, /^(?!.*\b2026\b).*\b(20[01]\d|202[0-5])\b/, /\bnot\b|\bno\b|denies/i]
   for (const re of pref) {
     const i = lines.findIndex((l, idx) => idx + 1 !== row.chart_line && re.test(l) && l.trim().length > 12 && !/^---/.test(l.trim()))
     if (i >= 0) return { line: i + 1, text: lines[i].trim() }
@@ -35,7 +35,7 @@ export function EvidenceBoard({ c, effective }: { c: CaseFile; effective: Policy
   const [busy, setBusy] = useState<string | null>(null)
   const ptext = useMemo(() => policyText(effective), [effective])
   const keys = useMemo(() => Object.fromEntries(rows.map(r => [r.id, rowKeys(r, effective, c.chartText)])), [rows, effective, c.chartText])
-  const ent = (id: string) => c.entailments?.find(e => e.row_id === id)
+  const ent = (id: string) => { const r = rows.find(x => x.id === id); return r ? entFor(c, r) : undefined }
   const row = rows.find(r => r.id === sel) || rows[0]
 
   const policyRanges: Range[] = rows.flatMap(r => {
@@ -46,7 +46,7 @@ export function EvidenceBoard({ c, effective }: { c: CaseFile; effective: Policy
     const k = keys[r.id]?.k1c
     if (!k || k.status !== 'verified') return []
     const e = ent(r.id)
-    const tone = e && e.verdict !== 'supports' ? 'red' as const : 'green' as const
+    const tone = r.status !== 'met' ? 'amber' as const : e?.verdict === 'supports' ? 'green' as const : e ? 'red' as const : 'violet' as const
     return [{ start: k.start, end: k.end, tone, active: r.id === row?.id }]
   })
 
@@ -61,21 +61,31 @@ export function EvidenceBoard({ c, effective }: { c: CaseFile; effective: Policy
     if (!row || !row.chart_quote) { toast('Select a criterion that has chart evidence.', 'amber'); return }
     const d = decoyLine(c, row)
     if (!d) return
-    caseStore.update(c.id, cc => ({ match: cc.match && { ...cc.match, rows: cc.match.rows.map(r => r.id === row.id ? { ...r, chart_quote: d.text, chart_line: d.line, swapped_from: r.swapped_from ?? { quote: r.chart_quote, line: r.chart_line } } : r) } }))
+    // Swap the evidence AND drop its Key 2 verdict + biller confirmation: nothing stays green until re-verified.
+    caseStore.update(c.id, cc => ({
+      match: cc.match && { ...cc.match, rows: cc.match.rows.map(r => r.id === row.id ? { ...r, chart_quote: d.text, chart_line: d.line, swapped_from: r.swapped_from ?? { quote: r.chart_quote, line: r.chart_line, entailment: cc.entailments?.find(e => e.row_id === r.id) ?? null } } : r) },
+      entailments: (cc.entailments || []).filter(e => e.row_id !== row.id),
+      confirmed: { ...cc.confirmed, [row.id]: false },
+    }))
     await audit('biller', 'demo.swap_evidence', c.id, { row: row.id, line: d.line })
     setBusy('swap')
     try {
       const r = await reverifyRow(c.id, row.id)
       if (r) toast(r.verdict === 'supports' ? 'Key 2 accepted the swapped line.' : `Key 2 caught it: ${REASON[r.reason_code] || r.reason_code}.`, r.verdict === 'supports' ? 'amber' : 'green')
-    } catch (e) { toast(friendlyError(e), 'red') } finally { setBusy(null) }
+    } catch (e) { toast(`${friendlyError(e)} The swapped line stays unverified.`, 'red') } finally { setBusy(null) }
   }
   async function restore() {
     const tampered = rows.filter(r => r.tampered_from || r.swapped_from)
     if (!tampered.length) return
-    caseStore.update(c.id, cc => ({ match: cc.match && { ...cc.match, rows: cc.match.rows.map(r => ({ ...r, policy_quote: r.tampered_from ?? r.policy_quote, chart_quote: r.swapped_from ? r.swapped_from.quote : r.chart_quote, chart_line: r.swapped_from ? r.swapped_from.line : r.chart_line, tampered_from: undefined, swapped_from: undefined })) } }))
-    await audit('biller', 'demo.restore', c.id, {})
-    setBusy('restore')
-    try { for (const r of tampered.filter(x => x.swapped_from)) await reverifyRow(c.id, r.id) } catch (e) { toast(friendlyError(e), 'red') } finally { setBusy(null) }
+    // The original quotes and their original verdicts come back exactly — no new model call needed.
+    caseStore.update(c.id, cc => {
+      const restoredEnts = rows.filter(r => r.swapped_from?.entailment).map(r => r.swapped_from!.entailment!)
+      return {
+        match: cc.match && { ...cc.match, rows: cc.match.rows.map(r => ({ ...r, policy_quote: r.tampered_from ?? r.policy_quote, chart_quote: r.swapped_from ? r.swapped_from.quote : r.chart_quote, chart_line: r.swapped_from ? r.swapped_from.line : r.chart_line, tampered_from: undefined, swapped_from: undefined })) },
+        entailments: (cc.entailments || []).filter(e => !restoredEnts.some(x => x.row_id === e.row_id)).concat(restoredEnts),
+      }
+    })
+    await audit('biller', 'demo.restore', c.id, { rows: tampered.map(r => r.id) })
     toast('Original verified evidence restored.', 'green')
   }
   function confirm(id: string, v: boolean) {
@@ -104,7 +114,7 @@ export function EvidenceBoard({ c, effective }: { c: CaseFile; effective: Policy
           <ScanSearch className="size-4 text-cyan-300" />
           <div>
             <div className="text-sm font-semibold">Evidence board</div>
-            <div className="text-[11.5px] text-ink-400">{greenCount}/{rows.length} criteria pass both keys · click a criterion to see both sources</div>
+            <div className="text-[11.5px] text-ink-400">{rows.filter(r => r.status === 'met' && isGreen(r)).length}/{rows.length} criteria met &amp; verified by both keys · click a criterion to see both sources</div>
           </div>
         </div>
         <div className="flex flex-wrap gap-1.5">
@@ -139,7 +149,7 @@ export function EvidenceBoard({ c, effective }: { c: CaseFile; effective: Policy
                       <Badge tone={r.status === 'met' ? 'green' : r.status === 'unmet' ? 'red' : 'amber'}>{r.status}</Badge>
                       <Badge tone={k?.k1p.status === 'verified' ? 'cyan' : 'red'} icon={<Fingerprint className="size-3" />}>policy {k?.k1p.status === 'verified' ? 'in source' : 'NOT FOUND'}</Badge>
                       {r.chart_quote && <Badge tone={k?.k1c?.status === 'verified' ? 'cyan' : 'red'} icon={<Fingerprint className="size-3" />}>chart {k?.k1c?.status === 'verified' ? `L${r.chart_line}` : 'NOT FOUND'}</Badge>}
-                      {r.chart_quote && (e ? <Badge tone={e.verdict === 'supports' ? 'green' : 'red'}>key 2 · {REASON[e.reason_code] || e.verdict}</Badge> : busy === 'swap' && active ? <Badge tone="violet" icon={<Spinner className="size-3" />}>key 2</Badge> : null)}
+                      {r.chart_quote && (e ? <Badge tone={e.verdict === 'supports' ? 'green' : 'red'}>key 2 · {REASON[e.reason_code] || e.verdict}</Badge> : busy === 'swap' && active ? <Badge tone="violet" icon={<Spinner className="size-3" />}>key 2 checking…</Badge> : r.status === 'met' ? <Badge tone="red">key 2 · not verified</Badge> : null)}
                     </div>
                     {r.status !== 'met' && r.missing_document && <div className="mt-1.5 text-[11.5px] text-amber-200/90">Attach: {r.missing_document}</div>}
                   </div>

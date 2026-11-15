@@ -68,7 +68,7 @@ export interface MatchRow {
   reasoning: string
   missing_document: string | null
   tampered_from?: string // original policy quote before an on-stage "Tamper"
-  swapped_from?: { quote: string | null; line: number | null } // original chart evidence before "Swap evidence"
+  swapped_from?: { quote: string | null; line: number | null; entailment?: Entailment | null } // original chart evidence before "Swap evidence"
 }
 
 export interface DenialMapping {
@@ -96,7 +96,7 @@ export interface DiffToken { text: string; kind: 'same' | 'added' | 'removed' }
 
 export type EntailVerdict = 'supports' | 'contradicts' | 'insufficient'
 export type EntailReason = 'ok' | 'date_mismatch' | 'laterality' | 'negation' | 'patient_mismatch' | 'irrelevant' | 'other'
-export interface Entailment { row_id: string; verdict: EntailVerdict; reason_code: EntailReason; explanation: string }
+export interface Entailment { row_id: string; verdict: EntailVerdict; reason_code: EntailReason; explanation: string; chart_quote?: string | null }
 
 export type FlagSeverity = 'violation' | 'warning' | 'info' | 'strength'
 export interface Flag {

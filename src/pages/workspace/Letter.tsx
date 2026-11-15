@@ -37,13 +37,16 @@ export function LetterPanel({ c, effective, onRedraft, redrafting }: { c: CaseFi
 
   const metRows = rows.filter(r => r.status === 'met')
   const allMetVerified = metRows.every(r => rowIsVerified(c, r, effective))
-  const allConfirmed = rows.filter(r => rowIsVerified(c, r, effective)).every(r => c.confirmed[r.id])
+  const allConfirmed = metRows.length > 0 && metRows.every(r => c.confirmed[r.id])
   const quotesOk = built.unverified.length === 0 && built.total > 0
   const signed = !!c.signedBy
+  const gaps = rows.filter(r => r.status === 'missing' || (r.status === 'unmet' && !!r.missing_document))
+  const [ackGaps, setAckGaps] = useState(false)
   const gates = [
-    { ok: quotesOk, label: `${built.verified}/${built.total} quotes verified verbatim` },
+    { ok: quotesOk, label: `${built.verified}/${built.total} quotes verified (provenance + support)` },
     { ok: allMetVerified, label: 'Every “met” criterion passes both keys' },
-    { ok: allConfirmed, label: 'Biller confirmed each verified criterion' },
+    { ok: allConfirmed, label: 'Biller confirmed each met criterion' },
+    ...(gaps.length ? [{ ok: ackGaps, label: `Missing documentation will be attached (${gaps.length})` }] : []),
     { ok: signed, label: 'Human sign-off' },
   ]
   const canExport = gates.every(g => g.ok)
@@ -55,7 +58,7 @@ export function LetterPanel({ c, effective, onRedraft, redrafting }: { c: CaseFi
     toast('Signed. Export unlocked when every gate is green.', 'green')
   }
   async function doExport() {
-    exportAppeal(c, built.blocks, effective, rows)
+    exportAppeal(c, built.blocks, effective, rows, r => rowIsVerified(c, r, effective))
     await audit(`biller:${c.signedBy}`, 'letter.export', c.id, { format: 'pdf' })
   }
   async function copyText() {
@@ -107,6 +110,12 @@ export function LetterPanel({ c, effective, onRedraft, redrafting }: { c: CaseFi
               </div>
             ))}
           </div>
+          {gaps.length > 0 && (
+            <label className="mt-3 flex items-start gap-2 rounded-lg border border-amber-300/20 bg-amber-400/[0.05] p-2.5 text-[12px] leading-snug text-amber-100">
+              <input type="checkbox" className="mt-0.5 accent-amber-300" checked={ackGaps} onChange={e => setAckGaps(e.target.checked)} />
+              <span>I’ll attach: {gaps.map(g => g.missing_document || g.criterion_label).join('; ')}</span>
+            </label>
+          )}
           {built.unverified.length > 0 && (
             <div className="mt-3 rounded-lg border border-rose-400/25 bg-rose-500/10 p-2.5 text-[12px] text-rose-200">
               {built.unverified.length} unverified quote{built.unverified.length > 1 ? 's' : ''}: “{built.unverified[0].text.slice(0, 90)}{built.unverified[0].text.length > 90 ? '…' : ''}”

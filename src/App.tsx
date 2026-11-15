@@ -57,6 +57,7 @@ export default function App() {
         <button onClick={() => setNavOpen(v => !v)} className="rounded-lg p-2 hover:bg-white/10 cursor-pointer" aria-label="Menu">{navOpen ? <X className="size-5" /> : <Menu className="size-5" />}</button>
       </div>
 
+      {navOpen && <div className="fixed inset-0 z-20 bg-black/60 backdrop-blur-sm lg:hidden" onClick={() => setNavOpen(false)} aria-hidden />}
       <aside className={cx('fixed inset-y-0 left-0 z-30 flex w-[248px] flex-col border-r border-white/8 bg-ink-950/85 px-3 py-4 backdrop-blur-xl transition-transform lg:translate-x-0', navOpen ? 'translate-x-0' : '-translate-x-full')}>
         <button onClick={() => navigate('/')} className="mb-6 flex items-center gap-2.5 px-2 text-left cursor-pointer">
           <Logo />

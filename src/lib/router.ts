@@ -3,8 +3,13 @@ import { useSyncExternalStore } from 'react'
 function current() { return (location.hash.replace(/^#/, '') || '/') }
 function subscribe(fn: () => void) { window.addEventListener('hashchange', fn); return () => window.removeEventListener('hashchange', fn) }
 
-export function navigate(path: string) {
+export function navigate(path: string, opts: { replace?: boolean } = {}) {
   if (current() === path) return
+  if (opts.replace) {
+    history.replaceState(history.state, '', '#' + path)
+    window.dispatchEvent(new HashChangeEvent('hashchange'))
+    return
+  }
   location.hash = path
   window.scrollTo({ top: 0 })
 }

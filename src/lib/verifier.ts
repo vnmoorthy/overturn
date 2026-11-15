@@ -57,9 +57,11 @@ function normCached(source: string): Normalized {
 /** Verify a quote against a source. Supports "…" ellipses: segments must appear in order. */
 export function verifyQuote(quote: string | null | undefined, source: string): VerifyResult {
   const q = stripWrapping(quote || '')
-  if (!q || q.length < 4) return { status: 'not_found', start: -1, end: -1 }
+  if (!q || q.length < 12) return { status: 'not_found', start: -1, end: -1 }
   const src = normCached(source)
   const segments = q.split(/\s*(?:\.\.\.|…|\[\.\.\.\])\s*/).map(s => normalize(s).text.replace(/[.;,:]+$/, '')).filter(Boolean)
+  // Ellipses may only elide, never stitch: ≤2 gaps, each kept segment ≥12 chars, segments ≤300 chars apart.
+  if (segments.length > 3 || (segments.length > 1 && segments.some(s => s.length < 12))) return { status: 'not_found', start: -1, end: -1 }
   let from = 0
   let start = -1
   let endN = -1
@@ -69,6 +71,7 @@ export function verifyQuote(quote: string | null | undefined, source: string): V
       const near = closestSentence(q, source)
       return { status: 'not_found', start: -1, end: -1, closest: near, diff: near ? wordDiff(near, q) : undefined }
     }
+    if (start >= 0 && idx - endN > 300) return { status: 'not_found', start: -1, end: -1 }
     if (start < 0) start = idx
     endN = idx + seg.length
     from = endN

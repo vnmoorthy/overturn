@@ -130,7 +130,9 @@ export function directorInstruction(x: RehearsalContext, c: CaseFile, opts: { to
     '- If the provider names a policy criterion but gives no chart evidence, ask for the specific documentation (the note and its date). If they cite chart evidence but no criterion, ask which criterion of the governing policy it satisfies.',
     '- If they claim something that is not in the record below, say you do not see that in the submitted documentation.',
     '- Never invent clinical facts, dates, lab values, policy text, or criteria. If asked about something that is not in these materials, say you would need to check the record.')
-  if (opts.tough) L.push('- Be a tougher reviewer than usual: interrupt rambling, insist on the exact chart date and finding, and press on every gap before you concede.')
+  L.push('- Only credit evidence the provider actually states on this call. Never volunteer chart findings, dates or policy text the provider has not mentioned.')
+  L.push('- Ask at least one specific follow-up question before you concede anything.')
+  if (opts.tough) L.push('- Be a tougher reviewer than usual: interrupt rambling, insist on the exact chart date and finding, and do not concede until the provider has addressed every requirement your denial cites AND the timing of the qualifying visit.')
   L.push('', 'WHEN TO CONCEDE',
     `- Concede ONLY when the provider has (1) cited the specific governing coverage criterion, for example by naming ${policyName} or stating the criterion, AND (2) pointed to specific chart evidence that satisfies it, and that evidence matches the record below.`,
     '- Also concede if the provider shows, with the same specificity, that the denial relied on a requirement that is not in the governing policy and the chart meets the criteria that are.',

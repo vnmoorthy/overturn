@@ -25,7 +25,7 @@ function inlineParse(src: string, ctx: LetterCtx): Inline[] {
     const field = m[2].toLowerCase() as 'policy' | 'chart'
     if (!row) out.push({ kind: 'quote', text: `[unknown citation ${m[1]}]`, ok: false, rowId: m[1], field })
     else if (field === 'policy') out.push({ kind: 'quote', text: row.policy_quote, ok: ctx.rowOk(row, 'policy'), rowId: row.id, field, cite: ctx.effective ? `${ctx.effective.id}, version effective ${ctx.effective.effective_date}` : 'policy' })
-    else if (!row.chart_quote) out.push({ kind: 'quote', text: '[no chart evidence for this criterion]', ok: false, rowId: row.id, field })
+    else if (!row.chart_quote) { /* no chart evidence to cite — token dropped */ }
     else out.push({ kind: 'quote', text: row.chart_quote, ok: ctx.rowOk(row, 'chart'), rowId: row.id, field, cite: `medical record, line ${row.chart_line}` })
     last = m.index! + m[0].length
   }
@@ -35,15 +35,22 @@ function inlineParse(src: string, ctx: LetterCtx): Inline[] {
 
 function textParse(src: string, ctx: LetterCtx): Inline[] {
   const out: Inline[] = []
-  const re = /\*\*([^*]+)\*\*|“([^”]{12,})”|"([^"]{12,})"/g
+  // Every quote pair is consumed in order, so text between two quotes is never mistaken for a quote.
+  const re = /\*\*([^*]+)\*\*|“([^”]*)”|"([^"\n]*)"/g
   let last = 0
   for (const m of src.matchAll(re)) {
     if (m.index! > last) out.push({ kind: 'text', text: src.slice(last, m.index) })
-    if (m[1]) out.push({ kind: 'bold', text: m[1] })
-    else {
-      const q = m[2] || m[3]
-      const ok = [ctx.policyText, ctx.chartText, ctx.denialText].some(s => verifyQuote(q, s).status === 'verified')
-      out.push({ kind: 'freequote', text: q, ok })
+    if (m[1] !== undefined) {
+      const inner = textParse(m[1], ctx)
+      if (inner.some(i => i.kind === 'freequote')) out.push(...inner)
+      else out.push({ kind: 'bold', text: m[1] })
+    } else {
+      const q = (m[2] ?? m[3] ?? '').trim()
+      if (q.split(/\s+/).length < 3) out.push({ kind: 'text', text: m[0] }) // a word or two in quotes is emphasis, not a quotation
+      else {
+        const ok = [ctx.policyText, ctx.chartText, ctx.denialText].some(s => verifyQuote(q, s).status === 'verified')
+        out.push({ kind: 'freequote', text: q, ok })
+      }
     }
     last = m.index! + m[0].length
   }

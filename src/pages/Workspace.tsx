@@ -3,7 +3,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { ArrowLeft, Clock, FileStack, Gavel, HeartPulse, History, Inbox, Mic, PenLine, Play, RotateCcw, ScanSearch, ShieldCheck, Sparkles, Zap } from 'lucide-react'
 import { useCase, caseStore, seedById } from '../lib/store'
 import { navigate, useRoute } from '../lib/router'
-import { caseContext, computeFlags, rowIsVerified, runCase, savedRun, useSteps } from '../lib/engine'
+import { caseContext, computeFlags, docsMatchSeed, resetSteps, rowIsVerified, runCase, savedRun, useSteps } from '../lib/engine'
 import { draftLetter, policyText } from '../lib/pipeline'
 import { appealDeadline, fmtDate } from '../lib/rules'
 import { verifyQuote } from '../lib/verifier'
@@ -31,7 +31,7 @@ export default function Workspace({ id }: { id?: string }) {
   const [stamp, setStamp] = useState(false)
   const [redrafting, setRedrafting] = useState(false)
   const [runError, setRunError] = useState<string | null>(null)
-  const autoRan = useRef(false)
+  const autoRan = useRef('')
 
   useEffect(() => { try { localStorage.setItem('overturn_last_case', caseId) } catch { /* ignore */ } }, [caseId])
   useEffect(() => { if (c) setTab(c.match ? 'evidence' : 'inputs') }, [caseId]) // eslint-disable-line react-hooks/exhaustive-deps
@@ -65,9 +65,11 @@ export default function Workspace({ id }: { id?: string }) {
   }
 
   useEffect(() => {
-    if (!c || autoRan.current) return
     const q = route.query.get('autorun')
-    if (q) { autoRan.current = true; navigate(`/case/${c.id}`); go(q === 'replay') }
+    if (!c || !q || autoRan.current === c.id + q) return
+    autoRan.current = c.id + q
+    navigate(`/case/${c.id}`, { replace: true }) // drop ?autorun from history so Back never re-runs a case
+    go(q === 'replay')
   }, [route.query, c]) // eslint-disable-line react-hooks/exhaustive-deps
 
   if (!c) return <EmptyState icon={<Inbox className="size-6" />} title="Case not found" body="It may have been deleted. Open the worklist to pick another denial." action={<Button onClick={() => navigate('/cases')}>Open worklist</Button>} />
@@ -76,10 +78,10 @@ export default function Workspace({ id }: { id?: string }) {
   const seed = seedById(c.id)
   const dl = d ? appealDeadline(d) : null
   const rows = c.match?.rows || []
-  const verifiedCount = effective ? rows.filter(r => rowIsVerified(c, r, effective)).length : 0
+  const verifiedCount = effective ? rows.filter(r => r.status === 'met' && rowIsVerified(c, r, effective)).length : 0
   const violations = flags.filter(f => f.severity === 'violation').length
-  const quoteCount = rows.length + rows.filter(r => r.chart_quote).length
-  const hasSaved = !!savedRun(c.id)
+  const quoteCount = effective ? rows.filter(r => rowIsVerified(c, r, effective)).reduce((n, r) => n + 1 + (r.status === 'met' && r.chart_quote ? 1 : 0), 0) : 0
+  const hasSaved = docsMatchSeed(c)
 
   async function redraft() {
     if (!c || !d || !effective) return
@@ -93,7 +95,7 @@ export default function Workspace({ id }: { id?: string }) {
   }
 
   const TABS: { key: Tab; label: string; icon: typeof ScanSearch; badge?: string; disabled?: boolean }[] = [
-    { key: 'evidence', label: 'Evidence', icon: ScanSearch, badge: rows.length ? `${verifiedCount}/${rows.length}` : undefined, disabled: !c.match },
+    { key: 'evidence', label: 'Evidence', icon: ScanSearch, badge: rows.length ? `${verifiedCount}/${rows.length}` : undefined, disabled: !c.match && !running },
     { key: 'findings', label: 'Findings', icon: Gavel, badge: violations ? String(violations) : undefined, disabled: !c.match },
     { key: 'letter', label: 'Appeal letter', icon: PenLine, disabled: !c.letter },
     { key: 'patient', label: 'Patient view', icon: HeartPulse, disabled: !c.match },
@@ -117,7 +119,7 @@ export default function Workspace({ id }: { id?: string }) {
           {hasSaved && <Button variant="outline" icon={<Zap className="size-4 text-amber-300" />} onClick={() => go(true)} disabled={running} title="Replays a genuine recorded Gemini run instantly (labeled cached)">Instant replay</Button>}
           <Button variant="primary" icon={running ? undefined : <Play className="size-4" />} loading={running} onClick={() => go(false)} disabled={running || (!c.denialText && !c.denialFile) || !c.chartText}>{c.match ? 'Re-run live' : 'Run Overturn'}</Button>
           <Button variant="subtle" icon={<Mic className="size-4" />} onClick={() => navigate(`/rehearse/${c.id}`)}>Rehearse P2P</Button>
-          {seed && <Button variant="ghost" icon={<RotateCcw className="size-4" />} onClick={() => { caseStore.resetCase(c.id); setTab('inputs'); toast('Case reset to the original documents.', 'gray') }} disabled={running}>Reset</Button>}
+          {seed && <Button variant="ghost" icon={<RotateCcw className="size-4" />} onClick={() => { caseStore.resetCase(c.id); resetSteps(c.id); setRunError(null); setTab('inputs'); toast('Case reset to the original documents.', 'gray') }} disabled={running}>Reset</Button>}
         </div>
       </div>
 
@@ -159,7 +161,7 @@ export default function Workspace({ id }: { id?: string }) {
               <ShieldCheck className="size-6 shrink-0 text-emerald-300" />
               <div className="min-w-0">
                 <div className="text-[15px] font-semibold text-ink-100">Appeal ready for review</div>
-                <div className="text-[12.5px] text-ink-300">{verifiedCount}/{rows.length} criteria pass both keys · {quoteCount} quotes checked verbatim · <span className="text-rose-200">{violations} possible violation{violations === 1 ? '' : 's'}</span>{c.match.summary ? ` · ${c.match.summary.slice(0, 120)}${c.match.summary.length > 120 ? '…' : ''}` : ''}</div>
+                <div className="text-[12.5px] text-ink-300">{verifiedCount}/{rows.length} criteria met &amp; verified · {quoteCount} quotes verified · <span className="text-rose-200">{violations} possible violation{violations === 1 ? '' : 's'}</span>{c.match.summary ? ` · ${c.match.summary.slice(0, 120)}${c.match.summary.length > 120 ? '…' : ''}` : ''}</div>
               </div>
             </div>
             <div className="flex gap-2">

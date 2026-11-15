@@ -20,6 +20,7 @@ export function OddsCard({ c, family }: { c: CaseFile; family: PolicyFamily }) {
       const q = `${c.denial?.service_description}. Denial: ${c.denial?.denial_reason_text}`
       const r = await embed([q, ...seg!.examples.map(e => e.findings)])
       const [qv, ...ev] = r.value
+      if (!qv || ev.length !== seg!.examples.length) throw new Error('Embedding service returned an incomplete result — try again.')
       setSimilar(seg!.examples.map((e, i) => ({ ...e, score: cosine(qv, ev[i]) })).sort((a, b) => b.score - a.score).slice(0, 3))
       setModel(r.model)
     } catch (e) { toast(friendlyError(e), 'red') } finally { setBusy(false) }

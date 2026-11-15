@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { HeartPulse, Languages, LoaderCircle, Pause, Volume2 } from 'lucide-react'
 import type { CaseFile, Flag } from '../../lib/types'
 import { explainForPatient, speak } from '../../lib/pipeline'
@@ -9,13 +9,16 @@ import { friendlyError, getUseCache } from '../../lib/gemini'
 import { audit } from '../../lib/audit'
 import { Badge, Button, Card, ModelChip, toast } from '../../ui/kit'
 
+const ttsCache = new Map<string, string>()
+let currentAudio: HTMLAudioElement | null = null
+
 export function PatientPanel({ c, flags }: { c: CaseFile; flags: Flag[] }) {
   const [lang, setLang] = useState<'English' | 'Spanish'>((c.patientExplainer?.lang as 'English' | 'Spanish') || 'English')
   const [busy, setBusy] = useState<'text' | 'audio' | null>(null)
   const [model, setModel] = useState<string>('')
   const [playing, setPlaying] = useState(false)
   const audio = useRef<HTMLAudioElement | null>(null)
-  const audioCache = useRef<Record<string, string>>({})
+  useEffect(() => () => { audio.current?.pause(); audio.current = null }, [])
   const d = c.denial!
   const dl = appealDeadline(d)
 
@@ -38,15 +41,16 @@ export function PatientPanel({ c, flags }: { c: CaseFile; flags: Flag[] }) {
     if (playing && audio.current) { audio.current.pause(); setPlaying(false); return }
     setBusy('audio')
     try {
-      const key = `${lang}:${text.slice(0, 40)}`
-      let url = audioCache.current[key]
+      const key = `${c.id}:${lang}:${text.slice(0, 60)}`
+      let url = ttsCache.get(key)
       if (!url) {
         const r = await speak(lang === 'Spanish' ? `Lee con calidez y calma: ${text}` : `Read warmly and calmly: ${text}`)
-        url = r.value; audioCache.current[key] = url
+        url = r.value; ttsCache.set(key, url)
         await audit(r.model, 'patient.tts', c.id, { lang })
       }
-      audio.current?.pause()
+      audio.current?.pause(); currentAudio?.pause()
       audio.current = new Audio(url)
+      currentAudio = audio.current
       audio.current.onended = () => setPlaying(false)
       await audio.current.play()
       setPlaying(true)
@@ -60,7 +64,7 @@ export function PatientPanel({ c, flags }: { c: CaseFile; flags: Flag[] }) {
           <div className="flex items-center gap-2 text-sm font-semibold"><HeartPulse className="size-4 text-pink-300" /> What this means for {d.member_name.split(' ')[0]}</div>
           <div className="flex items-center gap-1 rounded-xl border border-white/10 bg-white/[0.03] p-1">
             {(['English', 'Spanish'] as const).map(l => (
-              <button key={l} onClick={() => { setLang(l); if (c.patientExplainer && c.patientExplainer.lang !== l) generate(l) }}
+              <button key={l} onClick={() => { audio.current?.pause(); setPlaying(false); setLang(l); if (c.patientExplainer && c.patientExplainer.lang !== l) generate(l) }}
                 className={`rounded-lg px-3 py-1 text-[12.5px] cursor-pointer ${lang === l ? 'bg-white/10 text-ink-100' : 'text-ink-400'}`}>{l === 'English' ? 'English' : 'Español'}</button>
             ))}
           </div>

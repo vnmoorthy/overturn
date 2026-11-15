@@ -14,7 +14,7 @@ export function addDays(iso: string, days: number): Date {
 }
 export function fmtDate(d: Date | string): string {
   const x = typeof d === 'string' ? new Date(d + 'T12:00:00') : d
-  if (isNaN(x.getTime())) return String(d)
+  if (isNaN(x.getTime())) return typeof d === 'string' && d ? d : 'unknown date'
   return x.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })
 }
 export function daysBetween(a: Date, b: Date) { return Math.ceil((b.getTime() - a.getTime()) / 86_400_000) }
@@ -22,7 +22,8 @@ export function daysBetween(a: Date, b: Date) { return Math.ceil((b.getTime() - 
 export function appealDeadline(denial: Denial): { due: Date; days: number; rule: string; window: string } {
   const ma = denial.plan_type === 'Medicare Advantage'
   const windowDays = ma ? 65 : 180
-  const base = denial.notice_date || denial.date_of_service
+  const iso = (s: string) => (/^\d{4}-\d{2}-\d{2}$/.test(s || '') ? s : '')
+  const base = iso(denial.notice_date) || iso(denial.date_of_service) || new Date().toISOString().slice(0, 10)
   const due = addDays(base, windowDays)
   return {
     due,
@@ -165,11 +166,12 @@ export function evaluate(inp: RuleInput): Flag[] {
     flags.push({
       id: 'gaps',
       severity: 'warning',
-      title: `${missing.length} criterion${missing.length > 1 ? 'a' : ''} need${missing.length > 1 ? '' : 's'} more documentation`,
+      title: `${missing.length} ${missing.length > 1 ? 'criteria need' : 'criterion needs'} more documentation`,
       detail: missing.map(r => `${r.criterion_label}${r.missing_document ? ` — attach: ${r.missing_document}` : ''}`).join('; '),
     })
   }
-  return flags
+  const seen = new Set<string>()
+  return flags.filter(f => (seen.has(f.id) ? false : (seen.add(f.id), true)))
 }
 
 export const SEVERITY_ORDER: Record<Flag['severity'], number> = { violation: 0, warning: 1, strength: 2, info: 3 }
