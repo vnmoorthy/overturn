@@ -22,6 +22,10 @@
 
 *Berkeley × DeepMind Hackathon 2026 — Google AI Studio track*
 
+<a href="docs/demo/overturn-demo.mp4"><img src="docs/demo/overturn-demo.gif" alt="Overturn running live: reads a denial, finds two retired CMS rules, verifies 12 quotes, drafts the appeal" width="100%" /></a>
+
+**▶ [Watch the 50-second demo (MP4)](docs/demo/overturn-demo.mp4)** — recorded from a live run on the Gemini free tier.
+
 </div>
 
 ---
@@ -58,8 +62,16 @@ And the rules are **public**. Medicare Advantage plans are legally bound to Trad
 <td><img src="docs/screens/letter.png" alt="Appeal letter and export gate" /><br/><sub><b>Appeal letter.</b> The model can only cite through verified tokens; a human signs.</sub></td>
 </tr>
 <tr>
+<td><img src="docs/screens/rehearse.png" alt="P2P rehearsal" /><br/><sub><b>P2P rehearsal.</b> Argue with the plan’s medical director, live, on Gemini 3.8 Live.</sub></td>
+<td><img src="docs/screens/patient.png" alt="Patient view" /><br/><sub><b>Patient view.</b> Plain language, English or Spanish, read aloud by Gemini TTS.</sub></td>
+</tr>
+<tr>
 <td><img src="docs/screens/worklist.png" alt="Worklist" /><br/><sub><b>Worklist.</b> Every denial ranked by dollars × public overturn odds.</sub></td>
+<td><img src="docs/screens/audit.png" alt="Audit trail" /><br/><sub><b>Audit trail.</b> Every AI step and human decision, SHA-256 hash-chained.</sub></td>
+</tr>
+<tr>
 <td><img src="docs/screens/home.png" alt="Overview" /><br/><sub><b>Overview.</b> Start a live run, or replay a recorded one instantly.</sub></td>
+<td><img src="docs/screens/settings.png" alt="Settings" /><br/><sub><b>Settings.</b> Bring your own free key; per-task model fallback chains.</sub></td>
 </tr>
 </table>
 
@@ -156,6 +168,8 @@ No key? Open **Settings** in the app and paste one — it is stored only in your
 | `npm run build` | Production build to `dist/` |
 | `npm run typecheck` | Strict TypeScript check |
 | `npm run record-runs` | Re-record genuine Gemini runs for the three demo cases into `src/data/cached/` |
+| `npx tsx scripts/check-saved-runs.ts` | Re-verify every recorded run with the current verifier, rules and letter builder |
+| `node scripts/record-demo.mjs` + `scripts/make-demo-video.sh` | Record the captioned demo video from a live run |
 
 ### Deploy (free)
 

@@ -175,7 +175,13 @@ async function assets() {
   {
     const s = add(`1:10 – 1:40 — Live demo\n\nSAY: This is Maria’s real run. Gemini 4 read the policy, all three of its historical versions, and her chart in one pass. Two of the plan’s requirements were retired by CMS — in 2021 and 2023. The third appears in no version of the policy at all. And her chart meets all six criteria that actually apply — every quote verified verbatim.” (Optional: switch to the app tab and click Policy time-travel.)\n\nMOTION: Findings screenshot frames in; the three callouts zoom: 3 violations · 12/12 quotes verified · 6/6 criteria met.`)
     eyebrow(s, 'Live demo · Maria’s CGM denial'); title(s, 'They denied her with a rule', 'CMS retired in 2021')
-    shot(s, A.shots.findings, 0.6, 1.7, 7.4, 4.81, 'findings')
+    // Real product footage: the recorded live run plays on click (poster = findings screenshot)
+    const vid = path.join(ROOT, 'docs/demo/overturn-demo.mp4')
+    if (fs.existsSync(vid)) {
+      s.addShape(pres.shapes.ROUNDED_RECTANGLE, { x: 0.54, y: 1.64, w: 7.52, h: 4.75, rectRadius: 0.12, fill: { color: '0B0D14' }, line: { color: '343B52', width: 1 }, objectName: name(s, 'video-frame') })
+      const cover = fs.readFileSync(path.join(ROOT, 'docs/demo/poster.jpg')).toString('base64')
+      s.addMedia({ type: 'video', path: vid, x: 0.6, y: 1.7, w: 7.4, h: 4.625, cover: 'data:image/jpeg;base64,' + cover, objectName: 'demo-video' })
+    } else shot(s, A.shots.findings, 0.6, 1.7, 7.4, 4.81, 'findings')
     const callouts = [
       ['3', 'possible violations', 'Two retired requirements + one found in no version of LCD L33822', COL.rose],
       ['12/12', 'quotes verified verbatim', 'Every policy and chart quote exists in its source', COL.green],
