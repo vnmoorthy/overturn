@@ -1,12 +1,12 @@
 // Peer-to-peer rehearsal: the provider practices the P2P call with the plan's medical
 // director, played live by Gemini over real-time voice (Gemini Live API).
 
-import { useMemo, useState } from 'react'
+import { useMemo, useState, type ReactNode } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import {
-  ArrowLeft, ChevronDown, FileText, Headphones, Mic, MicOff, PhoneCall, PhoneOff, Quote, Settings as Cog, ShieldCheck, Sparkles, TriangleAlert,
+  ArrowLeft, ChevronDown, FileText, Headphones, Mic, MicOff, PhoneCall, PhoneOff, Settings as Cog, ShieldCheck, TriangleAlert,
 } from 'lucide-react'
-import { Badge, Button, Card, EmptyState, Field, Modal, ModelChip, Toggle, cx, type Tone } from '../ui/kit'
+import { Badge, Button, Card, EmptyState, Eyebrow, Modal, ModelChip, Toggle, cx, type Tone } from '../ui/kit'
 import { useCases } from '../lib/store'
 import { navigate } from '../lib/router'
 import { LIVE_MODEL } from '../lib/gemini'
@@ -27,7 +27,17 @@ const VOICES = [
   { id: 'Aoede', note: 'breezy' },
 ]
 const LS_VOICE = 'overturn_p2p_voice'
-const clock = (s: number) => `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')}`
+const clock = (s: number) => `${String(Math.floor(s / 60)).padStart(2, '0')}:${String(s % 60).padStart(2, '0')}`
+
+/** One ledger line: mono label, value that wraps instead of truncating. */
+function Ledger({ label, children }: { label: string; children: ReactNode }) {
+  return (
+    <div className="grid grid-cols-[120px_minmax(0,1fr)] items-baseline gap-3 border-b border-line/70 px-4 py-2.5 last:border-b-0">
+      <dt className="eyebrow !text-[10px]">{label}</dt>
+      <dd className="text-[13px] leading-snug text-ink-100 tabular-nums">{children}</dd>
+    </div>
+  )
+}
 
 export default function Rehearse({ id }: { id?: string }) {
   const all = useCases()
@@ -55,36 +65,38 @@ function Header({ all, current, disabled }: { all: CaseFile[]; current: CaseFile
     navigate(`/rehearse/${id}`)
   }
   return (
-    <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
-      <div className="min-w-0">
-        <div className="mb-1.5 flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-ink-400">
-          <span className="relative flex size-2"><span className="absolute inline-flex size-full animate-ping rounded-full bg-black/[0.04]" /><span className="relative inline-flex size-2 rounded-full bg-ink-300" /></span>
+    <div className="flex flex-col gap-6 border-b border-line pb-7 lg:flex-row lg:items-end lg:justify-between lg:gap-10">
+      <div className="min-w-0 max-w-[760px]">
+        <Eyebrow className="mb-3 flex items-center gap-2">
+          <span className="inline-block size-1.5 rounded-full bg-mint" aria-hidden />
           Peer-to-peer rehearsal
-        </div>
-        <h1 className="font-display text-[34px] leading-[1.05] tracking-tight text-ink-100 sm:text-[42px]">
-          Practice the call with the plan’s <span className="text-gradient italic">medical director</span>
+        </Eyebrow>
+        <h1 className="font-serif text-[34px] font-medium leading-[1.04] tracking-[-0.035em] text-ink-100 sm:text-[46px]">
+          Practice the call with the plan’s <span className="text-gradient">medical director</span>
         </h1>
-        <p className="mt-2 max-w-2xl text-[13.5px] leading-relaxed text-ink-300">
+        <p className="mt-3 max-w-[600px] text-[14.5px] leading-relaxed text-ink-300">
           Gemini plays the reviewer live, by voice. It defends the denial until you cite the governing criterion and the chart line that meets it.
         </p>
       </div>
-      <div className="flex flex-wrap items-center gap-2">
-        <label className="relative inline-flex min-w-0 items-center" title={disabled ? 'End the call to switch cases' : 'Switch case'}>
-          <span className="sr-only">Case to rehearse</span>
-          <select value={current?.id || ''} disabled={disabled} onChange={e => pick(e.target.value)}
-            className="h-10 w-full max-w-[300px] cursor-pointer appearance-none truncate rounded-md border border-line bg-black/[0.045] pl-3 pr-9 text-sm text-ink-100 outline-none transition hover:bg-black/[0.06] focus:border-line-strong disabled:cursor-not-allowed disabled:opacity-50">
-            {!current && <option value="" disabled>Choose a case</option>}
-            <optgroup label="Demo cases" className="bg-ink-900">
-              {hero.map(h => <option key={h.id} value={h.id} className="bg-ink-900 text-ink-100">{h.title}</option>)}
-            </optgroup>
-            {analyzed.length > 0 && (
-              <optgroup label="Analyzed cases" className="bg-ink-900">
-                {analyzed.map(a => <option key={a.id} value={a.id} className="bg-ink-900 text-ink-100">{a.title}</option>)}
+      <div className="flex flex-wrap items-end gap-2 lg:shrink-0 lg:flex-nowrap">
+        <label className="flex w-full min-w-0 flex-col gap-1.5 sm:w-[300px]" title={disabled ? 'End the call to switch cases' : 'Switch case'}>
+          <span className="eyebrow">Case to rehearse</span>
+          <span className="relative flex items-center">
+            <select value={current?.id || ''} disabled={disabled} onChange={e => pick(e.target.value)}
+              className="h-10 w-full cursor-pointer appearance-none truncate rounded-[4px] border border-line bg-paper-high pl-3 pr-9 text-[13.5px] text-ink-100 outline-none transition-colors hover:border-line-strong focus-visible:border-ink-100 disabled:cursor-not-allowed disabled:opacity-50">
+              {!current && <option value="" disabled>Choose a case</option>}
+              <optgroup label="Demo cases">
+                {hero.map(h => <option key={h.id} value={h.id}>{h.title}</option>)}
               </optgroup>
-            )}
-            {extra.map(x => <option key={x.id} value={x.id} className="bg-ink-900 text-ink-100">{x.title}</option>)}
-          </select>
-          <ChevronDown className="pointer-events-none absolute right-3 size-4 text-ink-400" />
+              {analyzed.length > 0 && (
+                <optgroup label="Analyzed cases">
+                  {analyzed.map(a => <option key={a.id} value={a.id}>{a.title}</option>)}
+                </optgroup>
+              )}
+              {extra.map(x => <option key={x.id} value={x.id}>{x.title}</option>)}
+            </select>
+            <ChevronDown className="pointer-events-none absolute right-3 size-4 text-ink-400" />
+          </span>
         </label>
         {current && (
           <Button variant="outline" icon={<ArrowLeft className="size-4" />} onClick={() => navigate(`/case/${current.id}`)}>Case workspace</Button>
@@ -133,6 +145,9 @@ function RehearseCase({ c, all }: { c: CaseFile; all: CaseFile[] }) {
 
   const chooseVoice = (v: string) => { setVoice(v); try { localStorage.setItem(LS_VOICE, v) } catch { /* ignore */ } }
 
+  const phaseWord = call.phase === 'live' ? 'Live' : call.phase === 'connecting' ? 'Connecting' : call.phase === 'ended' ? 'Ended' : 'Ready to call'
+  const consoleNote = call.phase === 'live' ? st.label : call.phase === 'connecting' && call.micState === 'requesting' ? 'Allow the microphone' : `Voice · ${voice}`
+
   return (
     <div className="space-y-6">
       <Header all={all} current={c} disabled={inCall} />
@@ -140,15 +155,16 @@ function RehearseCase({ c, all }: { c: CaseFile; all: CaseFile[] }) {
       <AnimatePresence>
         {!x.analyzed && (
           <motion.div initial={{ opacity: 0, y: -6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}
-            className="flex flex-col gap-3 rounded-lg border border-amber-600/25 bg-amber-500/[0.07] px-4 py-3.5 sm:flex-row sm:items-center sm:justify-between">
+            className="relative flex flex-col gap-3 overflow-hidden rounded-lg border border-line bg-paper-high py-3.5 pl-5 pr-4 sm:flex-row sm:items-center sm:justify-between">
+            <span aria-hidden className="absolute inset-y-0 left-0 w-[3px] bg-amber-500" />
             <div className="flex gap-3">
-              <TriangleAlert className="mt-0.5 size-4 shrink-0 text-amber-800" />
+              <TriangleAlert className="mt-0.5 size-4 shrink-0 text-amber-700" />
               <div>
-                <div className="text-[14px] font-medium text-amber-800">Run Overturn on this case first for verified coach cards</div>
-                <p className="mt-0.5 text-[12.5px] leading-relaxed text-ink-300">You can still rehearse now. The director argues from the denial letter and the chart as submitted.</p>
+                <div className="text-[14px] font-medium text-ink-100">Run Overturn on this case first for verified coach cards</div>
+                <p className="mt-0.5 text-[13px] leading-relaxed text-ink-300">You can still rehearse now. The director argues from the denial letter and the chart as submitted.</p>
               </div>
             </div>
-            <Button size="sm" variant="outline" className="shrink-0" onClick={() => navigate(`/case/${c.id}`)}>Run Overturn</Button>
+            <Button size="sm" variant="outline" className="shrink-0 self-start sm:self-center" onClick={() => navigate(`/case/${c.id}`)}>Run Overturn</Button>
           </motion.div>
         )}
       </AnimatePresence>
@@ -157,72 +173,91 @@ function RehearseCase({ c, all }: { c: CaseFile; all: CaseFile[] }) {
         {/* ---------------------------------------------------------------- call */}
         <div className="min-w-0 lg:sticky lg:top-6 lg:self-start">
           <Card glow={call.phase === 'live'} className="relative overflow-hidden lg:flex lg:max-h-[calc(100vh-3rem)] lg:flex-col">
-            <div className="flex flex-wrap items-center justify-between gap-2 border-b border-line/70 px-4 py-3 lg:shrink-0">
-              <div className="flex items-center gap-2.5">
-                <Badge tone={st.tone} className="h-6 gap-1.5 px-2.5" icon={
-                  <span className="relative flex size-1.5">{st.pulse && <span className={cx('absolute inline-flex size-full animate-ping rounded-full opacity-70', st.dot)} />}<span className={cx('relative inline-flex size-1.5 rounded-full', st.dot)} /></span>
-                }>
-                  <AnimatePresence mode="wait" initial={false}>
-                    <motion.span key={st.label} initial={{ opacity: 0, y: 3 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -3 }} transition={{ duration: 0.15 }}>{st.label}</motion.span>
-                  </AnimatePresence>
-                </Badge>
-                <span className={cx('font-mono text-[13px] tabular-nums', call.phase === 'live' ? 'text-ink-100' : 'text-ink-400')}>{clock(call.seconds)}</span>
+            {/* header strip */}
+            <div className="flex flex-wrap items-center justify-between gap-x-3 gap-y-2 border-b border-line px-4 py-2.5 lg:shrink-0">
+              <div className="flex min-w-0 items-center gap-3">
+                <span className="flex shrink-0 gap-1" aria-hidden>{[0, 1, 2].map(i => <span key={i} className="size-[7px] rounded-full bg-line-strong" />)}</span>
+                <span className="truncate font-mono text-[11.5px] text-ink-400">p2p-call <span className="text-faint">/</span> {c.id}</span>
               </div>
               <div className="flex shrink-0 items-center gap-2 whitespace-nowrap">
                 <ModelChip model={LIVE_MODEL} />
                 <label className="relative inline-flex items-center" title={inCall ? 'Voice is fixed for this call' : 'Director voice'}>
                   <span className="sr-only">Director voice</span>
                   <select value={voice} disabled={inCall} onChange={e => chooseVoice(e.target.value)}
-                    className="h-7 cursor-pointer appearance-none rounded-md border border-line bg-black/[0.03] pl-2 pr-6 font-mono text-[11px] text-ink-300 outline-none hover:bg-black/[0.045] disabled:cursor-not-allowed disabled:opacity-50">
-                    {VOICES.map(v => <option key={v.id} value={v.id} className="bg-ink-900">{v.id} · {v.note}</option>)}
+                    className="h-[22px] cursor-pointer appearance-none rounded-[3px] border border-line bg-paper-high pl-1.5 pr-5 font-mono text-[10.5px] text-ink-300 outline-none transition-colors hover:border-line-strong focus-visible:border-ink-100 disabled:cursor-not-allowed disabled:opacity-50">
+                    {VOICES.map(v => <option key={v.id} value={v.id}>{v.id} · {v.note}</option>)}
                   </select>
-                  <ChevronDown className="pointer-events-none absolute right-1.5 size-3 text-ink-400" />
+                  <ChevronDown className="pointer-events-none absolute right-1 size-3 text-ink-400" />
                 </label>
               </div>
             </div>
 
-            <div className="relative lg:shrink-0">
-              <div className="relative mx-auto h-[260px] w-full max-w-[520px] sm:h-[300px] lg:h-[270px]">
-                <CallOrb phase={call.phase} activity={call.activity} muted={call.muted} levels={call.levels} />
-                <AnimatePresence>
-                  {call.muted && call.phase === 'live' && (
-                    <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0 }}
-                      className="absolute left-1/2 top-4 -translate-x-1/2">
-                      <Badge tone="red" icon={<MicOff className="size-3" />}>You are muted</Badge>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
-              <div className="-mt-3 text-center">
-                <div className="text-[15px] font-semibold tracking-tight">{DIRECTOR.name}</div>
-                <div className="text-[12.5px] text-ink-400">{DIRECTOR.title} · {x.payer}</div>
+            {/* lab console: the page's one dark surface */}
+            <div className="p-3 lg:shrink-0">
+              <div className="grid-lab relative overflow-hidden rounded-md border border-lab-line bg-lab text-[#e9e7e0]">
+                <div className="flex items-center justify-between gap-3 border-b border-lab-line px-4 py-2.5 font-mono text-[10.5px] uppercase tracking-[0.13em]">
+                  <div className="flex shrink-0 items-center gap-2">
+                    <span className="relative flex size-1.5" aria-hidden>
+                      {st.pulse && <span className={cx('absolute inline-flex size-full animate-ping rounded-full opacity-70', call.phase === 'live' ? 'bg-mint' : 'bg-amber-400')} />}
+                      <span className={cx('relative inline-flex size-1.5 rounded-full', call.phase === 'live' ? 'bg-mint' : call.phase === 'connecting' ? 'bg-amber-400' : call.phase === 'ended' ? 'bg-[#6e6a5e]' : 'bg-[#8f8c84]')} />
+                    </span>
+                    <span className={call.phase === 'live' ? 'text-[#f7f5f0]' : 'text-[#b9b6ad]'}>{phaseWord}</span>
+                    <span className={cx('tabular-nums', call.phase === 'live' ? 'text-mint' : 'text-[#8f8c84]')}>{clock(call.seconds)}</span>
+                  </div>
+                  <div className="min-w-0 text-right" role="status">
+                    <AnimatePresence mode="wait" initial={false}>
+                      <motion.span key={consoleNote} className="block truncate text-[#8f8c84]" initial={{ opacity: 0, y: 3 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -3 }} transition={{ duration: 0.15 }}>{consoleNote}</motion.span>
+                    </AnimatePresence>
+                  </div>
+                </div>
+
+                <div className="px-5 pt-8 text-center sm:pt-10">
+                  <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-[#8f8c84]">On the line</div>
+                  <div className="mt-3 font-serif text-[28px] font-medium leading-none tracking-[-0.03em] text-[#f7f5f0] sm:text-[34px]">{DIRECTOR.name}</div>
+                  <div className="mt-3 font-mono text-[10.5px] uppercase leading-relaxed tracking-[0.13em] text-[#a8a59c]">
+                    <span>{DIRECTOR.title}</span><span className="hidden sm:inline"> · </span><span className="block sm:inline">{x.payer}</span>
+                  </div>
+                </div>
+
+                <div className="relative mx-auto h-[150px] w-full max-w-[560px] px-4 pb-4 pt-5 sm:h-[168px] sm:px-6">
+                  <CallOrb phase={call.phase} activity={call.activity} muted={call.muted} levels={call.levels} />
+                  <AnimatePresence>
+                    {call.muted && call.phase === 'live' && (
+                      <motion.div initial={{ opacity: 0, y: -4 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}
+                        className="absolute left-1/2 top-1 -translate-x-1/2">
+                        <Badge tone="red" icon={<MicOff className="size-3" />}>You are muted</Badge>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
               </div>
             </div>
 
-            <div className="flex flex-col items-center gap-3 px-4 pb-5 pt-4 lg:shrink-0">
+            {/* controls */}
+            <div className="flex flex-col items-center gap-3 px-4 pb-5 pt-2 lg:shrink-0">
               <AnimatePresence mode="wait" initial={false}>
                 {call.phase === 'live' ? (
-                  <motion.div key="live" initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -6 }} className="flex items-center gap-3">
+                  <motion.div key="live" initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -6 }} className="flex flex-wrap items-center justify-center gap-2.5">
                     <Button size="lg" variant={call.muted ? 'danger' : 'subtle'} className="min-w-[132px]" disabled={call.micState !== 'on'}
                       icon={call.muted ? <MicOff className="size-4" /> : <Mic className="size-4" />} onClick={call.toggleMute}>
                       {call.muted ? 'Unmute' : 'Mute'}
                     </Button>
-                    <button onClick={call.end}
-                      className="inline-flex h-12 min-w-[132px] cursor-pointer items-center justify-center gap-2.5 rounded-lg border border-rose-600/30 bg-gradient-to-b from-rose-600 to-rose-600 px-6 text-[15px] font-medium text-white transition hover:brightness-110 active:scale-[0.98]">
-                      <PhoneOff className="size-4" /> End call
-                    </button>
+                    <Button size="lg" variant="danger" className="min-w-[132px] border-rose-700! bg-rose-700! text-white! hover:border-rose-800! hover:bg-rose-800!"
+                      icon={<PhoneOff className="size-4" />} onClick={call.end}>
+                      End call
+                    </Button>
                   </motion.div>
                 ) : call.phase === 'connecting' ? (
-                  <motion.div key="connecting" initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -6 }} className="flex items-center gap-3">
+                  <motion.div key="connecting" initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -6 }} className="flex flex-wrap items-center justify-center gap-2.5">
                     <Button size="lg" variant="subtle" loading className="min-w-[160px]">Connecting</Button>
                     <Button size="lg" variant="danger" icon={<PhoneOff className="size-4" />} onClick={call.end}>Cancel</Button>
                   </motion.div>
                 ) : (
-                  <motion.div key="idle" initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -6 }} className="flex flex-col items-center gap-3">
-                    <Button size="lg" variant="primary" className="min-w-[190px]" icon={<PhoneCall className="size-4" />} onClick={() => void call.start()}>
+                  <motion.div key="idle" initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -6 }} className="flex flex-wrap items-center justify-center gap-x-6 gap-y-3">
+                    <Button size="lg" variant="success" className="min-w-[180px]" icon={<PhoneCall className="size-4" />} onClick={() => void call.start()}>
                       {call.phase === 'ended' ? 'Call again' : 'Start call'}
                     </Button>
-                    <Toggle checked={tough} onChange={setTough} label={<span className="text-[12.5px] text-ink-300">Tough reviewer</span>} />
+                    <Toggle checked={tough} onChange={setTough} label={<span className="text-[13px] text-ink-300">Tough reviewer</span>} />
                   </motion.div>
                 )}
               </AnimatePresence>
@@ -230,8 +265,9 @@ function RehearseCase({ c, all }: { c: CaseFile; all: CaseFile[] }) {
               <AnimatePresence initial={false}>
                 {call.micError ? (
                   <motion.div key="mic" initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }} className="w-full max-w-xl overflow-hidden">
-                    <div className="flex gap-3 rounded-md border border-amber-600/25 bg-amber-500/[0.07] px-3.5 py-3">
-                      <MicOff className="mt-0.5 size-4 shrink-0 text-amber-800" />
+                    <div className="relative flex gap-3 overflow-hidden rounded-md border border-line bg-paper-high py-3 pl-4 pr-3.5">
+                      <span aria-hidden className="absolute inset-y-0 left-0 w-[3px] bg-amber-500" />
+                      <MicOff className="mt-0.5 size-4 shrink-0 text-amber-700" />
                       <div>
                         <div className="text-[13px] font-medium text-amber-800">{micHelp(call.micError).title}</div>
                         <p className="mt-0.5 text-[12.5px] leading-relaxed text-ink-300">{micHelp(call.micError).body}</p>
@@ -240,7 +276,8 @@ function RehearseCase({ c, all }: { c: CaseFile; all: CaseFile[] }) {
                   </motion.div>
                 ) : call.error && !inCall ? (
                   <motion.div key="err" initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }} className="w-full max-w-xl overflow-hidden">
-                    <div className="flex flex-col gap-2 rounded-md border border-rose-600/25 bg-rose-500/[0.07] px-3.5 py-3 sm:flex-row sm:items-center sm:justify-between">
+                    <div className="relative flex flex-col gap-2 overflow-hidden rounded-md border border-line bg-paper-high py-3 pl-4 pr-3.5 sm:flex-row sm:items-center sm:justify-between">
+                      <span aria-hidden className="absolute inset-y-0 left-0 w-[3px] bg-rose-600" />
                       <div className="flex gap-3">
                         <TriangleAlert className="mt-0.5 size-4 shrink-0 text-rose-700" />
                         <p className="text-[12.5px] leading-relaxed text-rose-800">{call.error}</p>
@@ -249,14 +286,14 @@ function RehearseCase({ c, all }: { c: CaseFile; all: CaseFile[] }) {
                     </div>
                   </motion.div>
                 ) : !inCall && call.phase !== 'ended' ? (
-                  <motion.div key="hint" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="flex items-center gap-2 text-[12px] text-ink-400">
-                    <Headphones className="size-3.5" /> Headphones recommended. Talk naturally; you can interrupt the director.
+                  <motion.div key="hint" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="flex max-w-md items-start gap-2 text-[12.5px] leading-snug text-ink-400 sm:items-center">
+                    <Headphones className="mt-px size-3.5 shrink-0 sm:mt-0" /><span>Headphones recommended. Talk naturally; you can interrupt the director.</span>
                   </motion.div>
                 ) : null}
               </AnimatePresence>
             </div>
 
-            <div className="border-t border-line/70 lg:flex lg:min-h-0 lg:flex-1 lg:flex-col">
+            <div className="border-t border-line lg:flex lg:min-h-0 lg:flex-1 lg:flex-col">
               <Transcript entries={call.entries} phase={call.phase} payer={x.payer} micAvailable={call.micState === 'on'} onSend={call.sendText} />
             </div>
           </Card>
@@ -265,38 +302,38 @@ function RehearseCase({ c, all }: { c: CaseFile; all: CaseFile[] }) {
         {/* ---------------------------------------------------------------- coach */}
         <div className="min-w-0">
           <CoachPanel c={c} x={x} score={score} onAgain={() => void call.start()} transcript={transcript}>
-          <Card className="p-4">
-            <div className="flex items-start justify-between gap-3">
-              <div className="min-w-0">
-                <div className="text-[11px] font-semibold uppercase tracking-[0.14em] text-ink-400">The denial</div>
-                <div className="mt-0.5 truncate text-[14.5px] font-semibold">{c.title}</div>
+            <Card className="overflow-hidden">
+              <div className="flex items-start justify-between gap-3 px-4 pb-3 pt-4">
+                <div className="min-w-0">
+                  <Eyebrow>The denial</Eyebrow>
+                  <div className="mt-1.5 font-serif text-[20px] font-medium leading-snug tracking-[-0.02em] text-ink-100">{c.title}</div>
+                </div>
+                <Button size="sm" variant="outline" className="shrink-0" icon={<FileText className="size-3.5" />} onClick={() => setLetterOpen(true)}>Letter</Button>
               </div>
-              <Button size="sm" variant="ghost" className="shrink-0" icon={<FileText className="size-3.5" />} onClick={() => setLetterOpen(true)}>Letter</Button>
-            </div>
-            <div className="mt-3 flex flex-wrap gap-1.5">
-              {x.family && <Badge tone="violet">{x.family.id} · {x.family.short}</Badge>}
-              {x.analyzed
-                ? <Badge tone="cyan" icon={<ShieldCheck className="size-3" />}>{verifiedCount} verified citation{verifiedCount === 1 ? '' : 's'}</Badge>
-                : <Badge tone="amber">Not analyzed yet</Badge>}
-            </div>
-            <div className="mt-3.5 grid grid-cols-2 gap-3">
-              <Field label="Plan">{x.plan || x.payer}</Field>
-              <Field label="Billed">{x.amount || '—'}</Field>
-              <Field label="Service" className="col-span-2">{x.service || '—'}</Field>
-              {x.dos && <Field label="Date of service">{x.dos}</Field>}
-              {x.providerName && <Field label="You are">{x.providerName}</Field>}
-            </div>
-            <div className="mt-3.5 rounded-md border border-line/70 bg-black/[0.02] px-3 py-2.5">
-              <div className="mb-1 flex items-center gap-1.5 text-[10.5px] font-semibold uppercase tracking-[0.12em] text-ink-400"><Quote className="size-3" /> Why they denied it</div>
-              <p className="text-[12.5px] leading-relaxed text-ink-300">{x.reason}</p>
-            </div>
-            {x.summary && (
-              <div className="mt-2.5 flex gap-2 text-[12px] leading-relaxed text-ink-400" title={x.summary}>
-                <Sparkles className="mt-0.5 size-3.5 shrink-0 text-ink-200" /><span className="line-clamp-3">{x.summary}</span>
+              <div className="flex flex-wrap gap-1.5 px-4 pb-4">
+                {x.family && <Badge tone="violet">{x.family.id} · {x.family.short}</Badge>}
+                {x.analyzed
+                  ? <Badge tone="green" icon={<ShieldCheck className="size-3" />}>{verifiedCount} verified citation{verifiedCount === 1 ? '' : 's'}</Badge>
+                  : <Badge tone="amber">Not analyzed yet</Badge>}
               </div>
-            )}
-          </Card>
-
+              <dl className="border-t border-line">
+                <Ledger label="Plan">{x.plan || x.payer}</Ledger>
+                <Ledger label="Billed">{x.amount || '—'}</Ledger>
+                <Ledger label="Service">{x.service || '—'}</Ledger>
+                {x.dos && <Ledger label="Date of service">{x.dos}</Ledger>}
+                {x.providerName && <Ledger label="You are">{x.providerName}</Ledger>}
+              </dl>
+              <div className="border-t border-line px-4 py-3.5">
+                <div className="eyebrow !text-[10px]">Why they denied it</div>
+                <p className="mt-2 border-l-2 border-rose-400 pl-3 text-[13px] leading-relaxed text-ink-300">{x.reason}</p>
+              </div>
+              {x.summary && (
+                <div className="border-t border-line bg-paper-low/70 px-4 py-3.5" title={x.summary}>
+                  <div className="eyebrow !text-[10px]">Overturn analysis</div>
+                  <p className="mt-1.5 line-clamp-3 text-[12.5px] leading-relaxed text-ink-300">{x.summary}</p>
+                </div>
+              )}
+            </Card>
           </CoachPanel>
         </div>
       </div>

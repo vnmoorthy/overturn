@@ -1,23 +1,18 @@
-// Live transcript: merged per-turn bubbles for the provider and the medical director,
-// plus the typed-reply box (text fallback).
+// Live transcript: a clean call log, one merged row per turn for the provider and the
+// medical director, plus the typed-reply box (text fallback).
 
 import { useEffect, useRef, useState, type FormEvent } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
-import { Keyboard, Send } from 'lucide-react'
+import { CornerDownLeft, Keyboard } from 'lucide-react'
 import { cx } from '../../ui/kit'
 import { DIRECTOR, type TranscriptEntry } from './context'
 import type { CallPhase } from './useLiveCall'
 
 const clock = (s: number) => `${Math.floor(s / 60)}:${String(Math.floor(s % 60)).padStart(2, '0')}`
 
-function Dots() {
-  return (
-    <span className="inline-flex items-center gap-1 py-1" aria-label="Speaking">
-      {[0, 1, 2].map(i => (
-        <motion.span key={i} className="size-1.5 rounded-full bg-current" animate={{ opacity: [0.25, 1, 0.25], y: [0, -2, 0] }} transition={{ duration: 1, repeat: Infinity, delay: i * 0.15 }} />
-      ))}
-    </span>
-  )
+/** In-progress turn: a blinking block caret, the system's only allowed idle animation. */
+function Caret() {
+  return <span className="caret ml-0.5 inline-block h-[1.05em] w-[0.5em] translate-y-[2px] bg-current" role="img" aria-label="Speaking" />
 }
 
 export function Transcript({ entries, phase, payer, micAvailable, onSend }: {
@@ -32,6 +27,7 @@ export function Transcript({ entries, phase, payer, micAvailable, onSend }: {
   const stick = useRef(true)
   const live = phase === 'live'
   const shown = entries.filter(e => e.role === 'system' || e.text.trim() || !e.done)
+  const turns = shown.filter(e => e.role !== 'system').length
 
   useEffect(() => {
     const el = box.current
@@ -45,11 +41,19 @@ export function Transcript({ entries, phase, payer, micAvailable, onSend }: {
 
   return (
     <div className="flex min-h-0 flex-1 flex-col">
+      <div className="flex items-center justify-between gap-3 border-b border-line px-4 py-2.5 sm:px-5">
+        <span className="eyebrow">Transcript</span>
+        <span className="font-mono text-[10.5px] uppercase tracking-[0.1em] text-ink-400 tabular-nums">
+          {live && <span className="mr-1.5 inline-block size-1.5 -translate-y-px rounded-full bg-mint align-middle" aria-hidden />}
+          {turns} {turns === 1 ? 'turn' : 'turns'}
+        </span>
+      </div>
+
       <div ref={box} onScroll={e => { const el = e.currentTarget; stick.current = el.scrollHeight - el.scrollTop - el.clientHeight < 120 }}
-        className="scrollbar-thin h-[300px] space-y-3 lg:h-auto lg:min-h-[180px] lg:flex-1 overflow-y-auto px-4 py-4 sm:px-5" aria-live="polite">
+        className="scrollbar-thin h-[300px] overflow-y-auto px-4 sm:px-5 lg:h-auto lg:min-h-[180px] lg:flex-1" aria-live="polite">
         {!shown.length && (
-          <div className="flex h-full min-h-[150px] flex-col items-center justify-center gap-2 text-center">
-            <div className="text-[13.5px] font-medium text-ink-100">The transcript appears here as you talk</div>
+          <div className="flex h-full min-h-[150px] flex-col items-start justify-center gap-2 py-6 sm:items-center sm:text-center">
+            <div className="font-serif text-[16px] font-medium tracking-[-0.015em] text-ink-100">The transcript appears here as you talk</div>
             <p className="max-w-sm text-[12.5px] leading-relaxed text-ink-400">
               {DIRECTOR.short} opens by stating the denial reason. Name the governing criterion, then read the chart line that meets it.
             </p>
@@ -59,49 +63,46 @@ export function Transcript({ entries, phase, payer, micAvailable, onSend }: {
           {shown.map(e => {
             if (e.role === 'system') {
               return (
-                <motion.div key={e.id} initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex items-center gap-3 py-1 text-[11px] uppercase tracking-[0.14em] text-ink-400">
-                  <span className="h-px flex-1 bg-black/[0.045]" />{e.text} · {clock(e.at)}<span className="h-px flex-1 bg-black/[0.045]" />
+                <motion.div key={e.id} initial={{ opacity: 0 }} animate={{ opacity: 1 }}
+                  className="flex items-center gap-3 py-3 font-mono text-[10px] uppercase tracking-[0.14em] text-ink-400">
+                  <span className="h-px flex-1 bg-line" />{e.text} · {clock(e.at)}<span className="h-px flex-1 bg-line" />
                 </motion.div>
               )
             }
             const dir = e.role === 'director'
+            const who = dir ? `${DIRECTOR.name}, ${DIRECTOR.title} · ${payer}` : 'You (provider)'
             return (
-              <motion.div key={e.id} layout="position" initial={{ opacity: 0, y: 8, scale: 0.98 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0 }}
-                transition={{ type: 'spring', damping: 26, stiffness: 340 }}
-                className={cx('flex gap-2.5', dir ? 'justify-start' : 'flex-row-reverse')}>
-                <div className={cx('mt-5 grid size-7 shrink-0 place-items-center rounded-full text-[10.5px] font-semibold',
-                  dir ? 'bg-gradient-to-br from-emerald-600 to-rose-600 text-[#06301f]' : 'bg-gradient-to-br from-emerald-400 to-teal-600 text-[#06301f]')}>
-                  {dir ? DIRECTOR.initials : 'You'}
+              <motion.div key={e.id} layout="position" initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}
+                transition={{ duration: 0.2, ease: 'easeOut' }}
+                className="grid gap-1 border-b border-line/70 py-3 last:border-b-0 sm:grid-cols-[112px_minmax(0,1fr)] sm:gap-4">
+                <div className="flex items-baseline gap-2 font-mono text-[10.5px] uppercase tracking-[0.12em] sm:flex-col sm:gap-0.5 sm:pt-[3px]" title={who}>
+                  <span className={cx('font-medium', dir ? 'text-ink-100' : 'text-mint-deep')}>{dir ? DIRECTOR.short : 'You'}</span>
+                  <span className="sr-only">{who}</span>
+                  <span className="flex items-center gap-1.5 text-ink-400 tabular-nums">
+                    {clock(e.at)}
+                    {e.typed && <span className="inline-flex items-center gap-1 normal-case tracking-normal"><Keyboard className="size-3" aria-hidden /><span>typed</span></span>}
+                  </span>
                 </div>
-                <div className={cx('min-w-0 max-w-[82%]', !dir && 'text-right')}>
-                  <div className={cx('mb-1 flex items-center gap-1.5 text-[11px] text-ink-400', !dir && 'justify-end')}>
-                    <span className={dir ? 'text-ink-200' : 'text-emerald-800'}>{dir ? `${DIRECTOR.name}, ${DIRECTOR.title}` : 'You (provider)'}</span>
-                    {dir && <span className="hidden sm:inline">· {payer}</span>}
-                    {e.typed && <Keyboard className="size-3" aria-label="typed" />}
-                    <span className="font-mono">{clock(e.at)}</span>
-                  </div>
-                  <div className={cx('inline-block rounded-lg border px-3.5 py-2.5 text-left text-[13.5px] leading-relaxed',
-                    dir ? 'rounded-tl-md border-line-strong bg-black/[0.04] text-ink-100' : 'rounded-tr-md border-emerald-600/25 bg-emerald-500/[0.072] text-ink-100')}>
-                    {e.text.trim() ? e.text.trim() : <span className={dir ? 'text-ink-200' : 'text-emerald-800'}><Dots /></span>}
-                  </div>
-                </div>
+                <p className={cx('text-[13.5px] leading-relaxed', dir ? 'text-ink-100' : 'text-ink-200')}>
+                  {e.text.trim() ? e.text.trim() : <span className={dir ? 'text-ink-300' : 'text-mint-deep'}><Caret /></span>}
+                </p>
               </motion.div>
             )
           })}
         </AnimatePresence>
       </div>
 
-      <form onSubmit={submit} className="flex items-center gap-2 border-t border-line/70 px-3 py-3 sm:px-4">
+      <form onSubmit={submit} className="flex items-center gap-2 border-t border-line bg-paper-low/60 px-3 py-3 sm:px-4">
         <div className="relative min-w-0 flex-1">
           <Keyboard className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-ink-400" />
           <input value={draft} onChange={e => setDraft(e.target.value)} disabled={!live}
             placeholder={!live ? 'Start the call to reply' : micAvailable ? 'Or type a reply to the director' : 'No microphone: type your reply to the director'}
             aria-label="Type a reply to the medical director"
-            className="h-10 w-full rounded-md border border-line bg-black/[0.03] pl-9 pr-3 text-sm text-ink-100 placeholder:text-ink-400 outline-none transition focus:border-line-strong focus:bg-black/[0.045] disabled:opacity-50" />
+            className="h-10 w-full rounded-[4px] border border-line bg-paper-high pl-9 pr-3 text-[13.5px] text-ink-100 placeholder:text-ink-400 outline-none transition-colors focus:border-ink-100 disabled:cursor-not-allowed disabled:bg-paper-low disabled:opacity-70" />
         </div>
         <button type="submit" disabled={!live || !draft.trim()} aria-label="Send reply"
-          className="grid size-10 shrink-0 place-items-center rounded-md border border-line-strong bg-gradient-to-b from-[#8b6dff] to-[#6a4cf0] text-white transition hover:brightness-110 active:scale-95 disabled:pointer-events-none disabled:opacity-40 cursor-pointer">
-          <Send className="size-4" />
+          className="grid size-10 shrink-0 cursor-pointer place-items-center rounded-[4px] border border-ink-100 bg-ink-100 text-paper transition-colors hover:bg-[#2b2a27] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mint-deep disabled:pointer-events-none disabled:opacity-30">
+          <CornerDownLeft className="size-4" />
         </button>
       </form>
     </div>

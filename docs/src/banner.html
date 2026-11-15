@@ -1,50 +1,61 @@
 <!doctype html><html><head><meta charset="utf-8">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500&family=IBM+Plex+Serif:ital,wght@0,500;1,400&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0}
-body{width:1280px;height:640px;background:#05060a;font-family:Inter,sans-serif;color:#e6e9f2;overflow:hidden;position:relative}
-.blob{position:absolute;border-radius:50%;filter:blur(90px)}
-.grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);background-size:40px 40px;mask-image:radial-gradient(ellipse at 30% 30%,#000 30%,transparent 75%)}
-.wrap{position:absolute;inset:0;padding:64px 72px;display:flex;gap:40px}
-.left{flex:1.15;display:flex;flex-direction:column}
-.brand{display:flex;align-items:center;gap:14px;font-weight:700;font-size:30px;letter-spacing:-.02em}
-.pill{display:inline-flex;align-items:center;gap:8px;margin-top:34px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.05);border-radius:999px;padding:6px 14px;font-size:15px;color:#9aa2bd;width:max-content}
-h1{margin-top:22px;font-size:58px;line-height:1.02;letter-spacing:-.035em;font-weight:650}
-h1 em{font-family:'Instrument Serif',serif;font-weight:400;background:linear-gradient(92deg,#c4b5fd,#67e8f9 45%,#6ee7b7);-webkit-background-clip:text;color:transparent}
-p{margin-top:22px;font-size:19px;line-height:1.5;color:#9aa2bd;max-width:560px}
-p b{color:#e6e9f2}
-.chips{margin-top:auto;display:flex;flex-wrap:wrap;gap:8px}
-.chip{font-family:'JetBrains Mono',monospace;font-size:13px;color:#9aa2bd;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.04);border-radius:8px;padding:4px 9px}
-.right{flex:.95;position:relative}
-.letter{position:absolute;top:30px;left:10px;width:430px;background:#f6f3ec;color:#2a2a2a;border-radius:16px;padding:22px;transform:rotate(-3deg);box-shadow:0 30px 80px rgba(0,0,0,.6);font-size:13px;line-height:1.55}
-.letter .h{font-weight:800;letter-spacing:.04em}
-.letter mark{background:rgba(251,113,133,.35);border-radius:3px;padding:0 2px}
-.denied{position:absolute;right:18px;top:16px;border:3px solid #e11d48;color:#e11d48;font-weight:900;letter-spacing:.14em;padding:2px 10px;transform:rotate(12deg);border-radius:6px;font-size:18px}
-.policy{position:absolute;top:230px;left:70px;width:420px;border-radius:16px;padding:18px;background:linear-gradient(180deg,rgba(20,24,36,.96),rgba(12,14,22,.96));border:1px solid rgba(255,255,255,.1);box-shadow:0 30px 80px rgba(0,0,0,.6);font-size:13.5px;line-height:1.5}
-.policy .t{display:flex;justify-content:space-between;font-weight:600;font-size:13px;margin-bottom:8px}
-.red{color:#fda4af}.strike{text-decoration:line-through;text-decoration-color:#fb7185;color:#9aa2bd}
-.ok{margin-top:10px;border:1px solid rgba(52,211,153,.3);background:rgba(52,211,153,.08);border-radius:10px;padding:10px;color:#d1fae5}
-.mono{font-family:'JetBrains Mono',monospace;font-size:11.5px;color:#6ee7b7;margin-top:4px}
-.stamp{position:absolute;bottom:40px;left:0;border:4px solid #6ee7b7;border-radius:14px;padding:8px 18px;text-align:center;transform:rotate(-8deg);background:rgba(5,6,10,.85);box-shadow:0 0 80px rgba(52,211,153,.45)}
-.stamp .a{font-size:28px;font-weight:900;letter-spacing:.14em;color:#6ee7b7}
-.stamp .b{font-family:'JetBrains Mono',monospace;font-size:11.5px;color:#d1fae5;letter-spacing:.08em}
+body{width:1280px;height:640px;background:#f7f5f0;font-family:'IBM Plex Sans',sans-serif;color:#141414;overflow:hidden;position:relative}
+.grid{position:absolute;inset:0;background-image:linear-gradient(rgba(20,20,20,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(20,20,20,.035) 1px,transparent 1px);background-size:48px 48px;mask-image:radial-gradient(ellipse at 70% 40%,#000 20%,transparent 70%)}
+.top{position:absolute;left:64px;right:64px;top:34px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #d8d4c8;padding-bottom:18px}
+.brand{display:flex;align-items:center;gap:12px;font-family:'IBM Plex Mono',monospace;font-weight:500;font-size:22px;letter-spacing:-.02em}
+.nav{font-family:'IBM Plex Mono',monospace;font-size:13px;color:#6e6a5e;display:flex;gap:26px}
+.left{position:absolute;left:64px;top:118px;width:600px}
+.pill{display:inline-flex;align-items:center;gap:10px;border:1px solid #c9c5b8;border-radius:999px;padding:7px 14px;font-family:'IBM Plex Mono',monospace;font-size:11.5px;font-weight:500;letter-spacing:.13em;text-transform:uppercase;color:#6e6a5e}
+.pill i{display:block;width:14px;height:1.5px;background:#2fce96}
+h1{margin-top:24px;font-family:'IBM Plex Serif',serif;font-weight:500;font-size:66px;line-height:1.0;letter-spacing:-.045em}
+h1 em{font-style:italic;font-weight:400;color:#0c8a5f}
+p{margin-top:22px;font-size:18.5px;line-height:1.55;color:#57544b;max-width:540px}
+.cta{margin-top:28px;display:flex;gap:10px;align-items:center}
+.btn{font-size:14px;font-weight:500;padding:13px 16px;border-radius:4px}
+.mint{background:#2fce96;color:#06301f;border:1px solid #2fce96}
+.out{border:1px solid #c9c5b8;color:#141414}
+.link{font-family:'IBM Plex Mono',monospace;font-size:13px;color:#0c8a5f;margin-left:14px}
+.term{position:absolute;right:64px;top:140px;width:520px;background:#fcfbf7;border:1px solid #d8d4c8;border-radius:8px;box-shadow:0 30px 70px -40px rgba(20,20,20,.35),0 2px 6px rgba(20,20,20,.04);overflow:hidden}
+.bar{height:36px;display:flex;align-items:center;gap:7px;padding:0 14px;background:#efede6;border-bottom:1px solid #d8d4c8;font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:#6e6a5e}
+.bar b{width:8px;height:8px;border-radius:50%;background:#c9c5b8;display:block}
+.bar span{margin-left:10px}
+.body{padding:20px 22px 22px;font-family:'IBM Plex Mono',monospace;font-size:13px;line-height:1.95;color:#57544b}
+.g{color:#0c8a5f}.f{color:#b0ab9c}.r{color:#be123c}.s{text-decoration:line-through;text-decoration-color:#e11d48}
+.band{margin:10px 0 6px;border-left:2px solid #2fce96;background:#dff5ec;padding:6px 12px;color:#06301f}
+.caret{display:inline-block;width:8px;height:15px;background:#2fce96;vertical-align:-2px}
+.cap{position:absolute;right:64px;top:574px;font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.13em;color:#a29d8d}
+.models{position:absolute;left:64px;bottom:22px;display:flex;gap:8px}
+.chip{font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:#57544b;border:1px solid #d8d4c8;background:#fcfbf7;border-radius:3px;padding:4px 8px;display:flex;align-items:center;gap:6px}
+.chip i{width:6px;height:6px;border-radius:50%;background:#2fce96;display:block}
 </style></head><body>
-<div class="blob" style="width:520px;height:520px;left:-80px;top:-200px;background:rgba(124,92,255,.35)"></div>
-<div class="blob" style="width:420px;height:420px;right:-60px;top:120px;background:rgba(34,211,238,.16)"></div>
-<div class="blob" style="width:420px;height:420px;left:420px;bottom:-260px;background:rgba(52,211,153,.18)"></div>
 <div class="grid"></div>
-<div class="wrap">
- <div class="left">
-  <div class="brand"><svg width="44" height="44" viewBox="0 0 32 32" fill="none"><defs><linearGradient id="g" x1="0" y1="0" x2="32" y2="32"><stop stop-color="#a78bfa"/><stop offset=".55" stop-color="#22d3ee"/><stop offset="1" stop-color="#34d399"/></linearGradient></defs><rect x="1" y="1" width="30" height="30" rx="9" fill="#0b0d14" stroke="url(#g)" stroke-width="1.6"/><path d="M22.5 11.2A8 8 0 1 0 24 16" stroke="url(#g)" stroke-width="2.6" stroke-linecap="round"/><path d="M24.6 7.6v4.6H20" stroke="url(#g)" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M12.2 16.2l2.6 2.6 5-5.2" stroke="#34d399" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Overturn</div>
-  <div class="pill">✦ Built on Gemini 4 · Berkeley × DeepMind 2026</div>
-  <h1>Insurers deny care with rules <em>they’re not allowed to use.</em></h1>
-  <p>Overturn finds the exact sentence in Medicare’s own coverage policy that contradicts a denial, <b>verifies every quote twice</b>, and drafts a signed, fax-ready appeal in about two minutes.</p>
-  <div class="chips"><span class="chip">gemini-4-hydrogen</span><span class="chip">gemini-3.8-flash</span><span class="chip">gemini-3.8-live</span><span class="chip">gemini-3.8-flash-tts</span><span class="chip">gemini-embedding-2</span></div>
- </div>
- <div class="right">
-  <div class="letter"><div class="h">SUNRISE SENIOR ADVANTAGE (HMO)</div><div style="color:#666;font-size:11.5px;margin-bottom:8px">Notice of Denial of Medical Coverage</div>Member: Maria Delgado · Dexcom G7 CGM<br><br>The member does not meet coverage criteria because the member is <mark>not performing blood glucose testing four or more times per day</mark>…<div class="denied">DENIED</div></div>
-  <div class="policy"><div class="t"><span>CMS LCD L33822 · revision history</span><span class="red">retired</span></div><div class="strike">“…performing frequent (four or more times a day) testing”</div><div class="red" style="font-size:12px;margin-top:4px">Removed 07/18/2021 — not in effect on the date of service</div><div class="ok">In effect: “The beneficiary is insulin-treated; or,”<div class="mono">chart L18 · insulin glargine 22 units once daily ✓ ✓</div></div></div>
-  <div class="stamp"><div class="a">OVERTURN IT</div><div class="b">12 QUOTES VERIFIED · 3 VIOLATIONS</div></div>
+<div class="top">
+ <div class="brand"><svg width="30" height="30" viewBox="0 0 32 32" fill="none"><rect x="1" y="1" width="30" height="30" rx="7" fill="#141414"/><path d="M22.5 11.2A8 8 0 1 0 24 16" stroke="#f7f5f0" stroke-width="2.4" stroke-linecap="round"/><path d="M24.6 7.6v4.6H20" stroke="#f7f5f0" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M12.2 16.2l2.6 2.6 5-5.2" stroke="#2fce96" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>overturn</div>
+ <div class="nav"><span>Medicare Advantage appeals</span><span>Built on Gemini</span><span>Berkeley × DeepMind 2026</span></div>
+</div>
+<div class="left">
+ <div class="pill"><i></i>Denial appeals, verified.</div>
+ <h1>Insurers deny care with rules <em>they’re not allowed to use.</em></h1>
+ <p>Overturn finds the sentence in Medicare’s own coverage policy that contradicts a denial, verifies every quote twice, and drafts a signed, fax-ready appeal in about two minutes.</p>
+ <div class="cta"><span class="btn mint">Overturn a denial live ↗</span><span class="btn out">Instant replay</span><span class="link">vnmoorthy.github.io/overturn ↗</span></div>
+</div>
+<div class="term">
+ <div class="bar"><b></b><b></b><b></b><span>overturn · from denial to signed appeal</span></div>
+ <div class="body">
+  <div class="g">$ overturn appeal --case maria-cgm</div>
+  <div class="f">reading denial · Dexcom G7 CGM · DOS 2026-09-29</div>
+  <div>pinning policy · LCD L33822 · version in effect 2024-10-01</div>
+  <div><span class="s">“testing four or more times per day”</span> <span class="r">· retired 2021-07-18</span></div>
+  <div><span class="s">“3+ daily insulin injections”</span> <span class="r">· retired 2023-04-16</span></div>
+  <div>“intensive insulin therapy” <span class="r">· in no version of L33822</span></div>
+  <div class="f">matching chart · two-key verification</div>
+  <div class="g">6/6 criteria met · 12/12 quotes verified</div>
+  <div class="band">appeal ready · human sign-off required</div>
+  <div class="g">ready to file <span class="caret"></span></div>
  </div>
 </div>
+<div class="models"><span class="chip"><i></i>gemini-4-hydrogen</span><span class="chip"><i></i>gemini-3.8-flash</span><span class="chip"><i></i>gemini-3.8-live</span><span class="chip"><i></i>gemini-3.8-flash-tts</span><span class="chip"><i></i>gemini-embedding-2</span><span class="chip"><i></i>antigravity agent</span></div>
 </body></html>

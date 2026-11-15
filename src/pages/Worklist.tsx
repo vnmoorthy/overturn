@@ -3,7 +3,7 @@
 // with appeal clocks, outcome tracking, and a payer playbook that learns from results.
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { motion } from 'framer-motion'
-import { ArrowUpRight, FileStack, Plus, RotateCcw, Search, SearchX, X } from 'lucide-react'
+import { ArrowUpRight, Plus, RotateCcw, Search, SearchX, X } from 'lucide-react'
 import type { CaseFile } from '../lib/types'
 import { SEEDS, caseStore, newBlankCase, seedById, useCases } from '../lib/store'
 import { navigate } from '../lib/router'
@@ -136,26 +136,29 @@ export default function Worklist(_props: { id?: string }) {
   const awaiting = counts[FILTERS.findIndex(f => f.key === 'filed')]
   const demo = rows.find(r => r.c.hero && !r.filed) || rows.find(r => r.c.hero)
   const playbookAction = awaiting > 0
-    ? <Button size="sm" variant="subtle" onClick={() => { setQ(''); setFilter('filed'); scrollToTable() }}>Show {plural(awaiting, 'case')} awaiting a decision</Button>
+    ? <Button size="sm" variant="outline" onClick={() => { setQ(''); setFilter('filed'); scrollToTable() }}>Show {plural(awaiting, 'case')} awaiting a decision</Button>
     : demo
-      ? <Button size="sm" variant="subtle" icon={<ArrowUpRight className="size-3.5" />} onClick={() => openCase(demo.id)}>Work {demo.name.split(' ')[0]}’s demo case</Button>
+      ? <Button size="sm" variant="outline" icon={<ArrowUpRight className="size-3.5" />} onClick={() => openCase(demo.id)}>Work {demo.name.split(' ')[0]}’s demo case</Button>
       : null
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-7">
       {/* ---------------------------------------------------------- header */}
-      <motion.header initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }}
-        className="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
+      <motion.header initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.35 }}
+        className="flex flex-col gap-6 border-b border-line pb-7 lg:flex-row lg:items-end lg:justify-between">
         <div className="max-w-2xl">
-          <div className="mb-2 flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-ink-400">
-            <FileStack className="size-3.5 text-ink-200" /> Worklist
+          <div className="eyebrow mb-4 flex items-center gap-2.5">
+            <span aria-hidden className="size-[7px] bg-mint" />
+            <span>Denial worklist</span>
+            <span aria-hidden className="h-px w-8 bg-line-strong" />
+            <span className="tabular-nums">{plural(rows.length, 'case')}</span>
           </div>
-          <h1 className="text-[30px] font-semibold leading-[1.1] tracking-tight text-ink-100 sm:text-[38px]">
-            Every denial, <span className="font-display pr-1 text-[1.12em] font-normal italic text-gradient">ranked by what it’s worth.</span>
+          <h1 className="font-serif text-[34px] font-medium leading-[1.04] tracking-[-0.035em] text-ink-100 sm:text-[46px]">
+            Every denial, <span className="text-gradient">ranked by what it’s worth.</span>
           </h1>
-          <p className="mt-3 max-w-xl text-[14.5px] leading-relaxed text-ink-300">
+          <p className="mt-4 max-w-xl text-[15px] leading-relaxed text-ink-300">
             Medicare Advantage medical-necessity denials, prioritized by expected recovery — billed amount × how often independent reviewers
-            overturn that service — with every 65-day reconsideration clock (42 CFR § 422.582) in view.
+            overturn that service — with every 65-day reconsideration clock (<span className="whitespace-nowrap font-mono text-[13px] text-ink-200">42 CFR § 422.582</span>) in view.
           </p>
         </div>
         <div className="flex shrink-0 flex-wrap items-center gap-2">
@@ -168,61 +171,64 @@ export default function Worklist(_props: { id?: string }) {
       <KpiStrip k={kpis} />
 
       {/* ------------------------------------------------------------ table */}
-      <motion.div ref={tableRef} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2, duration: 0.4 }} className="scroll-mt-20">
+      <motion.div ref={tableRef} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.15, duration: 0.35 }} className="scroll-mt-20">
         <Card className="overflow-hidden">
-          <div className="flex flex-col gap-3 border-b border-line/70 px-4 py-3 sm:px-5 md:flex-row md:items-center md:justify-between">
-            <div role="group" aria-label="Filter by status" className="scrollbar-thin -mx-1 flex gap-1 overflow-x-auto px-1">
+          <div className="flex flex-col border-b border-line md:flex-row md:items-stretch md:justify-between">
+            <div role="group" aria-label="Filter by status" className="scrollbar-thin flex overflow-x-auto px-2 sm:px-3">
               {FILTERS.map((f, i) => {
                 const active = filter === f.key
                 return (
                   <button key={f.key} type="button" aria-pressed={active} onClick={() => setFilter(f.key)}
-                    className={cx('relative flex shrink-0 items-center gap-1.5 rounded-lg px-3 py-1.5 text-[12.5px] font-medium transition-colors cursor-pointer focus-visible:outline-2 focus-visible:outline-emerald-600/60',
-                      active ? 'text-ink-100' : 'text-ink-400 hover:bg-black/[0.03] hover:text-ink-100')}>
-                    {active && <motion.span layoutId="wl-filter" className="absolute inset-0 rounded-lg border border-line bg-black/[0.045]" transition={{ type: 'spring', damping: 30, stiffness: 400 }} />}
-                    <span className="relative">{f.label}</span>
-                    <span className={cx('relative rounded-md px-1.5 font-mono text-[10.5px] tabular-nums', active ? 'bg-black/[0.06] text-ink-100' : 'bg-black/[0.045] text-ink-400')}>{counts[i]}</span>
+                    className={cx('relative flex h-12 shrink-0 items-center gap-2 px-2.5 font-mono text-[11px] font-medium uppercase tracking-[0.1em] transition-colors cursor-pointer sm:px-3 focus-visible:outline focus-visible:outline-2 focus-visible:-outline-offset-4 focus-visible:outline-mint-deep',
+                      active ? 'text-ink-100' : 'text-ink-400 hover:text-ink-100')}>
+                    <span>{f.label}</span>
+                    <span className={cx('min-w-[20px] rounded-[3px] border px-1 text-center text-[10.5px] leading-[16px] tabular-nums tracking-normal transition-colors',
+                      active ? 'border-ink-100 bg-ink-100 text-paper' : 'border-line text-ink-400')}>{counts[i]}</span>
+                    {active && <motion.span layoutId="wl-filter" className="absolute inset-x-2.5 bottom-0 h-[2px] bg-ink-100 sm:inset-x-3" transition={{ type: 'spring', damping: 32, stiffness: 420 }} />}
                   </button>
                 )
               })}
             </div>
-            <label className="relative flex w-full items-center md:w-72">
-              <Search className="pointer-events-none absolute left-3 size-4 text-ink-400" />
-              <input ref={searchRef} value={q} onChange={e => setQ(e.target.value)} onKeyDown={e => { if (e.key === 'Escape') { setQ(''); e.currentTarget.blur() } }}
-                type="text" placeholder="Search patient, payer or policy" aria-label="Search cases by patient, payer or policy"
-                className="h-9 w-full rounded-md border border-line bg-black/[0.03] pl-9 pr-9 text-[13px] text-ink-100 placeholder:text-ink-400 outline-none transition focus:border-line-strong focus:bg-black/[0.045] focus:ring-2 focus:ring-emerald-600/20" />
-              {q
-                ? <button type="button" onClick={() => { setQ(''); searchRef.current?.focus() }} aria-label="Clear search" className="absolute right-2 rounded-md p-1 text-ink-400 hover:bg-black/[0.06] hover:text-ink-100 cursor-pointer"><X className="size-3.5" /></button>
-                : <kbd className="pointer-events-none absolute right-2.5 rounded border border-line bg-black/[0.03] px-1.5 font-mono text-[10.5px] text-ink-400">/</kbd>}
-            </label>
+            <div className="border-t border-line px-4 py-2.5 md:flex md:w-80 md:shrink-0 md:items-center md:border-t-0 md:py-0 md:pl-3 md:pr-4 lg:w-[22rem]">
+              <label className="relative flex w-full items-center">
+                <Search className="pointer-events-none absolute left-2.5 size-3.5 text-ink-400" />
+                <input ref={searchRef} value={q} onChange={e => setQ(e.target.value)} onKeyDown={e => { if (e.key === 'Escape') { setQ(''); e.currentTarget.blur() } }}
+                  type="text" placeholder="Search patient, payer or policy" aria-label="Search cases by patient, payer or policy"
+                  className="h-8 w-full rounded-[4px] border border-line bg-paper pl-8 pr-9 text-[13px] text-ink-100 placeholder:text-ink-400 outline-none transition-[border-color,box-shadow,background-color] hover:border-line-strong focus:border-ink-100 focus:bg-paper-high focus:shadow-[0_0_0_3px_rgba(47,206,150,0.2)]" />
+                {q
+                  ? <button type="button" onClick={() => { setQ(''); searchRef.current?.focus() }} aria-label="Clear search" className="absolute right-1.5 rounded-[3px] p-1 text-ink-400 hover:bg-paper-low hover:text-ink-100 cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-mint-deep"><X className="size-3.5" /></button>
+                  : <kbd className="pointer-events-none absolute right-2 rounded-[3px] border border-line bg-paper-high px-1.5 font-mono text-[10.5px] leading-[16px] text-ink-400">/</kbd>}
+              </label>
+            </div>
           </div>
 
           <CaseTable rows={shown} sort={sort} onSort={onSort} actions={actions}
             empty={
               <div className="flex flex-col items-center gap-3 text-center">
-                <div className="rounded-lg bg-black/[0.03] p-3 text-ink-300"><SearchX className="size-5" /></div>
-                <div className="text-[14.5px] font-semibold text-ink-100">No denials match {q ? `“${q}”` : 'this filter'}</div>
-                <p className="max-w-sm text-[13px] text-ink-400">Try another payer or patient name, or clear the filters to see the full queue.</p>
-                <Button size="sm" variant="subtle" onClick={clearFilters}>Clear filters</Button>
+                <div className="rounded-md border border-line bg-paper p-3 text-ink-300"><SearchX className="size-5" /></div>
+                <div className="font-serif text-[18px] font-medium tracking-[-0.015em] text-ink-100">No denials match {q ? `“${q}”` : 'this filter'}</div>
+                <p className="max-w-sm text-[13.5px] leading-relaxed text-ink-400">Try another payer or patient name, or clear the filters to see the full queue.</p>
+                <Button size="sm" variant="outline" onClick={clearFilters}>Clear filters</Button>
               </div>
             } />
 
-          <div className="flex flex-col gap-1.5 border-t border-line/70 px-4 py-3 text-[12px] text-ink-400 sm:px-5 lg:flex-row lg:items-center lg:justify-between">
-            <span>
-              Showing <span className="text-ink-200">{shown.length}</span> of {rows.length} denials
-              {shownBilled > 0 && <> · {usd(shownBilled)} open · <span className="text-ink-200">{usd(shownEv)} expected</span></>}
+          <div className="flex flex-col gap-2 border-t border-line bg-paper px-4 py-3.5 sm:px-5 lg:flex-row lg:items-start lg:justify-between lg:gap-10">
+            <span className="shrink-0 font-mono text-[11px] uppercase leading-5 tracking-[0.08em] text-ink-400">
+              Showing <span className="text-ink-100 tabular-nums">{shown.length}</span> of <span className="tabular-nums">{rows.length}</span> denials
+              {shownBilled > 0 && <> · <span className="tabular-nums">{usd(shownBilled)}</span> open · <span className="text-ink-100 tabular-nums">{usd(shownEv)} expected</span></>}
             </span>
             {data && (
-              <span className="lg:max-w-[60%] lg:text-right">
+              <p className="text-[12px] leading-relaxed text-ink-400 lg:max-w-[58%] lg:text-right">
                 Historical odds = share of {data.total_cases.toLocaleString('en-US')} California DMHC independent medical reviews ({data.year_range[0]}–{data.year_range[1]}) that overturned the plan for that service. A directional signal, not a prediction.{' '}
-                <a href={data.source_url} target="_blank" rel="noreferrer" onClick={e => e.stopPropagation()} className="text-ink-300 underline decoration-black/20 underline-offset-2 hover:text-ink-100">Source</a>
-              </span>
+                <a href={data.source_url} target="_blank" rel="noreferrer" onClick={e => e.stopPropagation()} className="inline-flex items-center gap-0.5 font-medium text-ink-200 underline decoration-line-strong underline-offset-[3px] hover:text-ink-100 hover:decoration-ink-100">Source<ArrowUpRight className="size-3" /></a>
+              </p>
             )}
           </div>
         </Card>
       </motion.div>
 
       {/* --------------------------------------------------------- playbook */}
-      <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.3, duration: 0.4 }}>
+      <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.25, duration: 0.35 }}>
         <Playbook cells={playbook} insights={insights} emptyAction={playbookAction} onFocusPayer={focusPayer} />
       </motion.div>
 

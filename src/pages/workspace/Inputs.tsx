@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react'
-import { Camera, FileText, Printer, Stethoscope, Upload, X } from 'lucide-react'
+import { Camera, FileText, Play, Printer, Stethoscope, Upload, X } from 'lucide-react'
 import { caseStore } from '../../lib/store'
 import { compressImage, pdfText, readDataUrl } from '../../lib/files'
 import { transcribeDocument } from '../../lib/pipeline'
@@ -7,7 +7,7 @@ import { dataUrlToPart } from '../../lib/engine'
 import { friendlyError } from '../../lib/gemini'
 import { audit } from '../../lib/audit'
 import type { CaseFile } from '../../lib/types'
-import { Badge, Button, Card, Spinner, cx, toast } from '../../ui/kit'
+import { Badge, Button, Spinner, cx, toast } from '../../ui/kit'
 import { printSampleLetter } from './exportLetter'
 
 function DropZone({ label, icon, onFile, busy, accept }: { label: string; icon: React.ReactNode; onFile: (f: File) => void; busy?: boolean; accept: string }) {
@@ -17,14 +17,50 @@ function DropZone({ label, icon, onFile, busy, accept }: { label: string; icon: 
   return (
     <div onDragOver={e => { e.preventDefault(); setOver(true) }} onDragLeave={() => setOver(false)}
       onDrop={e => { e.preventDefault(); setOver(false); const f = e.dataTransfer.files?.[0]; if (f) onFile(f) }}
-      className={cx('flex flex-wrap items-center justify-between gap-2 rounded-md border border-dashed px-3 py-2.5 transition-colors', over ? 'border-line-strong bg-black/[0.04]' : 'border-line bg-black/[0.02]')}>
-      <div className="flex items-center gap-2 text-[12.5px] text-ink-300">{busy ? <Spinner /> : icon}{busy ? 'Reading with Gemini…' : label}</div>
+      className={cx('flex flex-wrap items-center justify-between gap-x-3 gap-y-2.5 rounded-md border border-dashed px-3.5 py-3 transition-colors duration-150',
+        over ? 'border-ink-100 bg-paper-high' : busy ? 'border-mint-deep/60 bg-mint-pale/40' : 'border-line-strong bg-paper-high/60 hover:border-ink-400')}>
+      <div className="flex min-w-0 items-center gap-3">
+        <span className={cx('flex size-8 shrink-0 items-center justify-center rounded-[4px] border', busy ? 'border-mint-deep/40 bg-paper-high text-mint-deep' : 'border-line bg-paper-high text-ink-300')}>{busy ? <Spinner /> : icon}</span>
+        <div className="min-w-0">
+          <div className="text-[13px] leading-snug text-ink-200">{busy ? 'Reading with Gemini…' : over ? 'Drop to attach' : label}</div>
+          <div className="mt-0.5 font-mono text-[10.5px] uppercase tracking-[0.1em] text-ink-400">PDF · JPG · PNG · TXT</div>
+        </div>
+      </div>
       <div className="flex gap-1.5">
         <Button size="sm" variant="ghost" icon={<Camera className="size-3.5" />} onClick={() => cam.current?.click()} disabled={busy}>Photo</Button>
         <Button size="sm" variant="outline" icon={<Upload className="size-3.5" />} onClick={() => ref.current?.click()} disabled={busy}>Upload</Button>
       </div>
       <input ref={ref} type="file" accept={accept} className="hidden" onChange={e => { const f = e.target.files?.[0]; if (f) onFile(f); e.target.value = '' }} />
       <input ref={cam} type="file" accept="image/*" capture="environment" className="hidden" onChange={e => { const f = e.target.files?.[0]; if (f) onFile(f); e.target.value = '' }} />
+    </div>
+  )
+}
+
+/** A document pane: mono label + serif title over an inset desk that holds the drop zone and the sheet. */
+function Pane({ index, source, title, meta, children }: { index: string; source: string; title: string; meta?: React.ReactNode; children: React.ReactNode }) {
+  return (
+    <section aria-label={title} className="flex min-w-0 flex-col overflow-hidden rounded-lg border border-line bg-paper-high shadow-[0_1px_0_rgba(20,20,20,0.02),0_1px_2px_rgba(20,20,20,0.03)]">
+      <header className="flex min-h-[64px] flex-wrap items-center justify-between gap-x-3 gap-y-2 border-b border-line px-4 py-3 sm:px-5">
+        <div className="min-w-0">
+          <div className="eyebrow !text-[10px]">Doc {index} · {source}</div>
+          <h3 className="mt-0.5 font-serif text-[18px] font-medium leading-tight tracking-[-0.015em] text-ink-100">{title}</h3>
+        </div>
+        {meta && <div className="flex min-w-0 items-center gap-1.5">{meta}</div>}
+      </header>
+      <div className="flex flex-1 flex-col gap-3 bg-paper-low/55 p-3 sm:p-4">{children}</div>
+    </section>
+  )
+}
+
+/** A sheet of paper: hairline file strip on top, mono body. */
+function Sheet({ name, lines, children }: { name: string; lines?: number; children: React.ReactNode }) {
+  return (
+    <div className="flex flex-1 flex-col overflow-hidden rounded-[4px] border border-line bg-[#fffefb] shadow-[0_1px_2px_rgba(20,20,20,0.05),0_10px_28px_-18px_rgba(20,20,20,0.22)] transition-shadow focus-within:border-mint-deep/60 focus-within:shadow-[0_0_0_3px_rgba(47,206,150,0.16),0_10px_28px_-18px_rgba(20,20,20,0.22)]">
+      <div className="flex items-center justify-between gap-3 border-b border-line/70 px-4 py-1.5 font-mono text-[10.5px] text-ink-400">
+        <span className="truncate">{name}</span>
+        {typeof lines === 'number' && <span className="shrink-0 tabular-nums">{lines} lines</span>}
+      </div>
+      {children}
     </div>
   )
 }
@@ -71,43 +107,46 @@ export function InputsPanel({ c, onRun, running }: { c: CaseFile; onRun: () => v
   }
 
   const ready = (c.denialText.trim().length > 40 || !!c.denialFile) && c.chartText.trim().length > 40
+  const lineCount = (t: string) => (t ? t.split('\n').length : 0)
+  const textareaCls = 'scrollbar-thin min-h-[300px] w-full flex-1 resize-y bg-transparent px-4 py-3.5 font-mono text-[12px] leading-[1.75] text-ink-200 outline-none placeholder:text-ink-400 sm:px-5'
   return (
     <div className="grid gap-4 lg:grid-cols-2">
-      <Card className="flex flex-col p-4">
-        <div className="mb-2 flex h-8 items-center justify-between">
-          <div className="flex items-center gap-2 text-sm font-semibold"><FileText className="size-4 text-rose-700" /> Denial letter</div>
-          <div className="flex items-center gap-1.5">
-            {c.denialFile && <Badge tone="violet">{c.denialFile.name}</Badge>}
-            {c.denialText && <Button size="sm" variant="ghost" icon={<Printer className="size-3.5" />} onClick={() => printSampleLetter(c)}>Print letter</Button>}
-          </div>
-        </div>
-        <DropZone label="Drop a PDF, photo, or scan of the denial" icon={<Upload className="size-4" />} onFile={f => intake('denial', f)} busy={busy === 'denial'} accept=".pdf,image/*,.txt" />
+      <Pane index="01" source="from the plan" title="Denial letter"
+        meta={<>
+          {c.denialFile && <Badge tone="gray" className="max-w-[14rem] overflow-hidden">{c.denialFile.name}</Badge>}
+          {c.denialText && <Button size="sm" variant="ghost" icon={<Printer className="size-3.5" />} onClick={() => printSampleLetter(c)}>Print letter</Button>}
+        </>}>
+        <DropZone label="Drop a PDF, photo, or scan of the denial" icon={<FileText className="size-4" />} onFile={f => intake('denial', f)} busy={busy === 'denial'} accept=".pdf,image/*,.txt" />
         {c.denialFile && !c.denialText ? (
-          <div className="relative mt-3 overflow-hidden rounded-md border border-line">
-            {c.denialFile.mimeType.startsWith('image/')
-              ? <img src={c.denialFile.dataUrl} alt="Uploaded denial letter" className="max-h-[340px] w-full object-contain bg-ink-800/70" />
-              : <div className="p-6 text-sm text-ink-300">{c.denialFile.name}</div>}
-            <button onClick={() => caseStore.update(c.id, { denialFile: null })} className="absolute right-2 top-2 rounded-lg bg-[#141414]/35 p-1.5 cursor-pointer" aria-label="Remove file"><X className="size-4" /></button>
-          </div>
+          <Sheet name={c.denialFile.name}>
+            <div className="relative">
+              {c.denialFile.mimeType.startsWith('image/')
+                ? <img src={c.denialFile.dataUrl} alt="Uploaded denial letter" className="max-h-[340px] w-full bg-paper-low/60 object-contain" />
+                : <div className="p-6 font-mono text-[12.5px] text-ink-300">{c.denialFile.name}</div>}
+              <button onClick={() => caseStore.update(c.id, { denialFile: null })} className="absolute right-2 top-2 rounded-[4px] border border-line bg-paper-high/95 p-1.5 text-ink-300 shadow-sm transition-colors hover:border-line-strong hover:text-ink-100 cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-mint-deep" aria-label="Remove file"><X className="size-4" /></button>
+            </div>
+          </Sheet>
         ) : (
-          <textarea value={c.denialText} onChange={e => caseStore.update(c.id, { denialText: e.target.value })} spellCheck={false}
-            placeholder="…or paste the denial letter text here"
-            className="scrollbar-thin mt-3 min-h-[300px] flex-1 resize-y rounded-md border border-line/70 bg-ink-800/70 p-3 font-mono text-[12px] leading-relaxed text-ink-300 outline-none focus:border-line-strong" />
+          <Sheet name="denial-letter.txt" lines={lineCount(c.denialText)}>
+            <textarea value={c.denialText} onChange={e => caseStore.update(c.id, { denialText: e.target.value })} spellCheck={false}
+              aria-label="Denial letter text"
+              placeholder="…or paste the denial letter text here"
+              className={textareaCls} />
+          </Sheet>
         )}
-      </Card>
-      <Card className="flex flex-col p-4">
-        <div className="mb-2 flex h-8 items-center justify-between">
-          <div className="flex items-center gap-2 text-sm font-semibold"><Stethoscope className="size-4 text-emerald-700" /> Chart notes</div>
-          <span className="text-[11px] text-ink-400">{c.chartText ? `${c.chartText.split('\n').length} lines` : ''}</span>
-        </div>
-        <DropZone label="Drop chart notes (PDF, photo, or text)" icon={<Upload className="size-4" />} onFile={f => intake('chart', f)} busy={busy === 'chart'} accept=".pdf,image/*,.txt" />
-        <textarea value={c.chartText} onChange={e => caseStore.update(c.id, { chartText: e.target.value })} spellCheck={false}
-          placeholder="…or paste the relevant progress notes, test results and orders"
-          className="scrollbar-thin mt-3 min-h-[300px] flex-1 resize-y rounded-md border border-line/70 bg-ink-800/70 p-3 font-mono text-[12px] leading-relaxed text-ink-300 outline-none focus:border-emerald-600/40" />
-      </Card>
-      <div className="flex flex-wrap items-center justify-between gap-3 lg:col-span-2">
-        <p className="text-[12px] text-ink-400">Use synthetic or de-identified documents only. PDFs with a text layer are read exactly; photos are transcribed verbatim by Gemini.</p>
-        <Button variant="primary" size="lg" onClick={onRun} loading={running} disabled={!ready}>{c.match ? 'Re-run live' : 'Run Overturn'}</Button>
+      </Pane>
+      <Pane index="02" source="from the provider" title="Chart notes">
+        <DropZone label="Drop chart notes (PDF, photo, or text)" icon={<Stethoscope className="size-4" />} onFile={f => intake('chart', f)} busy={busy === 'chart'} accept=".pdf,image/*,.txt" />
+        <Sheet name={c.chartTitle || 'chart-notes.txt'} lines={c.chartText ? lineCount(c.chartText) : undefined}>
+          <textarea value={c.chartText} onChange={e => caseStore.update(c.id, { chartText: e.target.value })} spellCheck={false}
+            aria-label="Chart notes text"
+            placeholder="…or paste the relevant progress notes, test results and orders"
+            className={textareaCls} />
+        </Sheet>
+      </Pane>
+      <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-3 border-t border-line pt-4 lg:col-span-2">
+        <p className="max-w-2xl text-[12.5px] leading-relaxed text-ink-400"><span className="eyebrow mr-2 inline !text-[10px] !text-ink-300">Privacy</span>Use synthetic or de-identified documents only. PDFs with a text layer are read exactly; photos are transcribed verbatim by Gemini.</p>
+        <Button variant="primary" size="lg" icon={<Play className="size-4" />} onClick={onRun} loading={running} disabled={!ready} className="w-full sm:w-auto">{c.match ? 'Re-run live' : 'Run Overturn'}</Button>
       </div>
     </div>
   )
