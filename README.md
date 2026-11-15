@@ -22,9 +22,9 @@
 
 *Berkeley × DeepMind Hackathon 2026 — Google AI Studio track*
 
-<a href="docs/demo/overturn-demo.mp4"><img src="docs/demo/overturn-demo.gif" alt="Overturn running live: reads a denial, finds two retired CMS rules, verifies 12 quotes, drafts the appeal" width="100%" /></a>
+<a href="docs/demo/overturn-demo-narrated.mp4"><img src="docs/demo/overturn-demo.gif" alt="Overturn running live: reads a denial, finds two retired CMS rules, verifies 12 quotes, drafts the appeal" width="100%" /></a>
 
-**▶ [Watch the 50-second demo (MP4)](docs/demo/overturn-demo.mp4)** — recorded from a live run on the Gemini free tier.
+**▶ [Watch the 75-second narrated demo (MP4, with sound)](docs/demo/overturn-demo-narrated.mp4)**: a live run recorded on the Gemini free tier, voiced by Gemini 3.8 Live. A [silent, captioned 50-second cut](docs/demo/overturn-demo.mp4) is also available.
 
 </div>
 
@@ -172,6 +172,7 @@ No key? Open **Settings** in the app and paste one — it is stored only in your
 | `npm run record-runs` | Re-record genuine Gemini runs for the three demo cases into `src/data/cached/` |
 | `npx tsx scripts/check-saved-runs.ts` | Re-verify every recorded run with the current verifier, rules and letter builder |
 | `node scripts/record-demo.mjs` + `scripts/make-demo-video.sh` | Record the captioned demo video from a live run |
+| `node scripts/narrate-live.mjs` + `python3 scripts/make-narrated-video.py` | Voice `scripts/narration.json` with Gemini 3.8 Live (each line checked word for word against the model's own transcript) and cut the narrated video |
 
 ### Deploy to Google Cloud Run
 

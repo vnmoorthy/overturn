@@ -1,0 +1,15 @@
+{
+  "voice": "Kore",
+  "style": "Narrate this product demo like a calm, confident documentary voiceover. Warm, clear, measured pace, slight emphasis on numbers:",
+  "segments": [
+    { "id": "title",    "mark": "start",          "text": "Maria's insurer denied her glucose monitor using a rule Medicare deleted in 2021." },
+    { "id": "problem",  "mark": "hero_start",     "text": "Medicare Advantage plans deny three point two million requests a year. Fewer than one in eight gets appealed, yet four in five appeals win." },
+    { "id": "run",      "mark": "run_start",      "text": "Overturn sends six Gemini agents through the denial, the exact Medicare policy version, and her chart." },
+    { "id": "stamp",    "mark": "run_done",       "text": "Two of the plan's requirements were retired by Medicare. A third exists in no version of the policy at all." },
+    { "id": "receipt",  "mark": "stamp_done",     "text": "Here's the receipt: the policy itself, showing that rule removed in July 2021." },
+    { "id": "evidence", "mark": "tt_done",        "text": "Every criterion links a policy sentence to a line in her chart. Change a single word, and Overturn refuses to send." },
+    { "id": "findings", "mark": "tamper_done",    "text": "Plain code, not the model, decides every violation, each one cited to federal regulation." },
+    { "id": "letter",   "mark": "findings_done",  "text": "A human reviews and signs, and a fax-ready appeal is done in about two minutes." },
+    { "id": "close",    "mark": "letter_done",    "text": "Two point eight million denials a year go unfought. Overturn them." }
+  ]
+}

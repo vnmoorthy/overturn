@@ -7,6 +7,7 @@ Everything the Berkeley × DeepMind form asks for, ready to paste.
 | Track | **Google AI Studio** (Online Track) — all intelligence runs on the Gemini API via an AI Studio key |
 | Hosted prototype | https://vnmoorthy.github.io/overturn/ |
 | Code repository | https://github.com/vnmoorthy/overturn |
+| Demo video | [`docs/demo/overturn-demo-narrated.mp4`](demo/overturn-demo-narrated.mp4): 75 s, narrated by Gemini 3.8 Live, recorded from a live run. Upload this one to YouTube or X for the social-engagement score. |
 | Pitch deck | [`deck/Overturn-pitch-deck.pptx`](../deck/Overturn-pitch-deck.pptx) · storyboard [`deck/STORYBOARD.md`](../deck/STORYBOARD.md) |
 
 ---
