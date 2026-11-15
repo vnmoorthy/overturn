@@ -38,7 +38,7 @@ async function copy(text: string) {
 function CopyButton({ text, label = 'Copy' }: { text: string; label?: string }) {
   const [done, setDone] = useState(false)
   return (
-    <Button size="sm" variant="ghost" className="h-7 px-2 text-[12px]" icon={done ? <Check className="size-3.5 text-emerald-300" /> : <Copy className="size-3.5" />}
+    <Button size="sm" variant="ghost" className="h-7 px-2 text-[12px]" icon={done ? <Check className="size-3.5 text-emerald-700" /> : <Copy className="size-3.5" />}
       onClick={async () => {
         if (await copy(text)) { setDone(true); setTimeout(() => setDone(false), 1400) } else toast('Could not access the clipboard.', 'red')
       }}>{done ? 'Copied' : label}</Button>
@@ -62,8 +62,8 @@ function Scorecard({ score, onAgain, transcript }: { score: CallScore; onAgain: 
   return (
     <motion.div initial={{ opacity: 0, y: 12, scale: 0.98 }} animate={{ opacity: 1, y: 0, scale: 1 }} exit={{ opacity: 0, y: -8 }} transition={{ type: 'spring', damping: 24, stiffness: 300 }}>
       <Card glow={score.conceded} className="overflow-hidden">
-        <div className={cx('flex items-center gap-3 border-b border-white/8 px-4 py-3.5', score.conceded ? 'bg-emerald-400/[0.07]' : 'bg-amber-300/[0.05]')}>
-          <div className={cx('grid size-10 place-items-center rounded-xl', score.conceded ? 'bg-emerald-400/15 text-emerald-300' : 'bg-amber-300/12 text-amber-200')}>
+        <div className={cx('flex items-center gap-3 border-b border-line/70 px-4 py-3.5', score.conceded ? 'bg-emerald-500/[0.07]' : 'bg-amber-500/[0.07]')}>
+          <div className={cx('grid size-10 place-items-center rounded-md', score.conceded ? 'bg-emerald-500/[0.135] text-emerald-700' : 'bg-amber-500/[0.108] text-amber-800')}>
             {score.conceded ? <Trophy className="size-5" /> : <Gavel className="size-5" />}
           </div>
           <div className="min-w-0">
@@ -73,11 +73,11 @@ function Scorecard({ score, onAgain, transcript }: { score: CallScore; onAgain: 
         </div>
         <div className="space-y-3 p-4">
           {score.concession && (
-            <blockquote className="rounded-xl border border-emerald-400/20 bg-emerald-400/[0.06] px-3 py-2 text-[13px] italic leading-relaxed text-emerald-100">“{score.concession}”</blockquote>
+            <blockquote className="rounded-md border border-emerald-600/25 bg-emerald-500/[0.07] px-3 py-2 text-[13px] italic leading-relaxed text-emerald-800">“{score.concession}”</blockquote>
           )}
           <div className="grid grid-cols-4 gap-2">
             {stats.map(s => (
-              <div key={s.k} className="rounded-xl border border-white/8 bg-white/[0.03] px-2 py-2 text-center">
+              <div key={s.k} className="rounded-md border border-line/70 bg-black/[0.02] px-2 py-2 text-center">
                 <div className="font-mono text-[15px] font-semibold text-ink-100">{s.v}</div>
                 <div className="mt-0.5 text-[10px] leading-tight text-ink-400">{s.k}</div>
               </div>
@@ -88,8 +88,8 @@ function Scorecard({ score, onAgain, transcript }: { score: CallScore; onAgain: 
             <Badge tone={score.chartCited ? 'green' : 'gray'} icon={score.chartCited ? <Check className="size-3" /> : <CircleAlert className="size-3" />}>Cited chart evidence</Badge>
             <Badge tone={score.conceded ? 'green' : 'amber'}>{score.conceded ? 'Overturn won' : 'No concession'}</Badge>
           </div>
-          <div className="flex gap-2 rounded-xl border border-white/8 bg-white/[0.03] px-3 py-2.5 text-[12.5px] leading-relaxed text-ink-300">
-            <Lightbulb className="mt-0.5 size-4 shrink-0 text-amber-200" />{score.tip}
+          <div className="flex gap-2 rounded-md border border-line/70 bg-black/[0.02] px-3 py-2.5 text-[12.5px] leading-relaxed text-ink-300">
+            <Lightbulb className="mt-0.5 size-4 shrink-0 text-amber-800" />{score.tip}
           </div>
           <div className="flex flex-wrap gap-2 pt-1">
             <Button size="sm" variant="primary" icon={<RotateCcw className="size-3.5" />} onClick={onAgain}>Rehearse again</Button>
@@ -109,28 +109,28 @@ function CitationCard({ r, familyId, flash }: { r: CitationRow; familyId: string
     <motion.div id={`cite-${r.id}`} layout
       animate={flash ? { boxShadow: ['0 0 0 0 rgba(124,92,255,0)', '0 0 0 2px rgba(124,92,255,.7)', '0 0 0 0 rgba(124,92,255,0)'] } : undefined}
       transition={{ duration: 1.4 }}
-      className="rounded-xl border border-white/8 bg-white/[0.025] p-3">
+      className="rounded-md border border-line/70 bg-black/[0.02] p-3">
       <div className="flex items-start justify-between gap-2">
         <div className="min-w-0">
           <div className="flex items-center gap-1.5">
-            <span className="rounded-md bg-white/[0.07] px-1.5 font-mono text-[10.5px] text-ink-300">{r.id}</span>
+            <span className="rounded-md bg-black/[0.045] px-1.5 font-mono text-[10.5px] text-ink-300">{r.id}</span>
             <span className="text-[13px] font-medium leading-snug text-ink-100">{r.criterion_label}</span>
           </div>
         </div>
         <Badge tone={st.tone}>{st.label}</Badge>
       </div>
       <div className="mt-2.5 space-y-2">
-        <div className="border-l-2 border-violet-400/50 pl-2.5">
-          <div className="text-[10px] font-semibold uppercase tracking-[0.12em] text-violet-200/80">{familyId ? `${familyId} · policy` : 'Policy'}</div>
+        <div className="border-l-2 border-line-strong pl-2.5">
+          <div className="text-[10px] font-semibold uppercase tracking-[0.12em] text-ink-200">{familyId ? `${familyId} · policy` : 'Policy'}</div>
           <p className="mt-0.5 text-[12.5px] leading-relaxed text-ink-300">“{r.policy_quote}”</p>
         </div>
         {r.chart_quote ? (
-          <div className="border-l-2 border-emerald-400/50 pl-2.5">
-            <div className="text-[10px] font-semibold uppercase tracking-[0.12em] text-emerald-200/80">Chart · line {r.chart_line}</div>
+          <div className="border-l-2 border-emerald-600/50 pl-2.5">
+            <div className="text-[10px] font-semibold uppercase tracking-[0.12em] text-emerald-800">Chart · line {r.chart_line}</div>
             <p className="mt-0.5 text-[12.5px] leading-relaxed text-ink-300">“{r.chart_quote}”</p>
           </div>
         ) : r.missing_document ? (
-          <div className="border-l-2 border-amber-300/50 pl-2.5 text-[12.5px] leading-relaxed text-amber-100/90">Attach: {r.missing_document}</div>
+          <div className="border-l-2 border-amber-600/50 pl-2.5 text-[12.5px] leading-relaxed text-amber-800">Attach: {r.missing_document}</div>
         ) : null}
       </div>
       <div className="mt-2 flex items-center justify-between gap-2">
@@ -191,11 +191,11 @@ export function CoachPanel({ c, x, score, onAgain, transcript, children }: { c: 
 
       {violations.length > 0 && (
         <Card className="p-4">
-          <div className="mb-3 flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.14em] text-ink-400"><Swords className="size-3.5 text-rose-300" /> Lead with</div>
+          <div className="mb-3 flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.14em] text-ink-400"><Swords className="size-3.5 text-rose-700" /> Lead with</div>
           <div className="space-y-2.5">
             {violations.map(f => (
-              <div key={f.id} className="rounded-xl border border-rose-400/15 bg-rose-400/[0.05] px-3 py-2.5">
-                <div className="text-[13px] font-medium text-rose-100">{f.title}</div>
+              <div key={f.id} className="rounded-md border border-rose-600/25 bg-rose-500/[0.07] px-3 py-2.5">
+                <div className="text-[13px] font-medium text-rose-800">{f.title}</div>
                 <p className="mt-1 text-[12.5px] leading-relaxed text-ink-300">{f.detail}</p>
                 {f.citation && <div className="mt-1.5 font-mono text-[10.5px] text-ink-400">{f.citation}</div>}
               </div>
@@ -206,7 +206,7 @@ export function CoachPanel({ c, x, score, onAgain, transcript, children }: { c: 
 
       <Card className="p-4">
         <div className="mb-3 flex items-center justify-between gap-2">
-          <div className="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.14em] text-ink-400"><ShieldCheck className="size-3.5 text-cyan-300" /> Verified citations</div>
+          <div className="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.14em] text-ink-400"><ShieldCheck className="size-3.5 text-teal-700" /> Verified citations</div>
           {x.rows.length > 0 && <span className="font-mono text-[11px] text-ink-400">{x.rows.filter(r => r.verified).length}/{x.rows.length} verified</span>}
         </div>
         {x.rows.length ? (
@@ -222,7 +222,7 @@ export function CoachPanel({ c, x, score, onAgain, transcript, children }: { c: 
 
       <Card className="p-4">
         <div className="mb-3 flex items-center justify-between gap-2">
-          <div className="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.14em] text-ink-400"><MessageSquareQuote className="size-3.5 text-violet-300" /> Predicted objections</div>
+          <div className="flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.14em] text-ink-400"><MessageSquareQuote className="size-3.5 text-ink-200" /> Predicted objections</div>
           {obj && <ModelChip model={obj.model} ms={obj.cached ? undefined : obj.ms} cached={obj.cached} />}
         </div>
         {!obj && (
@@ -233,17 +233,17 @@ export function CoachPanel({ c, x, score, onAgain, transcript, children }: { c: 
         <AnimatePresence initial={false}>
           {obj?.items.map((o, i) => (
             <motion.div key={`${o.objection}-${i}`} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.08 }}
-              className="mb-2.5 overflow-hidden rounded-xl border border-white/8 bg-white/[0.025]">
-              <div className="border-b border-white/6 bg-rose-400/[0.04] px-3 py-2.5">
-                <div className="text-[10px] font-semibold uppercase tracking-[0.12em] text-rose-200/80">They may say</div>
+              className="mb-2.5 overflow-hidden rounded-md border border-line/70 bg-black/[0.02]">
+              <div className="border-b border-line/70 bg-rose-500/[0.07] px-3 py-2.5">
+                <div className="text-[10px] font-semibold uppercase tracking-[0.12em] text-rose-800">They may say</div>
                 <p className="mt-0.5 text-[13px] leading-relaxed text-ink-100">{o.objection}</p>
               </div>
               <div className="px-3 py-2.5">
-                <div className="text-[10px] font-semibold uppercase tracking-[0.12em] text-emerald-200/80">You answer</div>
+                <div className="text-[10px] font-semibold uppercase tracking-[0.12em] text-emerald-800">You answer</div>
                 <p className="mt-0.5 text-[13px] leading-relaxed text-ink-300">{o.response}</p>
                 <div className="mt-2 flex flex-wrap items-center gap-1.5">
                   {o.row_ids.map(id => (
-                    <button key={id} onClick={() => focusRow(id)} className="rounded-md border border-cyan-400/25 bg-cyan-400/10 px-1.5 py-0.5 font-mono text-[10.5px] text-cyan-200 hover:bg-cyan-400/20 cursor-pointer">{id}</button>
+                    <button key={id} onClick={() => focusRow(id)} className="rounded-md border border-teal-600/25 bg-teal-500/[0.09] px-1.5 py-0.5 font-mono text-[10.5px] text-teal-800 hover:bg-teal-500/[0.16] cursor-pointer">{id}</button>
                   ))}
                   <span className="ml-auto"><CopyButton text={o.response} /></span>
                 </div>

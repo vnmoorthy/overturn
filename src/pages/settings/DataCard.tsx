@@ -57,16 +57,16 @@ export function DataCard({ delay }: { delay?: number }) {
   }
 
   return (
-    <SettingsCard delay={delay} icon={<Database className="size-4 text-emerald-300" />} title="Data"
+    <SettingsCard delay={delay} icon={<Database className="size-4 text-emerald-700" />} title="Data"
       sub={<>Overturn keeps <span className="text-ink-200">{fmtBytes(usage.bytes)}</span> in this browser across {usage.keys.length} {usage.keys.length === 1 ? 'key' : 'keys'}. Nothing is stored anywhere else.</>}>
-      <div className="divide-y divide-white/[0.06] overflow-hidden rounded-xl border border-white/8">
+      <div className="divide-y divide-line/70 overflow-hidden rounded-md border border-line/70">
         <Row icon={<RotateCcw className="size-4 text-ink-300" />} title="Reset demo cases"
           body={`Put all ${SEEDS.length} demo cases back to their original state, discarding analyses, letters, and sign-offs${added ? `, and remove the ${added} ${added === 1 ? 'case' : 'cases'} you added` : ''}.`}
           action={<Button variant="subtle" onClick={() => setConfirm('cases')}>Reset cases</Button>} />
         <Row icon={<History className="size-4 text-ink-300" />} title="Clear audit log"
           body={`Delete all ${auditCount.toLocaleString()} hash-chained ${auditCount === 1 ? 'entry' : 'entries'}. Export them from the Audit trail first if you need a copy.`}
           action={<Button variant="subtle" disabled={!auditCount} onClick={() => setConfirm('audit')}>Clear log</Button>} />
-        <Row icon={<Eraser className="size-4 text-rose-300" />} title="Clear everything"
+        <Row icon={<Eraser className="size-4 text-rose-700" />} title="Clear everything"
           body="Remove every Overturn key from this browser, including cases, audit log, settings, and your API key, then reload."
           action={<Button variant="danger" icon={<Trash2 className="size-4" />} onClick={() => setConfirm('all')}>Clear everything</Button>} />
       </div>
@@ -83,7 +83,7 @@ export function DataCard({ delay }: { delay?: number }) {
         <p>This removes {usage.keys.length} {usage.keys.length === 1 ? 'key' : 'keys'} ({fmtBytes(usage.bytes)}) from this browser and reloads the app. It cannot be undone.</p>
         {usage.keys.length > 0 && (
           <div className="flex flex-wrap gap-1.5">
-            {[...usage.keys].sort().map(k => <code key={k} className="rounded-md border border-white/10 bg-white/[0.04] px-1.5 py-0.5 font-mono text-[11px] text-ink-300">{k}</code>)}
+            {[...usage.keys].sort().map(k => <code key={k} className="rounded-md border border-line bg-black/[0.03] px-1.5 py-0.5 font-mono text-[11px] text-ink-300">{k}</code>)}
           </div>
         )}
       </ConfirmDialog>

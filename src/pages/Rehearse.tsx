@@ -58,7 +58,7 @@ function Header({ all, current, disabled }: { all: CaseFile[]; current: CaseFile
     <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
       <div className="min-w-0">
         <div className="mb-1.5 flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-ink-400">
-          <span className="relative flex size-2"><span className="absolute inline-flex size-full animate-ping rounded-full bg-violet-400/60" /><span className="relative inline-flex size-2 rounded-full bg-violet-400" /></span>
+          <span className="relative flex size-2"><span className="absolute inline-flex size-full animate-ping rounded-full bg-black/[0.04]" /><span className="relative inline-flex size-2 rounded-full bg-ink-300" /></span>
           Peer-to-peer rehearsal
         </div>
         <h1 className="font-display text-[34px] leading-[1.05] tracking-tight text-ink-100 sm:text-[42px]">
@@ -72,7 +72,7 @@ function Header({ all, current, disabled }: { all: CaseFile[]; current: CaseFile
         <label className="relative inline-flex min-w-0 items-center" title={disabled ? 'End the call to switch cases' : 'Switch case'}>
           <span className="sr-only">Case to rehearse</span>
           <select value={current?.id || ''} disabled={disabled} onChange={e => pick(e.target.value)}
-            className="h-10 w-full max-w-[300px] cursor-pointer appearance-none truncate rounded-xl border border-white/10 bg-white/[0.06] pl-3 pr-9 text-sm text-ink-100 outline-none transition hover:bg-white/[0.1] focus:border-violet-300/40 disabled:cursor-not-allowed disabled:opacity-50">
+            className="h-10 w-full max-w-[300px] cursor-pointer appearance-none truncate rounded-md border border-line bg-black/[0.045] pl-3 pr-9 text-sm text-ink-100 outline-none transition hover:bg-black/[0.06] focus:border-line-strong disabled:cursor-not-allowed disabled:opacity-50">
             {!current && <option value="" disabled>Choose a case</option>}
             <optgroup label="Demo cases" className="bg-ink-900">
               {hero.map(h => <option key={h.id} value={h.id} className="bg-ink-900 text-ink-100">{h.title}</option>)}
@@ -96,12 +96,12 @@ function Header({ all, current, disabled }: { all: CaseFile[]; current: CaseFile
 
 // ------------------------------------------------------------------ status
 function statusOf(phase: CallPhase, activity: CallActivity, mic: MicState): { label: string; tone: Tone; dot: string; pulse: boolean } {
-  if (phase === 'connecting') return { label: mic === 'requesting' ? 'Connecting · allow the microphone' : 'Connecting', tone: 'cyan', dot: 'bg-cyan-300', pulse: true }
+  if (phase === 'connecting') return { label: mic === 'requesting' ? 'Connecting · allow the microphone' : 'Connecting', tone: 'cyan', dot: 'bg-teal-500', pulse: true }
   if (phase === 'live') {
-    if (activity === 'speaking') return { label: 'Medical director speaking', tone: 'violet', dot: 'bg-violet-300', pulse: true }
-    if (activity === 'listening') return { label: 'Listening', tone: 'green', dot: 'bg-emerald-300', pulse: true }
-    if (activity === 'thinking') return { label: 'Director is thinking', tone: 'violet', dot: 'bg-violet-300', pulse: true }
-    return { label: 'Live', tone: 'green', dot: 'bg-emerald-300', pulse: true }
+    if (activity === 'speaking') return { label: 'Medical director speaking', tone: 'violet', dot: 'bg-ink-300', pulse: true }
+    if (activity === 'listening') return { label: 'Listening', tone: 'green', dot: 'bg-emerald-500', pulse: true }
+    if (activity === 'thinking') return { label: 'Director is thinking', tone: 'violet', dot: 'bg-ink-300', pulse: true }
+    return { label: 'Live', tone: 'green', dot: 'bg-emerald-500', pulse: true }
   }
   if (phase === 'ended') return { label: 'Call ended', tone: 'gray', dot: 'bg-ink-400', pulse: false }
   return { label: 'Ready to call', tone: 'gray', dot: 'bg-ink-300', pulse: false }
@@ -140,11 +140,11 @@ function RehearseCase({ c, all }: { c: CaseFile; all: CaseFile[] }) {
       <AnimatePresence>
         {!x.analyzed && (
           <motion.div initial={{ opacity: 0, y: -6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}
-            className="flex flex-col gap-3 rounded-2xl border border-amber-300/20 bg-amber-300/[0.06] px-4 py-3.5 sm:flex-row sm:items-center sm:justify-between">
+            className="flex flex-col gap-3 rounded-lg border border-amber-600/25 bg-amber-500/[0.07] px-4 py-3.5 sm:flex-row sm:items-center sm:justify-between">
             <div className="flex gap-3">
-              <TriangleAlert className="mt-0.5 size-4 shrink-0 text-amber-200" />
+              <TriangleAlert className="mt-0.5 size-4 shrink-0 text-amber-800" />
               <div>
-                <div className="text-[14px] font-medium text-amber-100">Run Overturn on this case first for verified coach cards</div>
+                <div className="text-[14px] font-medium text-amber-800">Run Overturn on this case first for verified coach cards</div>
                 <p className="mt-0.5 text-[12.5px] leading-relaxed text-ink-300">You can still rehearse now. The director argues from the denial letter and the chart as submitted.</p>
               </div>
             </div>
@@ -157,7 +157,7 @@ function RehearseCase({ c, all }: { c: CaseFile; all: CaseFile[] }) {
         {/* ---------------------------------------------------------------- call */}
         <div className="min-w-0 lg:sticky lg:top-6 lg:self-start">
           <Card glow={call.phase === 'live'} className="relative overflow-hidden lg:flex lg:max-h-[calc(100vh-3rem)] lg:flex-col">
-            <div className="flex flex-wrap items-center justify-between gap-2 border-b border-white/8 px-4 py-3 lg:shrink-0">
+            <div className="flex flex-wrap items-center justify-between gap-2 border-b border-line/70 px-4 py-3 lg:shrink-0">
               <div className="flex items-center gap-2.5">
                 <Badge tone={st.tone} className="h-6 gap-1.5 px-2.5" icon={
                   <span className="relative flex size-1.5">{st.pulse && <span className={cx('absolute inline-flex size-full animate-ping rounded-full opacity-70', st.dot)} />}<span className={cx('relative inline-flex size-1.5 rounded-full', st.dot)} /></span>
@@ -173,7 +173,7 @@ function RehearseCase({ c, all }: { c: CaseFile; all: CaseFile[] }) {
                 <label className="relative inline-flex items-center" title={inCall ? 'Voice is fixed for this call' : 'Director voice'}>
                   <span className="sr-only">Director voice</span>
                   <select value={voice} disabled={inCall} onChange={e => chooseVoice(e.target.value)}
-                    className="h-7 cursor-pointer appearance-none rounded-md border border-white/10 bg-white/[0.04] pl-2 pr-6 font-mono text-[11px] text-ink-300 outline-none hover:bg-white/[0.08] disabled:cursor-not-allowed disabled:opacity-50">
+                    className="h-7 cursor-pointer appearance-none rounded-md border border-line bg-black/[0.03] pl-2 pr-6 font-mono text-[11px] text-ink-300 outline-none hover:bg-black/[0.045] disabled:cursor-not-allowed disabled:opacity-50">
                     {VOICES.map(v => <option key={v.id} value={v.id} className="bg-ink-900">{v.id} · {v.note}</option>)}
                   </select>
                   <ChevronDown className="pointer-events-none absolute right-1.5 size-3 text-ink-400" />
@@ -208,7 +208,7 @@ function RehearseCase({ c, all }: { c: CaseFile; all: CaseFile[] }) {
                       {call.muted ? 'Unmute' : 'Mute'}
                     </Button>
                     <button onClick={call.end}
-                      className="inline-flex h-12 min-w-[132px] cursor-pointer items-center justify-center gap-2.5 rounded-2xl border border-rose-300/30 bg-gradient-to-b from-rose-500 to-rose-600 px-6 text-[15px] font-medium text-white shadow-[0_8px_30px_-8px_rgba(244,63,94,.7)] transition hover:brightness-110 active:scale-[0.98]">
+                      className="inline-flex h-12 min-w-[132px] cursor-pointer items-center justify-center gap-2.5 rounded-lg border border-rose-600/30 bg-gradient-to-b from-rose-600 to-rose-600 px-6 text-[15px] font-medium text-white transition hover:brightness-110 active:scale-[0.98]">
                       <PhoneOff className="size-4" /> End call
                     </button>
                   </motion.div>
@@ -230,20 +230,20 @@ function RehearseCase({ c, all }: { c: CaseFile; all: CaseFile[] }) {
               <AnimatePresence initial={false}>
                 {call.micError ? (
                   <motion.div key="mic" initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }} className="w-full max-w-xl overflow-hidden">
-                    <div className="flex gap-3 rounded-xl border border-amber-300/20 bg-amber-300/[0.06] px-3.5 py-3">
-                      <MicOff className="mt-0.5 size-4 shrink-0 text-amber-200" />
+                    <div className="flex gap-3 rounded-md border border-amber-600/25 bg-amber-500/[0.07] px-3.5 py-3">
+                      <MicOff className="mt-0.5 size-4 shrink-0 text-amber-800" />
                       <div>
-                        <div className="text-[13px] font-medium text-amber-100">{micHelp(call.micError).title}</div>
+                        <div className="text-[13px] font-medium text-amber-800">{micHelp(call.micError).title}</div>
                         <p className="mt-0.5 text-[12.5px] leading-relaxed text-ink-300">{micHelp(call.micError).body}</p>
                       </div>
                     </div>
                   </motion.div>
                 ) : call.error && !inCall ? (
                   <motion.div key="err" initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }} className="w-full max-w-xl overflow-hidden">
-                    <div className="flex flex-col gap-2 rounded-xl border border-rose-400/20 bg-rose-400/[0.06] px-3.5 py-3 sm:flex-row sm:items-center sm:justify-between">
+                    <div className="flex flex-col gap-2 rounded-md border border-rose-600/25 bg-rose-500/[0.07] px-3.5 py-3 sm:flex-row sm:items-center sm:justify-between">
                       <div className="flex gap-3">
-                        <TriangleAlert className="mt-0.5 size-4 shrink-0 text-rose-300" />
-                        <p className="text-[12.5px] leading-relaxed text-rose-100">{call.error}</p>
+                        <TriangleAlert className="mt-0.5 size-4 shrink-0 text-rose-700" />
+                        <p className="text-[12.5px] leading-relaxed text-rose-800">{call.error}</p>
                       </div>
                       {/key|Settings/i.test(call.error) && <Button size="sm" variant="outline" className="shrink-0" icon={<Cog className="size-3.5" />} onClick={() => navigate('/settings')}>Settings</Button>}
                     </div>
@@ -256,7 +256,7 @@ function RehearseCase({ c, all }: { c: CaseFile; all: CaseFile[] }) {
               </AnimatePresence>
             </div>
 
-            <div className="border-t border-white/8 lg:flex lg:min-h-0 lg:flex-1 lg:flex-col">
+            <div className="border-t border-line/70 lg:flex lg:min-h-0 lg:flex-1 lg:flex-col">
               <Transcript entries={call.entries} phase={call.phase} payer={x.payer} micAvailable={call.micState === 'on'} onSend={call.sendText} />
             </div>
           </Card>
@@ -286,13 +286,13 @@ function RehearseCase({ c, all }: { c: CaseFile; all: CaseFile[] }) {
               {x.dos && <Field label="Date of service">{x.dos}</Field>}
               {x.providerName && <Field label="You are">{x.providerName}</Field>}
             </div>
-            <div className="mt-3.5 rounded-xl border border-white/8 bg-white/[0.03] px-3 py-2.5">
+            <div className="mt-3.5 rounded-md border border-line/70 bg-black/[0.02] px-3 py-2.5">
               <div className="mb-1 flex items-center gap-1.5 text-[10.5px] font-semibold uppercase tracking-[0.12em] text-ink-400"><Quote className="size-3" /> Why they denied it</div>
               <p className="text-[12.5px] leading-relaxed text-ink-300">{x.reason}</p>
             </div>
             {x.summary && (
               <div className="mt-2.5 flex gap-2 text-[12px] leading-relaxed text-ink-400" title={x.summary}>
-                <Sparkles className="mt-0.5 size-3.5 shrink-0 text-violet-300" /><span className="line-clamp-3">{x.summary}</span>
+                <Sparkles className="mt-0.5 size-3.5 shrink-0 text-ink-200" /><span className="line-clamp-3">{x.summary}</span>
               </div>
             )}
           </Card>

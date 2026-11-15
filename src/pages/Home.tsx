@@ -20,7 +20,7 @@ function HeroVisual() {
   return (
     <div className="relative mx-auto w-full max-w-[520px] select-none">
       <motion.div initial={{ opacity: 0, y: 20, rotate: -3 }} animate={{ opacity: 1, y: 0, rotate: -3 }} transition={{ delay: 0.2, duration: 0.7 }}
-        className="relative rounded-2xl border border-white/10 bg-[#f6f3ec] p-5 text-[11.5px] leading-relaxed text-[#2a2a2a] shadow-2xl">
+        className="relative rounded-lg border border-line bg-[#f6f3ec] p-5 text-[11.5px] leading-relaxed text-[#2a2a2a] shadow-2xl">
         <div className="font-bold tracking-wide">SUNRISE SENIOR ADVANTAGE (HMO)</div>
         <div className="mb-2 text-[10px] text-[#666]">Notice of Denial of Medical Coverage · Oct 6, 2026</div>
         <div>Member: Maria Delgado · Dexcom G7 CGM (E2103, A4239)</div>
@@ -30,23 +30,23 @@ function HeroVisual() {
       </motion.div>
 
       <motion.div initial={{ opacity: 0, x: 30 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 2.1, duration: 0.6 }}
-        className="glass-strong relative z-10 -mt-6 ml-4 rounded-2xl p-4 shadow-2xl sm:ml-16">
+        className="glass-strong relative z-10 -mt-6 ml-4 rounded-lg p-4 shadow-2xl sm:ml-16">
         <div className="mb-2 flex items-center justify-between">
-          <div className="flex min-w-0 items-center gap-1.5 truncate text-[12px] font-semibold"><History className="size-3.5 shrink-0 text-violet-300" /> CMS LCD L33822 · revision history</div>
+          <div className="flex min-w-0 items-center gap-1.5 truncate text-[12px] font-semibold"><History className="size-3.5 shrink-0 text-ink-200" /> CMS LCD L33822 · revision history</div>
           <Badge tone="red">retired</Badge>
         </div>
         <div className="text-[12px] leading-relaxed text-ink-300"><span className="line-through decoration-rose-400">“…performing frequent (four or more times a day) testing”</span></div>
-        <div className="mt-1 text-[11px] text-rose-200">Removed 07/18/2021 — not in effect on the date of service.</div>
-        <div className="mt-3 rounded-lg border border-emerald-400/25 bg-emerald-400/[0.07] p-2.5 text-[12px] text-emerald-100">
+        <div className="mt-1 text-[11px] text-rose-800">Removed 07/18/2021 — not in effect on the date of service.</div>
+        <div className="mt-3 rounded-lg border border-emerald-600/25 bg-emerald-500/[0.07] p-2.5 text-[12px] text-emerald-800">
           In effect: <motion.span animate={{ backgroundColor: ['rgba(52,211,153,0)', 'rgba(52,211,153,.3)'] }} transition={{ delay: 2.9, duration: 0.6 }} className="rounded px-0.5">“The beneficiary is insulin-treated; or,”</motion.span>
-          <div className="mt-1 font-mono text-[10.5px] text-emerald-200/80">chart L18 · insulin glargine 22 units once daily ✓ ✓</div>
+          <div className="mt-1 font-mono text-[10.5px] text-emerald-800">chart L18 · insulin glargine 22 units once daily ✓ ✓</div>
         </div>
       </motion.div>
 
       <motion.div initial={{ opacity: 0, scale: 0.6, rotate: -14 }} animate={{ opacity: 1, scale: 1, rotate: -8 }} transition={{ delay: 3.4, type: 'spring', damping: 11 }}
-        className="absolute -bottom-14 -left-1 z-20 rounded-xl border-[3px] border-emerald-300 bg-ink-950/80 px-4 py-2 text-center shadow-[0_0_60px_rgba(52,211,153,.4)] backdrop-blur">
-        <div className="text-[20px] font-black uppercase tracking-[0.14em] text-emerald-300">Overturn it</div>
-        <div className="font-mono text-[10px] tracking-wider text-emerald-100">12 QUOTES VERIFIED · 3 VIOLATIONS</div>
+        className="absolute -bottom-14 -left-1 z-20 rounded-md border-[3px] border-emerald-600 bg-ink-950/80 px-4 py-2 text-center backdrop-blur">
+        <div className="text-[20px] font-black uppercase tracking-[0.14em] text-emerald-700">Overturn it</div>
+        <div className="font-mono text-[10px] tracking-wider text-emerald-800">12 QUOTES VERIFIED · 3 VIOLATIONS</div>
       </motion.div>
     </div>
   )
@@ -59,8 +59,8 @@ export default function Home() {
       {/* hero */}
       <section className="grid items-center gap-12 overflow-x-clip pt-4 lg:grid-cols-[1.1fr_1fr] lg:overflow-visible lg:pt-10">
         <div>
-          <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} className="mb-5 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-3 py-1 text-[12px] text-ink-300">
-            <Sparkles className="size-3.5 text-violet-300" /> Built on Gemini 4 · Berkeley × DeepMind 2026
+          <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} className="mb-5 inline-flex items-center gap-2 rounded-full border border-line bg-black/[0.03] px-3 py-1 text-[12px] text-ink-300">
+            <Sparkles className="size-3.5 text-ink-200" /> Built on Gemini 4 · Berkeley × DeepMind 2026
           </motion.div>
           <motion.h1 initial={{ opacity: 0, y: 14 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.05 }}
             className="text-[42px] font-semibold leading-[1.03] tracking-[-0.03em] sm:text-[60px]">
@@ -85,9 +85,9 @@ export default function Home() {
       <section>
         <div className="grid gap-4 md:grid-cols-3">
           {[
-            { v: 3.2, d: 1, s: 'M', label: 'Medicare Advantage prior-authorization denials in 2023', tone: 'text-rose-300' },
-            { v: 11.7, d: 1, s: '%', label: 'of those denials were ever appealed', tone: 'text-amber-200' },
-            { v: 81.7, d: 1, s: '%', label: 'of appeals were partially or fully overturned', tone: 'text-emerald-300' },
+            { v: 3.2, d: 1, s: 'M', label: 'Medicare Advantage prior-authorization denials in 2023', tone: 'text-rose-700' },
+            { v: 11.7, d: 1, s: '%', label: 'of those denials were ever appealed', tone: 'text-amber-800' },
+            { v: 81.7, d: 1, s: '%', label: 'of appeals were partially or fully overturned', tone: 'text-emerald-700' },
           ].map((x, i) => (
             <motion.div key={i} className="h-full" initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.08 }}>
               <Card className="h-full p-6">
@@ -113,7 +113,7 @@ export default function Home() {
               <motion.div key={s.title} initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.05 }}>
                 <Card className="h-full p-5">
                   <div className="mb-3 flex items-center justify-between">
-                    <div className="rounded-xl border border-white/10 bg-white/[0.05] p-2.5"><Icon className="size-5 text-cyan-200" /></div>
+                    <div className="rounded-md border border-line bg-black/[0.03] p-2.5"><Icon className="size-5 text-teal-800" /></div>
                     <span className="font-mono text-[12px] text-ink-400">0{i + 1}</span>
                   </div>
                   <div className="text-[16px] font-semibold">{s.title}</div>
@@ -150,7 +150,7 @@ export default function Home() {
                   <div className="text-[17px] font-semibold">{h.title}</div>
                   <p className="mt-1 flex-1 text-[13.5px] text-ink-300">{h.subtitle}</p>
                   <div className="mt-4 flex items-center justify-between text-[12px] text-ink-400">
-                    <span>Similar IMRs overturned: <b className="text-emerald-300">{Math.round(odds.rate * 100)}%</b> (n={odds.n})</span>
+                    <span>Similar IMRs overturned: <b className="text-emerald-700">{Math.round(odds.rate * 100)}%</b> (n={odds.n})</span>
                     {c?.status && c.status !== 'new' && <Badge tone="green">{c.status}</Badge>}
                   </div>
                   <div className="mt-4 flex gap-2">
@@ -175,7 +175,7 @@ export default function Home() {
           const Icon = x.icon
           return (
             <Card key={x.t} className="p-5">
-              <Icon className="mb-3 size-5 text-emerald-300" />
+              <Icon className="mb-3 size-5 text-emerald-700" />
               <div className="font-semibold">{x.t}</div>
               <p className="mt-1.5 text-[13px] leading-relaxed text-ink-300">{x.b}</p>
             </Card>
@@ -183,8 +183,8 @@ export default function Home() {
         })}
       </section>
 
-      <footer className="flex flex-wrap items-center justify-between gap-3 border-t border-white/8 pt-6 text-[12px] text-ink-400">
-        <div className="flex items-center gap-2"><BadgeCheck className="size-4 text-emerald-300" /> Policy text: CMS Medicare Coverage Database (public domain). Outcomes: CA DMHC IMR open data. Synthetic patients only.</div>
+      <footer className="flex flex-wrap items-center justify-between gap-3 border-t border-line/70 pt-6 text-[12px] text-ink-400">
+        <div className="flex items-center gap-2"><BadgeCheck className="size-4 text-emerald-700" /> Policy text: CMS Medicare Coverage Database (public domain). Outcomes: CA DMHC IMR open data. Synthetic patients only.</div>
         <div>Not legal or medical advice · Human sign-off required on every appeal.</div>
       </footer>
     </div>

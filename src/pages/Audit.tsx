@@ -173,11 +173,11 @@ export default function Audit(_props: { id?: string }) {
   // ---------------------------------------------------------------- status
   type Status = { label: string; tone: string; icon: typeof ShieldCheck; sub: string }
   const status: Status = !entries.length ? { label: 'No entries', tone: 'text-ink-300', icon: ShieldQuestion, sub: 'Nothing to verify yet' }
-    : scan ? { label: 'Verifying…', tone: 'text-cyan-200', icon: ShieldCheck, sub: `${scan.done} of ${scan.total} checked` }
-    : fresh && record?.ok ? { label: 'Intact', tone: 'text-emerald-300', icon: ShieldCheck, sub: `All ${record.checked.toLocaleString()} hashes match` }
-    : fresh && record ? { label: 'Tampered', tone: 'text-rose-300', icon: ShieldAlert, sub: `Break at entry #${record.brokenAt}` }
-    : record ? { label: 'Unverified', tone: 'text-amber-200', icon: ShieldQuestion, sub: entries.length > record.total && tamperedSeq == null ? `${(entries.length - record.total).toLocaleString()} new since last check` : 'Log changed since last check' }
-    : { label: 'Unverified', tone: 'text-amber-200', icon: ShieldQuestion, sub: 'Run Verify chain' }
+    : scan ? { label: 'Verifying…', tone: 'text-teal-800', icon: ShieldCheck, sub: `${scan.done} of ${scan.total} checked` }
+    : fresh && record?.ok ? { label: 'Intact', tone: 'text-emerald-700', icon: ShieldCheck, sub: `All ${record.checked.toLocaleString()} hashes match` }
+    : fresh && record ? { label: 'Tampered', tone: 'text-rose-700', icon: ShieldAlert, sub: `Break at entry #${record.brokenAt}` }
+    : record ? { label: 'Unverified', tone: 'text-amber-800', icon: ShieldQuestion, sub: entries.length > record.total && tamperedSeq == null ? `${(entries.length - record.total).toLocaleString()} new since last check` : 'Log changed since last check' }
+    : { label: 'Unverified', tone: 'text-amber-800', icon: ShieldQuestion, sub: 'Run Verify chain' }
 
   const lastIdx = filtered.length - 1
   const hasMore = filtered.length > visible.length
@@ -194,26 +194,26 @@ export default function Audit(_props: { id?: string }) {
         <p className="mt-3 max-w-3xl text-[15px] leading-relaxed text-ink-300">
           Each entry is sealed with a SHA-256 hash that covers its own contents plus the previous entry's hash. Change one word in any past entry and its hash stops matching, which breaks every link after it, so edited history is detectable. That record of what the AI proposed, what a person approved, and when is your False Claims Act defense for every appeal you file.
         </p>
-        <div className="mt-3 inline-flex max-w-full items-center gap-2 overflow-x-auto rounded-lg border border-white/8 bg-white/[0.03] px-3 py-1.5 font-mono text-[11.5px] text-ink-300 scrollbar-thin">
-          <Fingerprint className="size-3.5 shrink-0 text-violet-300" />
-          <span className="whitespace-nowrap">hash<sub>n</sub> = SHA-256( seq, time, actor, action, case, payload, <span className="text-violet-200">hash<sub>n−1</sub></span> )</span>
+        <div className="mt-3 inline-flex max-w-full items-center gap-2 overflow-x-auto rounded-lg border border-line/70 bg-black/[0.02] px-3 py-1.5 font-mono text-[11.5px] text-ink-300 scrollbar-thin">
+          <Fingerprint className="size-3.5 shrink-0 text-ink-200" />
+          <span className="whitespace-nowrap">hash<sub>n</sub> = SHA-256( seq, time, actor, action, case, payload, <span className="text-ink-200">hash<sub>n−1</sub></span> )</span>
         </div>
       </motion.header>
 
       {/* stats */}
       <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
-        <Stat delay={0} label="Entries" icon={<History className="size-4 text-violet-300" />}
+        <Stat delay={0} label="Entries" icon={<History className="size-4 text-ink-200" />}
           value={<AnimatedNumber value={entries.length} />}
           sub={entries.length ? `${kinds.ai} AI · ${kinds.verifier} verifier · ${kinds.human} human · ${kinds.rules + kinds.system} system` : 'Nothing recorded yet'} />
-        <Stat delay={0.05} label="Head hash" icon={<Fingerprint className="size-4 text-cyan-300" />}
+        <Stat delay={0.05} label="Head hash" icon={<Fingerprint className="size-4 text-teal-700" />}
           value={<span className="flex items-center gap-1 font-mono text-[17px] sm:text-[19px]">{head ? shortHash(head.hash, 6, 4) : '—'}{head && <CopyButton text={head.hash} label="Copy head hash" />}</span>}
           sub={head ? `Latest entry #${head.seq} · anchor this to prove the past` : 'Appears with the first entry'} />
-        <Stat delay={0.1} label="Last verified" icon={<Clock className="size-4 text-emerald-300" />}
+        <Stat delay={0.1} label="Last verified" icon={<Clock className="size-4 text-emerald-700" />}
           value={<span title={record ? absTime(record.at) : undefined}>{record ? relTime(record.at, now) : 'Never'}</span>}
           sub={record ? `${record.total.toLocaleString()} entries · ${record.ms < 1 ? '<1' : record.ms.toFixed(0)} ms` : 'Run Verify chain to check'} />
         <Stat delay={0.15} label="Chain status" icon={<status.icon className={cx('size-4', status.tone)} />}
           value={<span className={status.tone}>{status.label}</span>} sub={status.sub}
-          className={fresh && record && !record.ok && !scan ? 'border-rose-400/40 bg-rose-500/[0.06]' : fresh && record?.ok && !scan ? 'border-emerald-400/25' : undefined} />
+          className={fresh && record && !record.ok && !scan ? 'border-rose-600/40 bg-rose-500/[0.07]' : fresh && record?.ok && !scan ? 'border-emerald-600/25' : undefined} />
       </div>
 
       {/* toolbar */}
@@ -221,12 +221,12 @@ export default function Audit(_props: { id?: string }) {
         <div className="flex flex-wrap items-center gap-2">
           <span className="relative inline-flex">
             {tamperedSeq != null && !scan && !fresh && (
-              <motion.span aria-hidden className="pointer-events-none absolute -inset-1 rounded-[14px] border-2 border-violet-400/60"
+              <motion.span aria-hidden className="pointer-events-none absolute -inset-1 rounded-[14px] border-2 border-line-strong"
                 animate={{ opacity: [0.9, 0], scale: [1, 1.08] }} transition={{ duration: 1.4, repeat: Infinity, ease: 'easeOut' }} />
             )}
             <Button variant="primary" icon={<ShieldCheck className="size-4" />} onClick={verify} loading={!!scan} disabled={!entries.length}>Verify chain</Button>
           </span>
-          <Button variant="outline" icon={<FlaskConical className="size-4 text-amber-300" />} onClick={tamper} disabled={entries.length < 2 || !!scan}
+          <Button variant="outline" icon={<FlaskConical className="size-4 text-amber-700" />} onClick={tamper} disabled={entries.length < 2 || !!scan}
             title="Silently edit one past entry in browser storage, without updating its hash">Simulate tamper</Button>
           <Button variant="ghost" icon={<RotateCcw className="size-4" />} onClick={reseal} loading={resealing} disabled={!entries.length || !!scan}
             title="Demo only: re-sign every entry from genesis">Reseal (demo reset)</Button>
@@ -257,8 +257,8 @@ export default function Audit(_props: { id?: string }) {
           <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
             <div className="flex items-center gap-2.5">
               <span className="relative flex size-2">
-                <span className="absolute inline-flex size-full animate-ping rounded-full bg-emerald-400/60" />
-                <span className="relative inline-flex size-2 rounded-full bg-emerald-400" />
+                <span className="absolute inline-flex size-full animate-ping rounded-full bg-emerald-500" />
+                <span className="relative inline-flex size-2 rounded-full bg-emerald-500" />
               </span>
               <div className="text-[15px] font-semibold text-ink-100">Live log</div>
               <div className="text-[13px] text-ink-400">
@@ -268,7 +268,7 @@ export default function Audit(_props: { id?: string }) {
             <div className="flex flex-wrap items-center gap-2">
               <div className="relative">
                 <select value={caseFilter} onChange={e => { setCaseFilter(e.target.value); setLimit(PAGE) }} aria-label="Filter by case"
-                  className="h-8 max-w-[240px] cursor-pointer appearance-none truncate rounded-lg border border-white/10 bg-white/[0.06] pl-3 pr-8 text-[13px] text-ink-100 outline-none transition-colors hover:bg-white/[0.1] focus:border-violet-400/50">
+                  className="h-8 max-w-[240px] cursor-pointer appearance-none truncate rounded-lg border border-line bg-black/[0.045] pl-3 pr-8 text-[13px] text-ink-100 outline-none transition-colors hover:bg-black/[0.06] focus:border-line-strong">
                   <option value="all" className="bg-ink-900">All cases</option>
                   {caseOptions.map(([id, n]) => (
                     <option key={id} value={id} className="bg-ink-900">{id === NO_CASE ? 'No case (global)' : caseTitles.get(id) || id} ({n})</option>
@@ -285,10 +285,10 @@ export default function Audit(_props: { id?: string }) {
               const active = prefix === p
               return (
                 <button key={p} role="tab" aria-selected={active} onClick={() => { setPrefix(p); setLimit(PAGE) }}
-                  className={cx('relative inline-flex h-8 shrink-0 items-center gap-1.5 rounded-lg px-3 text-[12.5px] transition-colors cursor-pointer', active ? 'text-ink-100' : 'text-ink-400 hover:bg-white/[0.05] hover:text-ink-100')}>
-                  {active && <motion.span layoutId="audit-prefix" className="absolute inset-0 rounded-lg border border-white/12 bg-white/[0.08]" transition={{ type: 'spring', damping: 30, stiffness: 400 }} />}
+                  className={cx('relative inline-flex h-8 shrink-0 items-center gap-1.5 rounded-lg px-3 text-[12.5px] transition-colors cursor-pointer', active ? 'text-ink-100' : 'text-ink-400 hover:bg-black/[0.03] hover:text-ink-100')}>
+                  {active && <motion.span layoutId="audit-prefix" className="absolute inset-0 rounded-lg border border-line bg-black/[0.045]" transition={{ type: 'spring', damping: 30, stiffness: 400 }} />}
                   <span className={cx('relative', p !== 'all' && 'font-mono')}>{p === 'all' ? 'All actions' : p}</span>
-                  <span className="relative rounded bg-white/[0.07] px-1 font-mono text-[10.5px] text-ink-400">{n}</span>
+                  <span className="relative rounded bg-black/[0.045] px-1 font-mono text-[10.5px] text-ink-400">{n}</span>
                 </button>
               )
             })}
@@ -300,7 +300,7 @@ export default function Audit(_props: { id?: string }) {
                 <span className={cx('grid size-4 place-items-center rounded border', KIND[k].node)}>{KIND[k].icon('size-2.5')}</span>{KIND[k].label}
               </span>
             ))}
-            <span className="inline-flex items-center gap-1.5"><span className="h-3 w-px bg-emerald-400/70" />verified link</span>
+            <span className="inline-flex items-center gap-1.5"><span className="h-3 w-px bg-emerald-500" />verified link</span>
             <span className="inline-flex items-center gap-1.5"><span className="h-3 w-px bg-rose-500" />broken link</span>
           </div>
 
@@ -355,7 +355,7 @@ export default function Audit(_props: { id?: string }) {
 function Stat({ label, value, sub, icon, delay, className }: { label: string; value: ReactNode; sub: string; icon: ReactNode; delay: number; className?: string }) {
   return (
     <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.35, delay }}
-      className={cx('glass min-w-0 rounded-2xl p-4 transition-colors duration-300', className)}>
+      className={cx('glass min-w-0 rounded-lg p-4 transition-colors duration-300', className)}>
       <div className="flex items-center justify-between gap-2">
         <div className="text-[10.5px] font-semibold uppercase tracking-[0.14em] text-ink-400">{label}</div>
         {icon}

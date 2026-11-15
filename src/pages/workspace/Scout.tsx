@@ -61,7 +61,7 @@ export function PolicyScout({ c, onUse }: { c: CaseFile; onUse: () => void }) {
     <Card className="p-5" glow={state === 'running'}>
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div className="flex items-start gap-3">
-          <div className="rounded-xl border border-violet-400/30 bg-violet-500/15 p-2.5"><Bot className="size-5 text-violet-200" /></div>
+          <div className="rounded-md border border-line-strong bg-black/[0.04] p-2.5"><Bot className="size-5 text-ink-200" /></div>
           <div>
             <div className="text-[15px] font-semibold">Not in the policy library — send the Antigravity agent</div>
             <p className="mt-1 max-w-2xl text-[13px] leading-relaxed text-ink-300">
@@ -78,11 +78,11 @@ export function PolicyScout({ c, onUse }: { c: CaseFile; onUse: () => void }) {
       </div>
 
       {state === 'running' && (
-        <div className="mt-4 flex items-center gap-3 rounded-xl border border-violet-400/20 bg-violet-500/[0.07] px-4 py-3 text-[13px] text-violet-100">
+        <div className="mt-4 flex items-center gap-3 rounded-md border border-line-strong bg-black/[0.04] px-4 py-3 text-[13px] text-ink-200">
           <Spinner /> Agent {status || 'starting'} · {secs}s — browsing the Medicare Coverage Database and reading the policy (usually 1–3 minutes)
         </div>
       )}
-      {state === 'error' && <div className="mt-4 rounded-xl border border-rose-400/25 bg-rose-500/10 px-4 py-3 text-[13px] text-rose-100">{err}</div>}
+      {state === 'error' && <div className="mt-4 rounded-md border border-rose-600/25 bg-rose-500/[0.09] px-4 py-3 text-[13px] text-rose-800">{err}</div>}
 
       {result && (
         <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} className="mt-4 space-y-3">
@@ -91,11 +91,11 @@ export function PolicyScout({ c, onUse }: { c: CaseFile; onUse: () => void }) {
             <span className="text-[14px] font-semibold">{result.title}</span>
             {result.effective_date && <Badge tone="gray">effective {result.effective_date}</Badge>}
             <Badge tone="amber">agent-sourced · verify before filing</Badge>
-            {result.source_url && <a href={result.source_url} target="_blank" rel="noreferrer" className="flex items-center gap-1 text-[12px] text-cyan-200 hover:underline">source <ExternalLink className="size-3" /></a>}
+            {result.source_url && <a href={result.source_url} target="_blank" rel="noreferrer" className="flex items-center gap-1 text-[12px] text-teal-800 hover:underline">source <ExternalLink className="size-3" /></a>}
           </div>
           <div className="grid gap-2 md:grid-cols-2">
             {result.criteria.map((cr, i) => (
-              <div key={i} className="rounded-lg border border-white/8 bg-black/20 p-3">
+              <div key={i} className="rounded-lg border border-line/70 bg-ink-800/70 p-3">
                 <div className="text-[12.5px] font-semibold text-ink-100">{cr.label}</div>
                 <div className="mt-1 line-clamp-4 text-[12px] italic leading-relaxed text-ink-300">“{cr.quote}”</div>
               </div>

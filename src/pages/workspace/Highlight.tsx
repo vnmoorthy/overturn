@@ -5,16 +5,16 @@ import { cx } from '../../ui/kit'
 export interface Range { start: number; end: number; tone: 'green' | 'red' | 'amber' | 'violet'; active?: boolean; id?: string }
 
 const TONE: Record<Range['tone'], string> = {
-  green: 'bg-emerald-400/15 text-emerald-100 decoration-emerald-400/60',
-  red: 'bg-rose-400/20 text-rose-100',
-  amber: 'bg-amber-300/15 text-amber-100',
-  violet: 'bg-violet-400/15 text-violet-100',
+  green: 'bg-emerald-500/[0.135] text-emerald-800 decoration-emerald-400/60',
+  red: 'bg-rose-500/[0.16] text-rose-800',
+  amber: 'bg-amber-500/[0.135] text-amber-800',
+  violet: 'bg-black/[0.04] text-ink-200',
 }
 const ACTIVE: Record<Range['tone'], string> = {
-  green: 'bg-emerald-400/30 text-white shadow-[0_0_0_1px_rgba(52,211,153,.6),0_0_28px_rgba(52,211,153,.45)]',
-  red: 'bg-rose-500/35 text-white shadow-[0_0_0_1px_rgba(251,113,133,.7),0_0_28px_rgba(251,113,133,.45)]',
-  amber: 'bg-amber-400/30 text-white shadow-[0_0_0_1px_rgba(251,191,36,.6)]',
-  violet: 'bg-violet-500/30 text-white shadow-[0_0_0_1px_rgba(167,139,250,.6)]',
+  green: 'bg-emerald-500/[0.16] text-white ',
+  red: 'bg-rose-500/[0.16] text-white ',
+  amber: 'bg-amber-500/[0.16] text-white ',
+  violet: 'bg-black/[0.04] text-white ',
 }
 
 function segments(text: string, ranges: Range[], offset = 0) {
@@ -74,8 +74,8 @@ export function ChartViewer({ text, ranges, activeKey, activeLine, className }: 
         const header = /^---.*---$/.test(l.text.trim())
         return (
           <div key={l.n} data-active={isActive ? '1' : undefined}
-            className={cx('flex gap-3 px-3 transition-colors duration-500', isActive && 'bg-emerald-400/[0.07]')}>
-            <span className={cx('w-7 shrink-0 select-none text-right tabular-nums', isActive ? 'text-emerald-300' : 'text-ink-600')}>{l.n}</span>
+            className={cx('flex gap-3 px-3 transition-colors duration-500', isActive && 'bg-emerald-500/[0.07]')}>
+            <span className={cx('w-7 shrink-0 select-none text-right tabular-nums', isActive ? 'text-emerald-700' : 'text-ink-400')}>{l.n}</span>
             <span className={cx('min-w-0 flex-1 whitespace-pre-wrap break-words', header ? 'text-ink-400 font-semibold' : 'text-ink-300')}>
               {segs.map((s, i) => s.r
                 ? <mark key={i} className={cx('rounded-[4px] px-0.5 transition-all duration-500', s.r.active ? ACTIVE[s.r.tone] : TONE[s.r.tone])}>{s.text}</mark>

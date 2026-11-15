@@ -85,11 +85,11 @@ export function PatientPanel({ c, flags }: { c: CaseFile; flags: Flag[] }) {
     <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_320px]">
       <Card className="p-5 sm:p-7">
         <div className="mb-4 flex flex-wrap items-center justify-between gap-2">
-          <div className="flex items-center gap-2 text-sm font-semibold"><HeartPulse className="size-4 text-pink-300" /> What this means for {d.member_name.split(' ')[0]}</div>
-          <div className="flex items-center gap-1 rounded-xl border border-white/10 bg-white/[0.03] p-1">
+          <div className="flex items-center gap-2 text-sm font-semibold"><HeartPulse className="size-4 text-rose-700" /> What this means for {d.member_name.split(' ')[0]}</div>
+          <div className="flex items-center gap-1 rounded-md border border-line bg-black/[0.02] p-1">
             {(['English', 'Spanish'] as const).map(l => (
               <button key={l} onClick={() => { audio.current?.pause(); stopBrowserVoice(); setPlaying(false); setLang(l); if (c.patientExplainer && c.patientExplainer.lang !== l) generate(l) }}
-                className={`rounded-lg px-3 py-1 text-[12.5px] cursor-pointer ${lang === l ? 'bg-white/10 text-ink-100' : 'text-ink-400'}`}>{l === 'English' ? 'English' : 'Español'}</button>
+                className={`rounded-lg px-3 py-1 text-[12.5px] cursor-pointer ${lang === l ? 'bg-black/[0.06] text-ink-100' : 'text-ink-400'}`}>{l === 'English' ? 'English' : 'Español'}</button>
             ))}
           </div>
         </div>
@@ -112,8 +112,8 @@ export function PatientPanel({ c, flags }: { c: CaseFile; flags: Flag[] }) {
       </Card>
       <Card className="space-y-3 p-4">
         <div className="text-sm font-semibold">Patient checklist</div>
-        <div className="rounded-xl border border-amber-300/20 bg-amber-400/[0.05] p-3">
-          <div className="text-[11px] font-semibold uppercase tracking-wider text-amber-200/90">Appeal deadline</div>
+        <div className="rounded-md border border-amber-600/25 bg-amber-500/[0.07] p-3">
+          <div className="text-[11px] font-semibold uppercase tracking-wider text-amber-800">Appeal deadline</div>
           <div className="mt-0.5 text-lg font-semibold">{fmtDate(dl.due)}</div>
           <div className="text-[12px] text-ink-400">{dl.days >= 0 ? `${dl.days} days left` : 'window closed'} · {dl.rule}</div>
         </div>

@@ -30,7 +30,7 @@ export function OddsCard({ c, family }: { c: CaseFile; family: PolicyFamily }) {
   return (
     <Card className="p-4">
       <div className="mb-3 flex items-center justify-between gap-2">
-        <div className="flex items-center gap-2 text-sm font-semibold"><Scale className="size-4 text-cyan-300" /> Honest odds</div>
+        <div className="flex items-center gap-2 text-sm font-semibold"><Scale className="size-4 text-teal-700" /> Honest odds</div>
         <Badge tone="cyan">public data, not a model guess</Badge>
       </div>
       <div className="flex items-end gap-4">
@@ -54,7 +54,7 @@ export function OddsCard({ c, family }: { c: CaseFile; family: PolicyFamily }) {
       {similar && (
         <div className="mt-3 space-y-2">
           {similar.map(s => (
-            <div key={s.id} className="rounded-lg border border-white/8 bg-black/20 p-2.5">
+            <div key={s.id} className="rounded-lg border border-line/70 bg-ink-800/70 p-2.5">
               <div className="mb-1 flex flex-wrap items-center gap-1.5">
                 <Badge tone={/overturn/i.test(s.determination) ? 'green' : 'red'}>{/overturn/i.test(s.determination) ? 'Overturned' : 'Upheld'}</Badge>
                 <span className="font-mono text-[10.5px] text-ink-400">{s.id} · {s.year} · similarity {(s.score * 100).toFixed(0)}</span>

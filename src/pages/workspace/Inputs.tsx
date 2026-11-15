@@ -17,7 +17,7 @@ function DropZone({ label, icon, onFile, busy, accept }: { label: string; icon: 
   return (
     <div onDragOver={e => { e.preventDefault(); setOver(true) }} onDragLeave={() => setOver(false)}
       onDrop={e => { e.preventDefault(); setOver(false); const f = e.dataTransfer.files?.[0]; if (f) onFile(f) }}
-      className={cx('flex flex-wrap items-center justify-between gap-2 rounded-xl border border-dashed px-3 py-2.5 transition-colors', over ? 'border-violet-400/60 bg-violet-500/10' : 'border-white/12 bg-white/[0.02]')}>
+      className={cx('flex flex-wrap items-center justify-between gap-2 rounded-md border border-dashed px-3 py-2.5 transition-colors', over ? 'border-line-strong bg-black/[0.04]' : 'border-line bg-black/[0.02]')}>
       <div className="flex items-center gap-2 text-[12.5px] text-ink-300">{busy ? <Spinner /> : icon}{busy ? 'Reading with Gemini…' : label}</div>
       <div className="flex gap-1.5">
         <Button size="sm" variant="ghost" icon={<Camera className="size-3.5" />} onClick={() => cam.current?.click()} disabled={busy}>Photo</Button>
@@ -75,7 +75,7 @@ export function InputsPanel({ c, onRun, running }: { c: CaseFile; onRun: () => v
     <div className="grid gap-4 lg:grid-cols-2">
       <Card className="flex flex-col p-4">
         <div className="mb-2 flex h-8 items-center justify-between">
-          <div className="flex items-center gap-2 text-sm font-semibold"><FileText className="size-4 text-rose-300" /> Denial letter</div>
+          <div className="flex items-center gap-2 text-sm font-semibold"><FileText className="size-4 text-rose-700" /> Denial letter</div>
           <div className="flex items-center gap-1.5">
             {c.denialFile && <Badge tone="violet">{c.denialFile.name}</Badge>}
             {c.denialText && <Button size="sm" variant="ghost" icon={<Printer className="size-3.5" />} onClick={() => printSampleLetter(c)}>Print letter</Button>}
@@ -83,27 +83,27 @@ export function InputsPanel({ c, onRun, running }: { c: CaseFile; onRun: () => v
         </div>
         <DropZone label="Drop a PDF, photo, or scan of the denial" icon={<Upload className="size-4" />} onFile={f => intake('denial', f)} busy={busy === 'denial'} accept=".pdf,image/*,.txt" />
         {c.denialFile && !c.denialText ? (
-          <div className="relative mt-3 overflow-hidden rounded-xl border border-white/10">
+          <div className="relative mt-3 overflow-hidden rounded-md border border-line">
             {c.denialFile.mimeType.startsWith('image/')
-              ? <img src={c.denialFile.dataUrl} alt="Uploaded denial letter" className="max-h-[340px] w-full object-contain bg-black/30" />
+              ? <img src={c.denialFile.dataUrl} alt="Uploaded denial letter" className="max-h-[340px] w-full object-contain bg-ink-800/70" />
               : <div className="p-6 text-sm text-ink-300">{c.denialFile.name}</div>}
-            <button onClick={() => caseStore.update(c.id, { denialFile: null })} className="absolute right-2 top-2 rounded-lg bg-black/60 p-1.5 cursor-pointer" aria-label="Remove file"><X className="size-4" /></button>
+            <button onClick={() => caseStore.update(c.id, { denialFile: null })} className="absolute right-2 top-2 rounded-lg bg-[#141414]/35 p-1.5 cursor-pointer" aria-label="Remove file"><X className="size-4" /></button>
           </div>
         ) : (
           <textarea value={c.denialText} onChange={e => caseStore.update(c.id, { denialText: e.target.value })} spellCheck={false}
             placeholder="…or paste the denial letter text here"
-            className="scrollbar-thin mt-3 min-h-[300px] flex-1 resize-y rounded-xl border border-white/8 bg-black/25 p-3 font-mono text-[12px] leading-relaxed text-ink-300 outline-none focus:border-violet-400/40" />
+            className="scrollbar-thin mt-3 min-h-[300px] flex-1 resize-y rounded-md border border-line/70 bg-ink-800/70 p-3 font-mono text-[12px] leading-relaxed text-ink-300 outline-none focus:border-line-strong" />
         )}
       </Card>
       <Card className="flex flex-col p-4">
         <div className="mb-2 flex h-8 items-center justify-between">
-          <div className="flex items-center gap-2 text-sm font-semibold"><Stethoscope className="size-4 text-emerald-300" /> Chart notes</div>
+          <div className="flex items-center gap-2 text-sm font-semibold"><Stethoscope className="size-4 text-emerald-700" /> Chart notes</div>
           <span className="text-[11px] text-ink-400">{c.chartText ? `${c.chartText.split('\n').length} lines` : ''}</span>
         </div>
         <DropZone label="Drop chart notes (PDF, photo, or text)" icon={<Upload className="size-4" />} onFile={f => intake('chart', f)} busy={busy === 'chart'} accept=".pdf,image/*,.txt" />
         <textarea value={c.chartText} onChange={e => caseStore.update(c.id, { chartText: e.target.value })} spellCheck={false}
           placeholder="…or paste the relevant progress notes, test results and orders"
-          className="scrollbar-thin mt-3 min-h-[300px] flex-1 resize-y rounded-xl border border-white/8 bg-black/25 p-3 font-mono text-[12px] leading-relaxed text-ink-300 outline-none focus:border-emerald-400/40" />
+          className="scrollbar-thin mt-3 min-h-[300px] flex-1 resize-y rounded-md border border-line/70 bg-ink-800/70 p-3 font-mono text-[12px] leading-relaxed text-ink-300 outline-none focus:border-emerald-600/40" />
       </Card>
       <div className="flex flex-wrap items-center justify-between gap-3 lg:col-span-2">
         <p className="text-[12px] text-ink-400">Use synthetic or de-identified documents only. PDFs with a text layer are read exactly; photos are transcribed verbatim by Gemini.</p>

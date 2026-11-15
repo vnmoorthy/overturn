@@ -60,7 +60,7 @@ export function Transcript({ entries, phase, payer, micAvailable, onSend }: {
             if (e.role === 'system') {
               return (
                 <motion.div key={e.id} initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex items-center gap-3 py-1 text-[11px] uppercase tracking-[0.14em] text-ink-400">
-                  <span className="h-px flex-1 bg-white/8" />{e.text} · {clock(e.at)}<span className="h-px flex-1 bg-white/8" />
+                  <span className="h-px flex-1 bg-black/[0.045]" />{e.text} · {clock(e.at)}<span className="h-px flex-1 bg-black/[0.045]" />
                 </motion.div>
               )
             }
@@ -70,19 +70,19 @@ export function Transcript({ entries, phase, payer, micAvailable, onSend }: {
                 transition={{ type: 'spring', damping: 26, stiffness: 340 }}
                 className={cx('flex gap-2.5', dir ? 'justify-start' : 'flex-row-reverse')}>
                 <div className={cx('mt-5 grid size-7 shrink-0 place-items-center rounded-full text-[10.5px] font-semibold',
-                  dir ? 'bg-gradient-to-br from-violet-400 to-pink-400 text-ink-950' : 'bg-gradient-to-br from-emerald-300 to-cyan-400 text-ink-950')}>
+                  dir ? 'bg-gradient-to-br from-emerald-600 to-rose-600 text-[#06301f]' : 'bg-gradient-to-br from-emerald-400 to-teal-600 text-[#06301f]')}>
                   {dir ? DIRECTOR.initials : 'You'}
                 </div>
                 <div className={cx('min-w-0 max-w-[82%]', !dir && 'text-right')}>
                   <div className={cx('mb-1 flex items-center gap-1.5 text-[11px] text-ink-400', !dir && 'justify-end')}>
-                    <span className={dir ? 'text-violet-200' : 'text-emerald-200'}>{dir ? `${DIRECTOR.name}, ${DIRECTOR.title}` : 'You (provider)'}</span>
+                    <span className={dir ? 'text-ink-200' : 'text-emerald-800'}>{dir ? `${DIRECTOR.name}, ${DIRECTOR.title}` : 'You (provider)'}</span>
                     {dir && <span className="hidden sm:inline">· {payer}</span>}
                     {e.typed && <Keyboard className="size-3" aria-label="typed" />}
                     <span className="font-mono">{clock(e.at)}</span>
                   </div>
-                  <div className={cx('inline-block rounded-2xl border px-3.5 py-2.5 text-left text-[13.5px] leading-relaxed',
-                    dir ? 'rounded-tl-md border-violet-300/15 bg-violet-400/[0.08] text-ink-100' : 'rounded-tr-md border-emerald-300/15 bg-emerald-400/[0.08] text-ink-100')}>
-                    {e.text.trim() ? e.text.trim() : <span className={dir ? 'text-violet-200' : 'text-emerald-200'}><Dots /></span>}
+                  <div className={cx('inline-block rounded-lg border px-3.5 py-2.5 text-left text-[13.5px] leading-relaxed',
+                    dir ? 'rounded-tl-md border-line-strong bg-black/[0.04] text-ink-100' : 'rounded-tr-md border-emerald-600/25 bg-emerald-500/[0.072] text-ink-100')}>
+                    {e.text.trim() ? e.text.trim() : <span className={dir ? 'text-ink-200' : 'text-emerald-800'}><Dots /></span>}
                   </div>
                 </div>
               </motion.div>
@@ -91,16 +91,16 @@ export function Transcript({ entries, phase, payer, micAvailable, onSend }: {
         </AnimatePresence>
       </div>
 
-      <form onSubmit={submit} className="flex items-center gap-2 border-t border-white/8 px-3 py-3 sm:px-4">
+      <form onSubmit={submit} className="flex items-center gap-2 border-t border-line/70 px-3 py-3 sm:px-4">
         <div className="relative min-w-0 flex-1">
           <Keyboard className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-ink-400" />
           <input value={draft} onChange={e => setDraft(e.target.value)} disabled={!live}
             placeholder={!live ? 'Start the call to reply' : micAvailable ? 'Or type a reply to the director' : 'No microphone: type your reply to the director'}
             aria-label="Type a reply to the medical director"
-            className="h-10 w-full rounded-xl border border-white/10 bg-white/[0.04] pl-9 pr-3 text-sm text-ink-100 placeholder:text-ink-400 outline-none transition focus:border-violet-300/40 focus:bg-white/[0.06] disabled:opacity-50" />
+            className="h-10 w-full rounded-md border border-line bg-black/[0.03] pl-9 pr-3 text-sm text-ink-100 placeholder:text-ink-400 outline-none transition focus:border-line-strong focus:bg-black/[0.045] disabled:opacity-50" />
         </div>
         <button type="submit" disabled={!live || !draft.trim()} aria-label="Send reply"
-          className="grid size-10 shrink-0 place-items-center rounded-xl border border-white/15 bg-gradient-to-b from-[#8b6dff] to-[#6a4cf0] text-white transition hover:brightness-110 active:scale-95 disabled:pointer-events-none disabled:opacity-40 cursor-pointer">
+          className="grid size-10 shrink-0 place-items-center rounded-md border border-line-strong bg-gradient-to-b from-[#8b6dff] to-[#6a4cf0] text-white transition hover:brightness-110 active:scale-95 disabled:pointer-events-none disabled:opacity-40 cursor-pointer">
           <Send className="size-4" />
         </button>
       </form>

@@ -7,7 +7,7 @@ import path from 'node:path'
 
 const BASE = process.argv[2] || 'http://127.0.0.1:5300'
 const ONLY = (process.argv[3] || '').split(',').filter(Boolean)
-const OUT = path.resolve('docs/screens')
+const OUT = path.resolve(process.env.SHOTS_DIR || 'docs/screens')
 fs.mkdirSync(OUT, { recursive: true })
 const sleep = ms => new Promise(r => setTimeout(r, ms))
 
@@ -15,7 +15,7 @@ const browser = await puppeteer.launch({
   executablePath: '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
   headless: true,
   userDataDir: fs.mkdtempSync(path.join(os.tmpdir(), 'overturn-shots-')),
-  defaultViewport: { width: 1440, height: 900, deviceScaleFactor: 2 },
+  defaultViewport: { width: 1440, height: 900, deviceScaleFactor: Number(process.env.SHOTS_DSF || 2) },
   args: ['--hide-scrollbars'],
 })
 const page = await browser.newPage()

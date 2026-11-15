@@ -1,75 +1,111 @@
 @import "tailwindcss";
 
+/* Overturn design system — warm paper, ink type, one mint accent.
+   IBM Plex Serif for headlines (italic for the accent phrase), Plex Sans for UI,
+   Plex Mono for labels, data and anything the machine says. Hairline borders, 4–8px radii. */
 @theme {
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
-  --font-display: "Instrument Serif", ui-serif, Georgia, serif;
-  --font-mono: "JetBrains Mono", ui-monospace, monospace;
-  --color-ink-950: #05060a;
-  --color-ink-900: #0a0c12;
-  --color-ink-800: #11141d;
-  --color-ink-700: #1a1f2c;
-  --color-ink-600: #262c3c;
-  --color-ink-400: #6b7390;
-  --color-ink-300: #9aa2bd;
-  --color-ink-100: #e6e9f2;
-  --color-aurora-1: #7c5cff;
-  --color-aurora-2: #22d3ee;
-  --color-aurora-3: #34d399;
-  --color-aurora-4: #f472b6;
-  --color-warn: #fbbf24;
-  --color-danger: #fb7185;
+  --font-sans: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "IBM Plex Serif", ui-serif, Georgia, serif;
+  --font-serif: "IBM Plex Serif", ui-serif, Georgia, serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+
+  /* The ink-* scale is inverted for paper: 950 is the page, 100 is the darkest ink. */
+  --color-ink-950: #f7f5f0;   /* paper */
+  --color-ink-900: #fcfbf7;   /* raised paper (cards) */
+  --color-ink-800: #efede6;   /* inset paper */
+  --color-ink-700: #e6e3d9;
+  --color-ink-600: #d8d4c8;
+  --color-ink-400: #6e6a5e;   /* muted */
+  --color-ink-300: #57544b;   /* secondary text */
+  --color-ink-200: #2e2c27;
+  --color-ink-100: #141414;   /* ink */
+
+  --color-paper: #f7f5f0;
+  --color-paper-high: #fcfbf7;
+  --color-paper-low: #efede6;
+  --color-line: #d8d4c8;
+  --color-line-strong: #c9c5b8;
+  --color-faint: #a29d8d;
+  --color-mint: #2fce96;
+  --color-mint-deep: #0c8a5f;
+  --color-mint-pale: #dff5ec;
+  --color-mint-ink: #06301f;
+  --color-lab: #0d0f0e;       /* the one dark "lab" surface */
+  --color-lab-line: rgba(247, 245, 240, 0.12);
+
+  --color-warn: #b45309;
+  --color-danger: #be123c;
 }
 
-:root { color-scheme: dark; }
+:root { color-scheme: light; }
 html, body, #root { height: 100%; }
 body {
   margin: 0;
-  background: var(--color-ink-950);
+  background: var(--color-paper);
   color: var(--color-ink-100);
   font-family: var(--font-sans);
+  font-feature-settings: "ss02";
   -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
+::selection { background: var(--color-mint-pale); color: var(--color-mint-ink); }
 
+/* Legacy utility names kept so every page shares one look. */
 .glass {
-  background: linear-gradient(180deg, rgba(255,255,255,0.055), rgba(255,255,255,0.02));
-  border: 1px solid rgba(255,255,255,0.08);
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
+  background: var(--color-paper-high);
+  border: 1px solid var(--color-line);
+  box-shadow: 0 1px 0 rgba(20, 20, 20, 0.02), 0 1px 2px rgba(20, 20, 20, 0.03);
 }
 .glass-strong {
-  background: linear-gradient(180deg, rgba(20,24,36,0.92), rgba(12,14,22,0.92));
-  border: 1px solid rgba(255,255,255,0.09);
-  backdrop-filter: blur(24px);
+  background: var(--color-paper-high);
+  border: 1px solid var(--color-line);
+  box-shadow: 0 24px 60px -24px rgba(20, 20, 20, 0.28), 0 2px 6px rgba(20, 20, 20, 0.05);
 }
+/* The accent phrase in a headline: serif italic in deep mint (never a rainbow gradient). */
 .text-gradient {
-  background: linear-gradient(92deg, #c4b5fd 0%, #67e8f9 45%, #6ee7b7 100%);
-  -webkit-background-clip: text; background-clip: text; color: transparent;
+  color: var(--color-mint-deep);
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
 }
-.ring-glow { box-shadow: 0 0 0 1px rgba(124,92,255,.35), 0 10px 40px -10px rgba(124,92,255,.55); }
+.ring-glow { box-shadow: 0 0 0 1px var(--color-mint), 0 12px 32px -20px rgba(12, 138, 95, 0.55); }
 .grid-bg {
   background-image:
-    linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px);
-  background-size: 44px 44px;
-  mask-image: radial-gradient(ellipse at 50% 0%, black 30%, transparent 75%);
+    linear-gradient(rgba(20, 20, 20, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(20, 20, 20, 0.035) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(ellipse at 50% 0%, black 25%, transparent 70%);
+}
+.grid-lab {
+  background-image:
+    linear-gradient(rgba(247, 245, 240, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(247, 245, 240, 0.045) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+/* Small uppercase mono label — the system's signature. */
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  font-weight: 500;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--color-ink-400);
 }
 .scrollbar-thin::-webkit-scrollbar { width: 8px; height: 8px; }
-.scrollbar-thin::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 8px; }
+.scrollbar-thin::-webkit-scrollbar-thumb { background: rgba(20, 20, 20, 0.14); border-radius: 8px; }
 .scrollbar-thin::-webkit-scrollbar-track { background: transparent; }
 
-@keyframes aurora-drift {
-  0% { transform: translate3d(0,0,0) scale(1); }
-  50% { transform: translate3d(4%, -3%, 0) scale(1.08); }
-  100% { transform: translate3d(0,0,0) scale(1); }
-}
-.aurora-blob { animation: aurora-drift 18s ease-in-out infinite; filter: blur(80px); }
 @keyframes scan { 0% { transform: translateY(-100%); } 100% { transform: translateY(100%); } }
 .scanline { animation: scan 2.4s linear infinite; }
 @keyframes shimmer { 0% { background-position: -400px 0; } 100% { background-position: 400px 0; } }
 .shimmer {
-  background: linear-gradient(90deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.09) 50%, rgba(255,255,255,0.03) 100%);
+  background: linear-gradient(90deg, rgba(20, 20, 20, 0.03) 0%, rgba(20, 20, 20, 0.07) 50%, rgba(20, 20, 20, 0.03) 100%);
   background-size: 800px 100%; animation: shimmer 1.6s linear infinite;
 }
+@keyframes caret { 0%, 49% { opacity: 1; } 50%, 100% { opacity: 0; } }
+.caret { animation: caret 1.05s steps(1) infinite; }
+/* aurora blobs are retired; keep the class inert in case anything still references it */
+.aurora-blob { display: none; }
 @media (prefers-reduced-motion: reduce) {
-  .aurora-blob, .scanline, .shimmer { animation: none; }
+  .scanline, .shimmer, .caret { animation: none; }
 }

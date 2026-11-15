@@ -148,7 +148,7 @@ export default function Worklist(_props: { id?: string }) {
         className="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
         <div className="max-w-2xl">
           <div className="mb-2 flex items-center gap-2 text-[11px] font-semibold uppercase tracking-[0.16em] text-ink-400">
-            <FileStack className="size-3.5 text-violet-300" /> Worklist
+            <FileStack className="size-3.5 text-ink-200" /> Worklist
           </div>
           <h1 className="text-[30px] font-semibold leading-[1.1] tracking-tight text-ink-100 sm:text-[38px]">
             Every denial, <span className="font-display pr-1 text-[1.12em] font-normal italic text-gradient">ranked by what it’s worth.</span>
@@ -170,17 +170,17 @@ export default function Worklist(_props: { id?: string }) {
       {/* ------------------------------------------------------------ table */}
       <motion.div ref={tableRef} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2, duration: 0.4 }} className="scroll-mt-20">
         <Card className="overflow-hidden">
-          <div className="flex flex-col gap-3 border-b border-white/8 px-4 py-3 sm:px-5 md:flex-row md:items-center md:justify-between">
+          <div className="flex flex-col gap-3 border-b border-line/70 px-4 py-3 sm:px-5 md:flex-row md:items-center md:justify-between">
             <div role="group" aria-label="Filter by status" className="scrollbar-thin -mx-1 flex gap-1 overflow-x-auto px-1">
               {FILTERS.map((f, i) => {
                 const active = filter === f.key
                 return (
                   <button key={f.key} type="button" aria-pressed={active} onClick={() => setFilter(f.key)}
-                    className={cx('relative flex shrink-0 items-center gap-1.5 rounded-lg px-3 py-1.5 text-[12.5px] font-medium transition-colors cursor-pointer focus-visible:outline-2 focus-visible:outline-violet-400/60',
-                      active ? 'text-ink-100' : 'text-ink-400 hover:bg-white/[0.04] hover:text-ink-100')}>
-                    {active && <motion.span layoutId="wl-filter" className="absolute inset-0 rounded-lg border border-white/12 bg-white/[0.08]" transition={{ type: 'spring', damping: 30, stiffness: 400 }} />}
+                    className={cx('relative flex shrink-0 items-center gap-1.5 rounded-lg px-3 py-1.5 text-[12.5px] font-medium transition-colors cursor-pointer focus-visible:outline-2 focus-visible:outline-emerald-600/60',
+                      active ? 'text-ink-100' : 'text-ink-400 hover:bg-black/[0.03] hover:text-ink-100')}>
+                    {active && <motion.span layoutId="wl-filter" className="absolute inset-0 rounded-lg border border-line bg-black/[0.045]" transition={{ type: 'spring', damping: 30, stiffness: 400 }} />}
                     <span className="relative">{f.label}</span>
-                    <span className={cx('relative rounded-md px-1.5 font-mono text-[10.5px] tabular-nums', active ? 'bg-white/[0.12] text-ink-100' : 'bg-white/[0.06] text-ink-400')}>{counts[i]}</span>
+                    <span className={cx('relative rounded-md px-1.5 font-mono text-[10.5px] tabular-nums', active ? 'bg-black/[0.06] text-ink-100' : 'bg-black/[0.045] text-ink-400')}>{counts[i]}</span>
                   </button>
                 )
               })}
@@ -189,24 +189,24 @@ export default function Worklist(_props: { id?: string }) {
               <Search className="pointer-events-none absolute left-3 size-4 text-ink-400" />
               <input ref={searchRef} value={q} onChange={e => setQ(e.target.value)} onKeyDown={e => { if (e.key === 'Escape') { setQ(''); e.currentTarget.blur() } }}
                 type="text" placeholder="Search patient, payer or policy" aria-label="Search cases by patient, payer or policy"
-                className="h-9 w-full rounded-xl border border-white/10 bg-white/[0.04] pl-9 pr-9 text-[13px] text-ink-100 placeholder:text-ink-400 outline-none transition focus:border-violet-400/50 focus:bg-white/[0.06] focus:ring-2 focus:ring-violet-400/20" />
+                className="h-9 w-full rounded-md border border-line bg-black/[0.03] pl-9 pr-9 text-[13px] text-ink-100 placeholder:text-ink-400 outline-none transition focus:border-line-strong focus:bg-black/[0.045] focus:ring-2 focus:ring-emerald-600/20" />
               {q
-                ? <button type="button" onClick={() => { setQ(''); searchRef.current?.focus() }} aria-label="Clear search" className="absolute right-2 rounded-md p-1 text-ink-400 hover:bg-white/10 hover:text-ink-100 cursor-pointer"><X className="size-3.5" /></button>
-                : <kbd className="pointer-events-none absolute right-2.5 rounded border border-white/10 bg-white/[0.04] px-1.5 font-mono text-[10.5px] text-ink-400">/</kbd>}
+                ? <button type="button" onClick={() => { setQ(''); searchRef.current?.focus() }} aria-label="Clear search" className="absolute right-2 rounded-md p-1 text-ink-400 hover:bg-black/[0.06] hover:text-ink-100 cursor-pointer"><X className="size-3.5" /></button>
+                : <kbd className="pointer-events-none absolute right-2.5 rounded border border-line bg-black/[0.03] px-1.5 font-mono text-[10.5px] text-ink-400">/</kbd>}
             </label>
           </div>
 
           <CaseTable rows={shown} sort={sort} onSort={onSort} actions={actions}
             empty={
               <div className="flex flex-col items-center gap-3 text-center">
-                <div className="rounded-2xl bg-white/[0.05] p-3 text-ink-300"><SearchX className="size-5" /></div>
+                <div className="rounded-lg bg-black/[0.03] p-3 text-ink-300"><SearchX className="size-5" /></div>
                 <div className="text-[14.5px] font-semibold text-ink-100">No denials match {q ? `“${q}”` : 'this filter'}</div>
                 <p className="max-w-sm text-[13px] text-ink-400">Try another payer or patient name, or clear the filters to see the full queue.</p>
                 <Button size="sm" variant="subtle" onClick={clearFilters}>Clear filters</Button>
               </div>
             } />
 
-          <div className="flex flex-col gap-1.5 border-t border-white/8 px-4 py-3 text-[12px] text-ink-400 sm:px-5 lg:flex-row lg:items-center lg:justify-between">
+          <div className="flex flex-col gap-1.5 border-t border-line/70 px-4 py-3 text-[12px] text-ink-400 sm:px-5 lg:flex-row lg:items-center lg:justify-between">
             <span>
               Showing <span className="text-ink-200">{shown.length}</span> of {rows.length} denials
               {shownBilled > 0 && <> · {usd(shownBilled)} open · <span className="text-ink-200">{usd(shownEv)} expected</span></>}
@@ -214,7 +214,7 @@ export default function Worklist(_props: { id?: string }) {
             {data && (
               <span className="lg:max-w-[60%] lg:text-right">
                 Historical odds = share of {data.total_cases.toLocaleString('en-US')} California DMHC independent medical reviews ({data.year_range[0]}–{data.year_range[1]}) that overturned the plan for that service. A directional signal, not a prediction.{' '}
-                <a href={data.source_url} target="_blank" rel="noreferrer" onClick={e => e.stopPropagation()} className="text-ink-300 underline decoration-white/20 underline-offset-2 hover:text-ink-100">Source</a>
+                <a href={data.source_url} target="_blank" rel="noreferrer" onClick={e => e.stopPropagation()} className="text-ink-300 underline decoration-black/20 underline-offset-2 hover:text-ink-100">Source</a>
               </span>
             )}
           </div>

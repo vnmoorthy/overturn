@@ -34,17 +34,17 @@ export function ModelsCard({ delay }: { delay?: number }) {
   }
 
   return (
-    <SettingsCard delay={delay} icon={<Gauge className="size-4 text-cyan-300" />} title="Model quality"
+    <SettingsCard delay={delay} icon={<Gauge className="size-4 text-teal-700" />} title="Model quality"
       sub="Choose which model leads the two reasoning-heavy steps: criteria matching and letter drafting. The other steps keep their fixed chains.">
-      <div role="radiogroup" aria-label="Model quality" className="grid gap-1.5 rounded-2xl border border-white/8 bg-ink-950/50 p-1.5 sm:grid-cols-2">
+      <div role="radiogroup" aria-label="Model quality" className="grid gap-1.5 rounded-lg border border-line/70 bg-ink-950/50 p-1.5 sm:grid-cols-2">
         {OPTIONS.map(o => {
           const active = q === o.q
           const Icon = o.icon
           return (
             <button key={o.q} role="radio" aria-checked={active} onClick={() => pick(o.q)}
-              className={cx('relative flex items-center gap-3 rounded-xl px-3.5 py-3 text-left transition-colors cursor-pointer', active ? 'text-ink-100' : 'text-ink-400 hover:text-ink-100 hover:bg-white/[0.03]')}>
-              {active && <motion.span layoutId="quality-pill" className="absolute inset-0 rounded-xl border border-violet-400/35 bg-gradient-to-b from-violet-500/20 to-violet-500/[0.06] shadow-[0_8px_30px_-12px_rgba(124,92,255,.7)]" transition={{ type: 'spring', damping: 28, stiffness: 380 }} />}
-              <span className={cx('relative grid size-8 shrink-0 place-items-center rounded-lg border', active ? 'border-violet-300/40 bg-violet-400/15 text-violet-100' : 'border-white/10 bg-white/[0.04]')}>
+              className={cx('relative flex items-center gap-3 rounded-md px-3.5 py-3 text-left transition-colors cursor-pointer', active ? 'text-ink-100' : 'text-ink-400 hover:text-ink-100 hover:bg-black/[0.02]')}>
+              {active && <motion.span layoutId="quality-pill" className="absolute inset-0 rounded-md border border-line-strong bg-gradient-to-b from-emerald-600/20 to-emerald-600/[0.06]" transition={{ type: 'spring', damping: 28, stiffness: 380 }} />}
+              <span className={cx('relative grid size-8 shrink-0 place-items-center rounded-lg border', active ? 'border-line-strong bg-black/[0.04] text-ink-200' : 'border-line bg-black/[0.03]')}>
                 <Icon className="size-4" />
               </span>
               <span className="relative min-w-0">
@@ -61,12 +61,12 @@ export function ModelsCard({ delay }: { delay?: number }) {
           <span>Task</span><span className="hidden md:block">Model chain · first choice → fallbacks</span>
         </div>
         <LayoutGroup>
-          <div className="divide-y divide-white/[0.06] overflow-hidden rounded-xl border border-white/8">
+          <div className="divide-y divide-line/70 overflow-hidden rounded-md border border-line/70">
             {TASKS.map(t => {
               const models = chain(t.task)
               const affected = QUALITY_TASKS.includes(t.task)
               return (
-                <motion.div layout="position" key={t.task} className={cx('grid gap-2 px-3.5 py-3 md:grid-cols-[minmax(0,260px)_minmax(0,1fr)] md:items-center md:gap-4', affected && 'bg-violet-500/[0.04]')}>
+                <motion.div layout="position" key={t.task} className={cx('grid gap-2 px-3.5 py-3 md:grid-cols-[minmax(0,260px)_minmax(0,1fr)] md:items-center md:gap-4', affected && 'bg-black/[0.04]')}>
                   <div className="min-w-0">
                     <div className="flex items-center gap-2">
                       <span className="font-mono text-[12.5px] font-semibold text-ink-100">{t.task}</span>
@@ -93,7 +93,7 @@ export function ModelsCard({ delay }: { delay?: number }) {
       </div>
 
       <div className="mt-4">
-        <Note icon={<Info className="size-3.5 text-cyan-300" />}>
+        <Note icon={<Info className="size-3.5 text-teal-700" />}>
           <span className="font-medium text-ink-100">Automatic fallback.</span> Each step tries its chain left to right. If a model returns 429 (quota) or 503 (overloaded), times out, or is unavailable, Overturn retries the same request on the next model. An invalid key stops right away. Every attempt and hop shows in the Agent trace, so you can always see which model actually answered.
         </Note>
       </div>
@@ -108,8 +108,8 @@ function ModelPath({ task, models }: { task: string; models: string[] }) {
         <motion.span layout key={`${task}-${m}`} transition={{ type: 'spring', damping: 26, stiffness: 300 }} className="inline-flex items-center gap-1">
           {i > 0 && <ChevronRight className="size-3 text-ink-400/60" />}
           <span className={cx('inline-flex items-center gap-1 rounded-md border px-1.5 py-0.5 font-mono text-[11px]',
-            i === 0 ? 'border-violet-400/35 bg-violet-500/[0.12] text-violet-100' : 'border-white/8 bg-white/[0.03] text-ink-400')}>
-            {i === 0 && <Sparkles className="size-3 text-violet-300" />}{m}
+            i === 0 ? 'border-line-strong bg-black/[0.04] text-ink-200' : 'border-line/70 bg-black/[0.02] text-ink-400')}>
+            {i === 0 && <Sparkles className="size-3 text-ink-200" />}{m}
           </span>
         </motion.span>
       ))}

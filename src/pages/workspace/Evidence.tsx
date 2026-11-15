@@ -109,17 +109,17 @@ export function EvidenceBoard({ c, effective }: { c: CaseFile; effective: Policy
 
   return (
     <Card className="overflow-hidden">
-      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-white/8 px-4 py-3">
+      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-line/70 px-4 py-3">
         <div className="flex items-center gap-3">
-          <ScanSearch className="size-4 text-cyan-300" />
+          <ScanSearch className="size-4 text-teal-700" />
           <div>
             <div className="text-sm font-semibold">Evidence board</div>
             <div className="text-[11.5px] text-ink-400">{rows.filter(r => r.status === 'met' && isGreen(r)).length}/{rows.length} criteria met &amp; verified by both keys · click a criterion to see both sources</div>
           </div>
         </div>
         <div className="flex flex-wrap gap-1.5">
-          <Button size="sm" variant="outline" icon={<Bug className="size-3.5 text-amber-300" />} onClick={doTamper} title="Change one word in the selected policy quote">Tamper a quote</Button>
-          <Button size="sm" variant="outline" icon={<Shuffle className="size-3.5 text-amber-300" />} onClick={doSwap} loading={busy === 'swap'} title="Replace the chart evidence with a real but wrong line">Swap evidence</Button>
+          <Button size="sm" variant="outline" icon={<Bug className="size-3.5 text-amber-700" />} onClick={doTamper} title="Change one word in the selected policy quote">Tamper a quote</Button>
+          <Button size="sm" variant="outline" icon={<Shuffle className="size-3.5 text-amber-700" />} onClick={doSwap} loading={busy === 'swap'} title="Replace the chart evidence with a real but wrong line">Swap evidence</Button>
           <Button size="sm" variant="ghost" icon={<RotateCcw className="size-3.5" />} onClick={restore} loading={busy === 'restore'} disabled={!rows.some(r => r.tampered_from || r.swapped_from)}>Restore</Button>
           <Button size="sm" variant="success" icon={<Check className="size-3.5" />} onClick={confirmAll} disabled={!greenCount}>Confirm all verified</Button>
         </div>
@@ -127,7 +127,7 @@ export function EvidenceBoard({ c, effective }: { c: CaseFile; effective: Policy
 
       <div className="grid lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.6fr)]">
         {/* criteria list */}
-        <div className="scrollbar-thin space-y-2 border-b lg:max-h-[640px] lg:overflow-y-auto border-white/8 p-3 lg:border-b-0 lg:border-r">
+        <div className="scrollbar-thin space-y-2 border-b lg:max-h-[640px] lg:overflow-y-auto border-line/70 p-3 lg:border-b-0 lg:border-r">
           {rows.map((r, i) => {
             const k = keys[r.id]
             const e = ent(r.id)
@@ -135,9 +135,9 @@ export function EvidenceBoard({ c, effective }: { c: CaseFile; effective: Policy
             const active = r.id === row?.id
             return (
               <motion.button key={r.id} onClick={() => setSel(r.id)} initial={{ opacity: 0, x: -10 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.06 }}
-                className={cx('w-full rounded-xl border p-3 text-left transition-all cursor-pointer', active ? 'border-white/20 bg-white/[0.07] ring-glow' : 'border-white/8 bg-white/[0.02] hover:bg-white/[0.05]')}>
+                className={cx('w-full rounded-md border p-3 text-left transition-all cursor-pointer', active ? 'border-line-strong bg-black/[0.045] ring-glow' : 'border-line/70 bg-black/[0.02] hover:bg-black/[0.03]')}>
                 <div className="flex items-start gap-2.5">
-                  <div className={cx('mt-0.5 shrink-0 rounded-full p-0.5', green && r.status === 'met' ? 'text-emerald-300' : r.status === 'met' ? 'text-rose-300' : 'text-amber-300')}>
+                  <div className={cx('mt-0.5 shrink-0 rounded-full p-0.5', green && r.status === 'met' ? 'text-emerald-700' : r.status === 'met' ? 'text-rose-700' : 'text-amber-700')}>
                     {green && r.status === 'met' ? <CircleCheck className="size-4" /> : r.status === 'met' ? <CircleX className="size-4" /> : <CircleAlert className="size-4" />}
                   </div>
                   <div className="min-w-0 flex-1">
@@ -151,10 +151,10 @@ export function EvidenceBoard({ c, effective }: { c: CaseFile; effective: Policy
                       {r.chart_quote && <Badge tone={k?.k1c?.status === 'verified' ? 'cyan' : 'red'} icon={<Fingerprint className="size-3" />}>chart {k?.k1c?.status === 'verified' ? `L${r.chart_line}` : 'NOT FOUND'}</Badge>}
                       {r.chart_quote && (e ? <Badge tone={e.verdict === 'supports' ? 'green' : 'red'}>key 2 · {REASON[e.reason_code] || e.verdict}</Badge> : busy === 'swap' && active ? <Badge tone="violet" icon={<Spinner className="size-3" />}>key 2 checking…</Badge> : r.status === 'met' ? <Badge tone="red">key 2 · not verified</Badge> : null)}
                     </div>
-                    {r.status !== 'met' && r.missing_document && <div className="mt-1.5 text-[11.5px] text-amber-200/90">Attach: {r.missing_document}</div>}
+                    {r.status !== 'met' && r.missing_document && <div className="mt-1.5 text-[11.5px] text-amber-800">Attach: {r.missing_document}</div>}
                   </div>
                 </div>
-                <div className="mt-2 flex items-center justify-between border-t border-white/6 pt-2">
+                <div className="mt-2 flex items-center justify-between border-t border-line/70 pt-2">
                   <label className="flex items-center gap-2 text-[11.5px] text-ink-300" onClick={ev => ev.stopPropagation()}>
                     <input type="checkbox" className="size-3.5 accent-emerald-400" checked={!!c.confirmed[r.id]} disabled={!green} onChange={ev => confirm(r.id, ev.target.checked)} />
                     Biller confirms
@@ -168,38 +168,38 @@ export function EvidenceBoard({ c, effective }: { c: CaseFile; effective: Policy
 
         {/* split sources */}
         <div className="grid min-w-0 xl:grid-cols-2">
-          <div className="min-w-0 border-b border-white/8 xl:border-b-0 xl:border-r">
-            <div className="flex items-center justify-between gap-2 border-b border-white/6 bg-white/[0.02] px-4 py-2.5">
-              <div className="flex min-w-0 items-center gap-2 text-[12.5px] font-semibold"><FileText className="size-3.5 text-violet-300" /><span className="truncate">{effective.id} · {effective.title}</span></div>
+          <div className="min-w-0 border-b border-line/70 xl:border-b-0 xl:border-r">
+            <div className="flex items-center justify-between gap-2 border-b border-line/70 bg-black/[0.02] px-4 py-2.5">
+              <div className="flex min-w-0 items-center gap-2 text-[12.5px] font-semibold"><FileText className="size-3.5 text-ink-200" /><span className="truncate">{effective.id} · {effective.title}</span></div>
               <a href={effective.source_url} target="_blank" rel="noreferrer" className="flex shrink-0 items-center gap-1 text-[11px] text-ink-400 hover:text-ink-100">CMS <ExternalLink className="size-3" /></a>
             </div>
             <div className="px-4 pt-2 text-[11px] text-ink-400">Version in effect on DOS {fmtDate(c.denial?.date_of_service || '')}: effective {fmtDate(effective.effective_date)}</div>
             <AnimatePresence>
               {k1Fail && k1Fail.status !== 'verified' && row && (
-                <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }} className="mx-4 mt-2 rounded-xl border border-rose-400/30 bg-rose-500/10 p-3 text-[12px]">
-                  <div className="mb-1 flex items-center gap-1.5 font-semibold text-rose-200"><CircleX className="size-3.5" /> Key 1: quote not found in the policy — export locked</div>
-                  {k1Fail.diff && <div className="leading-relaxed text-ink-300">Closest source sentence: {k1Fail.diff.map((d, i) => <span key={i} className={cx(d.kind === 'removed' && 'bg-emerald-400/20 text-emerald-200', d.kind === 'added' && 'bg-rose-400/25 text-rose-100 line-through')}>{d.text}</span>)}</div>}
+                <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }} className="mx-4 mt-2 rounded-md border border-rose-600/30 bg-rose-500/[0.09] p-3 text-[12px]">
+                  <div className="mb-1 flex items-center gap-1.5 font-semibold text-rose-800"><CircleX className="size-3.5" /> Key 1: quote not found in the policy — export locked</div>
+                  {k1Fail.diff && <div className="leading-relaxed text-ink-300">Closest source sentence: {k1Fail.diff.map((d, i) => <span key={i} className={cx(d.kind === 'removed' && 'bg-emerald-500/[0.16] text-emerald-800', d.kind === 'added' && 'bg-rose-500/[0.16] text-rose-800 line-through')}>{d.text}</span>)}</div>}
                 </motion.div>
               )}
             </AnimatePresence>
             <PolicyViewer text={ptext} ranges={policyRanges} activeKey={row?.id + (row?.policy_quote || '')} className="h-[560px]" />
           </div>
           <div className="min-w-0">
-            <div className="flex items-center justify-between gap-2 border-b border-white/6 bg-white/[0.02] px-4 py-2.5">
-              <div className="flex min-w-0 items-center gap-2 text-[12.5px] font-semibold"><Stethoscope className="size-3.5 text-emerald-300" /><span className="truncate">{c.chartTitle}</span></div>
+            <div className="flex items-center justify-between gap-2 border-b border-line/70 bg-black/[0.02] px-4 py-2.5">
+              <div className="flex min-w-0 items-center gap-2 text-[12.5px] font-semibold"><Stethoscope className="size-3.5 text-emerald-700" /><span className="truncate">{c.chartTitle}</span></div>
               <span className="text-[11px] text-ink-400">{toLines(c.chartText).length} lines</span>
             </div>
             {row && (
-              <div className="border-b border-white/6 px-4 py-2.5 text-[12px] leading-relaxed text-ink-300">
+              <div className="border-b border-line/70 px-4 py-2.5 text-[12px] leading-relaxed text-ink-300">
                 <span className="font-semibold text-ink-100">Why: </span>{row.reasoning}
-                {ent(row.id) && row.chart_quote && <div className={cx('mt-1', ent(row.id)!.verdict === 'supports' ? 'text-emerald-200/90' : 'text-rose-200')}>Key 2 ({ent(row.id)!.verdict}): {ent(row.id)!.explanation}</div>}
+                {ent(row.id) && row.chart_quote && <div className={cx('mt-1', ent(row.id)!.verdict === 'supports' ? 'text-emerald-800' : 'text-rose-800')}>Key 2 ({ent(row.id)!.verdict}): {ent(row.id)!.explanation}</div>}
               </div>
             )}
             <ChartViewer text={c.chartText} ranges={chartRanges} activeKey={row?.id + String(row?.chart_line)} activeLine={row?.chart_line} className="h-[520px]" />
           </div>
         </div>
       </div>
-      <div className="flex flex-wrap items-center justify-between gap-2 border-t border-white/8 px-4 py-2.5 text-[11.5px] text-ink-400">
+      <div className="flex flex-wrap items-center justify-between gap-2 border-t border-line/70 px-4 py-2.5 text-[11.5px] text-ink-400">
         <span><b className="text-ink-300">Key 1</b> is deterministic code: exact match after normalizing quotes, dashes and whitespace. <b className="text-ink-300">Key 2</b> is a skeptical Gemini auditor checking the quote actually supports the criterion.</span>
         {c.trace.length > 0 && <ModelChip model={c.trace[c.trace.length - 1].model} />}
       </div>

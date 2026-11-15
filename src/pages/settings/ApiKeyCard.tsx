@@ -63,7 +63,7 @@ export function ApiKeyCard({ delay, onChange }: { delay?: number; onChange?: () 
     : <Badge tone="red">None</Badge>
 
   return (
-    <SettingsCard delay={delay} id="api-key" icon={<KeyRound className="size-4 text-violet-300" />} title="Gemini API key" right={badge}
+    <SettingsCard delay={delay} id="api-key" icon={<KeyRound className="size-4 text-ink-200" />} title="Gemini API key" right={badge}
       sub={src === 'user'
         ? <>Using your key <span className="font-mono text-ink-300">{mask(userKey)}</span>. Requests go straight from this browser to Gemini.</>
         : src === 'demo'
@@ -77,9 +77,9 @@ export function ApiKeyCard({ delay, onChange }: { delay?: number; onChange?: () 
           <div className="relative min-w-0 flex-1">
             <input id="gemini-key" type={show ? 'text' : 'password'} value={draft} onChange={e => setDraft(e.target.value)}
               placeholder="AIza… or AQ.…" autoComplete="off" spellCheck={false} autoCapitalize="off"
-              className="h-10 w-full rounded-xl border border-white/10 bg-ink-950/60 pl-3.5 pr-11 font-mono text-[13px] text-ink-100 placeholder:text-ink-400/70 outline-none transition-colors focus:border-violet-400/60 focus:bg-ink-950/80" />
+              className="h-10 w-full rounded-md border border-line bg-ink-950/60 pl-3.5 pr-11 font-mono text-[13px] text-ink-100 placeholder:text-ink-400/70 outline-none transition-colors focus:border-line-strong focus:bg-ink-950/80" />
             <button type="button" onClick={() => setShow(v => !v)} aria-label={show ? 'Hide key' : 'Show key'}
-              className="absolute right-1.5 top-1/2 grid size-7 -translate-y-1/2 place-items-center rounded-lg text-ink-400 hover:bg-white/10 hover:text-ink-100 cursor-pointer">
+              className="absolute right-1.5 top-1/2 grid size-7 -translate-y-1/2 place-items-center rounded-lg text-ink-400 hover:bg-black/[0.06] hover:text-ink-100 cursor-pointer">
               {show ? <EyeOff className="size-4" /> : <Eye className="size-4" />}
             </button>
           </div>
@@ -88,23 +88,23 @@ export function ApiKeyCard({ delay, onChange }: { delay?: number; onChange?: () 
             {src === 'user' && <Button type="button" variant="danger" icon={<Trash2 className="size-4" />} onClick={remove}>Remove</Button>}
           </div>
         </div>
-        {looksOdd && <div className="text-[12px] text-amber-200/90">Gemini API keys usually start with “AIza” or “AQ.”. Double-check you copied the whole key.</div>}
+        {looksOdd && <div className="text-[12px] text-amber-800">Gemini API keys usually start with “AIza” or “AQ.”. Double-check you copied the whole key.</div>}
       </form>
 
-      <div className="mt-5 rounded-xl border border-white/8 bg-white/[0.025] p-3.5">
+      <div className="mt-5 rounded-md border border-line/70 bg-black/[0.02] p-3.5">
         <div className="flex flex-wrap items-center justify-between gap-3">
           <div className="min-w-0">
             <div className="text-[13.5px] font-medium text-ink-100">Test connection</div>
             <div className="text-[12px] text-ink-400">Sends “Reply OK” to <span className="font-mono">{TEST_MODEL}</span> with the active key and times the round trip.</div>
           </div>
-          <Button variant="outline" icon={<PlugZap className="size-4 text-cyan-300" />} loading={test.s === 'running'} disabled={src === 'none'} onClick={runTest}>
+          <Button variant="outline" icon={<PlugZap className="size-4 text-teal-700" />} loading={test.s === 'running'} disabled={src === 'none'} onClick={runTest}>
             {test.s === 'running' ? 'Testing…' : 'Test connection'}
           </Button>
         </div>
         <AnimatePresence mode="wait" initial={false}>
           {test.s === 'ok' && (
             <motion.div key="ok" initial={{ opacity: 0, y: -4 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}
-              className="mt-3 flex flex-wrap items-center gap-2 rounded-lg border border-emerald-400/25 bg-emerald-400/[0.07] px-3 py-2 text-[13px] text-emerald-200">
+              className="mt-3 flex flex-wrap items-center gap-2 rounded-lg border border-emerald-600/25 bg-emerald-500/[0.07] px-3 py-2 text-[13px] text-emerald-800">
               <CircleCheck className="size-4" /> Connected
               <ModelChip model={TEST_MODEL} ms={test.ms} />
               <span className="font-mono text-[11.5px] text-ink-300">{test.ms.toLocaleString()} ms · replied “{test.reply}”</span>
@@ -113,7 +113,7 @@ export function ApiKeyCard({ delay, onChange }: { delay?: number; onChange?: () 
           )}
           {test.s === 'err' && (
             <motion.div key="err" initial={{ opacity: 0, y: -4 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}
-              className="mt-3 flex items-start gap-2 rounded-lg border border-rose-400/25 bg-rose-500/[0.07] px-3 py-2 text-[13px] text-rose-200">
+              className="mt-3 flex items-start gap-2 rounded-lg border border-rose-600/25 bg-rose-500/[0.07] px-3 py-2 text-[13px] text-rose-800">
               <CircleX className="mt-0.5 size-4 shrink-0" /><span className="min-w-0">{test.error}</span>
             </motion.div>
           )}
@@ -122,12 +122,12 @@ export function ApiKeyCard({ delay, onChange }: { delay?: number; onChange?: () 
 
       <div className="mt-4 grid gap-2.5 sm:grid-cols-2">
         <a href="https://aistudio.google.com/apikey" target="_blank" rel="noreferrer noopener"
-          className={cx('group flex items-center justify-between gap-3 rounded-xl border border-violet-400/20 bg-violet-500/[0.06] px-3.5 py-3 transition-colors hover:border-violet-400/40 hover:bg-violet-500/[0.1]')}>
+          className={cx('group flex items-center justify-between gap-3 rounded-md border border-line-strong bg-black/[0.04] px-3.5 py-3 transition-colors hover:border-line-strong hover:bg-black/[0.04]')}>
           <div className="min-w-0">
-            <div className="text-[13px] font-medium text-violet-100">Get a key at aistudio.google.com/apikey</div>
-            <div className="text-[12px] text-violet-200/70">Free, no billing needed</div>
+            <div className="text-[13px] font-medium text-ink-200">Get a key at aistudio.google.com/apikey</div>
+            <div className="text-[12px] text-ink-200">Free, no billing needed</div>
           </div>
-          <ExternalLink className="size-4 shrink-0 text-violet-300 transition-transform group-hover:translate-x-0.5" />
+          <ExternalLink className="size-4 shrink-0 text-ink-200 transition-transform group-hover:translate-x-0.5" />
         </a>
         <Note icon={<Lock className="size-3.5 text-ink-400" />}>
           Keys are stored only in this browser and sent only to Google’s Gemini API. Overturn has no server that could see them. <ExtLink href="https://ai.google.dev/gemini-api/docs/api-key">About API keys</ExtLink>

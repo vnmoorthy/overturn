@@ -9,11 +9,11 @@ import { CopyButton, JsonView } from './bits'
 import { GENESIS, absTime, actorKind, actorLabel, recomputeHash, relTime, shortHash, summarize, type ActorKind, type LinkState } from './utils'
 
 export const KIND: Record<ActorKind, { tone: Tone; label: string; icon: (cls: string) => ReactNode; node: string }> = {
-  ai: { tone: 'violet', label: 'AI step', icon: c => <Sparkles className={c} />, node: 'text-violet-200 border-violet-400/30 bg-violet-500/10' },
-  verifier: { tone: 'cyan', label: 'Verifier', icon: c => <ShieldCheck className={c} />, node: 'text-cyan-200 border-cyan-400/30 bg-cyan-500/10' },
-  human: { tone: 'green', label: 'Human decision', icon: c => <UserCheck className={c} />, node: 'text-emerald-200 border-emerald-400/30 bg-emerald-500/10' },
-  rules: { tone: 'amber', label: 'Rules engine', icon: c => <Scale className={c} />, node: 'text-amber-200 border-amber-300/30 bg-amber-400/10' },
-  system: { tone: 'gray', label: 'System', icon: c => <Cpu className={c} />, node: 'text-ink-300 border-white/12 bg-white/[0.05]' },
+  ai: { tone: 'violet', label: 'AI step', icon: c => <Sparkles className={c} />, node: 'text-ink-200 border-line-strong bg-black/[0.04]' },
+  verifier: { tone: 'cyan', label: 'Verifier', icon: c => <ShieldCheck className={c} />, node: 'text-teal-800 border-teal-600/30 bg-teal-500/[0.09]' },
+  human: { tone: 'green', label: 'Human decision', icon: c => <UserCheck className={c} />, node: 'text-emerald-800 border-emerald-600/30 bg-emerald-500/[0.09]' },
+  rules: { tone: 'amber', label: 'Rules engine', icon: c => <Scale className={c} />, node: 'text-amber-800 border-amber-600/30 bg-amber-500/[0.09]' },
+  system: { tone: 'gray', label: 'System', icon: c => <Cpu className={c} />, node: 'text-ink-300 border-line bg-black/[0.03]' },
 }
 
 export function ActorChip({ actor }: { actor: string }) {
@@ -23,11 +23,11 @@ export function ActorChip({ actor }: { actor: string }) {
 }
 
 const LINE: Record<LinkState, string> = {
-  idle: 'bg-white/12',
-  ok: 'bg-emerald-400/70 shadow-[0_0_10px_rgba(52,211,153,.45)]',
-  broken: 'bg-rose-500 shadow-[0_0_14px_rgba(244,63,94,.8)]',
-  unchecked: 'bg-amber-300/30',
-  scanning: 'bg-cyan-300/80 shadow-[0_0_12px_rgba(34,211,238,.6)]',
+  idle: 'bg-black/[0.06]',
+  ok: 'bg-emerald-500 ',
+  broken: 'bg-rose-500 ',
+  unchecked: 'bg-amber-500/[0.16]',
+  scanning: 'bg-teal-500 ',
 }
 
 export type Below =
@@ -39,7 +39,7 @@ export type Below =
 
 function belowLine(b: Below): string {
   if (b.kind === 'link' || b.kind === 'genesis') return LINE[b.state]
-  return 'bg-transparent border-l border-dashed border-white/20'
+  return 'bg-transparent border-l border-dashed border-line-strong'
 }
 
 interface RowProps {
@@ -60,13 +60,13 @@ export const AuditRow = memo(function AuditRow({ entry: e, state, below, expande
   const summary = summarize(e.payload || {})
   const toggle = () => onToggle(e.seq)
 
-  const nodeCls = state === 'broken' ? 'border-rose-400/60 bg-rose-500/20 text-rose-200 shadow-[0_0_0_4px_rgba(244,63,94,.15)]'
-    : state === 'ok' ? cx(K.node, 'ring-2 ring-emerald-400/50')
-    : state === 'scanning' ? 'border-cyan-300/70 bg-cyan-400/20 text-cyan-100 shadow-[0_0_0_4px_rgba(34,211,238,.18)]'
+  const nodeCls = state === 'broken' ? 'border-rose-600/60 bg-rose-500/[0.16] text-rose-800 '
+    : state === 'ok' ? cx(K.node, 'ring-2 ring-emerald-600/50')
+    : state === 'scanning' ? 'border-teal-600/60 bg-teal-500/[0.16] text-teal-800 '
     : K.node
 
-  const cardCls = state === 'broken' ? 'border-rose-400/45 bg-rose-500/[0.07] shadow-[0_0_0_1px_rgba(244,63,94,.35),0_12px_40px_-12px_rgba(244,63,94,.5)]'
-    : state === 'scanning' ? 'shadow-[0_0_0_1px_rgba(34,211,238,.35)]'
+  const cardCls = state === 'broken' ? 'border-rose-600/45 bg-rose-500/[0.07] '
+    : state === 'scanning' ? ''
     : state === 'unchecked' ? 'opacity-60'
     : ''
 
@@ -79,7 +79,7 @@ export const AuditRow = memo(function AuditRow({ entry: e, state, below, expande
             key={state === 'broken' ? 'b' : 'n'}
             animate={state === 'broken' ? { scale: [1, 1.25, 1], rotate: [0, -8, 8, 0] } : state === 'scanning' ? { scale: [1, 1.12, 1] } : { scale: 1 }}
             transition={{ duration: 0.5 }}
-            className={cx('relative z-10 mt-1 grid size-9 place-items-center rounded-xl border transition-colors duration-300', nodeCls)}
+            className={cx('relative z-10 mt-1 grid size-9 place-items-center rounded-md border transition-colors duration-300', nodeCls)}
             title={K.label}>
             {state === 'broken' ? <ShieldAlert className="size-4" /> : K.icon('size-4')}
           </motion.div>
@@ -91,7 +91,7 @@ export const AuditRow = memo(function AuditRow({ entry: e, state, below, expande
           key={state === 'broken' ? 'card-b' : 'card'}
           animate={state === 'broken' ? { x: [0, -7, 7, -4, 4, 0] } : { x: 0 }}
           transition={{ duration: 0.45 }}
-          className={cx('glass min-w-0 rounded-2xl transition-[box-shadow,opacity,background-color,border-color] duration-300', cardCls)}>
+          className={cx('glass min-w-0 rounded-lg transition-[box-shadow,opacity,background-color,border-color] duration-300', cardCls)}>
           <div className="cursor-pointer px-3.5 py-3 sm:px-4" onClick={toggle}>
             <div className="flex flex-wrap items-center gap-x-2.5 gap-y-1.5">
               <span className="font-mono text-[12px] font-medium text-ink-400">#{e.seq}</span>
@@ -104,7 +104,7 @@ export const AuditRow = memo(function AuditRow({ entry: e, state, below, expande
                 <span title={absTime(e.ts)}>{relTime(e.ts, now)}</span>
                 <button type="button" aria-expanded={expanded} aria-label={expanded ? 'Hide details' : 'Show details'}
                   onClick={ev => { ev.stopPropagation(); toggle() }}
-                  className="grid size-6 place-items-center rounded-md hover:bg-white/10 hover:text-ink-100 cursor-pointer">
+                  className="grid size-6 place-items-center rounded-md hover:bg-black/[0.06] hover:text-ink-100 cursor-pointer">
                   <ChevronDown className={cx('size-4 transition-transform', expanded && 'rotate-180')} />
                 </button>
               </span>
@@ -112,13 +112,13 @@ export const AuditRow = memo(function AuditRow({ entry: e, state, below, expande
             <div className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1.5">
               {e.caseId && (
                 <button type="button" onClick={ev => { ev.stopPropagation(); navigate(`/case/${e.caseId}`) }}
-                  className="inline-flex max-w-full items-center gap-1.5 rounded-md border border-white/10 bg-white/[0.04] px-2 py-0.5 text-[12px] text-ink-200 transition-colors hover:border-white/25 hover:text-ink-100 cursor-pointer"
+                  className="inline-flex max-w-full items-center gap-1.5 rounded-md border border-line bg-black/[0.03] px-2 py-0.5 text-[12px] text-ink-200 transition-colors hover:border-line-strong hover:text-ink-100 cursor-pointer"
                   title={`Open case ${e.caseId}`}>
                   <Briefcase className="size-3 text-ink-400" /><span className="truncate">{caseTitle || e.caseId}</span>
                 </button>
               )}
               {summary && <span className="order-last min-w-0 basis-full truncate font-mono text-[11.5px] text-ink-400 sm:order-none sm:flex-1 sm:basis-0">{summary}</span>}
-              <span className={cx('ml-auto inline-flex items-center gap-1 font-mono text-[11px]', state === 'broken' ? 'text-rose-300' : state === 'ok' ? 'text-emerald-300/90' : 'text-ink-300')}>
+              <span className={cx('ml-auto inline-flex items-center gap-1 font-mono text-[11px]', state === 'broken' ? 'text-rose-700' : state === 'ok' ? 'text-emerald-700' : 'text-ink-300')}>
                 <span className="text-ink-400">hash</span> {shortHash(e.hash)}
               </span>
             </div>
@@ -128,7 +128,7 @@ export const AuditRow = memo(function AuditRow({ entry: e, state, below, expande
             {expanded && (
               <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }}
                 transition={{ duration: 0.22, ease: 'easeOut' }} className="overflow-hidden">
-                <div className="space-y-4 border-t border-white/8 px-3.5 py-4 sm:px-4">
+                <div className="space-y-4 border-t border-line/70 px-3.5 py-4 sm:px-4">
                   <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
                     <Meta label="Recorded">{absTime(e.ts)}</Meta>
                     <Meta label="Actor"><span className="font-mono">{e.actor}</span></Meta>
@@ -168,8 +168,8 @@ function HashLine({ label, value, tone }: { label: string; value: string; tone?:
   return (
     <div className="min-w-0">
       <div className="mb-1 text-[10.5px] font-semibold uppercase tracking-[0.14em] text-ink-400">{label}</div>
-      <div className="flex items-start gap-2 rounded-lg border border-white/8 bg-ink-950/60 px-2.5 py-1.5">
-        <code className={cx('min-w-0 flex-1 break-all font-mono text-[11.5px] leading-relaxed', tone === 'red' ? 'text-rose-300' : tone === 'green' ? 'text-emerald-300' : 'text-ink-200')}>{value}</code>
+      <div className="flex items-start gap-2 rounded-lg border border-line/70 bg-ink-950/60 px-2.5 py-1.5">
+        <code className={cx('min-w-0 flex-1 break-all font-mono text-[11.5px] leading-relaxed', tone === 'red' ? 'text-rose-700' : tone === 'green' ? 'text-emerald-700' : 'text-ink-200')}>{value}</code>
         <CopyButton text={value} label="Copy hash" />
       </div>
     </div>
@@ -184,12 +184,12 @@ function Forensics({ entry, contents }: { entry: AuditEntry; contents: boolean }
     return () => { alive = false }
   }, [entry, contents])
   return (
-    <div className="rounded-xl border border-rose-400/30 bg-rose-500/[0.07] p-3">
-      <div className="mb-2 flex items-center gap-2 text-[13px] font-semibold text-rose-200"><ShieldAlert className="size-4" /> Why verification failed</div>
+    <div className="rounded-md border border-rose-600/30 bg-rose-500/[0.07] p-3">
+      <div className="mb-2 flex items-center gap-2 text-[13px] font-semibold text-rose-800"><ShieldAlert className="size-4" /> Why verification failed</div>
       {contents ? (
         <div className="space-y-1.5 font-mono text-[11.5px]">
           <div className="flex flex-wrap gap-x-2"><span className="w-28 shrink-0 text-ink-400">signed hash</span><span className="break-all text-ink-200">{entry.hash}</span></div>
-          <div className="flex flex-wrap gap-x-2"><span className="w-28 shrink-0 text-ink-400">recomputed now</span><span className="break-all text-rose-300">{recomputed ?? 'computing…'}</span></div>
+          <div className="flex flex-wrap gap-x-2"><span className="w-28 shrink-0 text-ink-400">recomputed now</span><span className="break-all text-rose-700">{recomputed ?? 'computing…'}</span></div>
           <p className="pt-1 font-sans text-[12.5px] leading-relaxed text-ink-300">The contents of this entry no longer produce the hash it was signed with, so someone changed it after the fact. Entry #{entry.seq + 1} still points at the original hash, which is how the edit is caught.</p>
         </div>
       ) : (
@@ -210,11 +210,11 @@ function Connector({ below, entry }: { below: Below; entry: AuditEntry }) {
     const contents = below.kind === 'link' && below.contents
     label = s === 'broken'
       ? contents
-        ? <span className="text-rose-300">#{below.kind === 'link' ? below.olderSeq : ''} was edited after signing. Its contents no longer hash to {shortHash(entry.prevHash)}, the value this entry points to.</span>
-        : <span className="text-rose-300">prevHash {shortHash(entry.prevHash)} does not match the hash of {target}.</span>
+        ? <span className="text-rose-700">#{below.kind === 'link' ? below.olderSeq : ''} was edited after signing. Its contents no longer hash to {shortHash(entry.prevHash)}, the value this entry points to.</span>
+        : <span className="text-rose-700">prevHash {shortHash(entry.prevHash)} does not match the hash of {target}.</span>
       : s === 'unchecked'
-        ? <span className="text-amber-200/80">Not trusted: comes after the break.</span>
-        : <span className={s === 'ok' ? 'text-emerald-300/90' : s === 'scanning' ? 'text-cyan-200' : 'text-ink-400'}>
+        ? <span className="text-amber-800">Not trusted: comes after the break.</span>
+        : <span className={s === 'ok' ? 'text-emerald-700' : s === 'scanning' ? 'text-teal-800' : 'text-ink-400'}>
             <span className="text-ink-400">prevHash</span> {shortHash(entry.prevHash)} {s === 'ok' ? '=' : '→'} <span className="text-ink-400">hash of</span> {target}
           </span>
   } else if (below.kind === 'gap') {
@@ -223,11 +223,11 @@ function Connector({ below, entry }: { below: Below; entry: AuditEntry }) {
     label = <span className="text-ink-400">older entries below</span>
   }
   const iconCls = below.kind === 'link' || below.kind === 'genesis'
-    ? below.state === 'broken' ? 'border-rose-400/70 bg-rose-500/25 text-rose-100'
-      : below.state === 'ok' ? 'border-emerald-400/50 bg-emerald-500/15 text-emerald-200'
-      : below.state === 'scanning' ? 'border-cyan-300/60 bg-cyan-400/15 text-cyan-100'
-      : below.state === 'unchecked' ? 'border-amber-300/30 bg-ink-900 text-amber-200/80'
-      : 'border-white/12 bg-ink-900 text-ink-400'
+    ? below.state === 'broken' ? 'border-rose-600/60 bg-rose-500/[0.16] text-rose-800'
+      : below.state === 'ok' ? 'border-emerald-600/50 bg-emerald-500/[0.135] text-emerald-800'
+      : below.state === 'scanning' ? 'border-teal-600/60 bg-teal-500/[0.135] text-teal-800'
+      : below.state === 'unchecked' ? 'border-amber-600/30 bg-ink-900 text-amber-800'
+      : 'border-line bg-ink-900 text-ink-400'
     : ''
   return (
     <>
@@ -251,7 +251,7 @@ export function GenesisNode({ ok }: { ok: boolean }) {
   return (
     <li className="grid grid-cols-[36px_minmax(0,1fr)] gap-x-3 sm:gap-x-4">
       <div className="flex justify-center">
-        <div className={cx('grid size-9 place-items-center rounded-full border font-mono text-[10px] transition-colors duration-300', ok ? 'border-emerald-400/50 bg-emerald-500/10 text-emerald-200' : 'border-white/12 bg-white/[0.04] text-ink-400')}>0x0</div>
+        <div className={cx('grid size-9 place-items-center rounded-full border font-mono text-[10px] transition-colors duration-300', ok ? 'border-emerald-600/50 bg-emerald-500/[0.09] text-emerald-800' : 'border-line bg-black/[0.03] text-ink-400')}>0x0</div>
       </div>
       <div className="flex min-w-0 items-center gap-2 text-[12px] text-ink-400">
         <span className="font-semibold text-ink-300">Genesis</span>

@@ -33,8 +33,8 @@ export function CopyButton({ text, label = 'Copy', className }: { text: string; 
         if (await copyText(text)) { setDone(true); setTimeout(() => setDone(false), 1400) }
         else toast('Clipboard is blocked in this browser.', 'amber')
       }}
-      className={cx('inline-grid size-6 shrink-0 place-items-center rounded-md text-ink-400 transition-colors hover:bg-white/10 hover:text-ink-100 cursor-pointer', className)}>
-      {done ? <Check className="size-3.5 text-emerald-300" /> : <Copy className="size-3.5" />}
+      className={cx('inline-grid size-6 shrink-0 place-items-center rounded-md text-ink-400 transition-colors hover:bg-black/[0.06] hover:text-ink-100 cursor-pointer', className)}>
+      {done ? <Check className="size-3.5 text-emerald-700" /> : <Copy className="size-3.5" />}
     </button>
   )
 }
@@ -47,7 +47,7 @@ export function ConfirmDialog({ open, onClose, onConfirm, title, children, confi
   return (
     <Modal open={open} onClose={() => !busy && onClose()} title={title}>
       <div className="flex gap-4">
-        <div className="grid size-11 shrink-0 place-items-center rounded-2xl border border-rose-400/25 bg-rose-500/10 text-rose-300">
+        <div className="grid size-11 shrink-0 place-items-center rounded-lg border border-rose-600/25 bg-rose-500/[0.09] text-rose-700">
           {icon ?? <TriangleAlert className="size-5" />}
         </div>
         <div className="min-w-0 space-y-2 text-sm leading-relaxed text-ink-300">{children}</div>
@@ -76,15 +76,15 @@ export function JsonView({ value, danger = [], className }: { value: unknown; da
     if (m.index > last) out.push(text.slice(last, m.index))
     if (m[1] && m[2]) {
       const key = m[1].slice(1, -1)
-      out.push(<span key={i++} className={danger.includes(key) ? 'rounded bg-rose-500/25 px-0.5 text-rose-200' : 'text-violet-200'}>{m[1]}</span>, m[2])
-    } else if (m[1]) out.push(<span key={i++} className="text-emerald-200/90">{m[1]}</span>)
-    else if (m[3]) out.push(<span key={i++} className="text-amber-200">{m[3]}</span>)
-    else if (m[4]) out.push(<span key={i++} className="text-cyan-200">{m[4]}</span>)
+      out.push(<span key={i++} className={danger.includes(key) ? 'rounded bg-rose-500/[0.16] px-0.5 text-rose-800' : 'text-ink-200'}>{m[1]}</span>, m[2])
+    } else if (m[1]) out.push(<span key={i++} className="text-emerald-800">{m[1]}</span>)
+    else if (m[3]) out.push(<span key={i++} className="text-amber-800">{m[3]}</span>)
+    else if (m[4]) out.push(<span key={i++} className="text-teal-800">{m[4]}</span>)
     last = re.lastIndex
   }
   if (last < text.length) out.push(text.slice(last))
   return (
-    <pre className={cx('scrollbar-thin max-h-72 overflow-auto whitespace-pre-wrap break-words rounded-xl border border-white/8 bg-ink-950/70 p-3 font-mono text-[11.5px] leading-relaxed text-ink-300', className)}>
+    <pre className={cx('scrollbar-thin max-h-72 overflow-auto whitespace-pre-wrap break-words rounded-md border border-line/70 bg-ink-950/70 p-3 font-mono text-[11.5px] leading-relaxed text-ink-300', className)}>
       {out}
     </pre>
   )

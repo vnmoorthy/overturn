@@ -50,14 +50,14 @@ function ReliabilityCard({ delay }: { delay?: number }) {
     toast(v ? 'Saved runs will stand in for demo cases when every Gemini model is busy.' : 'Live only: demo cases will show an error if Gemini is busy.', v ? 'green' : 'gray')
   }
   return (
-    <SettingsCard delay={delay} icon={<LifeBuoy className="size-4 text-amber-200" />} title="Reliability"
+    <SettingsCard delay={delay} icon={<LifeBuoy className="size-4 text-amber-800" />} title="Reliability"
       sub="Free-tier quotas are shared, so a live demo can hit a busy minute.">
       <div className="flex flex-col gap-4">
         <Toggle checked={on} onChange={flip} label={<span className="text-[14px] font-medium text-ink-100">Use saved genuine runs for demo cases when Gemini is busy</span>} />
         <p className="text-[13px] leading-relaxed text-ink-400">
-          When every model in a step's chain is rate-limited or down, a demo case replays the output Gemini actually produced for that same case earlier, instead of failing. Only the built-in demo cases have saved runs. Cases you add always run live. Replayed steps are never passed off as live: they are labeled <span className="text-amber-200">cached run</span> in the UI and in the Agent trace.
+          When every model in a step's chain is rate-limited or down, a demo case replays the output Gemini actually produced for that same case earlier, instead of failing. Only the built-in demo cases have saved runs. Cases you add always run live. Replayed steps are never passed off as live: they are labeled <span className="text-amber-800">cached run</span> in the UI and in the Agent trace.
         </p>
-        <div className="flex flex-wrap items-center gap-2 rounded-xl border border-white/8 bg-white/[0.025] px-3 py-2.5">
+        <div className="flex flex-wrap items-center gap-2 rounded-md border border-line/70 bg-black/[0.02] px-3 py-2.5">
           <span className="text-[11.5px] text-ink-400">How it looks:</span>
           <ModelChip model="gemini-4-hydrogen" cached />
           <Badge tone="amber">cached run</Badge>
@@ -72,18 +72,18 @@ function ReliabilityCard({ delay }: { delay?: number }) {
 // ---------------------------------------------------------------- privacy & safety
 function PrivacyCard({ delay }: { delay?: number }) {
   const items: { icon: ReactNode; title: string; body: ReactNode; tone?: 'amber' }[] = [
-    { icon: <HardDrive className="size-4 text-emerald-300" />, title: 'All data stays in this browser', body: 'Cases, the audit log, and settings live in localStorage. There is no Overturn server or database.' },
-    { icon: <Users className="size-4 text-cyan-300" />, title: 'Synthetic patients only', body: 'Every demo patient, chart, and denial letter is made up. The policy text and outcome data are real public records.' },
-    { icon: <TriangleAlert className="size-4 text-amber-300" />, tone: 'amber', title: 'No real PHI on the free tier', body: <>Do not upload real patient information here. Data sent to the free tier of the Gemini API may be used to improve Google products (<ExtLink href="https://ai.google.dev/gemini-api/terms">terms</ExtLink>).</> },
-    { icon: <Lock className="size-4 text-violet-300" />, title: 'Production path', body: 'Vertex AI or Gemini Enterprise Agent Platform, under a Google Cloud Business Associate Agreement (BAA).' },
-    { icon: <UserCheck className="size-4 text-emerald-300" />, title: 'A human signs every appeal', body: 'Overturn drafts and verifies. A biller or provider reviews each finding and signs before anything is sent, and the sign-off is recorded in the audit trail.' },
+    { icon: <HardDrive className="size-4 text-emerald-700" />, title: 'All data stays in this browser', body: 'Cases, the audit log, and settings live in localStorage. There is no Overturn server or database.' },
+    { icon: <Users className="size-4 text-teal-700" />, title: 'Synthetic patients only', body: 'Every demo patient, chart, and denial letter is made up. The policy text and outcome data are real public records.' },
+    { icon: <TriangleAlert className="size-4 text-amber-700" />, tone: 'amber', title: 'No real PHI on the free tier', body: <>Do not upload real patient information here. Data sent to the free tier of the Gemini API may be used to improve Google products (<ExtLink href="https://ai.google.dev/gemini-api/terms">terms</ExtLink>).</> },
+    { icon: <Lock className="size-4 text-ink-200" />, title: 'Production path', body: 'Vertex AI or Gemini Enterprise Agent Platform, under a Google Cloud Business Associate Agreement (BAA).' },
+    { icon: <UserCheck className="size-4 text-emerald-700" />, title: 'A human signs every appeal', body: 'Overturn drafts and verifies. A biller or provider reviews each finding and signs before anything is sent, and the sign-off is recorded in the audit trail.' },
     { icon: <Scale className="size-4 text-ink-300" />, title: 'Not legal or medical advice', body: 'Overturn is a drafting and research tool. Coverage decisions and appeal strategy remain with qualified people.' },
   ]
   return (
-    <SettingsCard delay={delay} icon={<ShieldCheck className="size-4 text-emerald-300" />} title="Privacy & safety">
+    <SettingsCard delay={delay} icon={<ShieldCheck className="size-4 text-emerald-700" />} title="Privacy & safety">
       <ul className="space-y-3.5">
         {items.map(it => (
-          <li key={it.title} className={cx('flex gap-3', it.tone === 'amber' && '-mx-2 rounded-xl border border-amber-300/20 bg-amber-300/[0.05] px-2 py-2.5')}>
+          <li key={it.title} className={cx('flex gap-3', it.tone === 'amber' && '-mx-2 rounded-md border border-amber-600/25 bg-amber-500/[0.07] px-2 py-2.5')}>
             <span className="mt-0.5 shrink-0">{it.icon}</span>
             <div className="min-w-0">
               <div className="text-[13.5px] font-medium text-ink-100">{it.title}</div>
@@ -132,7 +132,7 @@ function AboutCard({ delay }: { delay?: number }) {
       <ul className="mt-2 space-y-2">
         {BUILT_WITH.map(b => (
           <li key={b.model} className="flex items-start gap-2.5">
-            <Sparkles className="mt-0.5 size-3.5 shrink-0 text-violet-300" />
+            <Sparkles className="mt-0.5 size-3.5 shrink-0 text-ink-200" />
             <div className="min-w-0 text-[12.5px] leading-snug">
               <span className="font-medium text-ink-100">{b.model}</span>
               <span className="text-ink-400"> · {b.role}</span>
@@ -144,7 +144,7 @@ function AboutCard({ delay }: { delay?: number }) {
       <div className="mt-5 text-[10.5px] font-semibold uppercase tracking-[0.14em] text-ink-400">Data sources</div>
       <ul className="mt-2 space-y-3 text-[12.5px] leading-relaxed">
         <li className="flex gap-2.5">
-          <BookOpen className="mt-0.5 size-3.5 shrink-0 text-cyan-300" />
+          <BookOpen className="mt-0.5 size-3.5 shrink-0 text-teal-700" />
           <div className="min-w-0">
             <ExtLink href="https://www.cms.gov/medicare-coverage-database/">CMS Medicare Coverage Database</ExtLink>
             <span className="text-ink-400">, verbatim Local Coverage Determination text and version history:</span>
@@ -159,7 +159,7 @@ function AboutCard({ delay }: { delay?: number }) {
           </div>
         </li>
         <li className="flex gap-2.5">
-          <BookOpen className="mt-0.5 size-3.5 shrink-0 text-cyan-300" />
+          <BookOpen className="mt-0.5 size-3.5 shrink-0 text-teal-700" />
           <div className="min-w-0">
             <ExtLink href={d?.source_url || 'https://data.ca.gov/dataset/independent-medical-review-imr-determinations-trend'}>California DMHC Independent Medical Review open data</ExtLink>
             <span className="text-ink-400">
@@ -168,7 +168,7 @@ function AboutCard({ delay }: { delay?: number }) {
           </div>
         </li>
         <li className="flex gap-2.5">
-          <BookOpen className="mt-0.5 size-3.5 shrink-0 text-cyan-300" />
+          <BookOpen className="mt-0.5 size-3.5 shrink-0 text-teal-700" />
           <div className="min-w-0">
             <ExtLink href="https://www.kff.org/medicare/nearly-50-million-prior-authorization-requests-were-sent-to-medicare-advantage-insurers-in-2023/">KFF analysis of Medicare Advantage prior authorization</ExtLink>
             <span className="text-ink-400">: in 2023, 3.2 million prior-authorization requests were denied, 11.7% of denials were appealed, and 81.7% of appeals were partly or fully overturned.</span>

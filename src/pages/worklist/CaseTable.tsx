@@ -21,7 +21,7 @@ function Th({ k, label, sort, onSort, right, wrap, className }: {
   return (
     <th scope="col" aria-sort={active ? (sort.dir === 'asc' ? 'ascending' : 'descending') : 'none'} className={cx('px-2.5 py-2.5 align-bottom', right && 'text-right', className)}>
       <button type="button" onClick={() => onSort(k)}
-        className={cx('-mx-1 inline-flex items-end gap-1 rounded-md px-1 py-0.5 text-[10.5px] font-semibold uppercase leading-tight tracking-[0.12em] transition-colors cursor-pointer hover:text-ink-100 focus-visible:outline-2 focus-visible:outline-violet-400/60',
+        className={cx('-mx-1 inline-flex items-end gap-1 rounded-md px-1 py-0.5 text-[10.5px] font-semibold uppercase leading-tight tracking-[0.12em] transition-colors cursor-pointer hover:text-ink-100 focus-visible:outline-2 focus-visible:outline-emerald-600/60',
           wrap ? 'max-w-[92px]' : 'whitespace-nowrap', right ? 'flex-row-reverse text-right' : 'text-left', active ? 'text-ink-100' : 'text-ink-400')}>
         <span>{label}</span><Icon className={cx('mb-px size-3 shrink-0', !active && 'opacity-40')} />
       </button>
@@ -30,16 +30,16 @@ function Th({ k, label, sort, onSort, right, wrap, className }: {
 }
 
 const ACT: Record<'subtle' | 'success' | 'danger' | 'ghost', string> = {
-  subtle: 'bg-white/[0.06] text-ink-100 border border-white/10 hover:bg-white/[0.1]',
-  success: 'bg-gradient-to-b from-emerald-400 to-emerald-600 text-ink-950 font-semibold shadow-[0_6px_20px_-8px_rgba(52,211,153,.6)] hover:brightness-110',
-  danger: 'bg-rose-500/15 text-rose-200 border border-rose-400/30 hover:bg-rose-500/25',
-  ghost: 'text-ink-300 hover:text-ink-100 hover:bg-white/[0.08]',
+  subtle: 'bg-black/[0.045] text-ink-100 border border-line hover:bg-black/[0.06]',
+  success: 'bg-gradient-to-b from-emerald-600 to-emerald-600 text-[#06301f] font-semibold  hover:brightness-110',
+  danger: 'bg-rose-500/[0.135] text-rose-800 border border-rose-600/30 hover:bg-rose-500/[0.16]',
+  ghost: 'text-ink-300 hover:text-ink-100 hover:bg-black/[0.045]',
 }
 /** Compact row-action button (same palette as kit Button, tighter metrics for dense tables). */
 function Act({ tone, icon, children, className, ...rest }: ButtonHTMLAttributes<HTMLButtonElement> & { tone: keyof typeof ACT; icon: ReactNode }) {
   return (
     <button type="button" {...rest}
-      className={cx('inline-flex h-7 items-center justify-center gap-1 whitespace-nowrap rounded-lg text-[12px] font-medium transition-all duration-150 active:scale-[0.97] cursor-pointer focus-visible:outline-2 focus-visible:outline-violet-400/60',
+      className={cx('inline-flex h-7 items-center justify-center gap-1 whitespace-nowrap rounded-lg text-[12px] font-medium transition-all duration-150 active:scale-[0.97] cursor-pointer focus-visible:outline-2 focus-visible:outline-emerald-600/60',
         children ? 'px-2' : 'w-7', ACT[tone], className)}>
       {icon}{children}
     </button>
@@ -54,7 +54,7 @@ export function CaseTable({ rows, sort, onSort, actions, empty }: {
     <div className="scrollbar-thin overflow-x-auto">
       <table className="w-full min-w-[1040px] border-collapse text-left">
         <thead>
-          <tr className="border-b border-white/8 bg-white/[0.015]">
+          <tr className="border-b border-line/70 bg-black/[0.02]">
             <Th k="patient" label="Patient & service" sort={sort} onSort={onSort} className="pl-4 sm:pl-5" />
             <Th k="policy" label="Policy" sort={sort} onSort={onSort} className="hidden md:table-cell" />
             <Th k="amount" label="Amount" sort={sort} onSort={onSort} right />
@@ -75,10 +75,10 @@ export function CaseTable({ rows, sort, onSort, actions, empty }: {
               tabIndex={0}
               onClick={() => actions.open(r)}
               onKeyDown={e => { if (e.target === e.currentTarget && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); actions.open(r) } }}
-              className={cx('group cursor-pointer border-b border-white/[0.05] align-top transition-colors last:border-0 hover:bg-white/[0.035] focus-visible:bg-white/[0.05] focus-visible:outline-none',
+              className={cx('group cursor-pointer border-b border-line/70 align-top transition-colors last:border-0 hover:bg-black/[0.02] focus-visible:bg-black/[0.03] focus-visible:outline-none',
                 r.closed && 'opacity-80 hover:opacity-100')}>
               <td className="relative py-3 pl-4 pr-2.5 sm:pl-5">
-                {r.c.hero && <span aria-hidden className="absolute inset-y-3 left-0 w-[2px] rounded-full bg-gradient-to-b from-violet-400 to-cyan-300" />}
+                {r.c.hero && <span aria-hidden className="absolute inset-y-3 left-0 w-[2px] rounded-full bg-gradient-to-b from-emerald-600 to-teal-400" />}
                 <div className="flex max-w-[232px] items-center gap-2">
                   <span className="truncate text-[13.5px] font-medium text-ink-100 transition-colors group-hover:text-white">{r.name}</span>
                   {r.c.hero && <Badge tone="violet">Demo</Badge>}
@@ -88,7 +88,7 @@ export function CaseTable({ rows, sort, onSort, actions, empty }: {
                   {r.plan && <span className="text-ink-400"> · {r.plan}</span>}
                 </div>
                 {r.familyShort && <div className="mt-1 text-[11.5px] text-ink-400 md:hidden">{r.familyShort} · {Math.round(r.odds.rate * 100)}% odds</div>}
-                {r.hook && <div className="mt-1 flex max-w-[232px] items-center gap-1 text-[11.5px] text-violet-200/85" title={r.hook}><Sparkles className="size-3 shrink-0" /><span className="truncate">{r.hook}</span></div>}
+                {r.hook && <div className="mt-1 flex max-w-[232px] items-center gap-1 text-[11.5px] text-ink-200" title={r.hook}><Sparkles className="size-3 shrink-0" /><span className="truncate">{r.hook}</span></div>}
               </td>
               <td className="hidden px-2.5 py-3 md:table-cell">
                 {r.familyShort
@@ -117,7 +117,7 @@ export function CaseTable({ rows, sort, onSort, actions, empty }: {
                     <Act tone="ghost" icon={<Undo2 className="size-3.5" />} onClick={stop(actions.reopen, r)} title="Clear the outcome and return to awaiting a decision">Reopen</Act>
                   )}
                   <Act tone="ghost" icon={<ArrowUpRight className="size-4" />} onClick={stop(actions.open, r)} aria-label={`Open ${r.name}`} title="Open case"
-                    className="group-hover:bg-white/[0.08] group-hover:text-ink-100" />
+                    className="group-hover:bg-black/[0.045] group-hover:text-ink-100" />
                 </div>
               </td>
             </motion.tr>
