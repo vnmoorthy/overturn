@@ -30,9 +30,9 @@ function HeroVisual() {
       </motion.div>
 
       <motion.div initial={{ opacity: 0, x: 30 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 2.1, duration: 0.6 }}
-        className="glass-strong relative z-10 -mt-6 ml-8 rounded-2xl p-4 shadow-2xl sm:ml-16">
+        className="glass-strong relative z-10 -mt-6 ml-4 rounded-2xl p-4 shadow-2xl sm:ml-16">
         <div className="mb-2 flex items-center justify-between">
-          <div className="flex items-center gap-1.5 text-[12px] font-semibold"><History className="size-3.5 text-violet-300" /> CMS LCD L33822 · revision history</div>
+          <div className="flex min-w-0 items-center gap-1.5 truncate text-[12px] font-semibold"><History className="size-3.5 shrink-0 text-violet-300" /> CMS LCD L33822 · revision history</div>
           <Badge tone="red">retired</Badge>
         </div>
         <div className="text-[12px] leading-relaxed text-ink-300"><span className="line-through decoration-rose-400">“…performing frequent (four or more times a day) testing”</span></div>
@@ -44,7 +44,7 @@ function HeroVisual() {
       </motion.div>
 
       <motion.div initial={{ opacity: 0, scale: 0.6, rotate: -14 }} animate={{ opacity: 1, scale: 1, rotate: -8 }} transition={{ delay: 3.4, type: 'spring', damping: 11 }}
-        className="absolute -bottom-6 left-2 z-20 rounded-xl border-[3px] border-emerald-300 bg-ink-950/80 px-4 py-2 text-center shadow-[0_0_60px_rgba(52,211,153,.4)] backdrop-blur">
+        className="absolute -bottom-14 -left-1 z-20 rounded-xl border-[3px] border-emerald-300 bg-ink-950/80 px-4 py-2 text-center shadow-[0_0_60px_rgba(52,211,153,.4)] backdrop-blur">
         <div className="text-[20px] font-black uppercase tracking-[0.14em] text-emerald-300">Overturn it</div>
         <div className="font-mono text-[10px] tracking-wider text-emerald-100">12 QUOTES VERIFIED · 3 VIOLATIONS</div>
       </motion.div>
@@ -57,7 +57,7 @@ export default function Home() {
   return (
     <div className="space-y-20 pb-10">
       {/* hero */}
-      <section className="grid items-center gap-12 pt-4 lg:grid-cols-[1.1fr_1fr] lg:pt-10">
+      <section className="grid items-center gap-12 overflow-x-clip pt-4 lg:grid-cols-[1.1fr_1fr] lg:overflow-visible lg:pt-10">
         <div>
           <motion.div initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} className="mb-5 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-3 py-1 text-[12px] text-ink-300">
             <Sparkles className="size-3.5 text-violet-300" /> Built on Gemini 4 · Berkeley × DeepMind 2026
@@ -78,7 +78,7 @@ export default function Home() {
             <ModelChip model="gemini-4-hydrogen" /><ModelChip model="gemini-3.8-flash" /><ModelChip model="gemini-3.8-live" /><ModelChip model="gemini-3.8-flash-tts" /><ModelChip model="gemini-embedding-2" />
           </div>
         </div>
-        <div className="pb-8"><HeroVisual /></div>
+        <div className="overflow-x-clip pb-12 pt-2"><HeroVisual /></div>
       </section>
 
       {/* stats */}
@@ -89,8 +89,8 @@ export default function Home() {
             { v: 11.7, d: 1, s: '%', label: 'of those denials were ever appealed', tone: 'text-amber-200' },
             { v: 81.7, d: 1, s: '%', label: 'of appeals were partially or fully overturned', tone: 'text-emerald-300' },
           ].map((x, i) => (
-            <motion.div key={i} initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.08 }}>
-              <Card className="p-6">
+            <motion.div key={i} className="h-full" initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.08 }}>
+              <Card className="h-full p-6">
                 <div className={`text-[52px] font-semibold leading-none tracking-tight ${x.tone}`}><CountUp to={x.v} decimals={x.d} suffix={x.s} /></div>
                 <div className="mt-3 text-[14px] text-ink-300">{x.label}</div>
               </Card>

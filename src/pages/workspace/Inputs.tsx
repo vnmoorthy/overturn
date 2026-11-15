@@ -74,7 +74,7 @@ export function InputsPanel({ c, onRun, running }: { c: CaseFile; onRun: () => v
   return (
     <div className="grid gap-4 lg:grid-cols-2">
       <Card className="flex flex-col p-4">
-        <div className="mb-2 flex items-center justify-between">
+        <div className="mb-2 flex h-8 items-center justify-between">
           <div className="flex items-center gap-2 text-sm font-semibold"><FileText className="size-4 text-rose-300" /> Denial letter</div>
           <div className="flex items-center gap-1.5">
             {c.denialFile && <Badge tone="violet">{c.denialFile.name}</Badge>}
@@ -96,7 +96,7 @@ export function InputsPanel({ c, onRun, running }: { c: CaseFile; onRun: () => v
         )}
       </Card>
       <Card className="flex flex-col p-4">
-        <div className="mb-2 flex items-center justify-between">
+        <div className="mb-2 flex h-8 items-center justify-between">
           <div className="flex items-center gap-2 text-sm font-semibold"><Stethoscope className="size-4 text-emerald-300" /> Chart notes</div>
           <span className="text-[11px] text-ink-400">{c.chartText ? `${c.chartText.split('\n').length} lines` : ''}</span>
         </div>
@@ -107,7 +107,7 @@ export function InputsPanel({ c, onRun, running }: { c: CaseFile; onRun: () => v
       </Card>
       <div className="flex flex-wrap items-center justify-between gap-3 lg:col-span-2">
         <p className="text-[12px] text-ink-400">Use synthetic or de-identified documents only. PDFs with a text layer are read exactly; photos are transcribed verbatim by Gemini.</p>
-        <Button variant="primary" size="lg" onClick={onRun} loading={running} disabled={!ready}>Run Overturn</Button>
+        <Button variant="primary" size="lg" onClick={onRun} loading={running} disabled={!ready}>{c.match ? 'Re-run live' : 'Run Overturn'}</Button>
       </div>
     </div>
   )

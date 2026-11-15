@@ -82,7 +82,7 @@ export function LetterPanel({ c, effective, onRedraft, redrafting }: { c: CaseFi
               className="scrollbar-thin min-h-[520px] w-full resize-y rounded-xl border border-white/10 bg-black/30 p-4 font-mono text-[12.5px] leading-relaxed text-ink-200 outline-none focus:border-violet-400/40" />
           </div>
         ) : (
-          <div className="scrollbar-thin max-h-[680px] overflow-y-auto bg-[linear-gradient(180deg,rgba(255,255,255,0.025),transparent)] px-6 py-6 sm:px-10">
+          <div className="scrollbar-thin bg-[linear-gradient(180deg,rgba(255,255,255,0.025),transparent)] px-6 py-6 sm:px-10">
             <div className="mx-auto max-w-[680px] font-[450] text-[14px] leading-[1.8] text-ink-300">
               <div className="mb-5 text-[12px] text-ink-400">{c.denial?.provider_name} → {c.denial?.plan_name}, Appeals &amp; Grievances · RE: {c.denial?.member_name}, {c.denial?.service_description}</div>
               {built.blocks.map((b, i) => b.kind === 'h'

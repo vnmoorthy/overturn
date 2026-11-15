@@ -91,7 +91,7 @@ export default function App() {
         </div>
       </aside>
 
-      <main className="relative lg:pl-[248px]">
+      <main className="relative overflow-x-clip lg:pl-[248px]">
         <div className="mx-auto max-w-[1400px] px-4 py-6 sm:px-6 lg:px-10 lg:py-8">{page}</div>
       </main>
 

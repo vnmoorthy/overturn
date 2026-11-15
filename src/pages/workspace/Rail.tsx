@@ -31,7 +31,7 @@ export function PipelineRail({ steps }: { steps: Record<StepKey, StepState> }) {
                 <div className="flex items-center gap-1.5 text-[13px] font-semibold text-ink-100">
                   <span className="text-ink-400 tabular-nums">{i + 1}</span>{s.label}
                 </div>
-                <div className={cx('text-[11.5px] text-ink-400', st.status === 'error' ? 'line-clamp-3' : 'truncate')} title={st.error || st.note || s.blurb}>
+                <div className={cx('text-[11.5px] leading-snug text-ink-400', st.status === 'error' ? 'line-clamp-3' : 'line-clamp-2')} title={st.error || st.note || s.blurb}>
                   {st.status === 'idle' && s.blurb}
                   {active && <span className="text-violet-200">{s.key === 'match' ? 'Reading policy + chart…' : 'Working…'}</span>}
                   {ok && (st.note || 'done')}
@@ -40,7 +40,8 @@ export function PipelineRail({ steps }: { steps: Record<StepKey, StepState> }) {
                 {ok && st.model && (
                   <div className="mt-1 flex items-center gap-1 font-mono text-[10.5px] text-ink-400">
                     {st.status === 'cached' ? <History className="size-3 text-amber-300" /> : <span className="size-1.5 rounded-full bg-emerald-400" />}
-                    <span className="truncate">{st.model}{st.ms ? ` · ${(st.ms / 1000).toFixed(1)}s` : ''}{st.status === 'cached' ? ' · cached run' : ''}</span>
+                    <span className="truncate" title={st.model}>{st.model}{st.ms ? ` · ${(st.ms / 1000).toFixed(1)}s` : ''}</span>
+                    {st.status === 'cached' && <span className="shrink-0 rounded bg-amber-300/15 px-1 text-amber-200">cached</span>}
                   </div>
                 )}
               </div>

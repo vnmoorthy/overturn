@@ -104,16 +104,16 @@ export default function Workspace({ id }: { id?: string }) {
     <div className="space-y-5">
       {/* header */}
       <div className="flex flex-wrap items-start justify-between gap-4">
-        <div className="min-w-0">
+        <div className="min-w-0 flex-1 basis-[22rem]">
           <button onClick={() => navigate('/cases')} className="mb-2 flex items-center gap-1.5 text-[12px] text-ink-400 hover:text-ink-100 cursor-pointer"><ArrowLeft className="size-3.5" /> Worklist</button>
           <div className="flex flex-wrap items-center gap-2">
             <h1 className="text-2xl font-semibold tracking-tight sm:text-[28px]">{d?.member_name || c.title.split(' — ')[0]}</h1>
             {c.hero && <Badge tone="violet">Demo case</Badge>}
             <Badge tone={c.status === 'ready' ? 'violet' : c.status === 'signed' ? 'amber' : c.status === 'won' ? 'green' : c.status === 'lost' ? 'red' : c.status === 'analyzing' ? 'cyan' : 'gray'}>{c.status}</Badge>
           </div>
-          <div className="mt-1 text-[14px] text-ink-300">{d?.service_description || c.title.split(' — ')[1] || 'Upload a denial to begin'}{d ? ` · ${d.plan_name}` : seed ? ` · ${seed.payer}` : ''}</div>
+          <div className="mt-1 line-clamp-2 text-[14px] text-ink-300">{d?.service_description || c.title.split(' — ')[1] || 'Upload a denial to begin'}{d ? ` · ${d.plan_name}` : seed ? ` · ${seed.payer}` : ''}</div>
         </div>
-        <div className="flex flex-wrap items-center gap-2">
+        <div className="flex shrink-0 flex-wrap items-center gap-2">
           {hasSaved && <Button variant="outline" icon={<Zap className="size-4 text-amber-300" />} onClick={() => go(true)} disabled={running} title="Replays a genuine recorded Gemini run instantly (labeled cached)">Instant replay</Button>}
           <Button variant="primary" icon={running ? undefined : <Play className="size-4" />} loading={running} onClick={() => go(false)} disabled={running || (!c.denialText && !c.denialFile) || !c.chartText}>{c.match ? 'Re-run live' : 'Run Overturn'}</Button>
           <Button variant="subtle" icon={<Mic className="size-4" />} onClick={() => navigate(`/rehearse/${c.id}`)}>Rehearse P2P</Button>
@@ -156,8 +156,8 @@ export default function Workspace({ id }: { id?: string }) {
           <motion.div initial={{ opacity: 0, y: -8 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}
             className="relative flex flex-wrap items-center justify-between gap-3 overflow-hidden rounded-2xl border border-emerald-400/25 bg-gradient-to-r from-emerald-500/[0.12] via-cyan-500/[0.06] to-violet-500/[0.1] px-5 py-3.5">
             <div className="flex items-center gap-3">
-              <ShieldCheck className="size-6 text-emerald-300" />
-              <div>
+              <ShieldCheck className="size-6 shrink-0 text-emerald-300" />
+              <div className="min-w-0">
                 <div className="text-[15px] font-semibold text-ink-100">Appeal ready for review</div>
                 <div className="text-[12.5px] text-ink-300">{verifiedCount}/{rows.length} criteria pass both keys · {quoteCount} quotes checked verbatim · <span className="text-rose-200">{violations} possible violation{violations === 1 ? '' : 's'}</span>{c.match.summary ? ` · ${c.match.summary.slice(0, 120)}${c.match.summary.length > 120 ? '…' : ''}` : ''}</div>
               </div>
@@ -245,7 +245,7 @@ function DenialCard({ c, familyId, onTimeTravel }: { c: NonNullable<ReturnType<t
           const none = !m.maps_to_criterion
           return (
             <div key={i} className="flex flex-wrap items-start justify-between gap-2 rounded-lg border border-white/6 bg-black/20 px-3 py-2">
-              <span className="min-w-0 flex-1 text-[12.5px] text-ink-300">“{m.requirement_quote}”</span>
+              <span className="min-w-0 flex-1 basis-[16rem] text-[12.5px] text-ink-300">“{m.requirement_quote}”</span>
               {retired ? <Badge tone="red">only in {familyId} {m.maps_to_version} — retired</Badge> : none ? <Badge tone="red">not in any version of {familyId}</Badge> : <Badge tone="amber">in current {familyId} · {m.maps_to_criterion}</Badge>}
             </div>
           )

@@ -117,7 +117,7 @@ export function EvidenceBoard({ c, effective }: { c: CaseFile; effective: Policy
 
       <div className="grid lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.6fr)]">
         {/* criteria list */}
-        <div className="scrollbar-thin max-h-[640px] space-y-2 overflow-y-auto border-b border-white/8 p-3 lg:border-b-0 lg:border-r">
+        <div className="scrollbar-thin space-y-2 border-b lg:max-h-[640px] lg:overflow-y-auto border-white/8 p-3 lg:border-b-0 lg:border-r">
           {rows.map((r, i) => {
             const k = keys[r.id]
             const e = ent(r.id)

@@ -56,11 +56,11 @@ export function CaseTable({ rows, sort, onSort, actions, empty }: {
         <thead>
           <tr className="border-b border-white/8 bg-white/[0.015]">
             <Th k="patient" label="Patient & service" sort={sort} onSort={onSort} className="pl-4 sm:pl-5" />
-            <Th k="policy" label="Policy" sort={sort} onSort={onSort} />
+            <Th k="policy" label="Policy" sort={sort} onSort={onSort} className="hidden md:table-cell" />
             <Th k="amount" label="Amount" sort={sort} onSort={onSort} right />
-            <Th k="deadline" label="Deadline" sort={sort} onSort={onSort} />
+            <Th k="deadline" label="Deadline" sort={sort} onSort={onSort} className="hidden sm:table-cell" />
             <Th k="status" label="Status" sort={sort} onSort={onSort} />
-            <Th k="odds" label="Historical odds" sort={sort} onSort={onSort} wrap />
+            <Th k="odds" label="Historical odds" sort={sort} onSort={onSort} wrap className="hidden lg:table-cell" />
             <Th k="ev" label="Expected value" sort={sort} onSort={onSort} right wrap />
             <th scope="col" className="py-2.5 pl-2.5 pr-4 text-right sm:pr-5"><span className="sr-only">Actions</span></th>
           </tr>
@@ -87,21 +87,22 @@ export function CaseTable({ rows, sort, onSort, actions, empty }: {
                   {r.service || <span className="text-ink-400">Add the denial letter to begin</span>}
                   {r.plan && <span className="text-ink-400"> · {r.plan}</span>}
                 </div>
+                {r.familyShort && <div className="mt-1 text-[11.5px] text-ink-400 md:hidden">{r.familyShort} · {Math.round(r.odds.rate * 100)}% odds</div>}
                 {r.hook && <div className="mt-1 flex max-w-[232px] items-center gap-1 text-[11.5px] text-violet-200/85" title={r.hook}><Sparkles className="size-3 shrink-0" /><span className="truncate">{r.hook}</span></div>}
               </td>
-              <td className="px-2.5 py-3">
+              <td className="hidden px-2.5 py-3 md:table-cell">
                 {r.familyShort
                   ? <div className="max-w-[150px] text-[12.5px] leading-snug text-ink-200">{r.familyShort}</div>
                   : <div className="text-[13px] text-ink-400">Not routed yet</div>}
                 {r.familyId && <div className="mt-1"><Badge className="font-mono">{r.familyId}</Badge></div>}
               </td>
               <td className="px-2.5 py-3 text-right text-[13.5px] tabular-nums text-ink-100">{r.amount ? usd(r.amount) : <span className="text-ink-400">—</span>}</td>
-              <td className="px-2.5 py-3"><DeadlineCell r={r} /></td>
+              <td className="hidden px-2.5 py-3 sm:table-cell"><DeadlineCell r={r} /></td>
               <td className="px-2.5 py-3">
                 <StatusBadge status={r.c.status} note={r.c.outcomeNote} />
                 {r.c.status === 'lost' && r.c.outcomeNote && <div className="mt-1 max-w-[130px] truncate text-[11.5px] text-ink-400" title={r.c.outcomeNote}>{r.c.outcomeNote}</div>}
               </td>
-              <td className="px-2.5 py-3"><OddsCell r={r} /></td>
+              <td className="hidden px-2.5 py-3 lg:table-cell"><OddsCell r={r} /></td>
               <td className="px-2.5 py-3"><ValueCell r={r} /></td>
               <td className="py-2.5 pl-2.5 pr-4 sm:pr-5">
                 <div className="flex items-center justify-end gap-1" onClick={e => e.stopPropagation()}>

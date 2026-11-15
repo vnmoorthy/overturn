@@ -171,7 +171,7 @@ function AboutCard({ delay }: { delay?: number }) {
           <BookOpen className="mt-0.5 size-3.5 shrink-0 text-cyan-300" />
           <div className="min-w-0">
             <ExtLink href="https://www.kff.org/medicare/nearly-50-million-prior-authorization-requests-were-sent-to-medicare-advantage-insurers-in-2023/">KFF analysis of Medicare Advantage prior authorization</ExtLink>
-            <span className="text-ink-400">: in 2024, 4.1 million requests were denied, 11.5% of denials were appealed, and 80.7% of appeals were partly or fully overturned.</span>
+            <span className="text-ink-400">: in 2023, 3.2 million prior-authorization requests were denied, 11.7% of denials were appealed, and 81.7% of appeals were partly or fully overturned.</span>
           </div>
         </li>
       </ul>

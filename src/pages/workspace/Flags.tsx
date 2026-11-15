@@ -16,9 +16,9 @@ export function FlagsPanel({ flags, compact }: { flags: Flag[]; compact?: boolea
   const v = flags.filter(f => f.severity === 'violation').length
   return (
     <Card className="p-4">
-      <div className="mb-3 flex items-center justify-between">
-        <div className="flex items-center gap-2 text-sm font-semibold"><Gavel className="size-4 text-rose-300" /> Compliance findings</div>
-        <div className="flex gap-1.5"><Badge tone="red">{v} possible violation{v === 1 ? '' : 's'}</Badge><Badge tone="gray">rules engine · deterministic</Badge></div>
+      <div className="mb-3 flex flex-wrap items-center justify-between gap-2">
+        <div className="flex items-center gap-2 text-sm font-semibold"><Gavel className="size-4 shrink-0 text-rose-300" /> Compliance findings</div>
+        <div className="flex flex-wrap gap-1.5"><Badge tone="red">{v} possible violation{v === 1 ? '' : 's'}</Badge><Badge tone="gray">rules engine · deterministic</Badge></div>
       </div>
       <div className={cx('grid gap-2.5', !compact && 'md:grid-cols-2')}>
         {sorted.map((f, i) => {
