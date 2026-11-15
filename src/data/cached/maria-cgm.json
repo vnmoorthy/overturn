@@ -1,0 +1,219 @@
+{
+ "extract": {
+  "letter_transcript": "SUNRISE HEALTH PLAN\nSunrise Senior Advantage (HMO) - a Medicare Advantage plan\nP.O. Box 4410, Oakland, CA 94612\n\nNOTICE OF DENIAL OF MEDICAL COVERAGE\n\nDate of notice: October 6, 2026\n\nMember: Maria Delgado\nMember ID: SSA-88214077\nRequesting provider: Dr. Priya Raman, MD - Bayview Endocrine Associates\n\nService requested: Continuous glucose monitor (Dexcom G7) with supplies\nHCPCS: E2103 Non-adjunctive CGM receiver; A4239 Supply allowance for non-adjunctive CGM, 1 month\nDiagnosis: E11.649 Type 2 diabetes mellitus with hypoglycemia without coma; Z79.4 Long term (current) use of insulin\nRequested date of service: September 29, 2026\nAmount: $1,284.00\n\nWe have denied your request for the service listed above.\n\nWhy we denied your request:\nThe requested continuous glucose monitor is not medically necessary. The member does not meet coverage criteria because the member is not performing blood glucose testing four or more times per day, and the member is not insulin-treated with multiple (three or more) daily administrations of insulin or a continuous subcutaneous insulin infusion pump. Per plan clinical guidelines, a CGM is covered only for members on intensive insulin therapy.\n\nThis decision was made by the Sunrise Health Plan Utilization Management department.\n\nYou have the right to ask Sunrise Senior Advantage to reconsider this decision. You must ask for a reconsideration within 65 calendar days from the date of this notice. If you or your doctor believe that waiting for a standard decision could seriously harm your health, you can ask for a fast (expedited) decision.",
+  "denial": {
+   "payer": "SUNRISE HEALTH PLAN",
+   "plan_name": "Sunrise Senior Advantage (HMO)",
+   "plan_type": "Medicare Advantage",
+   "member_name": "Maria Delgado",
+   "member_id": "SSA-88214077",
+   "provider_name": "Dr. Priya Raman, MD",
+   "service_description": "Continuous glucose monitor (Dexcom G7) with supplies",
+   "codes": [
+    {
+     "system": "HCPCS",
+     "code": "E2103",
+     "description": "Non-adjunctive CGM receiver"
+    },
+    {
+     "system": "HCPCS",
+     "code": "A4239",
+     "description": "Supply allowance for non-adjunctive CGM, 1 month"
+    },
+    {
+     "system": "ICD-10",
+     "code": "E11.649",
+     "description": "Type 2 diabetes mellitus with hypoglycemia without coma"
+    },
+    {
+     "system": "ICD-10",
+     "code": "Z79.4",
+     "description": "Long term (current) use of insulin"
+    }
+   ],
+   "date_of_service": "2026-09-29",
+   "notice_date": "2026-10-06",
+   "decision_type": "pre-service",
+   "denial_reason_text": "The requested continuous glucose monitor is not medically necessary. The member does not meet coverage criteria because the member is not performing blood glucose testing four or more times per day, and the member is not insulin-treated with multiple (three or more) daily administrations of insulin or a continuous subcutaneous insulin infusion pump. Per plan clinical guidelines, a CGM is covered only for members on intensive insulin therapy.",
+   "cited_requirements": [
+    "member is not performing blood glucose testing four or more times per day",
+    "member is not insulin-treated with multiple (three or more) daily administrations of insulin or a continuous subcutaneous insulin infusion pump",
+    "Per plan clinical guidelines, a CGM is covered only for members on intensive insulin therapy."
+   ],
+   "reviewer": null,
+   "reviewer_credentials_stated": false,
+   "specific_criterion_cited": false,
+   "billed_amount": 1284,
+   "expedited": false
+  }
+ },
+ "match": {
+  "rows": [
+   {
+    "criterion_id": "c1",
+    "status": "met",
+    "policy_quote": "The beneficiary has diabetes mellitus (Refer to the ICD-10 code list in the LCD-related Policy Article for applicable diagnoses);",
+    "chart_quote": "Assessment: E11.649 Type 2 DM with hypoglycemia without coma; Z79.4 long-term insulin use.",
+    "chart_line": 23,
+    "reasoning": "The 09/15/2026 office visit documents Type 2 diabetes mellitus (ICD-10 code E11.649), which is also noted since 2011 in her history.",
+    "missing_document": null,
+    "id": "r1",
+    "criterion_label": "Diabetes mellitus diagnosis"
+   },
+   {
+    "criterion_id": "c2",
+    "status": "met",
+    "policy_quote": "The beneficiary’s treating practitioner has concluded that the beneficiary (or beneficiary’s caregiver) has sufficient training using the CGM prescribed as evidenced by providing a prescription",
+    "chart_quote": "Plan: Patient and husband trained on CGM alerts; continue glargine 22 units; follow up in person in 3 months.",
+    "chart_line": 25,
+    "reasoning": "Dr. Priya Raman documented that the patient and her husband were trained on CGM alerts on 09/15/2026 and provided a prescription/order for the Dexcom G7 CGM on 09/22/2026.",
+    "missing_document": null,
+    "id": "r2",
+    "criterion_label": "Sufficient training / prescription by treating practitioner"
+   },
+   {
+    "criterion_id": "c3",
+    "status": "met",
+    "policy_quote": "The CGM is prescribed in accordance with its FDA indications for use",
+    "chart_quote": "Plan: Prescribe Dexcom G7 CGM for non-adjunctive use in accordance with its FDA indications for use.",
+    "chart_line": 24,
+    "reasoning": "The 09/15/2026 treatment plan explicitly states that the Dexcom G7 CGM is prescribed for non-adjunctive use in accordance with its FDA indications for use.",
+    "missing_document": null,
+    "id": "r3",
+    "criterion_label": "Prescribed per FDA indications for use"
+   },
+   {
+    "criterion_id": "c4a",
+    "status": "met",
+    "policy_quote": "The beneficiary is insulin-treated; or,",
+    "chart_quote": "Current regimen: insulin glargine 22 units subcutaneously once daily at bedtime; metformin 1000 mg twice daily.",
+    "chart_line": 18,
+    "reasoning": "The patient is treated with once-daily subcutaneous insulin glargine (22 units at bedtime), which satisfies the effective policy's requirement for any insulin treatment.",
+    "missing_document": null,
+    "id": "r4",
+    "criterion_label": "Insulin-treated (any insulin regimen)"
+   },
+   {
+    "criterion_id": "c4b2",
+    "status": "met",
+    "policy_quote": "A history of one level 3 hypoglycemic event (glucose <54mg/dL (3.0mmol/L)) characterized by altered mental and/or physical state requiring third-party assistance for treatment of hypoglycemia",
+    "chart_quote": "Assessment: Level 3 hypoglycemia requiring third-party assistance.",
+    "chart_line": 13,
+    "reasoning": "The 08/30/2026 emergency department summary documents a point-of-care glucose of 41 mg/dL with confusion and unresponsiveness requiring 911 activation by her husband and IV dextrose administration by paramedics.",
+    "missing_document": null,
+    "id": "r5",
+    "criterion_label": "One level 3 hypoglycemic event requiring third-party assistance"
+   },
+   {
+    "criterion_id": "c5",
+    "status": "met",
+    "policy_quote": "Within six (6) months prior to ordering the CGM, the treating practitioner has an in-person or Medicare-approved telehealth visit with the beneficiary to evaluate their diabetes control and determined that criteria (1)-(4) above are met.",
+    "chart_quote": "--- Office visit 09/15/2026, in person (Dr. Priya Raman, MD) ---",
+    "chart_line": 15,
+    "reasoning": "Dr. Priya Raman conducted an in-person visit on 09/15/2026—seven days prior to the 09/22/2026 CGM order—to evaluate the patient's diabetes control and need for CGM.",
+    "missing_document": null,
+    "id": "r6",
+    "criterion_label": "In-person or telehealth visit within 6 months before ordering"
+   }
+  ],
+  "denial_mappings": [
+   {
+    "requirement_quote": "the member is not performing blood glucose testing four or more times per day",
+    "maps_to_version": "2020",
+    "maps_to_criterion": "c2",
+    "explanation": "Frequent (4+ times daily) BGM testing was a requirement in the 2020 version of L33822 (removed 07/18/2021) and is not part of the effective policy."
+   },
+   {
+    "requirement_quote": "the member is not insulin-treated with multiple (three or more) daily administrations of insulin or a continuous subcutaneous insulin infusion pump",
+    "maps_to_version": "2023-01",
+    "maps_to_criterion": "c2",
+    "explanation": "The requirement for 3+ daily insulin administrations or a CSII pump comes from the superseded 2023-01 version (removed 04/16/2023); the effective policy only requires any insulin treatment (c4a) or qualifying hypoglycemia (c4b)."
+   },
+   {
+    "requirement_quote": "a CGM is covered only for members on intensive insulin therapy",
+    "maps_to_version": null,
+    "maps_to_criterion": null,
+    "explanation": "This plan clinical guideline restriction does not appear in the effective LCD L33822, which covers CGMs for any insulin-treated beneficiary or beneficiaries with qualifying problematic hypoglycemia."
+   }
+  ],
+  "summary": "The denial is inconsistent with the effective LCD L33822 (\"current\") policy and the patient's chart because it relies on obsolete criteria (4+ daily BGM tests and 3+ daily insulin administrations or CSII pump) that were removed prior to the 2026-09-29 date of service. The chart documents that Maria Delgado meets all required initial coverage criteria under the effective policy—including Type 2 diabetes, CGM training and prescription per FDA indications, insulin treatment (c4a) as well as a level 3 hypoglycemic event (c4b2), and an in-person evaluation within 6 months prior to ordering—so the denial should be overturned."
+ },
+ "entail": [
+  {
+   "row_id": "r1",
+   "verdict": "supports",
+   "reason_code": "ok",
+   "explanation": "The evidence explicitly confirms a diagnosis of Type 2 Diabetes Mellitus."
+  },
+  {
+   "row_id": "r2",
+   "verdict": "supports",
+   "reason_code": "ok",
+   "explanation": "The plan notes that the patient and caregiver were trained on CGM alerts, and a prescription was provided."
+  },
+  {
+   "row_id": "r3",
+   "verdict": "supports",
+   "reason_code": "ok",
+   "explanation": "The evidence explicitly states the CGM is prescribed in accordance with its FDA indications for use."
+  },
+  {
+   "row_id": "r4",
+   "verdict": "supports",
+   "reason_code": "ok",
+   "explanation": "The evidence establishes that the patient is currently treated with daily subcutaneous insulin glargine."
+  },
+  {
+   "row_id": "r5",
+   "verdict": "supports",
+   "reason_code": "ok",
+   "explanation": "The evidence documentation explicitly confirms an assessment of level 3 hypoglycemia requiring third-party assistance."
+  },
+  {
+   "row_id": "r6",
+   "verdict": "supports",
+   "reason_code": "ok",
+   "explanation": "An in-person office visit to evaluate diabetes control occurred on 09/15/2026, within six months prior to the order date."
+  }
+ ],
+ "letter": "On behalf of Maria Delgado (Member ID: SSA-88214077), we respectfully request reconsideration of Sunrise Senior Advantage (HMO)'s October 6, 2026 denial of a continuous glucose monitor (Dexcom G7) with supplies (HCPCS E2103, A4239; ICD-10 E11.649, Z79.4) for date of service September 29, 2026. The plan denied the request as not medically necessary, asserting that the patient does not perform blood glucose testing four or more times per day, is not treated with three or more daily insulin administrations or an insulin pump, and is not on intensive insulin therapy.\n\n## Governing coverage criteria\n\nUnder 42 CFR § 422.101(b)(1), (b)(3), and (b)(6), Medicare Advantage organizations must comply with Traditional Medicare coverage criteria when fully established in Local Coverage Determinations (LCDs) and may not apply more restrictive internal guidelines. The governing policy for date of service September 29, 2026 is LCD L33822 (Glucose Monitors), version effective October 1, 2024. The requirements cited in the denial notice are not part of this effective policy: CMS removed the requirement to test blood glucose four or more times daily on July 18, 2021, and removed the requirement for three or more daily insulin administrations or an insulin pump on April 16, 2023. Furthermore, the plan's restriction limiting coverage to members on intensive insulin therapy does not appear in any version of L33822.\n\n## The patient meets each criterion\n\nThe medical record demonstrates that Ms. Delgado satisfies every criterion of L33822 (effective October 1, 2024):\n\n- **Diabetes mellitus diagnosis:** [[Q:r1:policy]] The 09/15/2026 office visit documents Type 2 diabetes mellitus (ICD-10 E11.649), noted in her history since 2011: [[Q:r1:chart]]\n- **Training and prescription:** [[Q:r2:policy]] Dr. Priya Raman documented CGM alert training for the patient and her husband on 09/15/2026 and prescribed the Dexcom G7 on 09/22/2026: [[Q:r2:chart]]\n- **Prescribed per FDA indications:** [[Q:r3:policy]] The 09/15/2026 treatment plan specifies non-adjunctive use in accordance with FDA indications: [[Q:r3:chart]]\n- **Insulin-treated:** [[Q:r4:policy]] The patient is treated with once-daily subcutaneous insulin glargine (22 units at bedtime), satisfying the insulin treatment requirement: [[Q:r4:chart]]\n- **Level 3 hypoglycemic event:** [[Q:r5:policy]] The 08/30/2026 emergency department summary documents a glucose of 41 mg/dL with confusion and unresponsiveness requiring 911 activation and paramedic IV dextrose: [[Q:r5:chart]]\n- **Recent in-person visit:** [[Q:r6:policy]] Dr. Priya Raman conducted an in-person evaluation on 09/15/2026, seven days before the 09/22/2026 order: [[Q:r6:chart]]\n\n## Procedural issues\n\nIn addition to relying on retired and unauthorized criteria in violation of 42 CFR § 422.101(b)(3) and (b)(6), the October 6, 2026 denial notice fails to identify the specific coverage policy or criterion relied upon, as required by 42 CFR § 422.568(e) and CMS-0057-F. The notice also omits the reviewing clinician's identity and specialty, which is required to confirm appropriate expertise under 42 CFR § 422.566(d).\n\n## Request\n\nBecause Ms. Delgado meets all six criteria of the governing LCD L33822, we request that Sunrise Senior Advantage (HMO) overturn this denial and authorize coverage for HCPCS E2103 and A4239 for date of service September 29, 2026. If the denial is upheld at any stage, please provide the name and clinical specialty of the reviewing professional pursuant to 42 CFR § 422.566(d).",
+ "explain": {
+  "English": "Hi Maria,\n\nWe are writing to update you about your Dexcom G7 continuous glucose monitor. Your health plan denied coverage, but we believe their decision is wrong. \n\nThey based their denial on old rules that are no longer active, like needing four daily finger sticks or three daily insulin shots. Under the official current policy, called LCD L33822, you fully qualify for the monitor. Your medical records show you meet all six required criteria, including your Type 2 diabetes, your insulin use, a severe low blood sugar event, and your recent doctor visit within six months.\n\nOur care team is already appealing this denial to get it overturned before the December 10, 2026 deadline. You also have the right to call your insurance plan and ask for the credentials of the person who reviewed your request. We are right here to support you!",
+  "Spanish": "Hola María. Queremos informarle que su seguro rechazó la cobertura de su monitor continuo de glucosa Dexcom G7. No se preocupe, nuestro equipo de atención médica ya está preparando una apelación para defender su caso.\n\nLa negativa del seguro se basa en requisitos antiguos que ya fueron retirados, como exigir cuatro pinchazos de dedo diarios o tres inyecciones de insulina. El plan debe seguir la norma vigente L33822 y no citó una política de cobertura específica para negar el servicio. Su expediente médico demuestra que usted cumple con todos los requisitos actuales: tiene diabetes tipo 2, usa tratamiento de insulina, tuvo un episodio grave de bajo azúcar en sangre y asistió a sus citas médicas.\n\nLa fecha límite para presentar la apelación es el 10 de diciembre de 2026. Además, usted tiene derecho a llamar a su seguro para solicitar las credenciales médicas del revisor que tomó esta decisión. Estamos aquí para apoyarla en todo este proceso."
+ },
+ "objections": [
+  {
+   "objection": "The plan requires multiple daily insulin injections (MDI) or an insulin pump rather than just once-daily basal insulin for CGM coverage.",
+   "response": "Under the effective governing policy (LCD L33822), the criteria requires any insulin regimen, not exclusively MDI or pump therapy. The denial relies on a retired requirement or unapproved internal plan criteria in violation of 42 CFR § 422.101(b). The patient meets the insulin requirement with her daily subcutaneous insulin glargine regimen.",
+   "row_ids": [
+    "r4"
+   ]
+  },
+  {
+   "objection": "The patient does not have a documented history of recurrent severe hypoglycemia or frequent blood glucose testing logs.",
+   "response": "The governing policy requires a qualifying hypoglycemic event; the patient's records confirm a Level 3 hypoglycemic event (POC glucose 41 mg/dL) resulting in confusion and unresponsiveness, which required 911 activation and paramedic IV dextrose administration. Applying unstated or retired criteria violates 42 CFR § 422.101(b).",
+   "row_ids": [
+    "r5"
+   ]
+  },
+  {
+   "objection": "There is insufficient documentation demonstrating proper training, FDA-aligned prescribing, or recent clinical evaluation for CGM initiation.",
+   "response": "All clinical documentation requirements are fully met: Dr. Raman evaluated the patient in-person on 09/15/2026, documented a Type 2 diabetes diagnosis, prescribed the Dexcom G7 per FDA indications on 09/22/2026, and trained the patient and her husband on CGM alerts.",
+   "row_ids": [
+    "r1",
+    "r2",
+    "r3",
+    "r6"
+   ]
+  }
+ ],
+ "models": {
+  "extract": "gemini-3.5-flash",
+  "match": "gemini-4-hydrogen",
+  "entail": "gemini-3.5-flash",
+  "letter": "gemini-4-hydrogen",
+  "explain": "gemini-3.5-flash",
+  "coach": "gemini-3.5-flash"
+ },
+ "recordedAt": "2026-11-14T23:22:11.838Z"
+}

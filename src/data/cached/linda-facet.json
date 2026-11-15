@@ -1,0 +1,207 @@
+{
+ "extract": {
+  "letter_transcript": "HARBOR POINT HEALTH\nHarbor Point Medicare Advantage (HMO-POS)\n88 Harbor Blvd, San Diego, CA 92101\n\nNOTICE OF MEDICARE DENIAL OF MEDICAL COVERAGE\n\nDate: October 28, 2026\n\nMember: Linda Park\nMember ID: HPH-30177261\nProvider: Coastal Spine & Pain - Dr. Elena Vasquez, MD\n\nService requested: Lumbar facet joint medial branch block, L4-L5 and L5-S1, right (CPT 64493, 64494)\nDiagnosis: M47.816 Spondylosis without myelopathy or radiculopathy, lumbar region\nDate of service: November 3, 2026\nAmount: $2,450.00\n\nWe have denied coverage for this service.\n\nReason: Documentation does not demonstrate failure of conservative treatment. The medical record does not show that the member has had pain for at least 6 months, and does not show completion of 12 weeks of physical therapy.\n\nA physician reviewer made this decision.\n\nYou have the right to request a reconsideration within 65 calendar days of the date of this notice.",
+  "denial": {
+   "payer": "Harbor Point Health",
+   "plan_name": "Harbor Point Medicare Advantage (HMO-POS)",
+   "plan_type": "Medicare Advantage",
+   "member_name": "Linda Park",
+   "member_id": "HPH-30177261",
+   "provider_name": "Dr. Elena Vasquez, MD",
+   "service_description": "Lumbar facet joint medial branch block, L4-L5 and L5-S1, right",
+   "codes": [
+    {
+     "system": "CPT",
+     "code": "64493",
+     "description": "Lumbar facet joint medial branch block, first level"
+    },
+    {
+     "system": "CPT",
+     "code": "64494",
+     "description": "Lumbar facet joint medial branch block, second level"
+    },
+    {
+     "system": "ICD-10",
+     "code": "M47.816",
+     "description": "Spondylosis without myelopathy or radiculopathy, lumbar region"
+    }
+   ],
+   "date_of_service": "2026-11-03",
+   "notice_date": "2026-10-28",
+   "decision_type": "pre-service",
+   "denial_reason_text": "Documentation does not demonstrate failure of conservative treatment. The medical record does not show that the member has had pain for at least 6 months, and does not show completion of 12 weeks of physical therapy.",
+   "cited_requirements": [
+    "failure of conservative treatment",
+    "pain for at least 6 months",
+    "completion of 12 weeks of physical therapy"
+   ],
+   "reviewer": null,
+   "reviewer_credentials_stated": true,
+   "specific_criterion_cited": false,
+   "billed_amount": 2450,
+   "expedited": false
+  }
+ },
+ "match": {
+  "rows": [
+   {
+    "criterion_id": "c1",
+    "status": "met",
+    "policy_quote": "Moderate to severe chronic neck or low back pain, predominantly axial, that causes functional deficit measured on pain or disability scale",
+    "chart_quote": "Persistent axial pain 7/10; interferes with walking more than 15 minutes and with sleep.",
+    "chart_line": 17,
+    "reasoning": "The chart documents 5 months of axial low back pain (L5) rated 7/10 on the numeric rating scale (L7, L17) that causes functional deficits interfering with walking and sleep.",
+    "missing_document": null,
+    "id": "r1",
+    "criterion_label": "Moderate to severe chronic axial neck/low back pain with functional deficit"
+   },
+   {
+    "criterion_id": "c2",
+    "status": "met",
+    "policy_quote": "Pain present for minimum of 3 months with documented failure to respond to noninvasive conservative management (as tolerated)",
+    "chart_quote": "Physical therapy 05/01/2026 - 06/26/2026 (8 weeks, home exercise program), no meaningful improvement.",
+    "chart_line": 13,
+    "reasoning": "Pain has been present for 5 months since March 2026 (L5), exceeding the 3-month minimum, and failed 8 weeks of physical therapy (L13) as well as 10 weeks of Naproxen 500 mg twice daily (L14).",
+    "missing_document": null,
+    "id": "r2",
+    "criterion_label": "Pain >= 3 months with failed noninvasive conservative management"
+   },
+   {
+    "criterion_id": "c3",
+    "status": "met",
+    "policy_quote": "Absence of untreated radiculopathy or neurogenic claudication (except for radiculopathy caused by facet joint synovial cyst)",
+    "chart_quote": "No signs of radiculopathy or neurogenic claudication.",
+    "chart_line": 9,
+    "reasoning": "The initial consult explicitly documents no neurologic deficits, negative straight leg raise bilaterally (L8), and no signs of radiculopathy or neurogenic claudication.",
+    "missing_document": null,
+    "id": "r3",
+    "criterion_label": "No untreated radiculopathy or neurogenic claudication"
+   },
+   {
+    "criterion_id": "c4",
+    "status": "met",
+    "policy_quote": "There is no non-facet pathology per clinical assessment or radiology studies that could explain the source of the patient’s pain, including but not limited to fracture, tumor, infection, or significant deformity.",
+    "chart_quote": "Imaging: MRI lumbar spine 06/20/2026 shows facet arthropathy at L4-L5 and L5-S1, no stenosis.",
+    "chart_line": 10,
+    "reasoning": "Lumbar spine MRI confirms facet arthropathy at L4-L5 and L5-S1 without stenosis or other non-facet pathology explaining the patient's pain.",
+    "missing_document": null,
+    "id": "r4",
+    "criterion_label": "No non-facet pathology explaining the pain"
+   },
+   {
+    "criterion_id": "c5",
+    "status": "missing",
+    "policy_quote": "*Pain assessment must be performed and documented at baseline, after each diagnostic procedure using the same pain scale for each assessment. A disability scale must also be obtained at baseline to be used for functional assessment (if patient qualifies for treatment).",
+    "chart_quote": null,
+    "chart_line": null,
+    "reasoning": "Although a baseline pain score of 7/10 on the numeric rating scale is documented (L7), the chart does not document a validated baseline disability scale (such as ODI or PDAS).",
+    "missing_document": "Baseline functional assessment using a validated disability scale (e.g., ODI, PDAS, Roland Morris, or PROMIS)",
+    "id": "r5",
+    "criterion_label": "Pain scale at baseline and after each diagnostic procedure; disability scale at baseline"
+   },
+   {
+    "criterion_id": "c17",
+    "status": "met",
+    "policy_quote": "One to two levels, either unilateral or bilateral, are allowed per session per spine region.",
+    "chart_quote": "Plan: diagnostic medial branch block, right L4-L5 and L5-S1.",
+    "chart_line": 18,
+    "reasoning": "The planned procedure targets two unilateral levels (right L4-L5 and L5-S1) in a single lumbar spine region, which is within the policy limit.",
+    "missing_document": null,
+    "id": "r6",
+    "criterion_label": "One to two levels per session per region"
+   }
+  ],
+  "denial_mappings": [
+   {
+    "requirement_quote": "Documentation does not demonstrate failure of conservative treatment.",
+    "maps_to_version": "current",
+    "maps_to_criterion": "c2",
+    "explanation": "This maps to c2 in the effective policy, which requires documented failure to respond to noninvasive conservative management, though the chart actually documents failed 8-week physical therapy and 10-week Naproxen."
+   },
+   {
+    "requirement_quote": "The medical record does not show that the member has had pain for at least 6 months",
+    "maps_to_version": null,
+    "maps_to_criterion": null,
+    "explanation": "No policy version requires 6 months of pain; the effective policy (c2) requires a minimum of 3 months, which is met by the patient's 5-month pain history."
+   },
+   {
+    "requirement_quote": "does not show completion of 12 weeks of physical therapy.",
+    "maps_to_version": null,
+    "maps_to_criterion": null,
+    "explanation": "No policy version requires 12 weeks of physical therapy; the effective policy (c2) requires failure of noninvasive conservative management as tolerated without specifying a 12-week PT duration."
+   }
+  ],
+  "summary": "The denial is not consistent with the effective policy or the chart because L38801 requires at least 3 months of pain and failed noninvasive conservative management rather than 6 months of pain or 12 weeks of physical therapy, and the chart documents 5 months of axial low back pain with failed 8-week physical therapy and 10-week Naproxen. All evaluated criteria are met except c5, which is missing a documented baseline disability scale, so the denial's stated grounds should be overturned while the provider should submit a baseline disability scale if requested."
+ },
+ "entail": [
+  {
+   "row_id": "r1",
+   "verdict": "supports",
+   "reason_code": "ok",
+   "explanation": "The evidence documents persistent severe axial pain (7/10) causing functional interference with walking and sleeping."
+  },
+  {
+   "row_id": "r2",
+   "verdict": "supports",
+   "reason_code": "ok",
+   "explanation": "The evidence documents a trial of physical therapy for 8 weeks and nonsteroidal anti-inflammatory drugs (Naproxen) without meaningful improvement, meeting the requirement for noninvasive conservative management failure."
+  },
+  {
+   "row_id": "r3",
+   "verdict": "supports",
+   "reason_code": "ok",
+   "explanation": "The evidence explicitly confirms the absence of radiculopathy or neurogenic claudication."
+  },
+  {
+   "row_id": "r4",
+   "verdict": "supports",
+   "reason_code": "ok",
+   "explanation": "The MRI shows facet arthropathy at L4-L5 and L5-S1 without stenosis or other non-facet pathology to account for the pain."
+  },
+  {
+   "row_id": "r6",
+   "verdict": "supports",
+   "reason_code": "ok",
+   "explanation": "The planned procedure targets two levels (right L4-L5 and L5-S1), which complies with the one to two level limitation per session."
+  }
+ ],
+ "letter": "On behalf of Linda Park (Member ID: HPH-30177261), we formally request reconsideration of Harbor Point Medicare Advantage (HMO-POS)'s October 28, 2026 denial of prior authorization for a right-sided lumbar facet joint medial branch block at L4-L5 and L5-S1 (CPT 64493, CPT 64494; ICD-10 M47.816), scheduled for November 3, 2026. The denial asserts that the medical record fails to demonstrate failure of conservative treatment, specifically citing an alleged lack of six months of pain and 12 weeks of physical therapy.\n\n## Governing coverage criteria\n\nThe governing policy for this service is Local Coverage Determination (LCD) L38801, Facet Joint Interventions for Pain Management (version effective April 16, 2026). Under 42 CFR § 422.101(b)(1), (b)(3), and (b)(6), Medicare Advantage organizations must comply with Traditional Medicare NCDs and LCDs and may not apply more restrictive internal criteria where Medicare coverage criteria are fully established. Neither a six-month pain duration requirement nor a 12-week physical therapy requirement appears in any version of L38801.\n\n## The patient meets each criterion\n\nThe clinical record demonstrates that Ms. Park satisfies the applicable criteria under L38801:\n\n- **Chronic axial pain with functional deficit:** [[Q:r1:policy]] Ms. Park's record documents five months of axial low back pain rated 7/10 on the numeric rating scale, interfering with walking and sleep: [[Q:r1:chart]]\n- **Pain duration and failed conservative management:** [[Q:r2:policy]] Her pain has persisted for five months since March 2026—exceeding the three-month minimum—and has failed eight weeks of physical therapy and ten weeks of Naproxen 500 mg twice daily: [[Q:r2:chart]]\n- **No untreated radiculopathy or neurogenic claudication:** [[Q:r3:policy]] The initial consultation documents no neurologic deficits, negative straight leg raise bilaterally, and no signs of radiculopathy or neurogenic claudication: [[Q:r3:chart]]\n- **No non-facet pathology explaining the pain:** [[Q:r4:policy]] Lumbar spine MRI confirms facet arthropathy at L4-L5 and L5-S1 without stenosis or other non-facet pathology explaining her pain: [[Q:r4:chart]]\n- **Baseline pain and disability scales:** [[Q:r5:policy]] A baseline numeric rating scale pain score of 7/10 is documented: [[Q:r5:chart]] Because a validated baseline disability scale is not yet in the chart, we are attaching a baseline functional assessment using a validated disability scale (e.g., ODI, PDAS, Roland Morris, or PROMIS).\n- **Procedure scope:** [[Q:r6:policy]] The planned intervention targets two unilateral levels (right L4-L5 and L5-S1) in a single lumbar region: [[Q:r6:chart]]\n\n## Procedural issues\n\nIn addition to misstating the clinical record—which explicitly documents more than three months of pain and failed conservative therapy—the denial notice fails to cite any specific coverage policy or criterion, contrary to 42 CFR § 422.568(e) and CMS-0057-F. Moreover, imposing unstated six-month pain and 12-week physical therapy thresholds violates 42 CFR § 422.101(b)(6), which permits internal coverage criteria only when Medicare criteria are not fully established and requires public disclosure with supporting evidence.\n\n## Request\n\nWe respectfully request that Harbor Point Health overturn this denial and authorize coverage for CPT 64493 and CPT 64494 for November 3, 2026. Please also provide the name, specialty, and credentials of the reviewing clinician if not previously stated.",
+ "explain": {
+  "English": "Dear Linda,\n\nYour insurance plan denied your lower back injection on your right side. They claimed you needed six months of pain and twelve weeks of physical therapy. This denial seems wrong because your plan must follow policy L38801. That policy only requires three months of pain and basic care that did not help. Your chart already proves you have five months of pain, eight weeks of therapy, and ten weeks of Naproxen.\n\nThe insurer used rules not found in the policy and missed details in your chart. Almost every rule is met, though we must send one quick form measuring your daily pain scale.\n\nYour care team is appealing this decision right away. We have until January 1, 2027, to send it in. You can also call your insurance plan to ask for the reviewer's credentials. We are right by your side.",
+  "Spanish": "Hola Linda. Queremos explicarle qué pasó con su procedimiento de bloqueo lumbar. Su seguro negó la cobertura, pero creemos que fue un error. El seguro dijo que usted necesitaba seis meses de dolor y doce semanas de terapia física. Sin embargo, la regla oficial L38801 solo pide tres meses de dolor y probar otros tratamientos. \n\nSus registros muestran cinco meses de dolor, ocho semanas de terapia y diez semanas con Naproxeno. Usted cumple con las reglas oficiales. El seguro aplicó requisitos incorrectos sin citar una política clara. Solo falta un documento sobre su nivel de discapacidad inicial, el cual su médico puede enviar.\n\nSu equipo médico ya está preparando una apelación para defender su caso. La fecha límite para enviarla es el 1 de enero de 2027. Si desea, usted puede llamar a su seguro para pedir las credenciales del médico que revisó su caso. Estamos aquí para apoyarla en este proceso."
+ },
+ "objections": [
+  {
+   "objection": "The clinical documentation lacks a validated baseline disability scale score, such as an ODI or PDAS.",
+   "response": "The denial relies on criteria not contained within the governing LCD L38801, which MA plans must follow per 42 CFR § 422.101(b). Furthermore, the chart clearly documents significant functional deficits affecting walking and sleep alongside a baseline 7/10 pain score.",
+   "row_ids": [
+    "r1",
+    "r5"
+   ]
+  },
+  {
+   "objection": "There is insufficient evidence that noninvasive conservative treatments have been attempted and failed.",
+   "response": "The patient has failed 5 months of conservative management, including a completed 8-week course of physical therapy and 10 weeks of daily Naproxen 500 mg twice daily, satisfying the conservative care requirement.",
+   "row_ids": [
+    "r2"
+   ]
+  },
+  {
+   "objection": "The patient's lower back pain may be originating from radicular symptoms or non-facet lumbar spine pathology.",
+   "response": "Physical examination confirms negative straight leg raise bilaterally with zero neurogenic claudication or radiculopathy, and lumbar MRI explicitly confirms L4-L5 and L5-S1 facet arthropathy without spinal stenosis or other competing non-facet causes.",
+   "row_ids": [
+    "r3",
+    "r4"
+   ]
+  }
+ ],
+ "models": {
+  "extract": "gemini-3.5-flash",
+  "match": "gemini-4-hydrogen",
+  "entail": "gemini-3.5-flash",
+  "letter": "gemini-4-hydrogen",
+  "explain": "gemini-3.5-flash",
+  "coach": "gemini-3.5-flash"
+ },
+ "recordedAt": "2026-11-14T23:27:17.140Z"
+}

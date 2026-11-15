@@ -1,0 +1,75 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Instrument Serif", ui-serif, Georgia, serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  --color-ink-950: #05060a;
+  --color-ink-900: #0a0c12;
+  --color-ink-800: #11141d;
+  --color-ink-700: #1a1f2c;
+  --color-ink-600: #262c3c;
+  --color-ink-400: #6b7390;
+  --color-ink-300: #9aa2bd;
+  --color-ink-100: #e6e9f2;
+  --color-aurora-1: #7c5cff;
+  --color-aurora-2: #22d3ee;
+  --color-aurora-3: #34d399;
+  --color-aurora-4: #f472b6;
+  --color-warn: #fbbf24;
+  --color-danger: #fb7185;
+}
+
+:root { color-scheme: dark; }
+html, body, #root { height: 100%; }
+body {
+  margin: 0;
+  background: var(--color-ink-950);
+  color: var(--color-ink-100);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+.glass {
+  background: linear-gradient(180deg, rgba(255,255,255,0.055), rgba(255,255,255,0.02));
+  border: 1px solid rgba(255,255,255,0.08);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+.glass-strong {
+  background: linear-gradient(180deg, rgba(20,24,36,0.92), rgba(12,14,22,0.92));
+  border: 1px solid rgba(255,255,255,0.09);
+  backdrop-filter: blur(24px);
+}
+.text-gradient {
+  background: linear-gradient(92deg, #c4b5fd 0%, #67e8f9 45%, #6ee7b7 100%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.ring-glow { box-shadow: 0 0 0 1px rgba(124,92,255,.35), 0 10px 40px -10px rgba(124,92,255,.55); }
+.grid-bg {
+  background-image:
+    linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px);
+  background-size: 44px 44px;
+  mask-image: radial-gradient(ellipse at 50% 0%, black 30%, transparent 75%);
+}
+.scrollbar-thin::-webkit-scrollbar { width: 8px; height: 8px; }
+.scrollbar-thin::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 8px; }
+.scrollbar-thin::-webkit-scrollbar-track { background: transparent; }
+
+@keyframes aurora-drift {
+  0% { transform: translate3d(0,0,0) scale(1); }
+  50% { transform: translate3d(4%, -3%, 0) scale(1.08); }
+  100% { transform: translate3d(0,0,0) scale(1); }
+}
+.aurora-blob { animation: aurora-drift 18s ease-in-out infinite; filter: blur(80px); }
+@keyframes scan { 0% { transform: translateY(-100%); } 100% { transform: translateY(100%); } }
+.scanline { animation: scan 2.4s linear infinite; }
+@keyframes shimmer { 0% { background-position: -400px 0; } 100% { background-position: 400px 0; } }
+.shimmer {
+  background: linear-gradient(90deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.09) 50%, rgba(255,255,255,0.03) 100%);
+  background-size: 800px 100%; animation: shimmer 1.6s linear infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .aurora-blob, .scanline, .shimmer { animation: none; }
+}

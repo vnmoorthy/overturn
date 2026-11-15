@@ -1,0 +1,84 @@
+{
+  "id": "L33822",
+  "title": "Glucose Monitors",
+  "type": "LCD",
+  "contractor": "CGS Administrators, LLC (DME MAC J-B 17013, J-C 18003) / Noridian Healthcare Solutions, LLC (DME MAC J-A 16013, J-D 19003)",
+  "original_effective_date": "2015-10-01",
+  "retrieved": "2026-11-14",
+  "verbatim": true,
+  "related_policy_article": "A52464 (Glucose Monitor - Policy Article)",
+  "version_label": "2023-01",
+  "version_number": 48,
+  "effective_date": "2023-01-01",
+  "revision_ending_date": "2023-04-15",
+  "retired_date": null,
+  "source_url": "https://localcoverage.cms.gov/mcd_archive/view/lcd.aspx?lcdInfo=33822:48",
+  "notes": "CMS MCD Archive copy of L33822 version 48 (Revision Effective Date 01/01/2023, Revision Ending Date 04/15/2023). This is the last version before the 04/16/2023 expansion: the four-times-a-day testing prerequisite is already gone (removed 07/18/2021), but CGM coverage still requires multiple (three or more) daily insulin administrations or a CSII pump and frequent insulin adjustment.",
+  "sections": [
+    {
+      "id": "s1",
+      "heading": "Coverage Indications, Limitations, and/or Medical Necessity — Continuous Glucose Monitors (CGM)",
+      "text": "CONTINUOUS GLUCOSE MONITORS (CGM)\n\nA non-adjunctive CGM can be used to make treatment decisions without the need for a stand-alone BGM to confirm testing results. An adjunctive CGM requires the user verify their glucose levels or trends displayed on a CGM with a BGM prior to making treatment decisions. On February 28, 2022, CMS determined that both non-adjunctive and adjunctive CGMs may be classified as DME.\n\nRefer to the NON-MEDICAL NECESSITY COVERAGE AND PAYMENT RULES and CODING GUIDELINES sections in the LCD-related Policy Article for additional information regarding classification of CGMs as DME.\n\nTo be eligible for coverage of a CGM and related supplies, the beneficiary must meet all of the following coverage criteria (1)-(5):\n\n1. The beneficiary has diabetes mellitus (Refer to the ICD-10 code list in the LCD-related Policy Article for applicable diagnoses); and,\n\n2. The beneficiary is insulin-treated with multiple (three or more) daily administrations of insulin or a continuous subcutaneous insulin infusion (CSII) pump; and,\n\n3. The beneficiary’s insulin treatment regimen requires frequent adjustment by the beneficiary on the basis of BGM or CGM testing results; and,\n\n4. Within six (6) months prior to ordering the CGM, the treating practitioner has an in-person visit with the beneficiary to evaluate their diabetes control and determined that criteria (1-3) above are met; and,\n\n5. Every six (6) months following the initial prescription of the CGM, the treating practitioner has an in-person visit with the beneficiary to assess adherence to their CGM regimen and diabetes treatment plan.\n\nWhen a CGM (code E2102 or E2103) is covered, the related supply allowance (code A4238 or A4239) is also covered. Supplies (code A4238) for an adjunctive CGM integrated into an external insulin infusion pump are covered when the beneficiary meets both the CGM coverage criteria and the coverage criteria for an external insulin infusion pump. Refer to the External Infusion Pumps LCD (L33794) for additional information regarding billing a CGM receiver incorporated into an insulin infusion pump.\n\nIf any of coverage criteria (1-5) are not met, the CGM and related supply allowance will be denied as not reasonable and necessary.\n\nThe supply allowance (code A4238 or A4239) is billed as one (1) unit of service (UOS) per thirty (30) days. Only one (1) UOS of code A4238 or A4239 may be billed to the DME MACs at a time. Billing more than one (1) UOS per thirty (30) days of code A4238 or A4239 will be denied as not reasonable and necessary. Refer to the CODING GUIDELINES section in the LCD-related Policy Article for additional billing instructions.\n\nNon-adjunctive CGM devices replace standard home BGMs (HCPCS codes E0607, E2100, E2101) and related supplies (HCPCS codes A4233, A4234, A4235, A4236, A4244, A4245, A4246, A4247, A4250, A4253, A4255, A4256, A4257, A4258, A4259). Claims for a BGM and related supplies, billed in addition to a non-adjunctive CGM device (code K0554) and associated supply allowance (code K0553), will be denied.\n\nAdjunctive CGM devices do not replace a standard home BGM. The supply allowance for an adjunctive CGM (A4238) encompasses all items necessary for the use of the device and includes but is not limited to, CGM sensors and transmitters. Code A4238 does not include a home BGM and related BGM testing supplies. These items may be billed separately, in addition to code A4238. Refer to the CODING GUIDELINES section in the LCD-related Policy Article for additional information.\n\nAll CGM devices billed to Medicare using HCPCS code E2103 must be reviewed for correct coding by the Pricing, Data Analysis and Coding (PDAC) contractor and be listed on the Product Classification List (PCL). Effective July 1, 2022, all CGMs billed to Medicare using HCPCS code E2102 must be reviewed for correct coding by the PDAC contractor and be listed on the PCL. If a CGM system is billed using HCPCS code E2102 or E2103 but the CGM system is not on the PCL for that particular HCPCS code, then the claim will be denied as incorrect coding. Refer to the CODING GUIDELINES section in the LCD-related Policy Article for additional information."
+    },
+    {
+      "id": "s2",
+      "heading": "Coverage Indications, Limitations, and/or Medical Necessity — Home Blood Glucose Monitors (BGM)",
+      "text": "HOME BLOOD GLUCOSE MONITORS (BGM)\n\nTo be eligible for coverage of home blood glucose monitors and related accessories and supplies, the beneficiary must meet both of the following basic criteria (1) – (2):\n\n1. The beneficiary has diabetes (Refer to the ICD-10 code list in the LCD-related Policy Article for applicable diagnoses); and\n\n2. The beneficiary’s treating practitioner has concluded that the beneficiary (or the beneficiary’s caregiver) has sufficient training using the particular device prescribed as evidenced by providing a prescription for the appropriate supplies and frequency of blood glucose testing.\n\nFor all glucose monitors and related accessories and supplies, if the basic coverage criteria (1)-(2) are not met, the item(s) will be denied as not reasonable and necessary.\n\nHome blood glucose monitors with special features (HCPCS codes E2100, E2101) are covered when the basic coverage criteria (1)-(2) are met and the treating practitioner certifies that the beneficiary has a severe visual impairment (i.e., best corrected visual acuity of 20/200 or worse in both eyes) requiring use of this special monitoring system.\n\nCode E2101 is also covered for those with impairment of manual dexterity when the basic coverage criteria (1)-(2) are met and the treating practitioner certifies that the beneficiary has an impairment of manual dexterity severe enough to require the use of this special monitoring system. Coverage of code E2101 for beneficiaries with manual dexterity impairments is not dependent upon a visual impairment.\n\nIf a glucose monitor (code E2100 or E2101) is provided and basic coverage criteria (1)-(2) plus the additional criteria stated above are not met, it will be denied as not reasonable and necessary.\n\nLancets (code A4259), blood glucose test reagent strips (code A4253), glucose control solutions (code A4256) and spring powered devices for lancets (code A4258) are covered for beneficiaries for whom the glucose monitor is covered.\n\nMore than one spring powered device (code A4258) per 6 months is not reasonable and necessary.\n\nThe medical necessity for a laser skin piercing device (code E0620) and related lens shield cartridge (code A4257) has not been established; therefore, claims for code E0620 and/or code A4257 will be denied as not reasonable and necessary.\n\nThe quantity of test strips (code A4253) and lancets (code A4259) that are covered depends on the usual medical needs of the beneficiary and whether or not the beneficiary is being treated with insulin, regardless of their diagnostic classification as having Type 1 or Type 2 diabetes mellitus. Coverage of testing supplies is based on the following guidelines:\n\nUsual Utilization\n\nFor a beneficiary who is not currently being treated with insulin administrations, up to 100 test strips and up to 100 lancets every 3 months are covered if the basic coverage criteria (1)-(2) (above) are met.\n\nFor a beneficiary who is currently being treated with insulin administrations, up to 300 test strips and up to 300 lancets every 3 months are covered if basic coverage criteria (1)-(2) (above) are met.\n\nHigh Utilization\n\nFor a beneficiary who is not currently being treated with insulin administrations, more than 100 test strips and more than 100 lancets every 3 months are covered if criteria (a) – (c) below are met.\n\nFor a beneficiary who is currently being treated with insulin administrations, more than 300 test strips and more than 300 lancets every 3 months are covered if criteria (a) – (c) below are met.\n\na. Basic coverage criteria (1)-(2) listed above for all home glucose monitors and related accessories and supplies are met; and,\n\nb. Within the six (6) months prior to ordering quantities of strips and lancets that exceed the utilization guidelines, the treating practitioner has had an in-person visit with the beneficiary to evaluate their diabetes control and their need for the specific quantity of supplies that exceeds the usual utilization amounts described above; and,\n\nc. Every six (6) months, for continued dispensing of quantities of testing supplies that exceed the usual utilization amounts, the treating practitioner must verify adherence to the high utilization testing regimen.\n\nIf neither basic coverage criterion (1) or (2) is met, all testing supplies will be denied as not reasonable and necessary. If quantities of test strips or lancets that exceed the utilization guidelines are provided and criteria (a) – (c) are not met, the amount in excess will be denied as not reasonable and necessary."
+    },
+    {
+      "id": "s3",
+      "heading": "Coverage Indications, Limitations, and/or Medical Necessity — General \"reasonable and necessary\" preamble",
+      "text": "For any item to be covered by Medicare, it must 1) be eligible for a defined Medicare benefit category, 2) be reasonable and necessary for the diagnosis or treatment of illness or injury or to improve the functioning of a malformed body member, and 3) meet all other applicable Medicare statutory and regulatory requirements.\n\nThe purpose of a Local Coverage Determination (LCD) is to provide information regarding “reasonable and necessary” criteria based on Social Security Act § 1862(a)(1)(A) provisions.\n\nIn addition to the “reasonable and necessary” criteria contained in this LCD there are other payment rules, which are discussed in the following documents, that must also be met prior to Medicare reimbursement:\n\n- The LCD-related Standard Documentation Requirements Article, located at the bottom of this policy under the Related Local Coverage Documents section.\n\n- The LCD-related Policy Article, located at the bottom of this policy under the Related Local Coverage Documents section.\n\n- Refer to the Supplier Manual for additional information on documentation requirements.\n\n- Refer to the DME MAC web sites for additional bulletin articles and other publications related to this LCD.\n\nFor the items addressed in this LCD, the “reasonable and necessary” criteria, based on Social Security Act § 1862(a)(1)(A) provisions, are defined by the following coverage indications, limitations and/or medical necessity."
+    }
+  ],
+  "criteria": [
+    {
+      "id": "c1",
+      "number": "1",
+      "label": "Diabetes mellitus diagnosis",
+      "section": "s1",
+      "quote": "The beneficiary has diabetes mellitus (Refer to the ICD-10 code list in the LCD-related Policy Article for applicable diagnoses)"
+    },
+    {
+      "id": "c2",
+      "number": "2",
+      "label": "Multiple daily insulin administrations (3+) or CSII pump (removed 04/16/2023)",
+      "section": "s1",
+      "quote": "The beneficiary is insulin-treated with multiple (three or more) daily administrations of insulin or a continuous subcutaneous insulin infusion (CSII) pump"
+    },
+    {
+      "id": "c3",
+      "number": "3",
+      "label": "Insulin regimen requires frequent self-adjustment (removed 04/16/2023)",
+      "section": "s1",
+      "quote": "The beneficiary’s insulin treatment regimen requires frequent adjustment by the beneficiary on the basis of BGM or CGM testing results"
+    },
+    {
+      "id": "c4",
+      "number": "4",
+      "label": "In-person visit within 6 months before ordering",
+      "section": "s1",
+      "quote": "Within six (6) months prior to ordering the CGM, the treating practitioner has an in-person visit with the beneficiary to evaluate their diabetes control and determined that criteria (1-3) above are met"
+    },
+    {
+      "id": "c5",
+      "number": "5",
+      "label": "In-person visit every 6 months to assess adherence",
+      "section": "s1",
+      "quote": "Every six (6) months following the initial prescription of the CGM, the treating practitioner has an in-person visit with the beneficiary to assess adherence to their CGM regimen and diabetes treatment plan."
+    },
+    {
+      "id": "c6",
+      "number": null,
+      "label": "Denial rule if any criterion is not met",
+      "section": "s1",
+      "quote": "If any of coverage criteria (1-5) are not met, the CGM and related supply allowance will be denied as not reasonable and necessary."
+    }
+  ],
+  "revision_notes": [
+    "Revision Effective Date: 07/18/2021\nCOVERAGE INDICATIONS, LIMITATIONS AND/OR MEDICAL NECESSITY:\nRemoved: Four times or more per day testing with blood glucose monitor as prerequisite for CGM coverage\nRevised: “injections” to “administrations” for insulin treatment regimen criterion for CGMs\nRemoved: “Medicare-covered” from CSII pump criterion language for CGMs",
+    "Revision Effective Date: 04/16/2023\nCOVERAGE INDICATIONS, LIMITATIONS, AND/OR MEDICAL NECESSITY:\nRevised: Coverage criteria to separate initial coverage and continued coverage requirements\nRemoved: “with multiple (three or more) daily administrations of insulin or a continuous subcutaneous insulin infusion (CSII) pump” from CGM coverage criterion pertaining to beneficiary being insulin-treated\nAdded: “The beneficiary’s treating practitioner has concluded that the beneficiary (or beneficiary’s caregiver) has sufficient training using the CGM prescribed as evidenced by providing a prescription” as a CGM initial coverage criterion\nRemoved: “The beneficiary is insulin-treated with multiple (three or more) daily administrations of insulin or a continuous subcutaneous insulin infusion (CSII) pump” from CGM coverage criteria\nRemoved: “The beneficiary’s insulin treatment regimen requires frequent adjustment by the beneficiary on the basis of BGM or CGM testing results” from CGM coverage criteria\nRevised: Initial coverage criterion language pertaining to the in-person visit, to clarify that the visit may also be a “Medicare-approved telehealth visit”\nRevised: Initial coverage CGM criterion language pertaining to the in-person visit, to change notation of “criteria (1-3) above” to “criteria (1)-(4) above”\nAdded: Initial coverage CGM criterion pertaining to history of problematic hypoglycemia\nRevised: Continued coverage CGM criterion language pertaining to the in-person visit, to clarify that the visit may also be a “Medicare-approved telehealth visit” and that the practitioner must “document” adherence to the CGM regimen and diabetes treatment plan",
+    "Revision Effective Date: 01/01/2024\nCOVERAGE INDICATIONS, LIMITATIONS, AND/OR MEDICAL NECESSITY:\nAdded: “or Medicare-approved telehealth” to High Utilization coverage criteria\nRemoved: One (1) unit of service (UOS) per thirty (30) days regarding billing for supply allowance code A4238 or A4239\nAdded: Three (3) UOS per ninety (90) days regarding billing for supply allowance code A4238 or A4239 and “Billing more than three (3) UOS per ninety (90) days of code A4238 or A4239 will be denied as not reasonable and necessary.”"
+  ],
+  "revision_history_source": "https://api.coverage.cms.gov/v1/data/lcd/revision-history?lcdid=33822&ver=70"
+}

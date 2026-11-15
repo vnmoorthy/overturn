@@ -1,0 +1,211 @@
+{
+  "id": "L33718",
+  "title": "Positive Airway Pressure (PAP) Devices for the Treatment of Obstructive Sleep Apnea",
+  "type": "LCD",
+  "contractor": "CGS Administrators, LLC (DME MAC J-B 17013, J-C 18003) / Noridian Healthcare Solutions, LLC (DME MAC J-A 16013, J-D 19003)",
+  "version_label": "current",
+  "version_number": 52,
+  "effective_date": "2024-01-01",
+  "original_effective_date": "2015-10-01",
+  "revision_ending_date": null,
+  "retired_date": null,
+  "source_url": "https://www.cms.gov/medicare-coverage-database/view/lcd.aspx?lcdid=33718&ver=52",
+  "source_api_url": "https://api.coverage.cms.gov/v1/data/lcd?lcdid=33718&ver=52",
+  "retrieved": "2026-11-14",
+  "verbatim": true,
+  "related_policy_article": "A52467 (Positive Airway Pressure (PAP) Devices for the Treatment of Obstructive Sleep Apnea - Policy Article)",
+  "notes": "Current version 52, Revision Effective Date 01/01/2024 (refill-requirement wording change). The current LCD says \"in-person clinical evaluation\" / \"in-person clinical re-evaluation\"; the older term \"face-to-face\" was replaced with \"in-person\" in the 01/01/2020 revision. The \"initial 12 week trial\" wording appears in the re-qualification paragraph; the continued-coverage rule is phrased as \"beyond the first three months of therapy\". Text preserves published typography (≥, ’, –).",
+  "sections": [
+    {
+      "id": "s1",
+      "heading": "Coverage Indications, Limitations, and/or Medical Necessity — Definitions (apnea, hypopnea, AHI, RDI)",
+      "text": "DEFINITIONS:\n\nApnea is defined as the cessation of airflow for at least 10 seconds.\n\nHypopnea is defined as an abnormal respiratory event lasting at least 10 seconds associated with at least a 30% reduction in thoracoabdominal movement or airflow as compared to baseline, and with at least a 4% decrease in oxygen saturation.\n\nThe apnea-hypopnea index (AHI) is defined as the average number of episodes of apnea and hypopnea per hour of sleep without the use of a positive airway pressure device. For purposes of this policy, respiratory effort related arousals (RERAs) are not included in the calculation of the AHI. Sleep time can only be measured in a Type I (facility based polysomnogram) or Type II sleep study (see descriptions below).\n\nThe respiratory disturbance index (RDI) is defined as the average number of apneas plus hypopneas per hour of recording without the use of a positive airway pressure device. For purposes of this policy, respiratory effort related arousals (RERAs) are not included in the calculation of the RDI. The RDI is reported in Type III, Type IV, and other home sleep studies.\n\nIf the AHI or RDI is calculated based on less than 2 hours of sleep or recording time, the total number of recorded events used to calculate the AHI or RDI (respectively) must be at least the number of events that would have been required in a 2 hour period (i.e., must reach ≥30 events without symptoms or ≥10 events with symptoms)."
+    },
+    {
+      "id": "s2",
+      "heading": "Coverage Indications, Limitations, and/or Medical Necessity — Initial Coverage",
+      "text": "INITIAL COVERAGE:\n\nIn this policy, the term PAP (positive airway pressure) device will refer to both a single-level continuous positive airway pressure device (E0601) and a bi-level respiratory assist device without back-up rate (E0470) when it is used in the treatment of obstructive sleep apnea.\n\nI. An E0601 device is covered for the treatment of obstructive sleep apnea (OSA) if criteria A – C are met:\n\n    A. The beneficiary has an in-person clinical evaluation by the treating practitioner prior to the sleep test to assess the beneficiary for obstructive sleep apnea.\n\n    B. The beneficiary has a sleep test (as defined below) that meets either of the following criteria (1 or 2):\n\n        1. The apnea-hypopnea index (AHI) or Respiratory Disturbance Index (RDI) is greater than or equal to 15 events per hour with a minimum of 30 events; or,\n\n        2. The AHI or RDI is greater than or equal to 5 and less than or equal to 14 events per hour with a minimum of 10 events and documentation of:\n\n            a. Excessive daytime sleepiness, impaired cognition, mood disorders, or insomnia; or,\n\n            b. Hypertension, ischemic heart disease, or history of stroke.\n\n    C. The beneficiary and/or their caregiver has received instruction from the supplier of the device in the proper use and care of the equipment.\n\nIf a claim for an E0601 is submitted and all of the criteria above have not been met, it will be denied as not reasonable and necessary.\n\nII. An E0470 device is covered for those beneficiaries with OSA who meet criteria A-C above, in addition to criterion D:\n\n    D. An E0601 has been tried and proven ineffective based on a therapeutic trial conducted in either a facility or in a home setting.\n\nIneffective is defined as documented failure to meet therapeutic goals using an E0601 during the titration portion of a facility-based study or during home use despite optimal therapy (i.e., proper mask selection and fitting and appropriate pressure settings).\n\nIf E0470 is billed for a beneficiary with OSA and criteria A-D are not met, it will be denied as not reasonable and necessary.\n\nA bi-level positive airway pressure device with back-up rate (E0471) is not reasonable and necessary if the primary diagnosis is OSA. If an E0471 is billed with a diagnosis of OSA, it will be denied as not reasonable and necessary.\n\nIf an E0601 device is tried and found ineffective during the initial facility-based titration or home trial, substitution of an E0470 does not require a new initial in-person clinical evaluation or a new sleep test.\n\nIf an E0601 device has been used for more than 3 months and the beneficiary is switched to an E0470, a new initial in-person clinical evaluation is required, but a new sleep test is not required. A new 3 month trial would begin for use of the E0470.\n\nCoverage, coding and documentation requirements for the use of E0470 and E0471 for diagnoses other than OSA are addressed in the Respiratory Assist Devices (RAD) Local Coverage Determination (LCD) and related Policy Article (PA)."
+    },
+    {
+      "id": "s3",
+      "heading": "Coverage Indications, Limitations, and/or Medical Necessity — Sleep Tests",
+      "text": "Sleep Tests\n\nCoverage and Payment rules for diagnostic sleep tests may be found in the CMS National Coverage Determination (NCD) 240.4.1 (CMS Pub.100-03, Chapter 1, Part 4), the applicable A/B MAC LCDs and Billing and Coding articles. The sleep test must be either a polysomnogram performed in a facility-based laboratory (Type I study) or an inpatient hospital-based or home-based sleep test (HST) (Types II, III, IV, Other).\n\nCoverage of a PAP device for the treatment of OSA is limited to claims where the diagnosis of OSA is based upon all of the following:\n\n1. A sleep test (Type I, II, III, IV, Other) that meets the Medicare requirements for a valid sleep test as outlined in NCD 240.4.1 and the applicable A/B MAC LCD and Billing and Coding article; and,\n\n2. A sleep test that is approved by the Food and Drug Administration (FDA) as a diagnostic device; and,\n\n3. The sleep test results meet the coverage criteria in effect for the date of service of the claim for the PAP device; and,\n\n4. The sleep test is ordered by the beneficiary’s treating practitioner; and,\n\n5. The sleep test is conducted by an entity that qualifies as a Medicare provider of sleep tests and is in compliance with all applicable state regulatory requirements."
+    },
+    {
+      "id": "s4",
+      "heading": "Coverage Indications, Limitations, and/or Medical Necessity — Continued Coverage Beyond the First Three Months of Therapy",
+      "text": "CONTINUED COVERAGE BEYOND THE FIRST THREE MONTHS OF THERAPY:\n\nContinued coverage of a PAP device (E0470 or E0601) beyond the first three months of therapy requires that, no sooner than the 31st day but no later than the 91st day after initiating therapy, the treating practitioner must conduct a clinical re-evaluation and document that the beneficiary is benefiting from PAP therapy.\n\nFor PAP devices with initial dates of service on or after November 1, 2008, documentation of clinical benefit is demonstrated by:\n\n1. In-person clinical re-evaluation by the treating practitioner with documentation that symptoms of obstructive sleep apnea are improved; and,\n\n2. Objective evidence of adherence to use of the PAP device, reviewed by the treating practitioner.\n\nAdherence to therapy is defined as use of PAP ≥4 hours per night on 70% of nights during a consecutive thirty (30) day period anytime during the first three (3) months of initial usage.\n\nIf the above criteria are not met, continued coverage of a PAP device and related accessories will be denied as not reasonable and necessary.\n\nIf the treating practitioner re-evaluation does not occur until after the 91st day but the evaluation demonstrates that the beneficiary is benefiting from PAP therapy as defined in criteria 1 and 2 above, continued coverage of the PAP device will commence with the date of that re-evaluation.\n\nBeneficiaries who fail the initial 12 week trial are eligible to re-qualify for a PAP device but must have both:\n\n1. In-person clinical re-evaluation by the treating practitioner to determine the etiology of the failure to respond to PAP therapy; and,\n\n2. Repeat sleep test in a facility-based setting (Type 1 study). This may be a repeat diagnostic, titration or split-night study.\n\nIf an E0601 device is tried and found ineffective during the initial facility-based titration or home trial, substitution of an E0470 does not change the length of the trial unless there is less than 30 days remaining in the trial period. If more than 30 days remain in the trial period, the clinical re-evaluation would still occur between the 31st and 91st day following the initiation of an E0601 and objective documentation of adherence on the E0470 would need to occur prior to the 91st day following initiation of the E0601. If less than 30 days remain in the trial period, the clinical re-evaluation and objective documentation of adherence must occur before the 120th day following the initiation of the E0601.\n\nIf an E0601 device was used for more than 3 months and the beneficiary was then switched to an E0470, the clinical re-evaluation must occur between the 31st and 91st day following the initiation of the E0470. There would also need to be documentation of adherence to therapy during the 3 month trial with the E0470.\n\nIf there is discontinuation of usage of a PAP device at any time, the supplier is expected to ascertain this and stop billing for the equipment and related accessories and supplies.\n\nFor a PAP device dispensed prior to November 1, 2008, if the initial Medicare coverage criteria in effect at the time were met and the criteria for coverage after the first 3 months that were in effect at the time were met, the device will continue to be covered for dates of service on or after November 1, 2008 as long as the beneficiary continues to use the device."
+    },
+    {
+      "id": "s5",
+      "heading": "Coverage Indications, Limitations, and/or Medical Necessity — Replacement; Beneficiaries Entering Medicare",
+      "text": "REPLACEMENT:\n\nThis section applies to PAP devices initially provided and covered while the beneficiary was in Medicare fee-for-service (FFS).\n\nIf a PAP device is replaced during the 5 year reasonable useful lifetime (RUL) because of loss, theft, or irreparable damage due to a specific incident, there is no requirement for a new clinical evaluation, sleep test, or trial period.\n\nIf a PAP device is replaced following the 5 year RUL, there must be an in-person evaluation by their treating practitioner that documents that the beneficiary continues to use and benefit from the PAP device. There is no requirement for a new sleep test or trial period.\n\nBENEFICIARIES ENTERING MEDICARE:\n\nFor beneficiaries who received a PAP device prior to enrollment in fee for service (FFS) Medicare and are seeking Medicare coverage of either rental of the device, a replacement PAP device and/or accessories, both of the following coverage requirements must be met:\n\n1. Sleep test - There must be documentation that the beneficiary had a sleep test, prior to FFS Medicare enrollment, that meets the Medicare AHI/RDI coverage criteria in effect at the time that the beneficiary seeks Medicare coverage of a replacement PAP device and/or accessories; and,\n\n2. Clinical Evaluation - Following enrollment in FFS Medicare, the beneficiary must have an in-person evaluation by their treating practitioner who documents in the beneficiary’s medical record that:\n\nA. The beneficiary has a diagnosis of obstructive sleep apnea; and,\n\nB. The beneficiary continues to use the PAP device.\n\nIf either criteria 1 or 2 above are not met, the claim will be denied as not reasonable and necessary.\n\nIn these situations, there is no requirement for a clinical re-evaluation or for objective documentation of adherence to use of the device."
+    },
+    {
+      "id": "s6",
+      "heading": "Coverage Indications, Limitations, and/or Medical Necessity — Accessories",
+      "text": "ACCESSORIES:\n\nAccessories used with a PAP device are covered when the coverage criteria for the device are met. If the coverage criteria are not met, the accessories will be denied as not reasonable and necessary.\n\nThe following table represents the usual maximum amount of accessories expected to be reasonable and necessary:\n\nA4604 1 per 3 months\n\nA7027 1 per 3 months\n\nA7028 2 per 1 month\n\nA7029 2 per 1 month\n\nA7030 1 per 3 months\n\nA7031 1 per 1 month\n\nA7032 2 per 1 month\n\nA7033 2 per 1 month\n\nA7034 1 per 3 months\n\nA7035 1 per 6 months\n\nA7036 1 per 6 months\n\nA7037 1 per 3 months\n\nA7038 2 per 1 month\n\nA7039 1 per 6 months\n\nA7046 1 per 6 months\n\nQuantities of supplies greater than those described in the policy as the usual maximum amounts will be denied as not reasonable and necessary."
+    }
+  ],
+  "criteria": [
+    {
+      "id": "c1",
+      "number": "I.A",
+      "label": "In-person clinical evaluation before the sleep test",
+      "section": "s2",
+      "quote": "The beneficiary has an in-person clinical evaluation by the treating practitioner prior to the sleep test to assess the beneficiary for obstructive sleep apnea."
+    },
+    {
+      "id": "c2",
+      "number": "I.B",
+      "label": "Qualifying sleep test (criterion 1 or 2)",
+      "section": "s2",
+      "quote": "The beneficiary has a sleep test (as defined below) that meets either of the following criteria (1 or 2):"
+    },
+    {
+      "id": "c3",
+      "number": "I.B.1",
+      "label": "AHI/RDI >= 15 events per hour (minimum 30 events)",
+      "section": "s2",
+      "quote": "The apnea-hypopnea index (AHI) or Respiratory Disturbance Index (RDI) is greater than or equal to 15 events per hour with a minimum of 30 events"
+    },
+    {
+      "id": "c4",
+      "number": "I.B.2",
+      "label": "AHI/RDI 5-14 events per hour (minimum 10 events) with documented symptoms/comorbidity",
+      "section": "s2",
+      "quote": "The AHI or RDI is greater than or equal to 5 and less than or equal to 14 events per hour with a minimum of 10 events and documentation of:"
+    },
+    {
+      "id": "c4a",
+      "number": "I.B.2.a",
+      "label": "Excessive daytime sleepiness, impaired cognition, mood disorders, or insomnia",
+      "section": "s2",
+      "quote": "Excessive daytime sleepiness, impaired cognition, mood disorders, or insomnia"
+    },
+    {
+      "id": "c4b",
+      "number": "I.B.2.b",
+      "label": "Hypertension, ischemic heart disease, or history of stroke",
+      "section": "s2",
+      "quote": "Hypertension, ischemic heart disease, or history of stroke."
+    },
+    {
+      "id": "c5",
+      "number": "I.C",
+      "label": "Supplier instruction on use and care",
+      "section": "s2",
+      "quote": "The beneficiary and/or their caregiver has received instruction from the supplier of the device in the proper use and care of the equipment."
+    },
+    {
+      "id": "c6",
+      "number": "II.D",
+      "label": "Bi-level (E0470): E0601 tried and proven ineffective",
+      "section": "s2",
+      "quote": "An E0601 has been tried and proven ineffective based on a therapeutic trial conducted in either a facility or in a home setting."
+    },
+    {
+      "id": "c7",
+      "number": null,
+      "label": "E0601 to E0470 switch during trial needs no new evaluation or sleep test",
+      "section": "s2",
+      "quote": "If an E0601 device is tried and found ineffective during the initial facility-based titration or home trial, substitution of an E0470 does not require a new initial in-person clinical evaluation or a new sleep test."
+    },
+    {
+      "id": "c8",
+      "number": "Sleep test 1",
+      "label": "Valid Medicare sleep test (Type I, II, III, IV, Other) per NCD 240.4.1",
+      "section": "s3",
+      "quote": "A sleep test (Type I, II, III, IV, Other) that meets the Medicare requirements for a valid sleep test as outlined in NCD 240.4.1 and the applicable A/B MAC LCD and Billing and Coding article"
+    },
+    {
+      "id": "c9",
+      "number": null,
+      "label": "Home sleep tests (Types II, III, IV, Other) are acceptable",
+      "section": "s3",
+      "quote": "The sleep test must be either a polysomnogram performed in a facility-based laboratory (Type I study) or an inpatient hospital-based or home-based sleep test (HST) (Types II, III, IV, Other)."
+    },
+    {
+      "id": "c10",
+      "number": null,
+      "label": "Clinical re-evaluation between day 31 and day 91",
+      "section": "s4",
+      "quote": "Continued coverage of a PAP device (E0470 or E0601) beyond the first three months of therapy requires that, no sooner than the 31st day but no later than the 91st day after initiating therapy, the treating practitioner must conduct a clinical re-evaluation and document that the beneficiary is benefiting from PAP therapy."
+    },
+    {
+      "id": "c11",
+      "number": "Continued 1",
+      "label": "In-person re-evaluation documenting improved OSA symptoms",
+      "section": "s4",
+      "quote": "In-person clinical re-evaluation by the treating practitioner with documentation that symptoms of obstructive sleep apnea are improved"
+    },
+    {
+      "id": "c12",
+      "number": "Continued 2",
+      "label": "Objective adherence evidence reviewed by practitioner",
+      "section": "s4",
+      "quote": "Objective evidence of adherence to use of the PAP device, reviewed by the treating practitioner."
+    },
+    {
+      "id": "c13",
+      "number": null,
+      "label": "Adherence definition: >=4 hours/night on 70% of nights in a consecutive 30-day period",
+      "section": "s4",
+      "quote": "Adherence to therapy is defined as use of PAP ≥4 hours per night on 70% of nights during a consecutive thirty (30) day period anytime during the first three (3) months of initial usage."
+    },
+    {
+      "id": "c14",
+      "number": null,
+      "label": "Late re-evaluation (after day 91) still restores coverage from that date",
+      "section": "s4",
+      "quote": "If the treating practitioner re-evaluation does not occur until after the 91st day but the evaluation demonstrates that the beneficiary is benefiting from PAP therapy as defined in criteria 1 and 2 above, continued coverage of the PAP device will commence with the date of that re-evaluation."
+    },
+    {
+      "id": "c15",
+      "number": null,
+      "label": "Re-qualifying after failed 12-week trial",
+      "section": "s4",
+      "quote": "Beneficiaries who fail the initial 12 week trial are eligible to re-qualify for a PAP device but must have both:"
+    },
+    {
+      "id": "c16",
+      "number": null,
+      "label": "Replacement within 5-year RUL (loss/theft/damage): no new evaluation, sleep test, or trial",
+      "section": "s5",
+      "quote": "If a PAP device is replaced during the 5 year reasonable useful lifetime (RUL) because of loss, theft, or irreparable damage due to a specific incident, there is no requirement for a new clinical evaluation, sleep test, or trial period."
+    },
+    {
+      "id": "c17",
+      "number": null,
+      "label": "Replacement after 5-year RUL: in-person evaluation, no new sleep test",
+      "section": "s5",
+      "quote": "If a PAP device is replaced following the 5 year RUL, there must be an in-person evaluation by their treating practitioner that documents that the beneficiary continues to use and benefit from the PAP device. There is no requirement for a new sleep test or trial period."
+    },
+    {
+      "id": "c18",
+      "number": null,
+      "label": "Beneficiaries entering Medicare: no re-evaluation or adherence documentation required",
+      "section": "s5",
+      "quote": "In these situations, there is no requirement for a clinical re-evaluation or for objective documentation of adherence to use of the device."
+    },
+    {
+      "id": "c19",
+      "number": null,
+      "label": "Hypopnea definition (30% airflow reduction + 4% desaturation)",
+      "section": "s1",
+      "quote": "Hypopnea is defined as an abnormal respiratory event lasting at least 10 seconds associated with at least a 30% reduction in thoracoabdominal movement or airflow as compared to baseline, and with at least a 4% decrease in oxygen saturation."
+    },
+    {
+      "id": "c20",
+      "number": null,
+      "label": "Accessories covered when device criteria are met",
+      "section": "s6",
+      "quote": "Accessories used with a PAP device are covered when the coverage criteria for the device are met."
+    }
+  ],
+  "revision_notes": [
+    "Revision Effective Date: 01/01/2020\nCOVERAGE INDICATIONS, LIMITATIONS AND/OR MEDICAL NECESSITY:\nRevised: “face-to-face” to “in-person” where applicable\nRevised: \"practitioner\" to \"treating practitioner\"",
+    "Revision Effective Date: 08/08/2021\nCOVERAGE INDICATIONS, LIMITATIONS, AND/OR MEDICAL NECESSITY:\nRevised: The CMS manual reference to CMS Pub. 100-03\nRevised: Sleep Tests section to point to NCD 240.4.1 and applicable A/B MAC LCDs and Billing and Coding articles\nRemoved: Appendix B “List of Approved Other Devices that Indirectly Measure AHI/RDI”"
+  ],
+  "revision_history_source": "https://api.coverage.cms.gov/v1/data/lcd/revision-history?lcdid=33718&ver=52"
+}

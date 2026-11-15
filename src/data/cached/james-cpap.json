@@ -1,0 +1,218 @@
+{
+ "extract": {
+  "letter_transcript": "EVERGREEN HEALTH\nEvergreen Medicare Advantage PPO\n1200 Pine Street, Seattle, WA 98101\n\nORGANIZATION DETERMINATION - DENIAL\n\nNotice date: October 20, 2026\n\nEnrollee: James Whitaker\nEnrollee ID: EVG-55102938\nProvider: Northgate Sleep Center - Dr. Samuel Okafor, DO\n\nItem requested: CPAP device (E0601) with heated humidifier (E0562)\nDiagnosis: G47.33 Obstructive sleep apnea (adult)\nDate of service: October 14, 2026\nAmount: $1,860.00\n\nYour request has been denied.\n\nReason for denial:\nThe medical records do not document a face-to-face clinical evaluation by the treating practitioner prior to the sleep test. In addition, the apnea-hypopnea index (AHI) of 12.4 events per hour does not meet the required threshold of greater than or equal to 15 events per hour.\n\nReviewed by: Clinical Review Team, Evergreen Health.\n\nYou may request a reconsideration of this decision. Your request must be received within 65 days of the date of this notice.",
+  "denial": {
+   "payer": "Evergreen Health",
+   "plan_name": "Evergreen Medicare Advantage PPO",
+   "plan_type": "Medicare Advantage",
+   "member_name": "James Whitaker",
+   "member_id": "EVG-55102938",
+   "provider_name": "Dr. Samuel Okafor, DO",
+   "service_description": "CPAP device with heated humidifier",
+   "codes": [
+    {
+     "system": "HCPCS",
+     "code": "E0601",
+     "description": "CPAP device"
+    },
+    {
+     "system": "HCPCS",
+     "code": "E0562",
+     "description": "heated humidifier"
+    },
+    {
+     "system": "ICD-10",
+     "code": "G47.33",
+     "description": "Obstructive sleep apnea (adult)"
+    }
+   ],
+   "date_of_service": "2026-10-14",
+   "notice_date": "2026-10-20",
+   "decision_type": "pre-service",
+   "denial_reason_text": "The medical records do not document a face-to-face clinical evaluation by the treating practitioner prior to the sleep test. In addition, the apnea-hypopnea index (AHI) of 12.4 events per hour does not meet the required threshold of greater than or equal to 15 events per hour.",
+   "cited_requirements": [
+    "face-to-face clinical evaluation by the treating practitioner prior to the sleep test",
+    "apnea-hypopnea index (AHI) of 12.4 events per hour does not meet the required threshold of greater than or equal to 15 events per hour"
+   ],
+   "reviewer": "Clinical Review Team, Evergreen Health",
+   "reviewer_credentials_stated": false,
+   "specific_criterion_cited": false,
+   "billed_amount": 1860,
+   "expedited": false
+  }
+ },
+ "match": {
+  "rows": [
+   {
+    "criterion_id": "c1",
+    "status": "met",
+    "policy_quote": "The beneficiary has an in-person clinical evaluation by the treating practitioner prior to the sleep test to assess the beneficiary for obstructive sleep apnea.",
+    "chart_quote": "Face-to-face clinical evaluation performed prior to sleep testing.",
+    "chart_line": 6,
+    "reasoning": "The 07/28/2026 office visit note explicitly documents an in-person, face-to-face clinical evaluation by Dr. Okafor prior to the 08/12/2026 home sleep apnea test.",
+    "missing_document": null,
+    "id": "r1",
+    "criterion_label": "In-person clinical evaluation before the sleep test"
+   },
+   {
+    "criterion_id": "c3",
+    "status": "unmet",
+    "policy_quote": "The apnea-hypopnea index (AHI) or Respiratory Disturbance Index (RDI) is greater than or equal to 15 events per hour with a minimum of 30 events",
+    "chart_quote": "Total recording time 7.2 hours. AHI 12.4 events per hour. Oxygen nadir 84%.",
+    "chart_line": 14,
+    "reasoning": "The 08/12/2026 home sleep apnea test recorded an AHI of 12.4 events per hour, which is below the 15 events per hour threshold for c3 (though this is satisfied via alternative criterion c4).",
+    "missing_document": null,
+    "id": "r2",
+    "criterion_label": "AHI/RDI >= 15 events per hour (minimum 30 events)"
+   },
+   {
+    "criterion_id": "c4",
+    "status": "met",
+    "policy_quote": "The AHI or RDI is greater than or equal to 5 and less than or equal to 14 events per hour with a minimum of 10 events and documentation of:",
+    "chart_quote": "Total recording time 7.2 hours. AHI 12.4 events per hour. Oxygen nadir 84%.",
+    "chart_line": 14,
+    "reasoning": "The AHI is 12.4 events per hour (between 5 and 14) over 7.2 hours of recording time, exceeding the minimum 10 events required, and both c4a and c4b are documented.",
+    "missing_document": null,
+    "id": "r3",
+    "criterion_label": "AHI/RDI 5-14 events per hour (minimum 10 events) with documented symptoms/comorbidity"
+   },
+   {
+    "criterion_id": "c4a",
+    "status": "met",
+    "policy_quote": "Excessive daytime sleepiness, impaired cognition, mood disorders, or insomnia",
+    "chart_quote": "Epworth Sleepiness Scale score 14 (excessive daytime sleepiness).",
+    "chart_line": 7,
+    "reasoning": "The 07/28/2026 clinical evaluation documents excessive daytime sleepiness with an Epworth Sleepiness Scale score of 14.",
+    "missing_document": null,
+    "id": "r4",
+    "criterion_label": "Excessive daytime sleepiness, impaired cognition, mood disorders, or insomnia"
+   },
+   {
+    "criterion_id": "c4b",
+    "status": "met",
+    "policy_quote": "Hypertension, ischemic heart disease, or history of stroke.",
+    "chart_quote": "BP 148/92. History of hypertension, on lisinopril 20 mg daily.",
+    "chart_line": 9,
+    "reasoning": "The 07/28/2026 clinical evaluation documents a history of hypertension managed with lisinopril 20 mg daily.",
+    "missing_document": null,
+    "id": "r5",
+    "criterion_label": "Hypertension, ischemic heart disease, or history of stroke"
+   },
+   {
+    "criterion_id": "c5",
+    "status": "missing",
+    "policy_quote": "The beneficiary and/or their caregiver has received instruction from the supplier of the device in the proper use and care of the equipment.",
+    "chart_quote": null,
+    "chart_line": null,
+    "reasoning": "Although the 09/30/2026 clinic note documents education by the provider's office, the chart does not contain documentation of instruction from the DME supplier.",
+    "missing_document": "Supplier delivery/setup record documenting that the beneficiary and/or caregiver received instruction from the device supplier in the proper use and care of the equipment.",
+    "id": "r6",
+    "criterion_label": "Supplier instruction on use and care"
+   },
+   {
+    "criterion_id": "c8",
+    "status": "met",
+    "policy_quote": "A sleep test (Type I, II, III, IV, Other) that meets the Medicare requirements for a valid sleep test as outlined in NCD 240.4.1 and the applicable A/B MAC LCD and Billing and Coding article",
+    "chart_quote": "--- Home sleep apnea test 08/12/2026 (interpreted by Dr. Okafor, board-certified in sleep medicine) ---",
+    "chart_line": 13,
+    "reasoning": "A Type III home sleep apnea test was ordered by the treating practitioner and interpreted by a board-certified sleep medicine physician on 08/12/2026.",
+    "missing_document": null,
+    "id": "r7",
+    "criterion_label": "Valid Medicare sleep test (Type I, II, III, IV, Other) per NCD 240.4.1"
+   }
+  ],
+  "denial_mappings": [
+   {
+    "requirement_quote": "The medical records do not document a face-to-face clinical evaluation by the treating practitioner prior to the sleep test.",
+    "maps_to_version": "current",
+    "maps_to_criterion": "c1",
+    "explanation": "Maps to criterion c1 of the current policy version, which requires an in-person clinical evaluation prior to the sleep test; however, this is clearly documented on line 6 of the chart."
+   },
+   {
+    "requirement_quote": "the apnea-hypopnea index (AHI) of 12.4 events per hour does not meet the required threshold of greater than or equal to 15 events per hour.",
+    "maps_to_version": "current",
+    "maps_to_criterion": "c3",
+    "explanation": "Maps to criterion c3 of the current policy version, but the denial ignores the policy's alternative criterion c4 (AHI 5-14 events/hour with symptoms or comorbidities), which the patient satisfies via c4a and c4b."
+   }
+  ],
+  "summary": "The denial is inconsistent with the effective policy and the patient's chart because the chart documents a face-to-face clinical evaluation prior to the sleep test (c1) and an AHI of 12.4 events per hour with both excessive daytime sleepiness (c4a) and hypertension (c4b), satisfying the alternative AHI 5-14 pathway (c4) rather than requiring an AHI >= 15 (c3). However, documentation of device instruction from the supplier (c5) is missing from the chart and should be attached to complete the appeal."
+ },
+ "entail": [
+  {
+   "row_id": "r1",
+   "verdict": "supports",
+   "reason_code": "ok",
+   "explanation": "The note documents an in-person clinical evaluation by Dr. Okafor on 07/28/2026 prior to sleep testing to assess for obstructive sleep apnea."
+  },
+  {
+   "row_id": "r2",
+   "verdict": "contradicts",
+   "reason_code": "other",
+   "explanation": "The sleep test shows an AHI of 12.4 events per hour, which is below the required threshold of 15 or more events per hour."
+  },
+  {
+   "row_id": "r3",
+   "verdict": "supports",
+   "reason_code": "ok",
+   "explanation": "The AHI of 12.4 events per hour over 7.2 hours of recording time meets the 5 to 14 events per hour range and exceeds the minimum of 10 events."
+  },
+  {
+   "row_id": "r4",
+   "verdict": "supports",
+   "reason_code": "ok",
+   "explanation": "The Epworth Sleepiness Scale score of 14 explicitly documents excessive daytime sleepiness."
+  },
+  {
+   "row_id": "r5",
+   "verdict": "supports",
+   "reason_code": "ok",
+   "explanation": "The record documents a history of hypertension on lisinopril 20 mg daily with an elevated blood pressure of 148/92."
+  },
+  {
+   "row_id": "r7",
+   "verdict": "supports",
+   "reason_code": "ok",
+   "explanation": "The home sleep apnea test using a Type III device was performed on 08/12/2026 and interpreted by a board-certified sleep medicine physician."
+  }
+ ],
+ "letter": "On behalf of James Whitaker (Member ID EVG-55102938), our billing team requests reconsideration of Evergreen Health's October 20, 2026 denial under the Evergreen Medicare Advantage PPO plan for a CPAP device with heated humidifier (HCPCS E0601, E0562; ICD-10 G47.33; date of service October 14, 2026). The notice asserts that the records lack a pre-test face-to-face clinical evaluation and that an apnea-hypopnea index (AHI) of 12.4 events per hour fails to meet a 15-events-per-hour threshold. Both assertions are contradicted by the medical record and governing policy.\n\n## Governing coverage criteria\nLCD L33718, Positive Airway Pressure (PAP) Devices for the Treatment of Obstructive Sleep Apnea (effective January 1, 2024), governs this claim. Under 42 CFR § 422.101(b)(1), (b)(3), and (b)(6), Medicare Advantage plans must follow Traditional Medicare LCDs and may not apply more restrictive internal criteria where Medicare coverage criteria are fully established. L33718 provides an alternative pathway for an AHI or RDI of 5–14 events per hour with documented symptoms or comorbidities; the denial improperly ignores this pathway in the effective policy.\n\n## The patient meets each criterion\n- **In-person clinical evaluation before the sleep test:** Policy requires [[Q:r1:policy]]. Dr. Okafor's July 28, 2026 office note documents this evaluation before the August 12, 2026 home sleep apnea test: [[Q:r1:chart]].\n- **AHI/RDI >= 15 events per hour:** Policy specifies [[Q:r2:policy]]. While the August 12, 2026 test recorded an AHI of 12.4 events per hour ([[Q:r2:chart]]), the patient qualifies under the alternative pathway below.\n- **AHI/RDI 5–14 events per hour with symptoms or comorbidity:** Policy requires [[Q:r3:policy]]. The August 12, 2026 test recorded an AHI of 12.4 events per hour over 7.2 hours, exceeding the 10-event minimum: [[Q:r3:chart]].\n- **Documented symptoms:** Policy requires [[Q:r4:policy]]. The July 28, 2026 note documents excessive daytime sleepiness with an Epworth Sleepiness Scale score of 14: [[Q:r4:chart]].\n- **Documented comorbidity:** Policy requires [[Q:r5:policy]]. The July 28, 2026 note documents hypertension managed with lisinopril 20 mg daily: [[Q:r5:chart]].\n- **Valid Medicare sleep test:** Policy requires [[Q:r7:policy]]. A Type III home sleep apnea test was ordered by the treating practitioner and interpreted by a board-certified sleep medicine physician on August 12, 2026: [[Q:r7:chart]].\n- **Supplier instruction on use and care:** Policy requires [[Q:r6:policy]]. Because the September 30, 2026 clinic note reflects only office education, we are attaching the supplier delivery/setup record documenting that the beneficiary and/or caregiver received instruction from the device supplier in the proper use and care of the equipment.\n\n## Procedural issues\nThe denial notice does not cite the specific coverage policy or criterion relied upon, as required by 42 CFR § 422.568(e) and CMS-0057-F. It also disregards documented evidence in the chart, omits L33718's alternative qualification pathway in violation of 42 CFR § 422.101(b)(1), (b)(3), and (b)(6), and fails to state the reviewing clinician's identity or specialty under 42 CFR § 422.566(d).\n\n## Request\nPlease overturn the October 20, 2026 denial and cover HCPCS E0601 and E0562 for date of service October 14, 2026. If the denial is not fully reversed, please provide the reviewing physician's or appropriate health care professional's name and specialty credentials pursuant to 42 CFR § 422.566(d).",
+ "explain": {
+  "English": "Hello James. We are reaching out about your CPAP machine and heated humidifier. Your health plan denied coverage, saying you did not meet their rules. However, this denial looks incorrect. Your chart already shows you saw a doctor before your sleep test. It also shows your sleep test results plus daytime tiredness and high blood pressure. Under policy L33718, those symptoms qualify you, but the denial ignored that rule and did not cite a specific policy. We only need to add one document from your supplier showing device instructions. Our team is appealing this decision for you before the deadline on December 24, 2026, which is 40 days away. You can also call your plan to ask for the reviewer's credentials. We are right by your side to help with this.",
+  "Spanish": "Hola James. Queremos explicarle qué pasó con su equipo CPAP y humidificador. Su seguro negó la cobertura diciendo que no cumple los requisitos, pero creemos que esa decisión es incorrecta.\n\nLa aseguradora ignoró una vía alternativa para calificar según la norma L33718 y no citó una política específica. Su expediente muestra que tuvo su evaluación médica en persona antes del estudio de sueño. Además, aunque su resultado fue de 12.4 eventos por hora y no 15, usted sí califica porque tiene presión alta y somnolencia de día. Solo falta adjuntar un documento del proveedor sobre las instrucciones del aparato para completar todo.\n\nSu equipo médico ya está preparando la apelación. La fecha límite para presentarla es el 24 de diciembre de 2026, por lo que nos quedan 40 días. Si lo desea, usted puede llamar a su plan de salud para pedir las credenciales del revisor que tomó la decisión. Estamos aquí para apoyarle."
+ },
+ "objections": [
+  {
+   "objection": "The patient's AHI of 12.4 events per hour fails to meet the primary coverage threshold of at least 15 events per hour.",
+   "response": "While the patient does not meet the >= 15 AHI threshold (r2), coverage is fully satisfied under the alternative criterion L33718 requiring an AHI of 5-14 events/hr combined with documented comorbidities (r3). The denial improperly ignores this valid path to qualification, which is required under 42 CFR § 422.101(b)(1).",
+   "row_ids": [
+    "r2",
+    "r3"
+   ]
+  },
+  {
+   "objection": "Even if evaluating the 5-14 AHI criteria, the patient must have documented excessive daytime sleepiness or hypertension.",
+   "response": "The patient clearly satisfies both documented symptom options under the 5-14 AHI criteria (r3): the 07/28/2026 clinical note documents excessive daytime sleepiness with an ESS score of 14 (r4) as well as hypertension managed with lisinopril (r5).",
+   "row_ids": [
+    "r3",
+    "r4",
+    "r5"
+   ]
+  },
+  {
+   "objection": "The chart lacks proof of DME supplier instruction on the use and care of the CPAP equipment.",
+   "response": "Although supplier-specific instruction documentation is currently missing (r6), the 09/30/2026 clinic note confirms the patient received direct instruction on use and care from the provider's office. Furthermore, the plan failed to cite a specific coverage policy in its denial per 42 CFR § 422.568(e).",
+   "row_ids": [
+    "r6"
+   ]
+  }
+ ],
+ "models": {
+  "extract": "gemini-3.5-flash",
+  "match": "gemini-4-hydrogen",
+  "entail": "gemini-4-hydrogen",
+  "letter": "gemini-4-hydrogen",
+  "explain": "gemini-3.5-flash",
+  "coach": "gemini-3.5-flash"
+ },
+ "recordedAt": "2026-11-14T23:25:40.320Z"
+}

@@ -1,0 +1,66 @@
+<!doctype html><html><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0}
+body{width:1600px;height:1060px;background:#05060a;font-family:Inter,sans-serif;color:#e6e9f2;position:relative;overflow:hidden}
+.grid{position:absolute;inset:0;background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);background-size:40px 40px}
+h1{position:absolute;left:48px;top:34px;font-size:30px;letter-spacing:-.02em}
+h1 span{color:#9aa2bd;font-weight:500;font-size:18px;margin-left:12px}
+.box{position:absolute;border-radius:16px;border:1px solid rgba(255,255,255,.1);background:linear-gradient(180deg,rgba(255,255,255,.055),rgba(255,255,255,.02));padding:14px 16px}
+.lbl{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:#6b7390;margin-bottom:8px}
+.t{font-weight:600;font-size:15px}
+.s{font-size:12.5px;color:#9aa2bd;line-height:1.45;margin-top:3px}
+.m{font-family:'JetBrains Mono',monospace;font-size:11.5px;color:#c4b5fd;margin-top:6px}
+.zone{position:absolute;border-radius:22px;border:1px dashed rgba(255,255,255,.14)}
+.zt{position:absolute;top:-11px;left:18px;background:#05060a;padding:0 8px;font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase}
+.step{width:208px;height:156px}
+.g{border-color:rgba(52,211,153,.4);background:linear-gradient(180deg,rgba(52,211,153,.12),rgba(52,211,153,.03))}
+.v{border-color:rgba(167,139,250,.45);background:linear-gradient(180deg,rgba(124,92,255,.16),rgba(124,92,255,.04))}
+.c{border-color:rgba(34,211,238,.4);background:linear-gradient(180deg,rgba(34,211,238,.12),rgba(34,211,238,.03))}
+.r{border-color:rgba(251,113,133,.4);background:linear-gradient(180deg,rgba(251,113,133,.12),rgba(251,113,133,.03))}
+.a{border-color:rgba(251,191,36,.4);background:linear-gradient(180deg,rgba(251,191,36,.1),rgba(251,191,36,.02))}
+svg{position:absolute;inset:0}
+.num{position:absolute;top:-10px;right:-10px;width:26px;height:26px;border-radius:50%;background:#7c5cff;color:#fff;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center}
+</style></head><body><div class="grid"></div>
+<h1>Overturn — system architecture <span>browser-native agent pipeline on Gemini · deterministic trust layer</span></h1>
+
+<svg viewBox="0 0 1600 1060"><defs><marker id="ar" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#67e8f9"/></marker>
+<linearGradient id="ln" x1="0" x2="1"><stop stop-color="#a78bfa"/><stop offset="1" stop-color="#22d3ee"/></linearGradient></defs>
+<g stroke="url(#ln)" stroke-width="2" fill="none" marker-end="url(#ar)">
+<path d="M260 248 H300"/><path d="M508 248 H548"/><path d="M756 248 H796"/><path d="M1004 248 H1044"/><path d="M1252 248 H1292"/>
+
+</g>
+<g stroke="#34d399" stroke-width="2" fill="none" stroke-dasharray="6 6" marker-end="url(#ar)"><path d="M780 840 H860"/><path d="M1180 840 H1240"/></g>
+</svg>
+
+<div class="zone" style="left:32px;top:110px;width:1536px;height:250px"><div class="zt" style="color:#c4b5fd">Agent pipeline · src/lib/engine.ts</div></div>
+<div class="box step" style="left:52px;top:180px"><div class="num">1</div><div class="t">Read denial</div><div class="s">PDF text layer (pdf.js, exact) or photo → multimodal extraction. Verbatim cited requirements.</div><div class="m">gemini-3.8-flash → 3.5-flash</div></div>
+<div class="box step" style="left:300px;top:180px"><div class="num">2</div><div class="t">Find rulebook</div><div class="s">HCPCS/CPT router + Gemini fallback. Pins the LCD version in effect on the date of service.</div><div class="m">code router · 3.5-flash-lite</div></div>
+<div class="box step v" style="left:548px;top:180px"><div class="num">3</div><div class="t">Match evidence</div><div class="s">One long-context call: policy + line-numbered chart + denial + historical versions. JSON schema.</div><div class="m">gemini-4-hydrogen (thinking)</div></div>
+<div class="box step c" style="left:796px;top:180px"><div class="num">4</div><div class="t">Two-key verify</div><div class="s">Key 1: deterministic exact-match provenance. Key 2: skeptical entailment auditor.</div><div class="m">verifier.ts + gemini-3.5-flash</div></div>
+<div class="box step r" style="left:1044px;top:180px"><div class="num">5</div><div class="t">Compliance rules</div><div class="s">Retired rules, phantom criteria, ignored pathways, contradicted record, deadlines.</div><div class="m">rules.ts · deterministic</div></div>
+<div class="box step v" style="left:1292px;top:180px"><div class="num">6</div><div class="t">Draft appeal</div><div class="s">Model may only cite via [[Q:row:field]] tokens; expanded to verified quotes.</div><div class="m">gemini-4-hydrogen</div></div>
+
+<div class="zone" style="left:32px;top:395px;width:740px;height:190px"><div class="zt" style="color:#67e8f9">Data · src/data</div></div>
+<div class="box" style="left:52px;top:420px;width:220px;height:140px"><div class="t">CMS policy library</div><div class="s">LCD L33822 (3 versions), L33718, L38801 (+ retired L38803). Verbatim, 93 criteria, effective dates.</div><div class="m">public domain · MCD</div></div>
+<div class="box" style="left:290px;top:420px;width:220px;height:140px"><div class="t">Case documents</div><div class="s">Denial letters & chart notes. Synthetic demo patients; user uploads stay in the browser.</div><div class="m">localStorage</div></div>
+<div class="box" style="left:528px;top:420px;width:224px;height:140px"><div class="t">Outcome prior</div><div class="s">42,710 CA DMHC independent medical reviews → honest odds, n shown. Similar cases via embeddings.</div><div class="m">gemini-embedding-2</div></div>
+
+<div class="zone" style="left:796px;top:395px;width:772px;height:190px"><div class="zt" style="color:#6ee7b7">Trust layer</div></div>
+<div class="box g" style="left:816px;top:420px;width:232px;height:140px"><div class="t">Tamper & swap tests</div><div class="s">Change one word → Key 1 fails, export locks. Swap a real-but-wrong line → Key 2 flags it.</div></div>
+<div class="box g" style="left:1064px;top:420px;width:232px;height:140px"><div class="t">Export gate</div><div class="s">All quotes verified · all met criteria pass both keys · biller confirms each row · human signature.</div></div>
+<div class="box g" style="left:1312px;top:420px;width:236px;height:140px"><div class="t">Hash-chained audit</div><div class="s">Every AI step + human decision, SHA-256 chained (WebCrypto). Verify-chain pinpoints edits.</div></div>
+
+<div class="zone" style="left:32px;top:640px;width:740px;height:150px"><div class="zt" style="color:#fbbf24">Experiences</div></div>
+<div class="box a" style="left:52px;top:665px;width:168px;height:118px"><div class="t">Worklist</div><div class="s">Ranked by $ × public overturn odds; payer playbook.</div></div>
+<div class="box a" style="left:232px;top:665px;width:168px;height:118px"><div class="t">P2P rehearsal</div><div class="s">Live voice vs. the plan’s medical director.</div><div class="m">gemini-3.8-live</div></div>
+<div class="box a" style="left:412px;top:665px;width:168px;height:118px"><div class="t">Patient view</div><div class="s">6th-grade explainer, EN/ES, read aloud.</div><div class="m">3.8-flash-tts</div></div>
+<div class="box a" style="left:592px;top:665px;width:160px;height:118px"><div class="t">Fax packet</div><div class="s">Letter + verbatim exhibits A–C → PDF.</div></div>
+
+<div class="box" style="left:816px;top:640px;width:752px;height:150px"><div class="lbl">Reliability</div><div class="s" style="font-size:13.5px;line-height:1.6">Every Gemini call runs through <b style="color:#e6e9f2">run(task)</b>: per-task model fallback chains with timeouts (429 / 503 / 504 → next model), a live agent-trace panel, and genuine recorded runs for the demo cases as a clearly labeled “cached run” fallback. Structured outputs via responseJsonSchema; thinking levels tuned per step.</div></div>
+
+<div class="zone" style="left:32px;top:830px;width:1536px;height:200px"><div class="zt" style="color:#9aa2bd">Deployment</div></div>
+<div class="box" style="left:52px;top:860px;width:720px;height:150px"><div class="t">Today: static SPA on GitHub Pages ($0)</div><div class="s">Vite + React 19 + TypeScript + Tailwind. The browser calls the Gemini API directly (free-tier key or bring-your-own-key in Settings). No server, no database; nothing leaves the browser except Gemini requests.</div><div class="m">@google/genai 3.3 · v1beta · Live API over WebSocket</div></div>
+<div class="box g" style="left:880px;top:860px;width:300px;height:150px"><div class="t">Production path</div><div class="s">Cloud Run service holds the key; per-tenant rate limits; Firestore audit log.</div></div>
+<div class="box v" style="left:1250px;top:860px;width:298px;height:150px"><div class="t">PHI-ready</div><div class="s">Gemini on Vertex AI / Agent Platform under a Google Cloud BAA; SOC 2.</div></div>
+</body></html>

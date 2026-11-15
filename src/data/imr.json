@@ -1,0 +1,5358 @@
+{
+ "source": "California DMHC Independent Medical Review Determinations (data.ca.gov)",
+ "source_url": "https://data.ca.gov/dataset/independent-medical-review-imr-determinations-trend",
+ "csv_url": "https://data.chhs.ca.gov/dataset/b79b3447-4c10-4ae6-84e2-1076f83bb24e/resource/3340c5d7-4054-4d03-90e0-5f44290ed095/download/independent-medical-review-imr-determinations-trends.csv",
+ "publisher": "California Department of Managed Health Care (DMHC)",
+ "license": "Creative Commons Attribution",
+ "retrieved": "2026-11-14",
+ "total_cases": 42710,
+ "raw_rows": 42749,
+ "duplicate_rows_removed": 39,
+ "year_range": [
+  2001,
+  2026
+ ],
+ "overturned_definition": "Determination == 'Overturned Decision of Health Plan' (IMR reviewer reversed the plan's denial; plan must authorize). The only other value is 'Upheld Decision of Health Plan'.",
+ "determination_values": {
+  "Overturned Decision of Health Plan": 22431,
+  "Upheld Decision of Health Plan": 20279
+ },
+ "caveats": [
+  "Covers only enrollees of California DMHC-licensed health plans (HMOs, some PPOs, and many Medi-Cal managed care plans). It does not cover Medicare or Medicare Advantage benefits, CDI-regulated health insurance policies (CDI runs a separate IMR program), self-funded employer (ERISA) plans, or workers' compensation.",
+  "Only completed IMR determinations appear (the Determination column has just two values). Denials the plan reversed on its own before a decision, ineligible or withdrawn requests, and internal-appeal outcomes are not represented, so these rates are not the odds of winning a first-level plan appeal.",
+  "Selection effect: patients/providers choose which denials to escalate, so the overturn rate reflects contested cases, not all denials.",
+  "Rates vary substantially by year and by Type (Experimental/Investigational vs Medical Necessity); see by_type, by_year and segments.*.recent. All-time overturn rate is 52.5%, but 2022-2026 is 66.3%.",
+  "2026 is a partial year (CSV resource last modified 2026-10-08; 538 cases so far).",
+  "Segment membership is a text filter on the Findings narrative (see each segment's filter); TreatmentCategory/SubCategory coding is inconsistent across years and changed scheme around 2025-2026.",
+  "Example findings are the first ~600 characters of the public Findings text, HTML entities decoded and whitespace collapsed; truncation marked with an ellipsis.",
+  "39 exact-duplicate rows (identical in every column, including ReferenceID) were removed before counting."
+ ],
+ "overall": {
+  "n": 42710,
+  "overturned": 22431,
+  "upheld": 20279,
+  "rate": 0.525
+ },
+ "by_type": {
+  "Medical Necessity": {
+   "n": 31480,
+   "overturned": 17359,
+   "upheld": 14121,
+   "rate": 0.551
+  },
+  "Experimental/Investigational": {
+   "n": 10462,
+   "overturned": 4747,
+   "upheld": 5715,
+   "rate": 0.454
+  },
+  "Urgent Care": {
+   "n": 768,
+   "overturned": 325,
+   "upheld": 443,
+   "rate": 0.423
+  }
+ },
+ "by_year": [
+  {
+   "year": 2001,
+   "n": 28,
+   "overturned": 7,
+   "upheld": 21,
+   "rate": 0.25
+  },
+  {
+   "year": 2002,
+   "n": 689,
+   "overturned": 242,
+   "upheld": 447,
+   "rate": 0.351
+  },
+  {
+   "year": 2003,
+   "n": 731,
+   "overturned": 280,
+   "upheld": 451,
+   "rate": 0.383
+  },
+  {
+   "year": 2004,
+   "n": 787,
+   "overturned": 305,
+   "upheld": 482,
+   "rate": 0.388
+  },
+  {
+   "year": 2005,
+   "n": 959,
+   "overturned": 313,
+   "upheld": 646,
+   "rate": 0.326
+  },
+  {
+   "year": 2006,
+   "n": 1080,
+   "overturned": 442,
+   "upheld": 638,
+   "rate": 0.409
+  },
+  {
+   "year": 2007,
+   "n": 1342,
+   "overturned": 571,
+   "upheld": 771,
+   "rate": 0.425
+  },
+  {
+   "year": 2008,
+   "n": 1520,
+   "overturned": 677,
+   "upheld": 843,
+   "rate": 0.445
+  },
+  {
+   "year": 2009,
+   "n": 1429,
+   "overturned": 639,
+   "upheld": 790,
+   "rate": 0.447
+  },
+  {
+   "year": 2010,
+   "n": 1452,
+   "overturned": 661,
+   "upheld": 791,
+   "rate": 0.455
+  },
+  {
+   "year": 2011,
+   "n": 1435,
+   "overturned": 684,
+   "upheld": 751,
+   "rate": 0.477
+  },
+  {
+   "year": 2012,
+   "n": 1200,
+   "overturned": 588,
+   "upheld": 612,
+   "rate": 0.49
+  },
+  {
+   "year": 2013,
+   "n": 1195,
+   "overturned": 486,
+   "upheld": 709,
+   "rate": 0.407
+  },
+  {
+   "year": 2014,
+   "n": 1432,
+   "overturned": 549,
+   "upheld": 883,
+   "rate": 0.383
+  },
+  {
+   "year": 2015,
+   "n": 2076,
+   "overturned": 1068,
+   "upheld": 1008,
+   "rate": 0.514
+  },
+  {
+   "year": 2016,
+   "n": 3053,
+   "overturned": 1713,
+   "upheld": 1340,
+   "rate": 0.561
+  },
+  {
+   "year": 2017,
+   "n": 2953,
+   "overturned": 1391,
+   "upheld": 1562,
+   "rate": 0.471
+  },
+  {
+   "year": 2018,
+   "n": 2683,
+   "overturned": 1294,
+   "upheld": 1389,
+   "rate": 0.482
+  },
+  {
+   "year": 2019,
+   "n": 2331,
+   "overturned": 1223,
+   "upheld": 1108,
+   "rate": 0.525
+  },
+  {
+   "year": 2020,
+   "n": 2197,
+   "overturned": 1364,
+   "upheld": 833,
+   "rate": 0.621
+  },
+  {
+   "year": 2021,
+   "n": 2133,
+   "overturned": 1298,
+   "upheld": 835,
+   "rate": 0.609
+  },
+  {
+   "year": 2022,
+   "n": 1776,
+   "overturned": 1065,
+   "upheld": 711,
+   "rate": 0.6
+  },
+  {
+   "year": 2023,
+   "n": 2246,
+   "overturned": 1442,
+   "upheld": 804,
+   "rate": 0.642
+  },
+  {
+   "year": 2024,
+   "n": 2715,
+   "overturned": 1778,
+   "upheld": 937,
+   "rate": 0.655
+  },
+  {
+   "year": 2025,
+   "n": 2730,
+   "overturned": 1975,
+   "upheld": 755,
+   "rate": 0.723
+  },
+  {
+   "year": 2026,
+   "n": 538,
+   "overturned": 376,
+   "upheld": 162,
+   "rate": 0.699
+  }
+ ],
+ "by_treatment": [
+  {
+   "category": "Pharmacy",
+   "subcategory": null,
+   "n": 11936,
+   "overturned": 7200,
+   "upheld": 4736,
+   "rate": 0.603
+  },
+  {
+   "category": "Pharmacy",
+   "subcategory": "Other",
+   "n": 1825,
+   "overturned": 868,
+   "upheld": 957,
+   "rate": 0.476
+  },
+  {
+   "category": "Pharmacy",
+   "subcategory": "Weight Control",
+   "n": 1581,
+   "overturned": 1365,
+   "upheld": 216,
+   "rate": 0.863
+  },
+  {
+   "category": "Pharmacy",
+   "subcategory": "Anti-virals",
+   "n": 1351,
+   "overturned": 1100,
+   "upheld": 251,
+   "rate": 0.814
+  },
+  {
+   "category": "Pharmacy",
+   "subcategory": "Hormones",
+   "n": 971,
+   "overturned": 418,
+   "upheld": 553,
+   "rate": 0.43
+  },
+  {
+   "category": "Pharmacy",
+   "subcategory": "Biologics",
+   "n": 527,
+   "overturned": 412,
+   "upheld": 115,
+   "rate": 0.782
+  },
+  {
+   "category": "Pharmacy",
+   "subcategory": "Skin Treatment",
+   "n": 519,
+   "overturned": 358,
+   "upheld": 161,
+   "rate": 0.69
+  },
+  {
+   "category": "Pharmacy",
+   "subcategory": "Botox Injection",
+   "n": 517,
+   "overturned": 300,
+   "upheld": 217,
+   "rate": 0.58
+  },
+  {
+   "category": "Pharmacy",
+   "subcategory": "Pain Medication",
+   "n": 413,
+   "overturned": 134,
+   "upheld": 279,
+   "rate": 0.324
+  },
+  {
+   "category": "Pharmacy",
+   "subcategory": "Arthritis Rx",
+   "n": 400,
+   "overturned": 224,
+   "upheld": 176,
+   "rate": 0.56
+  },
+  {
+   "category": "Pharmacy",
+   "subcategory": "IVIG Therapy",
+   "n": 385,
+   "overturned": 189,
+   "upheld": 196,
+   "rate": 0.491
+  },
+  {
+   "category": "Pharmacy",
+   "subcategory": "Non-FDA Approved Use",
+   "n": 383,
+   "overturned": 167,
+   "upheld": 216,
+   "rate": 0.436
+  },
+  {
+   "category": "Pharmacy",
+   "subcategory": "Diabetic Medication",
+   "n": 288,
+   "overturned": 215,
+   "upheld": 73,
+   "rate": 0.747
+  },
+  {
+   "category": "Pharmacy",
+   "subcategory": "Anti-inflammatories",
+   "n": 266,
+   "overturned": 140,
+   "upheld": 126,
+   "rate": 0.526
+  },
+  {
+   "category": "Pharmacy",
+   "subcategory": "Digestion/GI Rx",
+   "n": 229,
+   "overturned": 182,
+   "upheld": 47,
+   "rate": 0.795
+  },
+  {
+   "category": "Pharmacy",
+   "subcategory": "Antibiotics",
+   "n": 202,
+   "overturned": 84,
+   "upheld": 118,
+   "rate": 0.416
+  },
+  {
+   "category": "Pharmacy",
+   "subcategory": "Formulary v Non Form",
+   "n": 197,
+   "overturned": 78,
+   "upheld": 119,
+   "rate": 0.396
+  },
+  {
+   "category": "Pharmacy",
+   "subcategory": "Cardiac Rx",
+   "n": 180,
+   "overturned": 70,
+   "upheld": 110,
+   "rate": 0.389
+  },
+  {
+   "category": "Pharmacy",
+   "subcategory": "Analgesics",
+   "n": 179,
+   "overturned": 36,
+   "upheld": 143,
+   "rate": 0.201
+  },
+  {
+   "category": "Pharmacy",
+   "subcategory": "Migraine Rx",
+   "n": 172,
+   "overturned": 143,
+   "upheld": 29,
+   "rate": 0.831
+  },
+  {
+   "category": "Pharmacy",
+   "subcategory": "Neuromuscular RX",
+   "n": 111,
+   "overturned": 90,
+   "upheld": 21,
+   "rate": 0.811
+  },
+  {
+   "category": "Pharmacy",
+   "subcategory": "Tx for Migraine",
+   "n": 104,
+   "overturned": 46,
+   "upheld": 58,
+   "rate": 0.442
+  },
+  {
+   "category": "Pharmacy",
+   "subcategory": "Anti-Depressants",
+   "n": 103,
+   "overturned": 53,
+   "upheld": 50,
+   "rate": 0.515
+  },
+  {
+   "category": "Pharmacy",
+   "subcategory": "Anti-Fungal",
+   "n": 102,
+   "overturned": 43,
+   "upheld": 59,
+   "rate": 0.422
+  },
+  {
+   "category": "Pharmacy",
+   "subcategory": "Sedatives/ Hypnotics",
+   "n": 77,
+   "overturned": 26,
+   "upheld": 51,
+   "rate": 0.338
+  },
+  {
+   "category": "Pharmacy",
+   "subcategory": "Tx for Impotence",
+   "n": 75,
+   "overturned": 45,
+   "upheld": 30,
+   "rate": 0.6
+  },
+  {
+   "category": "Pharmacy",
+   "subcategory": "ADD/ADHD Rx",
+   "n": 63,
+   "overturned": 41,
+   "upheld": 22,
+   "rate": 0.651
+  },
+  {
+   "category": "Pharmacy",
+   "subcategory": "Glucagon-Like Peptide-1 (GLP)",
+   "n": 56,
+   "overturned": 41,
+   "upheld": 15,
+   "rate": 0.732
+  },
+  {
+   "category": "Pharmacy",
+   "subcategory": "Osteoporosis Rx",
+   "n": 55,
+   "overturned": 37,
+   "upheld": 18,
+   "rate": 0.673
+  },
+  {
+   "category": "Pharmacy",
+   "subcategory": "Tx for Allergies",
+   "n": 52,
+   "overturned": 28,
+   "upheld": 24,
+   "rate": 0.538
+  },
+  {
+   "category": "Pharmacy",
+   "subcategory": "Asthma Rx",
+   "n": 50,
+   "overturned": 35,
+   "upheld": 15,
+   "rate": 0.7
+  },
+  {
+   "category": "Pharmacy",
+   "subcategory": "Anti-hypertensives",
+   "n": 40,
+   "overturned": 11,
+   "upheld": 29,
+   "rate": 0.275
+  },
+  {
+   "category": "Pharmacy",
+   "subcategory": "Chemotherapy",
+   "n": 40,
+   "overturned": 14,
+   "upheld": 26,
+   "rate": 0.35
+  },
+  {
+   "category": "Pharmacy",
+   "subcategory": "Special Foods",
+   "n": 38,
+   "overturned": 19,
+   "upheld": 19,
+   "rate": 0.5
+  },
+  {
+   "category": "Pharmacy",
+   "subcategory": "Antacids",
+   "n": 37,
+   "overturned": 21,
+   "upheld": 16,
+   "rate": 0.568
+  },
+  {
+   "category": "Pharmacy",
+   "subcategory": "Interferon",
+   "n": 37,
+   "overturned": 13,
+   "upheld": 24,
+   "rate": 0.351
+  },
+  {
+   "category": "Pharmacy",
+   "subcategory": "Anti-Psychotic",
+   "n": 33,
+   "overturned": 13,
+   "upheld": 20,
+   "rate": 0.394
+  },
+  {
+   "category": "Pharmacy",
+   "subcategory": "Allergy Rx",
+   "n": 31,
+   "overturned": 18,
+   "upheld": 13,
+   "rate": 0.581
+  },
+  {
+   "category": "Pharmacy",
+   "subcategory": "Epileptic Medication",
+   "n": 29,
+   "overturned": 19,
+   "upheld": 10,
+   "rate": 0.655
+  },
+  {
+   "category": "Pharmacy",
+   "subcategory": "Invest Tx Protocol",
+   "n": 25,
+   "overturned": 14,
+   "upheld": 11,
+   "rate": 0.56
+  },
+  {
+   "category": "Pharmacy",
+   "subcategory": "Anxiety Rx",
+   "n": 24,
+   "overturned": 3,
+   "upheld": 21,
+   "rate": 0.125
+  },
+  {
+   "category": "Pharmacy",
+   "subcategory": "Vitamins",
+   "n": 24,
+   "overturned": 11,
+   "upheld": 13,
+   "rate": 0.458
+  },
+  {
+   "category": "Pharmacy",
+   "subcategory": "Birth Control",
+   "n": 20,
+   "overturned": 9,
+   "upheld": 11,
+   "rate": 0.45
+  },
+  {
+   "category": "Diag Imag & Screen",
+   "subcategory": null,
+   "n": 5988,
+   "overturned": 2907,
+   "upheld": 3081,
+   "rate": 0.485
+  },
+  {
+   "category": "Diag Imag & Screen",
+   "subcategory": "MRI",
+   "n": 1068,
+   "overturned": 457,
+   "upheld": 611,
+   "rate": 0.428
+  },
+  {
+   "category": "Diag Imag & Screen",
+   "subcategory": "Lab Work",
+   "n": 1015,
+   "overturned": 321,
+   "upheld": 694,
+   "rate": 0.316
+  },
+  {
+   "category": "Diag Imag & Screen",
+   "subcategory": "Other",
+   "n": 864,
+   "overturned": 393,
+   "upheld": 471,
+   "rate": 0.455
+  },
+  {
+   "category": "Diag Imag & Screen",
+   "subcategory": "Mammography",
+   "n": 784,
+   "overturned": 731,
+   "upheld": 53,
+   "rate": 0.932
+  },
+  {
+   "category": "Diag Imag & Screen",
+   "subcategory": "Genetic/Genomic Test",
+   "n": 582,
+   "overturned": 301,
+   "upheld": 281,
+   "rate": 0.517
+  },
+  {
+   "category": "Diag Imag & Screen",
+   "subcategory": "CT Scan",
+   "n": 433,
+   "overturned": 131,
+   "upheld": 302,
+   "rate": 0.303
+  },
+  {
+   "category": "Diag Imag & Screen",
+   "subcategory": "PET Scan",
+   "n": 424,
+   "overturned": 253,
+   "upheld": 171,
+   "rate": 0.597
+  },
+  {
+   "category": "Diag Imag & Screen",
+   "subcategory": "Ultrasound",
+   "n": 127,
+   "overturned": 52,
+   "upheld": 75,
+   "rate": 0.409
+  },
+  {
+   "category": "Diag Imag & Screen",
+   "subcategory": "Colonoscopy/Sigmoid",
+   "n": 102,
+   "overturned": 40,
+   "upheld": 62,
+   "rate": 0.392
+  },
+  {
+   "category": "Diag Imag & Screen",
+   "subcategory": "Bone Density Scan",
+   "n": 76,
+   "overturned": 28,
+   "upheld": 48,
+   "rate": 0.368
+  },
+  {
+   "category": "Diag Imag & Screen",
+   "subcategory": "Sleep Study",
+   "n": 71,
+   "overturned": 29,
+   "upheld": 42,
+   "rate": 0.408
+  },
+  {
+   "category": "Diag Imag & Screen",
+   "subcategory": "Oncotype DX Assay",
+   "n": 61,
+   "overturned": 29,
+   "upheld": 32,
+   "rate": 0.475
+  },
+  {
+   "category": "Diag Imag & Screen",
+   "subcategory": "Allergy Testing",
+   "n": 60,
+   "overturned": 6,
+   "upheld": 54,
+   "rate": 0.1
+  },
+  {
+   "category": "Diag Imag & Screen",
+   "subcategory": "Biopsy",
+   "n": 51,
+   "overturned": 19,
+   "upheld": 32,
+   "rate": 0.373
+  },
+  {
+   "category": "Diag Imag & Screen",
+   "subcategory": "Heart Monitor",
+   "n": 44,
+   "overturned": 11,
+   "upheld": 33,
+   "rate": 0.25
+  },
+  {
+   "category": "Diag Imag & Screen",
+   "subcategory": "Endoscopy",
+   "n": 41,
+   "overturned": 23,
+   "upheld": 18,
+   "rate": 0.561
+  },
+  {
+   "category": "Diag Imag & Screen",
+   "subcategory": "Scoping Procedure",
+   "n": 25,
+   "overturned": 9,
+   "upheld": 16,
+   "rate": 0.36
+  },
+  {
+   "category": "Diag Imag & Screen",
+   "subcategory": "Psychological Evaluation",
+   "n": 21,
+   "overturned": 7,
+   "upheld": 14,
+   "rate": 0.333
+  },
+  {
+   "category": "Mental Health",
+   "subcategory": null,
+   "n": 4830,
+   "overturned": 2849,
+   "upheld": 1981,
+   "rate": 0.59
+  },
+  {
+   "category": "Mental Health",
+   "subcategory": "RTC",
+   "n": 1390,
+   "overturned": 1119,
+   "upheld": 271,
+   "rate": 0.805
+  },
+  {
+   "category": "Mental Health",
+   "subcategory": "RTC/ Admit",
+   "n": 1061,
+   "overturned": 440,
+   "upheld": 621,
+   "rate": 0.415
+  },
+  {
+   "category": "Mental Health",
+   "subcategory": "Partial Hospital",
+   "n": 371,
+   "overturned": 235,
+   "upheld": 136,
+   "rate": 0.633
+  },
+  {
+   "category": "Mental Health",
+   "subcategory": "Acute Psych/ Admit",
+   "n": 362,
+   "overturned": 203,
+   "upheld": 159,
+   "rate": 0.561
+  },
+  {
+   "category": "Mental Health",
+   "subcategory": "Intensive Outpt Prog",
+   "n": 309,
+   "overturned": 221,
+   "upheld": 88,
+   "rate": 0.715
+  },
+  {
+   "category": "Mental Health",
+   "subcategory": "RTC/Discharge",
+   "n": 289,
+   "overturned": 117,
+   "upheld": 172,
+   "rate": 0.405
+  },
+  {
+   "category": "Mental Health",
+   "subcategory": "Other",
+   "n": 274,
+   "overturned": 119,
+   "upheld": 155,
+   "rate": 0.434
+  },
+  {
+   "category": "Mental Health",
+   "subcategory": "Psychotherapy",
+   "n": 163,
+   "overturned": 85,
+   "upheld": 78,
+   "rate": 0.521
+  },
+  {
+   "category": "Mental Health",
+   "subcategory": "Individ Counsel",
+   "n": 130,
+   "overturned": 87,
+   "upheld": 43,
+   "rate": 0.669
+  },
+  {
+   "category": "Mental Health",
+   "subcategory": "Drug Rehab Program",
+   "n": 106,
+   "overturned": 29,
+   "upheld": 77,
+   "rate": 0.274
+  },
+  {
+   "category": "Mental Health",
+   "subcategory": "ETOH Rehab Program",
+   "n": 83,
+   "overturned": 23,
+   "upheld": 60,
+   "rate": 0.277
+  },
+  {
+   "category": "Mental Health",
+   "subcategory": "Behavioral Therapy",
+   "n": 77,
+   "overturned": 39,
+   "upheld": 38,
+   "rate": 0.506
+  },
+  {
+   "category": "Mental Health",
+   "subcategory": "Acute Psych",
+   "n": 39,
+   "overturned": 30,
+   "upheld": 9,
+   "rate": 0.769
+  },
+  {
+   "category": "Mental Health",
+   "subcategory": "Cognitive Therapy",
+   "n": 39,
+   "overturned": 21,
+   "upheld": 18,
+   "rate": 0.538
+  },
+  {
+   "category": "Mental Health",
+   "subcategory": "Acute Psych/Dischg",
+   "n": 34,
+   "overturned": 25,
+   "upheld": 9,
+   "rate": 0.735
+  },
+  {
+   "category": "Mental Health",
+   "subcategory": "TMS",
+   "n": 31,
+   "overturned": 27,
+   "upheld": 4,
+   "rate": 0.871
+  },
+  {
+   "category": "DME",
+   "subcategory": null,
+   "n": 2679,
+   "overturned": 1196,
+   "upheld": 1483,
+   "rate": 0.446
+  },
+  {
+   "category": "DME",
+   "subcategory": "Other",
+   "n": 987,
+   "overturned": 403,
+   "upheld": 584,
+   "rate": 0.408
+  },
+  {
+   "category": "DME",
+   "subcategory": "Electric Wheelchair",
+   "n": 160,
+   "overturned": 37,
+   "upheld": 123,
+   "rate": 0.231
+  },
+  {
+   "category": "DME",
+   "subcategory": "Wheelchair",
+   "n": 141,
+   "overturned": 38,
+   "upheld": 103,
+   "rate": 0.27
+  },
+  {
+   "category": "DME",
+   "subcategory": "Orthotics",
+   "n": 133,
+   "overturned": 92,
+   "upheld": 41,
+   "rate": 0.692
+  },
+  {
+   "category": "DME",
+   "subcategory": "CPM Machine",
+   "n": 108,
+   "overturned": 43,
+   "upheld": 65,
+   "rate": 0.398
+  },
+  {
+   "category": "DME",
+   "subcategory": "Electric Scooter",
+   "n": 100,
+   "overturned": 9,
+   "upheld": 91,
+   "rate": 0.09
+  },
+  {
+   "category": "DME",
+   "subcategory": "Glucose Monitor",
+   "n": 100,
+   "overturned": 76,
+   "upheld": 24,
+   "rate": 0.76
+  },
+  {
+   "category": "DME",
+   "subcategory": "Prosthesis",
+   "n": 94,
+   "overturned": 48,
+   "upheld": 46,
+   "rate": 0.511
+  },
+  {
+   "category": "DME",
+   "subcategory": "Special Bed",
+   "n": 88,
+   "overturned": 40,
+   "upheld": 48,
+   "rate": 0.455
+  },
+  {
+   "category": "DME",
+   "subcategory": "Braces",
+   "n": 81,
+   "overturned": 29,
+   "upheld": 52,
+   "rate": 0.358
+  },
+  {
+   "category": "DME",
+   "subcategory": "Insulin Pump",
+   "n": 76,
+   "overturned": 52,
+   "upheld": 24,
+   "rate": 0.684
+  },
+  {
+   "category": "DME",
+   "subcategory": "C-Pap Machine",
+   "n": 66,
+   "overturned": 37,
+   "upheld": 29,
+   "rate": 0.561
+  },
+  {
+   "category": "DME",
+   "subcategory": "Cont Glucose Monitor",
+   "n": 62,
+   "overturned": 55,
+   "upheld": 7,
+   "rate": 0.887
+  },
+  {
+   "category": "DME",
+   "subcategory": "Compression Garments",
+   "n": 57,
+   "overturned": 24,
+   "upheld": 33,
+   "rate": 0.421
+  },
+  {
+   "category": "DME",
+   "subcategory": "Elect Bone Stim",
+   "n": 53,
+   "overturned": 17,
+   "upheld": 36,
+   "rate": 0.321
+  },
+  {
+   "category": "DME",
+   "subcategory": "Wearable Cardio Defib",
+   "n": 53,
+   "overturned": 34,
+   "upheld": 19,
+   "rate": 0.642
+  },
+  {
+   "category": "DME",
+   "subcategory": "Oxygen",
+   "n": 44,
+   "overturned": 8,
+   "upheld": 36,
+   "rate": 0.182
+  },
+  {
+   "category": "DME",
+   "subcategory": "Shoe Inserts",
+   "n": 38,
+   "overturned": 26,
+   "upheld": 12,
+   "rate": 0.684
+  },
+  {
+   "category": "DME",
+   "subcategory": "Pneumatic Vest",
+   "n": 33,
+   "overturned": 16,
+   "upheld": 17,
+   "rate": 0.485
+  },
+  {
+   "category": "DME",
+   "subcategory": "Special Chair",
+   "n": 27,
+   "overturned": 17,
+   "upheld": 10,
+   "rate": 0.63
+  },
+  {
+   "category": "DME",
+   "subcategory": "ABI Vest",
+   "n": 26,
+   "overturned": 17,
+   "upheld": 9,
+   "rate": 0.654
+  },
+  {
+   "category": "DME",
+   "subcategory": "Walker",
+   "n": 26,
+   "overturned": 12,
+   "upheld": 14,
+   "rate": 0.462
+  },
+  {
+   "category": "DME",
+   "subcategory": "Hearing Aid",
+   "n": 25,
+   "overturned": 9,
+   "upheld": 16,
+   "rate": 0.36
+  },
+  {
+   "category": "DME",
+   "subcategory": "Speech Generate Device",
+   "n": 22,
+   "overturned": 21,
+   "upheld": 1,
+   "rate": 0.955
+  },
+  {
+   "category": "DME",
+   "subcategory": "TENS Unit",
+   "n": 22,
+   "overturned": 5,
+   "upheld": 17,
+   "rate": 0.227
+  },
+  {
+   "category": "Pain Management",
+   "subcategory": null,
+   "n": 1827,
+   "overturned": 1237,
+   "upheld": 590,
+   "rate": 0.677
+  },
+  {
+   "category": "Pain Management",
+   "subcategory": "Viscosupp Injection",
+   "n": 838,
+   "overturned": 786,
+   "upheld": 52,
+   "rate": 0.938
+  },
+  {
+   "category": "Pain Management",
+   "subcategory": "Other",
+   "n": 346,
+   "overturned": 135,
+   "upheld": 211,
+   "rate": 0.39
+  },
+  {
+   "category": "Pain Management",
+   "subcategory": "Nerve Block",
+   "n": 246,
+   "overturned": 146,
+   "upheld": 100,
+   "rate": 0.593
+  },
+  {
+   "category": "Pain Management",
+   "subcategory": "Epidural Injection",
+   "n": 169,
+   "overturned": 76,
+   "upheld": 93,
+   "rate": 0.45
+  },
+  {
+   "category": "Pain Management",
+   "subcategory": "Steroid Injection",
+   "n": 86,
+   "overturned": 57,
+   "upheld": 29,
+   "rate": 0.663
+  },
+  {
+   "category": "Pain Management",
+   "subcategory": "Analgesic Rx",
+   "n": 65,
+   "overturned": 12,
+   "upheld": 53,
+   "rate": 0.185
+  },
+  {
+   "category": "Pain Management",
+   "subcategory": "Pain Medication",
+   "n": 46,
+   "overturned": 14,
+   "upheld": 32,
+   "rate": 0.304
+  },
+  {
+   "category": "Pain Management",
+   "subcategory": "Pain Mgmt Prog",
+   "n": 21,
+   "overturned": 8,
+   "upheld": 13,
+   "rate": 0.381
+  },
+  {
+   "category": "Orthopedic Proc",
+   "subcategory": null,
+   "n": 1676,
+   "overturned": 493,
+   "upheld": 1183,
+   "rate": 0.294
+  },
+  {
+   "category": "Orthopedic Proc",
+   "subcategory": "Other",
+   "n": 672,
+   "overturned": 214,
+   "upheld": 458,
+   "rate": 0.318
+  },
+  {
+   "category": "Orthopedic Proc",
+   "subcategory": "Artificial Disc Repl",
+   "n": 244,
+   "overturned": 24,
+   "upheld": 220,
+   "rate": 0.098
+  },
+  {
+   "category": "Orthopedic Proc",
+   "subcategory": "Fusion",
+   "n": 244,
+   "overturned": 68,
+   "upheld": 176,
+   "rate": 0.279
+  },
+  {
+   "category": "Orthopedic Proc",
+   "subcategory": "Hip Replacement",
+   "n": 107,
+   "overturned": 35,
+   "upheld": 72,
+   "rate": 0.327
+  },
+  {
+   "category": "Orthopedic Proc",
+   "subcategory": "Arthroscopy",
+   "n": 97,
+   "overturned": 42,
+   "upheld": 55,
+   "rate": 0.433
+  },
+  {
+   "category": "Orthopedic Proc",
+   "subcategory": "Knee Replacement",
+   "n": 93,
+   "overturned": 25,
+   "upheld": 68,
+   "rate": 0.269
+  },
+  {
+   "category": "Orthopedic Proc",
+   "subcategory": "Diskectomy",
+   "n": 46,
+   "overturned": 8,
+   "upheld": 38,
+   "rate": 0.174
+  },
+  {
+   "category": "Orthopedic Proc",
+   "subcategory": "Fract/Bone Repair",
+   "n": 45,
+   "overturned": 21,
+   "upheld": 24,
+   "rate": 0.467
+  },
+  {
+   "category": "Orthopedic Proc",
+   "subcategory": "Jaw Surgery",
+   "n": 40,
+   "overturned": 31,
+   "upheld": 9,
+   "rate": 0.775
+  },
+  {
+   "category": "Orthopedic Proc",
+   "subcategory": "Laminectomy",
+   "n": 28,
+   "overturned": 10,
+   "upheld": 18,
+   "rate": 0.357
+  },
+  {
+   "category": "Orthopedic Proc",
+   "subcategory": "Ligament/Tendon Repair",
+   "n": 23,
+   "overturned": 7,
+   "upheld": 16,
+   "rate": 0.304
+  },
+  {
+   "category": "Orthopedic Proc",
+   "subcategory": "Charite",
+   "n": 21,
+   "overturned": 0,
+   "upheld": 21,
+   "rate": 0.0
+  },
+  {
+   "category": "Cancer Care",
+   "subcategory": null,
+   "n": 1622,
+   "overturned": 708,
+   "upheld": 914,
+   "rate": 0.436
+  },
+  {
+   "category": "Cancer Care",
+   "subcategory": "Proton Beam",
+   "n": 315,
+   "overturned": 107,
+   "upheld": 208,
+   "rate": 0.34
+  },
+  {
+   "category": "Cancer Care",
+   "subcategory": "Other",
+   "n": 291,
+   "overturned": 142,
+   "upheld": 149,
+   "rate": 0.488
+  },
+  {
+   "category": "Cancer Care",
+   "subcategory": "Chemotherapy",
+   "n": 223,
+   "overturned": 95,
+   "upheld": 128,
+   "rate": 0.426
+  },
+  {
+   "category": "Cancer Care",
+   "subcategory": "Radiation Oncology",
+   "n": 149,
+   "overturned": 58,
+   "upheld": 91,
+   "rate": 0.389
+  },
+  {
+   "category": "Cancer Care",
+   "subcategory": "Radiation Therapy",
+   "n": 147,
+   "overturned": 86,
+   "upheld": 61,
+   "rate": 0.585
+  },
+  {
+   "category": "Cancer Care",
+   "subcategory": "Cancer Rx",
+   "n": 145,
+   "overturned": 67,
+   "upheld": 78,
+   "rate": 0.462
+  },
+  {
+   "category": "Cancer Care",
+   "subcategory": "Investigational Tx",
+   "n": 145,
+   "overturned": 64,
+   "upheld": 81,
+   "rate": 0.441
+  },
+  {
+   "category": "Cancer Care",
+   "subcategory": "Surgery",
+   "n": 127,
+   "overturned": 57,
+   "upheld": 70,
+   "rate": 0.449
+  },
+  {
+   "category": "Cancer Care",
+   "subcategory": "OON/ Acad Ctr Ref",
+   "n": 33,
+   "overturned": 14,
+   "upheld": 19,
+   "rate": 0.424
+  },
+  {
+   "category": "Gen Surg Proc",
+   "subcategory": null,
+   "n": 1450,
+   "overturned": 701,
+   "upheld": 749,
+   "rate": 0.483
+  },
+  {
+   "category": "Gen Surg Proc",
+   "subcategory": "Other",
+   "n": 434,
+   "overturned": 165,
+   "upheld": 269,
+   "rate": 0.38
+  },
+  {
+   "category": "Gen Surg Proc",
+   "subcategory": "Gastric Bypass",
+   "n": 208,
+   "overturned": 123,
+   "upheld": 85,
+   "rate": 0.591
+  },
+  {
+   "category": "Gen Surg Proc",
+   "subcategory": "Bariatric Other",
+   "n": 174,
+   "overturned": 89,
+   "upheld": 85,
+   "rate": 0.511
+  },
+  {
+   "category": "Gen Surg Proc",
+   "subcategory": "Bariatric Lap Band",
+   "n": 126,
+   "overturned": 56,
+   "upheld": 70,
+   "rate": 0.444
+  },
+  {
+   "category": "Gen Surg Proc",
+   "subcategory": "Bariatric Duod Swtch",
+   "n": 91,
+   "overturned": 67,
+   "upheld": 24,
+   "rate": 0.736
+  },
+  {
+   "category": "Gen Surg Proc",
+   "subcategory": "Bariatric Surgery",
+   "n": 82,
+   "overturned": 45,
+   "upheld": 37,
+   "rate": 0.549
+  },
+  {
+   "category": "Gen Surg Proc",
+   "subcategory": "GERD Procedure",
+   "n": 64,
+   "overturned": 25,
+   "upheld": 39,
+   "rate": 0.391
+  },
+  {
+   "category": "Gen Surg Proc",
+   "subcategory": "Bariatric Roux-en-y",
+   "n": 63,
+   "overturned": 46,
+   "upheld": 17,
+   "rate": 0.73
+  },
+  {
+   "category": "Gen Surg Proc",
+   "subcategory": "Breast Surgery",
+   "n": 62,
+   "overturned": 25,
+   "upheld": 37,
+   "rate": 0.403
+  },
+  {
+   "category": "Gen Surg Proc",
+   "subcategory": "Revision Procedures",
+   "n": 40,
+   "overturned": 12,
+   "upheld": 28,
+   "rate": 0.3
+  },
+  {
+   "category": "Gen Surg Proc",
+   "subcategory": "Hernia Repair",
+   "n": 35,
+   "overturned": 15,
+   "upheld": 20,
+   "rate": 0.429
+  },
+  {
+   "category": "Gen Surg Proc",
+   "subcategory": "Circumcision",
+   "n": 23,
+   "overturned": 8,
+   "upheld": 15,
+   "rate": 0.348
+  },
+  {
+   "category": "Rehab/ Svc - Outpt",
+   "subcategory": null,
+   "n": 1380,
+   "overturned": 757,
+   "upheld": 623,
+   "rate": 0.549
+  },
+  {
+   "category": "Rehab/ Svc - Outpt",
+   "subcategory": "Speech Therapy",
+   "n": 672,
+   "overturned": 481,
+   "upheld": 191,
+   "rate": 0.716
+  },
+  {
+   "category": "Rehab/ Svc - Outpt",
+   "subcategory": "Physical Therapy",
+   "n": 408,
+   "overturned": 138,
+   "upheld": 270,
+   "rate": 0.338
+  },
+  {
+   "category": "Rehab/ Svc - Outpt",
+   "subcategory": "Occupational Therapy",
+   "n": 159,
+   "overturned": 88,
+   "upheld": 71,
+   "rate": 0.553
+  },
+  {
+   "category": "Rehab/ Svc - Outpt",
+   "subcategory": "Other",
+   "n": 106,
+   "overturned": 35,
+   "upheld": 71,
+   "rate": 0.33
+  },
+  {
+   "category": "Reconstr/Plast Proc",
+   "subcategory": null,
+   "n": 1309,
+   "overturned": 598,
+   "upheld": 711,
+   "rate": 0.457
+  },
+  {
+   "category": "Reconstr/Plast Proc",
+   "subcategory": "Other",
+   "n": 413,
+   "overturned": 199,
+   "upheld": 214,
+   "rate": 0.482
+  },
+  {
+   "category": "Reconstr/Plast Proc",
+   "subcategory": "Panniculectomy",
+   "n": 177,
+   "overturned": 59,
+   "upheld": 118,
+   "rate": 0.333
+  },
+  {
+   "category": "Reconstr/Plast Proc",
+   "subcategory": "Breast reduction",
+   "n": 165,
+   "overturned": 93,
+   "upheld": 72,
+   "rate": 0.564
+  },
+  {
+   "category": "Reconstr/Plast Proc",
+   "subcategory": "Liposuction",
+   "n": 87,
+   "overturned": 34,
+   "upheld": 53,
+   "rate": 0.391
+  },
+  {
+   "category": "Reconstr/Plast Proc",
+   "subcategory": "Breast Augmentation",
+   "n": 83,
+   "overturned": 37,
+   "upheld": 46,
+   "rate": 0.446
+  },
+  {
+   "category": "Reconstr/Plast Proc",
+   "subcategory": "Excess Skin Removal",
+   "n": 59,
+   "overturned": 17,
+   "upheld": 42,
+   "rate": 0.288
+  },
+  {
+   "category": "Reconstr/Plast Proc",
+   "subcategory": "Facial Feminization Surgery",
+   "n": 48,
+   "overturned": 42,
+   "upheld": 6,
+   "rate": 0.875
+  },
+  {
+   "category": "Reconstr/Plast Proc",
+   "subcategory": "Blepharoplasty",
+   "n": 45,
+   "overturned": 14,
+   "upheld": 31,
+   "rate": 0.311
+  },
+  {
+   "category": "Reconstr/Plast Proc",
+   "subcategory": "Implant Removal",
+   "n": 39,
+   "overturned": 8,
+   "upheld": 31,
+   "rate": 0.205
+  },
+  {
+   "category": "Reconstr/Plast Proc",
+   "subcategory": "Skin Resurfacing",
+   "n": 36,
+   "overturned": 15,
+   "upheld": 21,
+   "rate": 0.417
+  },
+  {
+   "category": "Reconstr/Plast Proc",
+   "subcategory": "Mastectomy",
+   "n": 34,
+   "overturned": 25,
+   "upheld": 9,
+   "rate": 0.735
+  },
+  {
+   "category": "Reconstr/Plast Proc",
+   "subcategory": "Mammoplasty",
+   "n": 28,
+   "overturned": 15,
+   "upheld": 13,
+   "rate": 0.536
+  },
+  {
+   "category": "Reconstr/Plast Proc",
+   "subcategory": "Hair Removal",
+   "n": 25,
+   "overturned": 19,
+   "upheld": 6,
+   "rate": 0.76
+  },
+  {
+   "category": "Elect/Therm/Radfreq",
+   "subcategory": null,
+   "n": 1115,
+   "overturned": 479,
+   "upheld": 636,
+   "rate": 0.43
+  },
+  {
+   "category": "Elect/Therm/Radfreq",
+   "subcategory": "Other",
+   "n": 385,
+   "overturned": 155,
+   "upheld": 230,
+   "rate": 0.403
+  },
+  {
+   "category": "Elect/Therm/Radfreq",
+   "subcategory": "Radiofreq Ablat",
+   "n": 317,
+   "overturned": 136,
+   "upheld": 181,
+   "rate": 0.429
+  },
+  {
+   "category": "Elect/Therm/Radfreq",
+   "subcategory": "TMS",
+   "n": 290,
+   "overturned": 155,
+   "upheld": 135,
+   "rate": 0.534
+  },
+  {
+   "category": "Elect/Therm/Radfreq",
+   "subcategory": "Extracorp Shock Wave",
+   "n": 41,
+   "overturned": 8,
+   "upheld": 33,
+   "rate": 0.195
+  },
+  {
+   "category": "Elect/Therm/Radfreq",
+   "subcategory": "Radiation Therapy",
+   "n": 31,
+   "overturned": 15,
+   "upheld": 16,
+   "rate": 0.484
+  },
+  {
+   "category": "Elect/Therm/Radfreq",
+   "subcategory": "IDET",
+   "n": 30,
+   "overturned": 2,
+   "upheld": 28,
+   "rate": 0.067
+  },
+  {
+   "category": "Autism Related Tx",
+   "subcategory": null,
+   "n": 1039,
+   "overturned": 722,
+   "upheld": 317,
+   "rate": 0.695
+  },
+  {
+   "category": "Autism Related Tx",
+   "subcategory": "Appld Behav Analysis",
+   "n": 470,
+   "overturned": 325,
+   "upheld": 145,
+   "rate": 0.691
+  },
+  {
+   "category": "Autism Related Tx",
+   "subcategory": "Speech Therapy",
+   "n": 300,
+   "overturned": 237,
+   "upheld": 63,
+   "rate": 0.79
+  },
+  {
+   "category": "Autism Related Tx",
+   "subcategory": "Occupational Therapy",
+   "n": 117,
+   "overturned": 89,
+   "upheld": 28,
+   "rate": 0.761
+  },
+  {
+   "category": "Autism Related Tx",
+   "subcategory": "Other",
+   "n": 46,
+   "overturned": 17,
+   "upheld": 29,
+   "rate": 0.37
+  },
+  {
+   "category": "Autism Related Tx",
+   "subcategory": "Social Skills Thpy",
+   "n": 21,
+   "overturned": 9,
+   "upheld": 12,
+   "rate": 0.429
+  },
+  {
+   "category": "Diag/ MD Eval",
+   "subcategory": null,
+   "n": 776,
+   "overturned": 370,
+   "upheld": 406,
+   "rate": 0.477
+  },
+  {
+   "category": "Diag/ MD Eval",
+   "subcategory": "SCP Consult Refer",
+   "n": 348,
+   "overturned": 206,
+   "upheld": 142,
+   "rate": 0.592
+  },
+  {
+   "category": "Diag/ MD Eval",
+   "subcategory": "OON Referral",
+   "n": 183,
+   "overturned": 50,
+   "upheld": 133,
+   "rate": 0.273
+  },
+  {
+   "category": "Diag/ MD Eval",
+   "subcategory": "Other",
+   "n": 132,
+   "overturned": 68,
+   "upheld": 64,
+   "rate": 0.515
+  },
+  {
+   "category": "Diag/ MD Eval",
+   "subcategory": "Ongoing OON Tx",
+   "n": 57,
+   "overturned": 21,
+   "upheld": 36,
+   "rate": 0.368
+  },
+  {
+   "category": "Diag/ MD Eval",
+   "subcategory": "Req 2nd Opin/OON",
+   "n": 28,
+   "overturned": 13,
+   "upheld": 15,
+   "rate": 0.464
+  },
+  {
+   "category": "Emergency/Urg Care",
+   "subcategory": null,
+   "n": 620,
+   "overturned": 276,
+   "upheld": 344,
+   "rate": 0.445
+  },
+  {
+   "category": "Emergency/Urg Care",
+   "subcategory": "Emergency Room",
+   "n": 471,
+   "overturned": 219,
+   "upheld": 252,
+   "rate": 0.465
+  },
+  {
+   "category": "Emergency/Urg Care",
+   "subcategory": "Urgent Care",
+   "n": 82,
+   "overturned": 32,
+   "upheld": 50,
+   "rate": 0.39
+  },
+  {
+   "category": "Emergency/Urg Care",
+   "subcategory": "Ambulance/Transport",
+   "n": 67,
+   "overturned": 25,
+   "upheld": 42,
+   "rate": 0.373
+  },
+  {
+   "category": "Rehab/Svcs SNF Inpt",
+   "subcategory": null,
+   "n": 519,
+   "overturned": 127,
+   "upheld": 392,
+   "rate": 0.245
+  },
+  {
+   "category": "Rehab/Svcs SNF Inpt",
+   "subcategory": "Inpt Admission",
+   "n": 301,
+   "overturned": 77,
+   "upheld": 224,
+   "rate": 0.256
+  },
+  {
+   "category": "Rehab/Svcs SNF Inpt",
+   "subcategory": "Inpt Discharge",
+   "n": 83,
+   "overturned": 13,
+   "upheld": 70,
+   "rate": 0.157
+  },
+  {
+   "category": "Rehab/Svcs SNF Inpt",
+   "subcategory": "Other",
+   "n": 66,
+   "overturned": 24,
+   "upheld": 42,
+   "rate": 0.364
+  },
+  {
+   "category": "Rehab/Svcs SNF Inpt",
+   "subcategory": "Inpt Early Discharge",
+   "n": 46,
+   "overturned": 9,
+   "upheld": 37,
+   "rate": 0.196
+  },
+  {
+   "category": "Cardio-Vasc Proc",
+   "subcategory": null,
+   "n": 505,
+   "overturned": 263,
+   "upheld": 242,
+   "rate": 0.521
+  },
+  {
+   "category": "Cardio-Vasc Proc",
+   "subcategory": "Other",
+   "n": 311,
+   "overturned": 153,
+   "upheld": 158,
+   "rate": 0.492
+  },
+  {
+   "category": "Cardio-Vasc Proc",
+   "subcategory": "Surgery",
+   "n": 41,
+   "overturned": 31,
+   "upheld": 10,
+   "rate": 0.756
+  },
+  {
+   "category": "Cardio-Vasc Proc",
+   "subcategory": "Vein Ablation",
+   "n": 34,
+   "overturned": 17,
+   "upheld": 17,
+   "rate": 0.5
+  },
+  {
+   "category": "Cardio-Vasc Proc",
+   "subcategory": "Vein Stripping",
+   "n": 26,
+   "overturned": 6,
+   "upheld": 20,
+   "rate": 0.231
+  },
+  {
+   "category": "Cardio-Vasc Proc",
+   "subcategory": "Card Valve Repl",
+   "n": 23,
+   "overturned": 17,
+   "upheld": 6,
+   "rate": 0.739
+  },
+  {
+   "category": "Cardio-Vasc Proc",
+   "subcategory": "Stent",
+   "n": 23,
+   "overturned": 16,
+   "upheld": 7,
+   "rate": 0.696
+  },
+  {
+   "category": "Special Proc",
+   "subcategory": null,
+   "n": 499,
+   "overturned": 175,
+   "upheld": 324,
+   "rate": 0.351
+  },
+  {
+   "category": "Special Proc",
+   "subcategory": "General Anesthesia",
+   "n": 148,
+   "overturned": 38,
+   "upheld": 110,
+   "rate": 0.257
+  },
+  {
+   "category": "Special Proc",
+   "subcategory": "Other",
+   "n": 148,
+   "overturned": 60,
+   "upheld": 88,
+   "rate": 0.405
+  },
+  {
+   "category": "Special Proc",
+   "subcategory": "Hyperbaric O2 Chamb",
+   "n": 73,
+   "overturned": 25,
+   "upheld": 48,
+   "rate": 0.342
+  },
+  {
+   "category": "Special Proc",
+   "subcategory": "Stem Cell Transplant",
+   "n": 56,
+   "overturned": 23,
+   "upheld": 33,
+   "rate": 0.411
+  },
+  {
+   "category": "Special Proc",
+   "subcategory": "Organ Transplant",
+   "n": 34,
+   "overturned": 17,
+   "upheld": 17,
+   "rate": 0.5
+  },
+  {
+   "category": "Ear-Nose-Thro Proc",
+   "subcategory": null,
+   "n": 490,
+   "overturned": 252,
+   "upheld": 238,
+   "rate": 0.514
+  },
+  {
+   "category": "Ear-Nose-Thro Proc",
+   "subcategory": "Other",
+   "n": 237,
+   "overturned": 109,
+   "upheld": 128,
+   "rate": 0.46
+  },
+  {
+   "category": "Ear-Nose-Thro Proc",
+   "subcategory": "Sinus Surgery",
+   "n": 155,
+   "overturned": 99,
+   "upheld": 56,
+   "rate": 0.639
+  },
+  {
+   "category": "Ear-Nose-Thro Proc",
+   "subcategory": "Septoplasty",
+   "n": 36,
+   "overturned": 22,
+   "upheld": 14,
+   "rate": 0.611
+  },
+  {
+   "category": "Ear-Nose-Thro Proc",
+   "subcategory": "Cochlear Implant",
+   "n": 28,
+   "overturned": 9,
+   "upheld": 19,
+   "rate": 0.321
+  },
+  {
+   "category": "Ear-Nose-Thro Proc",
+   "subcategory": "Tonsillectomy",
+   "n": 23,
+   "overturned": 5,
+   "upheld": 18,
+   "rate": 0.217
+  },
+  {
+   "category": "Alternative Tx",
+   "subcategory": null,
+   "n": 413,
+   "overturned": 139,
+   "upheld": 274,
+   "rate": 0.337
+  },
+  {
+   "category": "Alternative Tx",
+   "subcategory": "Acupuncture",
+   "n": 205,
+   "overturned": 81,
+   "upheld": 124,
+   "rate": 0.395
+  },
+  {
+   "category": "Alternative Tx",
+   "subcategory": "Other",
+   "n": 125,
+   "overturned": 28,
+   "upheld": 97,
+   "rate": 0.224
+  },
+  {
+   "category": "Alternative Tx",
+   "subcategory": "Biofeedback",
+   "n": 75,
+   "overturned": 28,
+   "upheld": 47,
+   "rate": 0.373
+  },
+  {
+   "category": "Acute Med Svc Inpt",
+   "subcategory": null,
+   "n": 341,
+   "overturned": 167,
+   "upheld": 174,
+   "rate": 0.49
+  },
+  {
+   "category": "Acute Med Svc Inpt",
+   "subcategory": "Admission",
+   "n": 211,
+   "overturned": 109,
+   "upheld": 102,
+   "rate": 0.517
+  },
+  {
+   "category": "Acute Med Svc Inpt",
+   "subcategory": "Other",
+   "n": 39,
+   "overturned": 16,
+   "upheld": 23,
+   "rate": 0.41
+  },
+  {
+   "category": "Acute Med Svc Inpt",
+   "subcategory": "Early Discharge",
+   "n": 26,
+   "overturned": 8,
+   "upheld": 18,
+   "rate": 0.308
+  },
+  {
+   "category": "Ob-Gyn Proc",
+   "subcategory": null,
+   "n": 292,
+   "overturned": 128,
+   "upheld": 164,
+   "rate": 0.438
+  },
+  {
+   "category": "Ob-Gyn Proc",
+   "subcategory": "Other",
+   "n": 100,
+   "overturned": 42,
+   "upheld": 58,
+   "rate": 0.42
+  },
+  {
+   "category": "Ob-Gyn Proc",
+   "subcategory": "Hysterectomy",
+   "n": 83,
+   "overturned": 30,
+   "upheld": 53,
+   "rate": 0.361
+  },
+  {
+   "category": "Ob-Gyn Proc",
+   "subcategory": "Fibroid Removal",
+   "n": 23,
+   "overturned": 12,
+   "upheld": 11,
+   "rate": 0.522
+  },
+  {
+   "category": "Ob-Gyn Proc",
+   "subcategory": "Laparoscopy",
+   "n": 21,
+   "overturned": 12,
+   "upheld": 9,
+   "rate": 0.571
+  },
+  {
+   "category": "Neurosurgery Proc",
+   "subcategory": null,
+   "n": 171,
+   "overturned": 88,
+   "upheld": 83,
+   "rate": 0.515
+  },
+  {
+   "category": "Neurosurgery Proc",
+   "subcategory": "Other",
+   "n": 130,
+   "overturned": 65,
+   "upheld": 65,
+   "rate": 0.5
+  },
+  {
+   "category": "Dent/Orthodont Proc",
+   "subcategory": null,
+   "n": 168,
+   "overturned": 93,
+   "upheld": 75,
+   "rate": 0.554
+  },
+  {
+   "category": "Dent/Orthodont Proc",
+   "subcategory": "Other",
+   "n": 60,
+   "overturned": 33,
+   "upheld": 27,
+   "rate": 0.55
+  },
+  {
+   "category": "Dent/Orthodont Proc",
+   "subcategory": "Dental Anesthesia",
+   "n": 36,
+   "overturned": 21,
+   "upheld": 15,
+   "rate": 0.583
+  },
+  {
+   "category": "Chiropractic Care",
+   "subcategory": null,
+   "n": 158,
+   "overturned": 50,
+   "upheld": 108,
+   "rate": 0.316
+  },
+  {
+   "category": "Chiropractic Care",
+   "subcategory": "Other",
+   "n": 68,
+   "overturned": 17,
+   "upheld": 51,
+   "rate": 0.25
+  },
+  {
+   "category": "Chiropractic Care",
+   "subcategory": "Pain Management",
+   "n": 37,
+   "overturned": 13,
+   "upheld": 24,
+   "rate": 0.351
+  },
+  {
+   "category": "Chiropractic Care",
+   "subcategory": "Spinal Adjustment",
+   "n": 22,
+   "overturned": 7,
+   "upheld": 15,
+   "rate": 0.318
+  },
+  {
+   "category": "Home Health Care",
+   "subcategory": null,
+   "n": 153,
+   "overturned": 72,
+   "upheld": 81,
+   "rate": 0.471
+  },
+  {
+   "category": "Home Health Care",
+   "subcategory": "Skill Nsg Vsts",
+   "n": 90,
+   "overturned": 44,
+   "upheld": 46,
+   "rate": 0.489
+  },
+  {
+   "category": "Home Health Care",
+   "subcategory": "Other",
+   "n": 31,
+   "overturned": 16,
+   "upheld": 15,
+   "rate": 0.516
+  },
+  {
+   "category": "Vision Services",
+   "subcategory": null,
+   "n": 112,
+   "overturned": 47,
+   "upheld": 65,
+   "rate": 0.42
+  },
+  {
+   "category": "Vision Services",
+   "subcategory": "Other",
+   "n": 72,
+   "overturned": 40,
+   "upheld": 32,
+   "rate": 0.556
+  },
+  {
+   "category": "Vision Services",
+   "subcategory": "Vision Therapy",
+   "n": 33,
+   "overturned": 6,
+   "upheld": 27,
+   "rate": 0.182
+  },
+  {
+   "category": "Urology Proc",
+   "subcategory": null,
+   "n": 105,
+   "overturned": 43,
+   "upheld": 62,
+   "rate": 0.41
+  },
+  {
+   "category": "Urology Proc",
+   "subcategory": "Other",
+   "n": 83,
+   "overturned": 34,
+   "upheld": 49,
+   "rate": 0.41
+  },
+  {
+   "category": "Surgery",
+   "subcategory": null,
+   "n": 83,
+   "overturned": 50,
+   "upheld": 33,
+   "rate": 0.602
+  },
+  {
+   "category": "Surgery",
+   "subcategory": "CNS Extracranial/Autonomic",
+   "n": 24,
+   "overturned": 15,
+   "upheld": 9,
+   "rate": 0.625
+  },
+  {
+   "category": "Ophthalmology Proc",
+   "subcategory": null,
+   "n": 65,
+   "overturned": 27,
+   "upheld": 38,
+   "rate": 0.415
+  },
+  {
+   "category": "Ophthalmology Proc",
+   "subcategory": "Other",
+   "n": 43,
+   "overturned": 20,
+   "upheld": 23,
+   "rate": 0.465
+  },
+  {
+   "category": "Transportation",
+   "subcategory": null,
+   "n": 65,
+   "overturned": 35,
+   "upheld": 30,
+   "rate": 0.538
+  },
+  {
+   "category": "Transportation",
+   "subcategory": "Emergency",
+   "n": 32,
+   "overturned": 21,
+   "upheld": 11,
+   "rate": 0.656
+  },
+  {
+   "category": "Transportation",
+   "subcategory": "Non Emerg Med (NEMT)",
+   "n": 31,
+   "overturned": 13,
+   "upheld": 18,
+   "rate": 0.419
+  },
+  {
+   "category": "Vision Services/Ophthalmology",
+   "subcategory": null,
+   "n": 50,
+   "overturned": 28,
+   "upheld": 22,
+   "rate": 0.56
+  },
+  {
+   "category": "Vision Services/Ophthalmology",
+   "subcategory": "Other",
+   "n": 22,
+   "overturned": 12,
+   "upheld": 10,
+   "rate": 0.545
+  },
+  {
+   "category": "Prev Health Screen",
+   "subcategory": null,
+   "n": 44,
+   "overturned": 12,
+   "upheld": 32,
+   "rate": 0.273
+  },
+  {
+   "category": "Drug Ad Oth Oral",
+   "subcategory": null,
+   "n": 42,
+   "overturned": 38,
+   "upheld": 4,
+   "rate": 0.905
+  },
+  {
+   "category": "Drug Ad Oth Oral",
+   "subcategory": "Injection Admin Drugs",
+   "n": 29,
+   "overturned": 25,
+   "upheld": 4,
+   "rate": 0.862
+  },
+  {
+   "category": "Medicine Serv Proc",
+   "subcategory": null,
+   "n": 34,
+   "overturned": 18,
+   "upheld": 16,
+   "rate": 0.529
+  },
+  {
+   "category": "Not Applicable",
+   "subcategory": null,
+   "n": 31,
+   "overturned": 14,
+   "upheld": 17,
+   "rate": 0.452
+  },
+  {
+   "category": "Not Applicable",
+   "subcategory": "Not Applicable",
+   "n": 30,
+   "overturned": 14,
+   "upheld": 16,
+   "rate": 0.467
+  },
+  {
+   "category": "Radio Proc",
+   "subcategory": null,
+   "n": 29,
+   "overturned": 15,
+   "upheld": 14,
+   "rate": 0.517
+  },
+  {
+   "category": "Alcohol Drug Tmt",
+   "subcategory": null,
+   "n": 20,
+   "overturned": 18,
+   "upheld": 2,
+   "rate": 0.9
+  },
+  {
+   "category": "Durable Med Equip",
+   "subcategory": null,
+   "n": 18,
+   "overturned": 13,
+   "upheld": 5,
+   "rate": 0.722
+  },
+  {
+   "category": "Eval and Mgmt",
+   "subcategory": null,
+   "n": 13,
+   "overturned": 5,
+   "upheld": 8,
+   "rate": 0.385
+  },
+  {
+   "category": "DME MACs",
+   "subcategory": null,
+   "n": 6,
+   "overturned": 3,
+   "upheld": 3,
+   "rate": 0.5
+  },
+  {
+   "category": "Path Lab Proc",
+   "subcategory": null,
+   "n": 6,
+   "overturned": 1,
+   "upheld": 5,
+   "rate": 0.167
+  },
+  {
+   "category": "Temp Codes",
+   "subcategory": null,
+   "n": 6,
+   "overturned": 6,
+   "upheld": 0,
+   "rate": 1.0
+  },
+  {
+   "category": "Admin Misc  Invest",
+   "subcategory": null,
+   "n": 3,
+   "overturned": 2,
+   "upheld": 1,
+   "rate": 0.667
+  },
+  {
+   "category": "MLTSS",
+   "subcategory": null,
+   "n": 3,
+   "overturned": 1,
+   "upheld": 2,
+   "rate": 0.333
+  },
+  {
+   "category": "Category III Codes",
+   "subcategory": null,
+   "n": 2,
+   "overturned": 0,
+   "upheld": 2,
+   "rate": 0.0
+  },
+  {
+   "category": "Gen Surg proc",
+   "subcategory": null,
+   "n": 2,
+   "overturned": 1,
+   "upheld": 1,
+   "rate": 0.5
+  },
+  {
+   "category": "Med Surg Supplies",
+   "subcategory": null,
+   "n": 2,
+   "overturned": 1,
+   "upheld": 1,
+   "rate": 0.5
+  },
+  {
+   "category": "National Temp Codes",
+   "subcategory": null,
+   "n": 2,
+   "overturned": 0,
+   "upheld": 2,
+   "rate": 0.0
+  },
+  {
+   "category": "Proc/Profess Serv",
+   "subcategory": null,
+   "n": 2,
+   "overturned": 1,
+   "upheld": 1,
+   "rate": 0.5
+  },
+  {
+   "category": "Ambulance Transport",
+   "subcategory": null,
+   "n": 1,
+   "overturned": 1,
+   "upheld": 0,
+   "rate": 1.0
+  },
+  {
+   "category": "Chemo Drugs",
+   "subcategory": null,
+   "n": 1,
+   "overturned": 0,
+   "upheld": 1,
+   "rate": 0.0
+  },
+  {
+   "category": "Est National Codes",
+   "subcategory": null,
+   "n": 1,
+   "overturned": 0,
+   "upheld": 1,
+   "rate": 0.0
+  },
+  {
+   "category": "Ortho Proc Serv",
+   "subcategory": null,
+   "n": 1,
+   "overturned": 0,
+   "upheld": 1,
+   "rate": 0.0
+  },
+  {
+   "category": "Other Thera Proc",
+   "subcategory": null,
+   "n": 1,
+   "overturned": 1,
+   "upheld": 0,
+   "rate": 1.0
+  },
+  {
+   "category": "Outpatient PPS",
+   "subcategory": null,
+   "n": 1,
+   "overturned": 1,
+   "upheld": 0,
+   "rate": 1.0
+  },
+  {
+   "category": "Path Lab Serv",
+   "subcategory": null,
+   "n": 1,
+   "overturned": 1,
+   "upheld": 0,
+   "rate": 1.0
+  },
+  {
+   "category": "Prop Lab Analyses",
+   "subcategory": null,
+   "n": 1,
+   "overturned": 0,
+   "upheld": 1,
+   "rate": 0.0
+  },
+  {
+   "category": "Prosthetic Proc",
+   "subcategory": null,
+   "n": 1,
+   "overturned": 1,
+   "upheld": 0,
+   "rate": 1.0
+  }
+ ],
+ "by_diagnosis": [
+  {
+   "category": "Orth/Musculoskeletal",
+   "subcategory": null,
+   "n": 7333,
+   "overturned": 3053,
+   "upheld": 4280,
+   "rate": 0.416
+  },
+  {
+   "category": "Orth/Musculoskeletal",
+   "subcategory": "Back Pain",
+   "n": 1473,
+   "overturned": 460,
+   "upheld": 1013,
+   "rate": 0.312
+  },
+  {
+   "category": "Orth/Musculoskeletal",
+   "subcategory": "Osteoarthritis",
+   "n": 1334,
+   "overturned": 893,
+   "upheld": 441,
+   "rate": 0.669
+  },
+  {
+   "category": "Orth/Musculoskeletal",
+   "subcategory": "Other",
+   "n": 845,
+   "overturned": 302,
+   "upheld": 543,
+   "rate": 0.357
+  },
+  {
+   "category": "Orth/Musculoskeletal",
+   "subcategory": "Vertebral Disc Prob",
+   "n": 796,
+   "overturned": 189,
+   "upheld": 607,
+   "rate": 0.237
+  },
+  {
+   "category": "Orth/Musculoskeletal",
+   "subcategory": "Knee Problem",
+   "n": 492,
+   "overturned": 193,
+   "upheld": 299,
+   "rate": 0.392
+  },
+  {
+   "category": "Orth/Musculoskeletal",
+   "subcategory": "Knee Problem/Pain",
+   "n": 376,
+   "overturned": 241,
+   "upheld": 135,
+   "rate": 0.641
+  },
+  {
+   "category": "Orth/Musculoskeletal",
+   "subcategory": "Osteoporosis",
+   "n": 194,
+   "overturned": 102,
+   "upheld": 92,
+   "rate": 0.526
+  },
+  {
+   "category": "Orth/Musculoskeletal",
+   "subcategory": "Joint Problem",
+   "n": 163,
+   "overturned": 43,
+   "upheld": 120,
+   "rate": 0.264
+  },
+  {
+   "category": "Orth/Musculoskeletal",
+   "subcategory": "Fracture",
+   "n": 156,
+   "overturned": 51,
+   "upheld": 105,
+   "rate": 0.327
+  },
+  {
+   "category": "Orth/Musculoskeletal",
+   "subcategory": "Hip Problem",
+   "n": 132,
+   "overturned": 43,
+   "upheld": 89,
+   "rate": 0.326
+  },
+  {
+   "category": "Orth/Musculoskeletal",
+   "subcategory": "Neck Problem",
+   "n": 132,
+   "overturned": 35,
+   "upheld": 97,
+   "rate": 0.265
+  },
+  {
+   "category": "Orth/Musculoskeletal",
+   "subcategory": "Shoulder Problem",
+   "n": 121,
+   "overturned": 43,
+   "upheld": 78,
+   "rate": 0.355
+  },
+  {
+   "category": "Orth/Musculoskeletal",
+   "subcategory": "Shoulder Problem/Pain",
+   "n": 115,
+   "overturned": 53,
+   "upheld": 62,
+   "rate": 0.461
+  },
+  {
+   "category": "Orth/Musculoskeletal",
+   "subcategory": "Neck Problem/Pain",
+   "n": 102,
+   "overturned": 55,
+   "upheld": 47,
+   "rate": 0.539
+  },
+  {
+   "category": "Orth/Musculoskeletal",
+   "subcategory": "TMJ",
+   "n": 95,
+   "overturned": 52,
+   "upheld": 43,
+   "rate": 0.547
+  },
+  {
+   "category": "Orth/Musculoskeletal",
+   "subcategory": "Tendon Problem",
+   "n": 87,
+   "overturned": 22,
+   "upheld": 65,
+   "rate": 0.253
+  },
+  {
+   "category": "Orth/Musculoskeletal",
+   "subcategory": "Amputation",
+   "n": 86,
+   "overturned": 36,
+   "upheld": 50,
+   "rate": 0.419
+  },
+  {
+   "category": "Orth/Musculoskeletal",
+   "subcategory": "Hip Problem/Pain",
+   "n": 78,
+   "overturned": 22,
+   "upheld": 56,
+   "rate": 0.282
+  },
+  {
+   "category": "Orth/Musculoskeletal",
+   "subcategory": "Scoliosis",
+   "n": 74,
+   "overturned": 23,
+   "upheld": 51,
+   "rate": 0.311
+  },
+  {
+   "category": "Orth/Musculoskeletal",
+   "subcategory": "Ligament Problem",
+   "n": 71,
+   "overturned": 27,
+   "upheld": 44,
+   "rate": 0.38
+  },
+  {
+   "category": "Orth/Musculoskeletal",
+   "subcategory": "Bone Fracture/Break",
+   "n": 69,
+   "overturned": 20,
+   "upheld": 49,
+   "rate": 0.29
+  },
+  {
+   "category": "Orth/Musculoskeletal",
+   "subcategory": "Sciatica",
+   "n": 66,
+   "overturned": 19,
+   "upheld": 47,
+   "rate": 0.288
+  },
+  {
+   "category": "Orth/Musculoskeletal",
+   "subcategory": "Joint Problem/Pain",
+   "n": 65,
+   "overturned": 33,
+   "upheld": 32,
+   "rate": 0.508
+  },
+  {
+   "category": "Orth/Musculoskeletal",
+   "subcategory": "Muscle Spasms",
+   "n": 51,
+   "overturned": 23,
+   "upheld": 28,
+   "rate": 0.451
+  },
+  {
+   "category": "Orth/Musculoskeletal",
+   "subcategory": "Deformities",
+   "n": 35,
+   "overturned": 20,
+   "upheld": 15,
+   "rate": 0.571
+  },
+  {
+   "category": "Orth/Musculoskeletal",
+   "subcategory": "Fibromyalgia",
+   "n": 24,
+   "overturned": 9,
+   "upheld": 15,
+   "rate": 0.375
+  },
+  {
+   "category": "Orth/Musculoskeletal",
+   "subcategory": "Carpal Tunnel Synd",
+   "n": 22,
+   "overturned": 11,
+   "upheld": 11,
+   "rate": 0.5
+  },
+  {
+   "category": "Mental Disorder",
+   "subcategory": null,
+   "n": 6113,
+   "overturned": 3460,
+   "upheld": 2653,
+   "rate": 0.566
+  },
+  {
+   "category": "Mental Disorder",
+   "subcategory": "Depression",
+   "n": 1122,
+   "overturned": 656,
+   "upheld": 466,
+   "rate": 0.585
+  },
+  {
+   "category": "Mental Disorder",
+   "subcategory": "Depression - Severe",
+   "n": 591,
+   "overturned": 281,
+   "upheld": 310,
+   "rate": 0.475
+  },
+  {
+   "category": "Mental Disorder",
+   "subcategory": "Substance Abuse",
+   "n": 565,
+   "overturned": 228,
+   "upheld": 337,
+   "rate": 0.404
+  },
+  {
+   "category": "Mental Disorder",
+   "subcategory": "Anxiety",
+   "n": 502,
+   "overturned": 268,
+   "upheld": 234,
+   "rate": 0.534
+  },
+  {
+   "category": "Mental Disorder",
+   "subcategory": "Eating Disorder",
+   "n": 474,
+   "overturned": 269,
+   "upheld": 205,
+   "rate": 0.568
+  },
+  {
+   "category": "Mental Disorder",
+   "subcategory": "Bipolar Disorder",
+   "n": 453,
+   "overturned": 251,
+   "upheld": 202,
+   "rate": 0.554
+  },
+  {
+   "category": "Mental Disorder",
+   "subcategory": "Substance Use Disorder",
+   "n": 391,
+   "overturned": 324,
+   "upheld": 67,
+   "rate": 0.829
+  },
+  {
+   "category": "Mental Disorder",
+   "subcategory": "ADHD",
+   "n": 347,
+   "overturned": 170,
+   "upheld": 177,
+   "rate": 0.49
+  },
+  {
+   "category": "Mental Disorder",
+   "subcategory": "Gender Dysphoria",
+   "n": 263,
+   "overturned": 216,
+   "upheld": 47,
+   "rate": 0.821
+  },
+  {
+   "category": "Mental Disorder",
+   "subcategory": "Other",
+   "n": 250,
+   "overturned": 127,
+   "upheld": 123,
+   "rate": 0.508
+  },
+  {
+   "category": "Mental Disorder",
+   "subcategory": "ETOH Abuse/ Addict",
+   "n": 238,
+   "overturned": 70,
+   "upheld": 168,
+   "rate": 0.294
+  },
+  {
+   "category": "Mental Disorder",
+   "subcategory": "Alcohol Use Disorder",
+   "n": 218,
+   "overturned": 178,
+   "upheld": 40,
+   "rate": 0.817
+  },
+  {
+   "category": "Mental Disorder",
+   "subcategory": "Schizophrenia",
+   "n": 134,
+   "overturned": 84,
+   "upheld": 50,
+   "rate": 0.627
+  },
+  {
+   "category": "Mental Disorder",
+   "subcategory": "Obsess/Compulsive",
+   "n": 123,
+   "overturned": 80,
+   "upheld": 43,
+   "rate": 0.65
+  },
+  {
+   "category": "Mental Disorder",
+   "subcategory": "PTSD",
+   "n": 103,
+   "overturned": 74,
+   "upheld": 29,
+   "rate": 0.718
+  },
+  {
+   "category": "Mental Disorder",
+   "subcategory": "AlcoholAbuse/Addiction",
+   "n": 65,
+   "overturned": 40,
+   "upheld": 25,
+   "rate": 0.615
+  },
+  {
+   "category": "Mental Disorder",
+   "subcategory": "ADD",
+   "n": 49,
+   "overturned": 19,
+   "upheld": 30,
+   "rate": 0.388
+  },
+  {
+   "category": "Mental Disorder",
+   "subcategory": "Transgender",
+   "n": 45,
+   "overturned": 26,
+   "upheld": 19,
+   "rate": 0.578
+  },
+  {
+   "category": "Mental Disorder",
+   "subcategory": "High Risk Suicide",
+   "n": 43,
+   "overturned": 28,
+   "upheld": 15,
+   "rate": 0.651
+  },
+  {
+   "category": "Mental Disorder",
+   "subcategory": "Stress Disorder",
+   "n": 36,
+   "overturned": 17,
+   "upheld": 19,
+   "rate": 0.472
+  },
+  {
+   "category": "Mental Disorder",
+   "subcategory": "Psychosis",
+   "n": 34,
+   "overturned": 19,
+   "upheld": 15,
+   "rate": 0.559
+  },
+  {
+   "category": "Cancer",
+   "subcategory": null,
+   "n": 3704,
+   "overturned": 1781,
+   "upheld": 1923,
+   "rate": 0.481
+  },
+  {
+   "category": "Cancer",
+   "subcategory": "Breast",
+   "n": 807,
+   "overturned": 465,
+   "upheld": 342,
+   "rate": 0.576
+  },
+  {
+   "category": "Cancer",
+   "subcategory": "Prostate",
+   "n": 619,
+   "overturned": 214,
+   "upheld": 405,
+   "rate": 0.346
+  },
+  {
+   "category": "Cancer",
+   "subcategory": "Other",
+   "n": 483,
+   "overturned": 257,
+   "upheld": 226,
+   "rate": 0.532
+  },
+  {
+   "category": "Cancer",
+   "subcategory": "Lung",
+   "n": 264,
+   "overturned": 142,
+   "upheld": 122,
+   "rate": 0.538
+  },
+  {
+   "category": "Cancer",
+   "subcategory": "Skin",
+   "n": 247,
+   "overturned": 58,
+   "upheld": 189,
+   "rate": 0.235
+  },
+  {
+   "category": "Cancer",
+   "subcategory": "Colon",
+   "n": 179,
+   "overturned": 72,
+   "upheld": 107,
+   "rate": 0.402
+  },
+  {
+   "category": "Cancer",
+   "subcategory": "Brain",
+   "n": 171,
+   "overturned": 89,
+   "upheld": 82,
+   "rate": 0.52
+  },
+  {
+   "category": "Cancer",
+   "subcategory": "Ovarian",
+   "n": 104,
+   "overturned": 54,
+   "upheld": 50,
+   "rate": 0.519
+  },
+  {
+   "category": "Cancer",
+   "subcategory": "Liver",
+   "n": 99,
+   "overturned": 53,
+   "upheld": 46,
+   "rate": 0.535
+  },
+  {
+   "category": "Cancer",
+   "subcategory": "Pancreas",
+   "n": 90,
+   "overturned": 56,
+   "upheld": 34,
+   "rate": 0.622
+  },
+  {
+   "category": "Cancer",
+   "subcategory": "Melanoma",
+   "n": 77,
+   "overturned": 10,
+   "upheld": 67,
+   "rate": 0.13
+  },
+  {
+   "category": "Cancer",
+   "subcategory": "Bone",
+   "n": 58,
+   "overturned": 33,
+   "upheld": 25,
+   "rate": 0.569
+  },
+  {
+   "category": "Cancer",
+   "subcategory": "Lymph Nodes",
+   "n": 56,
+   "overturned": 25,
+   "upheld": 31,
+   "rate": 0.446
+  },
+  {
+   "category": "Cancer",
+   "subcategory": "Leukemia",
+   "n": 55,
+   "overturned": 38,
+   "upheld": 17,
+   "rate": 0.691
+  },
+  {
+   "category": "Cancer",
+   "subcategory": "Throat/ Neck",
+   "n": 45,
+   "overturned": 24,
+   "upheld": 21,
+   "rate": 0.533
+  },
+  {
+   "category": "Cancer",
+   "subcategory": "Tumor",
+   "n": 41,
+   "overturned": 26,
+   "upheld": 15,
+   "rate": 0.634
+  },
+  {
+   "category": "Cancer",
+   "subcategory": "Blood",
+   "n": 38,
+   "overturned": 25,
+   "upheld": 13,
+   "rate": 0.658
+  },
+  {
+   "category": "Cancer",
+   "subcategory": "Lymphoma",
+   "n": 31,
+   "overturned": 22,
+   "upheld": 9,
+   "rate": 0.71
+  },
+  {
+   "category": "Cancer",
+   "subcategory": "Uterine",
+   "n": 30,
+   "overturned": 15,
+   "upheld": 15,
+   "rate": 0.5
+  },
+  {
+   "category": "Cancer",
+   "subcategory": "Renal",
+   "n": 29,
+   "overturned": 12,
+   "upheld": 17,
+   "rate": 0.414
+  },
+  {
+   "category": "Cancer",
+   "subcategory": "Esophagus",
+   "n": 21,
+   "overturned": 9,
+   "upheld": 12,
+   "rate": 0.429
+  },
+  {
+   "category": "Cancer",
+   "subcategory": "Sarcoma",
+   "n": 20,
+   "overturned": 14,
+   "upheld": 6,
+   "rate": 0.7
+  },
+  {
+   "category": "Endocrine/Metabolic",
+   "subcategory": null,
+   "n": 3342,
+   "overturned": 2248,
+   "upheld": 1094,
+   "rate": 0.673
+  },
+  {
+   "category": "Endocrine/Metabolic",
+   "subcategory": "Obesity",
+   "n": 1326,
+   "overturned": 1157,
+   "upheld": 169,
+   "rate": 0.873
+  },
+  {
+   "category": "Endocrine/Metabolic",
+   "subcategory": "Diabetes",
+   "n": 834,
+   "overturned": 541,
+   "upheld": 293,
+   "rate": 0.649
+  },
+  {
+   "category": "Endocrine/Metabolic",
+   "subcategory": "Growth Horm Def",
+   "n": 314,
+   "overturned": 129,
+   "upheld": 185,
+   "rate": 0.411
+  },
+  {
+   "category": "Endocrine/Metabolic",
+   "subcategory": "Other",
+   "n": 199,
+   "overturned": 84,
+   "upheld": 115,
+   "rate": 0.422
+  },
+  {
+   "category": "Endocrine/Metabolic",
+   "subcategory": "Thyroid Problems",
+   "n": 182,
+   "overturned": 116,
+   "upheld": 66,
+   "rate": 0.637
+  },
+  {
+   "category": "Endocrine/Metabolic",
+   "subcategory": "High Cholesterol",
+   "n": 109,
+   "overturned": 32,
+   "upheld": 77,
+   "rate": 0.294
+  },
+  {
+   "category": "Endocrine/Metabolic",
+   "subcategory": "Hormone Abnormality",
+   "n": 100,
+   "overturned": 52,
+   "upheld": 48,
+   "rate": 0.52
+  },
+  {
+   "category": "Endocrine/Metabolic",
+   "subcategory": "Hormone Deficiency",
+   "n": 85,
+   "overturned": 37,
+   "upheld": 48,
+   "rate": 0.435
+  },
+  {
+   "category": "Endocrine/Metabolic",
+   "subcategory": "Gynecomastia",
+   "n": 52,
+   "overturned": 18,
+   "upheld": 34,
+   "rate": 0.346
+  },
+  {
+   "category": "Endocrine/Metabolic",
+   "subcategory": "Cystic Fibrosis",
+   "n": 34,
+   "overturned": 26,
+   "upheld": 8,
+   "rate": 0.765
+  },
+  {
+   "category": "Endocrine/Metabolic",
+   "subcategory": "Hypoglycemia",
+   "n": 28,
+   "overturned": 19,
+   "upheld": 9,
+   "rate": 0.679
+  },
+  {
+   "category": "Endocrine/Metabolic",
+   "subcategory": "Lipedema (Lipoedema)",
+   "n": 27,
+   "overturned": 12,
+   "upheld": 15,
+   "rate": 0.444
+  },
+  {
+   "category": "Endocrine/Metabolic",
+   "subcategory": "Pituitary Condition",
+   "n": 27,
+   "overturned": 16,
+   "upheld": 11,
+   "rate": 0.593
+  },
+  {
+   "category": "CNS/ Neuromusc Dis",
+   "subcategory": null,
+   "n": 3302,
+   "overturned": 1817,
+   "upheld": 1485,
+   "rate": 0.55
+  },
+  {
+   "category": "CNS/ Neuromusc Dis",
+   "subcategory": "Other",
+   "n": 896,
+   "overturned": 418,
+   "upheld": 478,
+   "rate": 0.467
+  },
+  {
+   "category": "CNS/ Neuromusc Dis",
+   "subcategory": "Migraine",
+   "n": 639,
+   "overturned": 407,
+   "upheld": 232,
+   "rate": 0.637
+  },
+  {
+   "category": "CNS/ Neuromusc Dis",
+   "subcategory": "Multiple Sclerosis",
+   "n": 377,
+   "overturned": 232,
+   "upheld": 145,
+   "rate": 0.615
+  },
+  {
+   "category": "CNS/ Neuromusc Dis",
+   "subcategory": "Headache",
+   "n": 261,
+   "overturned": 110,
+   "upheld": 151,
+   "rate": 0.421
+  },
+  {
+   "category": "CNS/ Neuromusc Dis",
+   "subcategory": "Apnea/Sleep Apnea",
+   "n": 168,
+   "overturned": 128,
+   "upheld": 40,
+   "rate": 0.762
+  },
+  {
+   "category": "CNS/ Neuromusc Dis",
+   "subcategory": "Cerebral Palsy",
+   "n": 146,
+   "overturned": 84,
+   "upheld": 62,
+   "rate": 0.575
+  },
+  {
+   "category": "CNS/ Neuromusc Dis",
+   "subcategory": "Paralysis",
+   "n": 137,
+   "overturned": 38,
+   "upheld": 99,
+   "rate": 0.277
+  },
+  {
+   "category": "CNS/ Neuromusc Dis",
+   "subcategory": "Epilepsy",
+   "n": 120,
+   "overturned": 93,
+   "upheld": 27,
+   "rate": 0.775
+  },
+  {
+   "category": "CNS/ Neuromusc Dis",
+   "subcategory": "Peripheral Neuropathy",
+   "n": 71,
+   "overturned": 45,
+   "upheld": 26,
+   "rate": 0.634
+  },
+  {
+   "category": "CNS/ Neuromusc Dis",
+   "subcategory": "Parkinson's Disease",
+   "n": 68,
+   "overturned": 42,
+   "upheld": 26,
+   "rate": 0.618
+  },
+  {
+   "category": "CNS/ Neuromusc Dis",
+   "subcategory": "Insomnia",
+   "n": 66,
+   "overturned": 25,
+   "upheld": 41,
+   "rate": 0.379
+  },
+  {
+   "category": "CNS/ Neuromusc Dis",
+   "subcategory": "Brain Tumor",
+   "n": 59,
+   "overturned": 31,
+   "upheld": 28,
+   "rate": 0.525
+  },
+  {
+   "category": "CNS/ Neuromusc Dis",
+   "subcategory": "Narcolepsy",
+   "n": 56,
+   "overturned": 26,
+   "upheld": 30,
+   "rate": 0.464
+  },
+  {
+   "category": "CNS/ Neuromusc Dis",
+   "subcategory": "ALS",
+   "n": 43,
+   "overturned": 29,
+   "upheld": 14,
+   "rate": 0.674
+  },
+  {
+   "category": "CNS/ Neuromusc Dis",
+   "subcategory": "Speech Problems",
+   "n": 35,
+   "overturned": 23,
+   "upheld": 12,
+   "rate": 0.657
+  },
+  {
+   "category": "CNS/ Neuromusc Dis",
+   "subcategory": "Chronic Pain Syndrome",
+   "n": 33,
+   "overturned": 15,
+   "upheld": 18,
+   "rate": 0.455
+  },
+  {
+   "category": "CNS/ Neuromusc Dis",
+   "subcategory": "Complex Regional Pain Synd/RSD",
+   "n": 32,
+   "overturned": 21,
+   "upheld": 11,
+   "rate": 0.656
+  },
+  {
+   "category": "CNS/ Neuromusc Dis",
+   "subcategory": "Alzheimer's Disease",
+   "n": 28,
+   "overturned": 13,
+   "upheld": 15,
+   "rate": 0.464
+  },
+  {
+   "category": "CNS/ Neuromusc Dis",
+   "subcategory": "Seizures",
+   "n": 21,
+   "overturned": 13,
+   "upheld": 8,
+   "rate": 0.619
+  },
+  {
+   "category": "Cardiac/Circ Problem",
+   "subcategory": null,
+   "n": 2157,
+   "overturned": 868,
+   "upheld": 1289,
+   "rate": 0.402
+  },
+  {
+   "category": "Cardiac/Circ Problem",
+   "subcategory": "Other",
+   "n": 473,
+   "overturned": 186,
+   "upheld": 287,
+   "rate": 0.393
+  },
+  {
+   "category": "Cardiac/Circ Problem",
+   "subcategory": "Cardiac/Heart Prob",
+   "n": 296,
+   "overturned": 105,
+   "upheld": 191,
+   "rate": 0.355
+  },
+  {
+   "category": "Cardiac/Circ Problem",
+   "subcategory": "Stroke/ CVA",
+   "n": 248,
+   "overturned": 78,
+   "upheld": 170,
+   "rate": 0.315
+  },
+  {
+   "category": "Cardiac/Circ Problem",
+   "subcategory": "Varicose Veins",
+   "n": 209,
+   "overturned": 80,
+   "upheld": 129,
+   "rate": 0.383
+  },
+  {
+   "category": "Cardiac/Circ Problem",
+   "subcategory": "Hypertension",
+   "n": 182,
+   "overturned": 70,
+   "upheld": 112,
+   "rate": 0.385
+  },
+  {
+   "category": "Cardiac/Circ Problem",
+   "subcategory": "Cardiomyopathy",
+   "n": 97,
+   "overturned": 50,
+   "upheld": 47,
+   "rate": 0.515
+  },
+  {
+   "category": "Cardiac/Circ Problem",
+   "subcategory": "Arrhythmia/Irregular Heart Rhythm",
+   "n": 90,
+   "overturned": 44,
+   "upheld": 46,
+   "rate": 0.489
+  },
+  {
+   "category": "Cardiac/Circ Problem",
+   "subcategory": "Lymphedema",
+   "n": 89,
+   "overturned": 57,
+   "upheld": 32,
+   "rate": 0.64
+  },
+  {
+   "category": "Cardiac/Circ Problem",
+   "subcategory": "Chest Pain",
+   "n": 88,
+   "overturned": 24,
+   "upheld": 64,
+   "rate": 0.273
+  },
+  {
+   "category": "Cardiac/Circ Problem",
+   "subcategory": "CAD",
+   "n": 69,
+   "overturned": 19,
+   "upheld": 50,
+   "rate": 0.275
+  },
+  {
+   "category": "Cardiac/Circ Problem",
+   "subcategory": "Cardiac Valve Dis",
+   "n": 46,
+   "overturned": 24,
+   "upheld": 22,
+   "rate": 0.522
+  },
+  {
+   "category": "Cardiac/Circ Problem",
+   "subcategory": "Coronary Artery Disease",
+   "n": 46,
+   "overturned": 19,
+   "upheld": 27,
+   "rate": 0.413
+  },
+  {
+   "category": "Cardiac/Circ Problem",
+   "subcategory": "Heart Attack",
+   "n": 42,
+   "overturned": 17,
+   "upheld": 25,
+   "rate": 0.405
+  },
+  {
+   "category": "Cardiac/Circ Problem",
+   "subcategory": "Congestive Heart Failure",
+   "n": 32,
+   "overturned": 18,
+   "upheld": 14,
+   "rate": 0.562
+  },
+  {
+   "category": "Cardiac/Circ Problem",
+   "subcategory": "Angina",
+   "n": 24,
+   "overturned": 9,
+   "upheld": 15,
+   "rate": 0.375
+  },
+  {
+   "category": "Cardiac/Circ Problem",
+   "subcategory": "Congenital Heart Dft",
+   "n": 23,
+   "overturned": 16,
+   "upheld": 7,
+   "rate": 0.696
+  },
+  {
+   "category": "Cardiac/Circ Problem",
+   "subcategory": "Blood Clot",
+   "n": 22,
+   "overturned": 12,
+   "upheld": 10,
+   "rate": 0.545
+  },
+  {
+   "category": "Digestive System/ GI",
+   "subcategory": null,
+   "n": 1855,
+   "overturned": 892,
+   "upheld": 963,
+   "rate": 0.481
+  },
+  {
+   "category": "Digestive System/ GI",
+   "subcategory": "Other",
+   "n": 509,
+   "overturned": 224,
+   "upheld": 285,
+   "rate": 0.44
+  },
+  {
+   "category": "Digestive System/ GI",
+   "subcategory": "GERD & Relate Dis",
+   "n": 228,
+   "overturned": 38,
+   "upheld": 190,
+   "rate": 0.167
+  },
+  {
+   "category": "Digestive System/ GI",
+   "subcategory": "Crohn's Disease",
+   "n": 180,
+   "overturned": 147,
+   "upheld": 33,
+   "rate": 0.817
+  },
+  {
+   "category": "Digestive System/ GI",
+   "subcategory": "Ulcerative Colitis",
+   "n": 165,
+   "overturned": 107,
+   "upheld": 58,
+   "rate": 0.648
+  },
+  {
+   "category": "Digestive System/ GI",
+   "subcategory": "Crohns Disease",
+   "n": 158,
+   "overturned": 62,
+   "upheld": 96,
+   "rate": 0.392
+  },
+  {
+   "category": "Digestive System/ GI",
+   "subcategory": "GERD/Reflux Disease",
+   "n": 101,
+   "overturned": 49,
+   "upheld": 52,
+   "rate": 0.485
+  },
+  {
+   "category": "Digestive System/ GI",
+   "subcategory": "Irritable Bowel",
+   "n": 76,
+   "overturned": 31,
+   "upheld": 45,
+   "rate": 0.408
+  },
+  {
+   "category": "Digestive System/ GI",
+   "subcategory": "Abdominal/Stomach Pain",
+   "n": 62,
+   "overturned": 39,
+   "upheld": 23,
+   "rate": 0.629
+  },
+  {
+   "category": "Digestive System/ GI",
+   "subcategory": "Irritable Bowel Syndrome",
+   "n": 51,
+   "overturned": 34,
+   "upheld": 17,
+   "rate": 0.667
+  },
+  {
+   "category": "Digestive System/ GI",
+   "subcategory": "Constipation",
+   "n": 28,
+   "overturned": 15,
+   "upheld": 13,
+   "rate": 0.536
+  },
+  {
+   "category": "Digestive System/ GI",
+   "subcategory": "Cirrhosis",
+   "n": 24,
+   "overturned": 14,
+   "upheld": 10,
+   "rate": 0.583
+  },
+  {
+   "category": "Digestive System/ GI",
+   "subcategory": "Colitis/Inflammatory Bowel Disease",
+   "n": 24,
+   "overturned": 16,
+   "upheld": 8,
+   "rate": 0.667
+  },
+  {
+   "category": "Digestive System/ GI",
+   "subcategory": "GI Bleeding",
+   "n": 22,
+   "overturned": 11,
+   "upheld": 11,
+   "rate": 0.5
+  },
+  {
+   "category": "Digestive System/ GI",
+   "subcategory": "Chronic Diarrhea",
+   "n": 21,
+   "overturned": 10,
+   "upheld": 11,
+   "rate": 0.476
+  },
+  {
+   "category": "Digestive System/ GI",
+   "subcategory": "Inflammatory Bowel",
+   "n": 21,
+   "overturned": 7,
+   "upheld": 14,
+   "rate": 0.333
+  },
+  {
+   "category": "Digestive System/ GI",
+   "subcategory": "Gastritis",
+   "n": 20,
+   "overturned": 10,
+   "upheld": 10,
+   "rate": 0.5
+  },
+  {
+   "category": "Digestive System/ GI",
+   "subcategory": "Hernia",
+   "n": 20,
+   "overturned": 10,
+   "upheld": 10,
+   "rate": 0.5
+  },
+  {
+   "category": "Infectious Disease",
+   "subcategory": null,
+   "n": 1795,
+   "overturned": 1268,
+   "upheld": 527,
+   "rate": 0.706
+  },
+  {
+   "category": "Infectious Disease",
+   "subcategory": "Hepatitis",
+   "n": 1376,
+   "overturned": 1121,
+   "upheld": 255,
+   "rate": 0.815
+  },
+  {
+   "category": "Infectious Disease",
+   "subcategory": "Lyme Disease",
+   "n": 109,
+   "overturned": 8,
+   "upheld": 101,
+   "rate": 0.073
+  },
+  {
+   "category": "Infectious Disease",
+   "subcategory": "AIDS/HIV",
+   "n": 78,
+   "overturned": 39,
+   "upheld": 39,
+   "rate": 0.5
+  },
+  {
+   "category": "Infectious Disease",
+   "subcategory": "Bacterial Infection",
+   "n": 64,
+   "overturned": 30,
+   "upheld": 34,
+   "rate": 0.469
+  },
+  {
+   "category": "Infectious Disease",
+   "subcategory": "Nail Fungus",
+   "n": 58,
+   "overturned": 28,
+   "upheld": 30,
+   "rate": 0.483
+  },
+  {
+   "category": "Infectious Disease",
+   "subcategory": "Other",
+   "n": 57,
+   "overturned": 21,
+   "upheld": 36,
+   "rate": 0.368
+  },
+  {
+   "category": "Infectious Disease",
+   "subcategory": "Viral Infection",
+   "n": 33,
+   "overturned": 13,
+   "upheld": 20,
+   "rate": 0.394
+  },
+  {
+   "category": "Autism Spectrum",
+   "subcategory": null,
+   "n": 1387,
+   "overturned": 927,
+   "upheld": 460,
+   "rate": 0.668
+  },
+  {
+   "category": "Autism Spectrum",
+   "subcategory": "Autism-PDD-NOS",
+   "n": 888,
+   "overturned": 613,
+   "upheld": 275,
+   "rate": 0.69
+  },
+  {
+   "category": "Autism Spectrum",
+   "subcategory": "Autistic Disorder",
+   "n": 419,
+   "overturned": 256,
+   "upheld": 163,
+   "rate": 0.611
+  },
+  {
+   "category": "Autism Spectrum",
+   "subcategory": "Other",
+   "n": 36,
+   "overturned": 28,
+   "upheld": 8,
+   "rate": 0.778
+  },
+  {
+   "category": "Autism Spectrum",
+   "subcategory": "Asperger Syndrome",
+   "n": 24,
+   "overturned": 14,
+   "upheld": 10,
+   "rate": 0.583
+  },
+  {
+   "category": "Skin Disorders",
+   "subcategory": null,
+   "n": 1310,
+   "overturned": 729,
+   "upheld": 581,
+   "rate": 0.556
+  },
+  {
+   "category": "Skin Disorders",
+   "subcategory": "Psoriasis",
+   "n": 346,
+   "overturned": 228,
+   "upheld": 118,
+   "rate": 0.659
+  },
+  {
+   "category": "Skin Disorders",
+   "subcategory": "Other",
+   "n": 344,
+   "overturned": 159,
+   "upheld": 185,
+   "rate": 0.462
+  },
+  {
+   "category": "Skin Disorders",
+   "subcategory": "Dermatitis",
+   "n": 143,
+   "overturned": 115,
+   "upheld": 28,
+   "rate": 0.804
+  },
+  {
+   "category": "Skin Disorders",
+   "subcategory": "Excess Skin",
+   "n": 75,
+   "overturned": 15,
+   "upheld": 60,
+   "rate": 0.2
+  },
+  {
+   "category": "Skin Disorders",
+   "subcategory": "Eczema",
+   "n": 72,
+   "overturned": 55,
+   "upheld": 17,
+   "rate": 0.764
+  },
+  {
+   "category": "Skin Disorders",
+   "subcategory": "Acne",
+   "n": 65,
+   "overturned": 32,
+   "upheld": 33,
+   "rate": 0.492
+  },
+  {
+   "category": "Skin Disorders",
+   "subcategory": "Rash",
+   "n": 63,
+   "overturned": 24,
+   "upheld": 39,
+   "rate": 0.381
+  },
+  {
+   "category": "Skin Disorders",
+   "subcategory": "Skin Lesion",
+   "n": 36,
+   "overturned": 24,
+   "upheld": 12,
+   "rate": 0.667
+  },
+  {
+   "category": "Skin Disorders",
+   "subcategory": "Cyst",
+   "n": 35,
+   "overturned": 19,
+   "upheld": 16,
+   "rate": 0.543
+  },
+  {
+   "category": "Skin Disorders",
+   "subcategory": "Mole",
+   "n": 26,
+   "overturned": 11,
+   "upheld": 15,
+   "rate": 0.423
+  },
+  {
+   "category": "Skin Disorders",
+   "subcategory": "Keloid",
+   "n": 20,
+   "overturned": 14,
+   "upheld": 6,
+   "rate": 0.7
+  },
+  {
+   "category": "OB-GYN/ Pregnancy",
+   "subcategory": null,
+   "n": 1080,
+   "overturned": 539,
+   "upheld": 541,
+   "rate": 0.499
+  },
+  {
+   "category": "OB-GYN/ Pregnancy",
+   "subcategory": "Female Breast Dis",
+   "n": 390,
+   "overturned": 259,
+   "upheld": 131,
+   "rate": 0.664
+  },
+  {
+   "category": "OB-GYN/ Pregnancy",
+   "subcategory": "Other",
+   "n": 264,
+   "overturned": 132,
+   "upheld": 132,
+   "rate": 0.5
+  },
+  {
+   "category": "OB-GYN/ Pregnancy",
+   "subcategory": "Pregnancy",
+   "n": 149,
+   "overturned": 60,
+   "upheld": 89,
+   "rate": 0.403
+  },
+  {
+   "category": "OB-GYN/ Pregnancy",
+   "subcategory": "Fibroids",
+   "n": 66,
+   "overturned": 19,
+   "upheld": 47,
+   "rate": 0.288
+  },
+  {
+   "category": "OB-GYN/ Pregnancy",
+   "subcategory": "Menopause",
+   "n": 50,
+   "overturned": 10,
+   "upheld": 40,
+   "rate": 0.2
+  },
+  {
+   "category": "OB-GYN/ Pregnancy",
+   "subcategory": "Endometriosis",
+   "n": 37,
+   "overturned": 10,
+   "upheld": 27,
+   "rate": 0.27
+  },
+  {
+   "category": "OB-GYN/ Pregnancy",
+   "subcategory": "Ovarian Cyst",
+   "n": 29,
+   "overturned": 12,
+   "upheld": 17,
+   "rate": 0.414
+  },
+  {
+   "category": "Pediatrics",
+   "subcategory": null,
+   "n": 1062,
+   "overturned": 665,
+   "upheld": 397,
+   "rate": 0.626
+  },
+  {
+   "category": "Pediatrics",
+   "subcategory": "Delayed Speech",
+   "n": 412,
+   "overturned": 323,
+   "upheld": 89,
+   "rate": 0.784
+  },
+  {
+   "category": "Pediatrics",
+   "subcategory": "Other",
+   "n": 223,
+   "overturned": 125,
+   "upheld": 98,
+   "rate": 0.561
+  },
+  {
+   "category": "Pediatrics",
+   "subcategory": "Short Stature",
+   "n": 134,
+   "overturned": 54,
+   "upheld": 80,
+   "rate": 0.403
+  },
+  {
+   "category": "Pediatrics",
+   "subcategory": "Develop Delay/ Cog",
+   "n": 86,
+   "overturned": 65,
+   "upheld": 21,
+   "rate": 0.756
+  },
+  {
+   "category": "Pediatrics",
+   "subcategory": "Allergy",
+   "n": 58,
+   "overturned": 6,
+   "upheld": 52,
+   "rate": 0.103
+  },
+  {
+   "category": "Pediatrics",
+   "subcategory": "Develop Delay/ Ortho",
+   "n": 47,
+   "overturned": 27,
+   "upheld": 20,
+   "rate": 0.574
+  },
+  {
+   "category": "Pediatrics",
+   "subcategory": "Congenital Deformity",
+   "n": 45,
+   "overturned": 29,
+   "upheld": 16,
+   "rate": 0.644
+  },
+  {
+   "category": "Pediatrics",
+   "subcategory": "Pediatric Ortho",
+   "n": 25,
+   "overturned": 19,
+   "upheld": 6,
+   "rate": 0.76
+  },
+  {
+   "category": "GU/ Kidney Disorder",
+   "subcategory": null,
+   "n": 992,
+   "overturned": 480,
+   "upheld": 512,
+   "rate": 0.484
+  },
+  {
+   "category": "GU/ Kidney Disorder",
+   "subcategory": "Other",
+   "n": 295,
+   "overturned": 133,
+   "upheld": 162,
+   "rate": 0.451
+  },
+  {
+   "category": "GU/ Kidney Disorder",
+   "subcategory": "Incontinence",
+   "n": 99,
+   "overturned": 33,
+   "upheld": 66,
+   "rate": 0.333
+  },
+  {
+   "category": "GU/ Kidney Disorder",
+   "subcategory": "Erectile Dysfunction",
+   "n": 96,
+   "overturned": 56,
+   "upheld": 40,
+   "rate": 0.583
+  },
+  {
+   "category": "GU/ Kidney Disorder",
+   "subcategory": "Female Breast Dis/Lump/Cyst",
+   "n": 75,
+   "overturned": 39,
+   "upheld": 36,
+   "rate": 0.52
+  },
+  {
+   "category": "GU/ Kidney Disorder",
+   "subcategory": "Male Genital Dis",
+   "n": 36,
+   "overturned": 17,
+   "upheld": 19,
+   "rate": 0.472
+  },
+  {
+   "category": "GU/ Kidney Disorder",
+   "subcategory": "Prostate Problem",
+   "n": 33,
+   "overturned": 15,
+   "upheld": 18,
+   "rate": 0.455
+  },
+  {
+   "category": "GU/ Kidney Disorder",
+   "subcategory": "Uterine Fibroids",
+   "n": 33,
+   "overturned": 19,
+   "upheld": 14,
+   "rate": 0.576
+  },
+  {
+   "category": "GU/ Kidney Disorder",
+   "subcategory": "Endometriosis",
+   "n": 32,
+   "overturned": 20,
+   "upheld": 12,
+   "rate": 0.625
+  },
+  {
+   "category": "GU/ Kidney Disorder",
+   "subcategory": "Chron Kidney Failure/ESRD",
+   "n": 31,
+   "overturned": 24,
+   "upheld": 7,
+   "rate": 0.774
+  },
+  {
+   "category": "GU/ Kidney Disorder",
+   "subcategory": "Vaginal Infection",
+   "n": 27,
+   "overturned": 8,
+   "upheld": 19,
+   "rate": 0.296
+  },
+  {
+   "category": "GU/ Kidney Disorder",
+   "subcategory": "Menopause",
+   "n": 26,
+   "overturned": 15,
+   "upheld": 11,
+   "rate": 0.577
+  },
+  {
+   "category": "GU/ Kidney Disorder",
+   "subcategory": "UTI",
+   "n": 26,
+   "overturned": 14,
+   "upheld": 12,
+   "rate": 0.538
+  },
+  {
+   "category": "GU/ Kidney Disorder",
+   "subcategory": "Acute Kidney Failure",
+   "n": 24,
+   "overturned": 16,
+   "upheld": 8,
+   "rate": 0.667
+  },
+  {
+   "category": "GU/ Kidney Disorder",
+   "subcategory": "Ovarian Cyst",
+   "n": 23,
+   "overturned": 12,
+   "upheld": 11,
+   "rate": 0.522
+  },
+  {
+   "category": "GU/ Kidney Disorder",
+   "subcategory": "Interstit Cystitis",
+   "n": 22,
+   "overturned": 6,
+   "upheld": 16,
+   "rate": 0.273
+  },
+  {
+   "category": "GU/ Kidney Disorder",
+   "subcategory": "Chron Kidney Fail",
+   "n": 21,
+   "overturned": 9,
+   "upheld": 12,
+   "rate": 0.429
+  },
+  {
+   "category": "GU/ Kidney Disorder",
+   "subcategory": "Female Infertility",
+   "n": 21,
+   "overturned": 12,
+   "upheld": 9,
+   "rate": 0.571
+  },
+  {
+   "category": "Immuno Disorders",
+   "subcategory": null,
+   "n": 960,
+   "overturned": 480,
+   "upheld": 480,
+   "rate": 0.5
+  },
+  {
+   "category": "Immuno Disorders",
+   "subcategory": "Other",
+   "n": 263,
+   "overturned": 121,
+   "upheld": 142,
+   "rate": 0.46
+  },
+  {
+   "category": "Immuno Disorders",
+   "subcategory": "Arthritis",
+   "n": 158,
+   "overturned": 89,
+   "upheld": 69,
+   "rate": 0.563
+  },
+  {
+   "category": "Immuno Disorders",
+   "subcategory": "Autoimmune Disease",
+   "n": 122,
+   "overturned": 77,
+   "upheld": 45,
+   "rate": 0.631
+  },
+  {
+   "category": "Immuno Disorders",
+   "subcategory": "Fibromyalgia",
+   "n": 109,
+   "overturned": 33,
+   "upheld": 76,
+   "rate": 0.303
+  },
+  {
+   "category": "Immuno Disorders",
+   "subcategory": "Lupus",
+   "n": 89,
+   "overturned": 48,
+   "upheld": 41,
+   "rate": 0.539
+  },
+  {
+   "category": "Immuno Disorders",
+   "subcategory": "Rheumatoid Arthritis",
+   "n": 88,
+   "overturned": 36,
+   "upheld": 52,
+   "rate": 0.409
+  },
+  {
+   "category": "Immuno Disorders",
+   "subcategory": "Alopecia",
+   "n": 78,
+   "overturned": 66,
+   "upheld": 12,
+   "rate": 0.846
+  },
+  {
+   "category": "Immuno Disorders",
+   "subcategory": "Scleroderma",
+   "n": 29,
+   "overturned": 6,
+   "upheld": 23,
+   "rate": 0.207
+  },
+  {
+   "category": "Immuno Disorders",
+   "subcategory": "Chronic Fatigue Synd",
+   "n": 24,
+   "overturned": 4,
+   "upheld": 20,
+   "rate": 0.167
+  },
+  {
+   "category": "Morbid Obesity",
+   "subcategory": null,
+   "n": 945,
+   "overturned": 490,
+   "upheld": 455,
+   "rate": 0.519
+  },
+  {
+   "category": "Morbid Obesity",
+   "subcategory": "Other",
+   "n": 436,
+   "overturned": 236,
+   "upheld": 200,
+   "rate": 0.541
+  },
+  {
+   "category": "Morbid Obesity",
+   "subcategory": "Hypertension",
+   "n": 195,
+   "overturned": 128,
+   "upheld": 67,
+   "rate": 0.656
+  },
+  {
+   "category": "Morbid Obesity",
+   "subcategory": "Excess Skin",
+   "n": 132,
+   "overturned": 36,
+   "upheld": 96,
+   "rate": 0.273
+  },
+  {
+   "category": "Morbid Obesity",
+   "subcategory": "Musculoskelet/ Ortho",
+   "n": 86,
+   "overturned": 42,
+   "upheld": 44,
+   "rate": 0.488
+  },
+  {
+   "category": "Morbid Obesity",
+   "subcategory": "Cardiac Problem",
+   "n": 38,
+   "overturned": 24,
+   "upheld": 14,
+   "rate": 0.632
+  },
+  {
+   "category": "Morbid Obesity",
+   "subcategory": "Post Surg Complicat",
+   "n": 24,
+   "overturned": 8,
+   "upheld": 16,
+   "rate": 0.333
+  },
+  {
+   "category": "Respiratory System",
+   "subcategory": null,
+   "n": 896,
+   "overturned": 414,
+   "upheld": 482,
+   "rate": 0.462
+  },
+  {
+   "category": "Respiratory System",
+   "subcategory": "Sleep Apnea",
+   "n": 233,
+   "overturned": 99,
+   "upheld": 134,
+   "rate": 0.425
+  },
+  {
+   "category": "Respiratory System",
+   "subcategory": "Asthma",
+   "n": 207,
+   "overturned": 107,
+   "upheld": 100,
+   "rate": 0.517
+  },
+  {
+   "category": "Respiratory System",
+   "subcategory": "Other",
+   "n": 137,
+   "overturned": 63,
+   "upheld": 74,
+   "rate": 0.46
+  },
+  {
+   "category": "Respiratory System",
+   "subcategory": "COPD",
+   "n": 58,
+   "overturned": 17,
+   "upheld": 41,
+   "rate": 0.293
+  },
+  {
+   "category": "Respiratory System",
+   "subcategory": "Resp Allergies",
+   "n": 49,
+   "overturned": 27,
+   "upheld": 22,
+   "rate": 0.551
+  },
+  {
+   "category": "Respiratory System",
+   "subcategory": "Breathing Problem",
+   "n": 44,
+   "overturned": 25,
+   "upheld": 19,
+   "rate": 0.568
+  },
+  {
+   "category": "Respiratory System",
+   "subcategory": "Bronchitis",
+   "n": 31,
+   "overturned": 13,
+   "upheld": 18,
+   "rate": 0.419
+  },
+  {
+   "category": "Respiratory System",
+   "subcategory": "Short of Breath",
+   "n": 26,
+   "overturned": 12,
+   "upheld": 14,
+   "rate": 0.462
+  },
+  {
+   "category": "Respiratory System",
+   "subcategory": "Pulmonary Fibrosis",
+   "n": 25,
+   "overturned": 11,
+   "upheld": 14,
+   "rate": 0.44
+  },
+  {
+   "category": "Respiratory System",
+   "subcategory": "Resp Infection",
+   "n": 24,
+   "overturned": 10,
+   "upheld": 14,
+   "rate": 0.417
+  },
+  {
+   "category": "Respiratory System",
+   "subcategory": "Pneumonia",
+   "n": 22,
+   "overturned": 11,
+   "upheld": 11,
+   "rate": 0.5
+  },
+  {
+   "category": "Respiratory System",
+   "subcategory": "RSV",
+   "n": 22,
+   "overturned": 13,
+   "upheld": 9,
+   "rate": 0.591
+  },
+  {
+   "category": "Prevention/Good Hlth",
+   "subcategory": null,
+   "n": 819,
+   "overturned": 558,
+   "upheld": 261,
+   "rate": 0.681
+  },
+  {
+   "category": "Prevention/Good Hlth",
+   "subcategory": "Not Applicable",
+   "n": 818,
+   "overturned": 557,
+   "upheld": 261,
+   "rate": 0.681
+  },
+  {
+   "category": "Ears/Nose/Throat",
+   "subcategory": null,
+   "n": 702,
+   "overturned": 327,
+   "upheld": 375,
+   "rate": 0.466
+  },
+  {
+   "category": "Ears/Nose/Throat",
+   "subcategory": "Sinusitis",
+   "n": 185,
+   "overturned": 110,
+   "upheld": 75,
+   "rate": 0.595
+  },
+  {
+   "category": "Ears/Nose/Throat",
+   "subcategory": "Other",
+   "n": 153,
+   "overturned": 63,
+   "upheld": 90,
+   "rate": 0.412
+  },
+  {
+   "category": "Ears/Nose/Throat",
+   "subcategory": "Hearing Problem",
+   "n": 86,
+   "overturned": 27,
+   "upheld": 59,
+   "rate": 0.314
+  },
+  {
+   "category": "Ears/Nose/Throat",
+   "subcategory": "Hearing Problem/Loss",
+   "n": 37,
+   "overturned": 19,
+   "upheld": 18,
+   "rate": 0.514
+  },
+  {
+   "category": "Ears/Nose/Throat",
+   "subcategory": "Nasal Air Obstruct",
+   "n": 33,
+   "overturned": 14,
+   "upheld": 19,
+   "rate": 0.424
+  },
+  {
+   "category": "Ears/Nose/Throat",
+   "subcategory": "Throat Infection",
+   "n": 30,
+   "overturned": 10,
+   "upheld": 20,
+   "rate": 0.333
+  },
+  {
+   "category": "Ears/Nose/Throat",
+   "subcategory": "Otitis Media/Ear Inf",
+   "n": 23,
+   "overturned": 4,
+   "upheld": 19,
+   "rate": 0.174
+  },
+  {
+   "category": "Ears/Nose/Throat",
+   "subcategory": "Dizziness Vertigo",
+   "n": 22,
+   "overturned": 11,
+   "upheld": 11,
+   "rate": 0.5
+  },
+  {
+   "category": "Vision",
+   "subcategory": null,
+   "n": 416,
+   "overturned": 196,
+   "upheld": 220,
+   "rate": 0.471
+  },
+  {
+   "category": "Vision",
+   "subcategory": "Other",
+   "n": 172,
+   "overturned": 86,
+   "upheld": 86,
+   "rate": 0.5
+  },
+  {
+   "category": "Vision",
+   "subcategory": "Eyelid Droop",
+   "n": 45,
+   "overturned": 17,
+   "upheld": 28,
+   "rate": 0.378
+  },
+  {
+   "category": "Vision",
+   "subcategory": "Glaucoma",
+   "n": 38,
+   "overturned": 18,
+   "upheld": 20,
+   "rate": 0.474
+  },
+  {
+   "category": "Vision",
+   "subcategory": "Cataracts",
+   "n": 33,
+   "overturned": 12,
+   "upheld": 21,
+   "rate": 0.364
+  },
+  {
+   "category": "Foot Disorder",
+   "subcategory": null,
+   "n": 397,
+   "overturned": 172,
+   "upheld": 225,
+   "rate": 0.433
+  },
+  {
+   "category": "Foot Disorder",
+   "subcategory": "Other",
+   "n": 161,
+   "overturned": 61,
+   "upheld": 100,
+   "rate": 0.379
+  },
+  {
+   "category": "Foot Disorder",
+   "subcategory": "Plantar Fascitis",
+   "n": 95,
+   "overturned": 38,
+   "upheld": 57,
+   "rate": 0.4
+  },
+  {
+   "category": "Foot Disorder",
+   "subcategory": "Foot/Toe Pain",
+   "n": 41,
+   "overturned": 26,
+   "upheld": 15,
+   "rate": 0.634
+  },
+  {
+   "category": "Foot Disorder",
+   "subcategory": "Bunion",
+   "n": 36,
+   "overturned": 17,
+   "upheld": 19,
+   "rate": 0.472
+  },
+  {
+   "category": "Foot Disorder",
+   "subcategory": "Heel Pain",
+   "n": 24,
+   "overturned": 7,
+   "upheld": 17,
+   "rate": 0.292
+  },
+  {
+   "category": "Genetic Diseases",
+   "subcategory": null,
+   "n": 349,
+   "overturned": 214,
+   "upheld": 135,
+   "rate": 0.613
+  },
+  {
+   "category": "Genetic Diseases",
+   "subcategory": "Other",
+   "n": 173,
+   "overturned": 107,
+   "upheld": 66,
+   "rate": 0.618
+  },
+  {
+   "category": "Genetic Diseases",
+   "subcategory": "Downs Syndrome",
+   "n": 43,
+   "overturned": 31,
+   "upheld": 12,
+   "rate": 0.721
+  },
+  {
+   "category": "Genetic Diseases",
+   "subcategory": "Chromosomal Anomaly",
+   "n": 37,
+   "overturned": 20,
+   "upheld": 17,
+   "rate": 0.541
+  },
+  {
+   "category": "Genetic Diseases",
+   "subcategory": "Muscular Dystrophy",
+   "n": 35,
+   "overturned": 19,
+   "upheld": 16,
+   "rate": 0.543
+  },
+  {
+   "category": "Genetic Diseases",
+   "subcategory": "Ehlers-Danlos Syndrome",
+   "n": 27,
+   "overturned": 15,
+   "upheld": 12,
+   "rate": 0.556
+  },
+  {
+   "category": "Trauma/ Injuries",
+   "subcategory": null,
+   "n": 334,
+   "overturned": 132,
+   "upheld": 202,
+   "rate": 0.395
+  },
+  {
+   "category": "Trauma/ Injuries",
+   "subcategory": "Auto Accident",
+   "n": 83,
+   "overturned": 34,
+   "upheld": 49,
+   "rate": 0.41
+  },
+  {
+   "category": "Trauma/ Injuries",
+   "subcategory": "Other",
+   "n": 66,
+   "overturned": 21,
+   "upheld": 45,
+   "rate": 0.318
+  },
+  {
+   "category": "Trauma/ Injuries",
+   "subcategory": "Brain Injury/Concussion",
+   "n": 59,
+   "overturned": 27,
+   "upheld": 32,
+   "rate": 0.458
+  },
+  {
+   "category": "Trauma/ Injuries",
+   "subcategory": "Injury",
+   "n": 59,
+   "overturned": 20,
+   "upheld": 39,
+   "rate": 0.339
+  },
+  {
+   "category": "Trauma/ Injuries",
+   "subcategory": "Spinal Cord Injury",
+   "n": 24,
+   "overturned": 10,
+   "upheld": 14,
+   "rate": 0.417
+  },
+  {
+   "category": "Blood Related Disord",
+   "subcategory": null,
+   "n": 203,
+   "overturned": 96,
+   "upheld": 107,
+   "rate": 0.473
+  },
+  {
+   "category": "Blood Related Disord",
+   "subcategory": "Other",
+   "n": 122,
+   "overturned": 57,
+   "upheld": 65,
+   "rate": 0.467
+  },
+  {
+   "category": "Blood Related Disord",
+   "subcategory": "Anemia",
+   "n": 72,
+   "overturned": 35,
+   "upheld": 37,
+   "rate": 0.486
+  },
+  {
+   "category": "Chron Pain Synd",
+   "subcategory": null,
+   "n": 193,
+   "overturned": 46,
+   "upheld": 147,
+   "rate": 0.238
+  },
+  {
+   "category": "Chron Pain Synd",
+   "subcategory": "Not Applicable",
+   "n": 192,
+   "overturned": 46,
+   "upheld": 146,
+   "rate": 0.24
+  },
+  {
+   "category": "Dental Problems",
+   "subcategory": null,
+   "n": 160,
+   "overturned": 87,
+   "upheld": 73,
+   "rate": 0.544
+  },
+  {
+   "category": "Dental Problems",
+   "subcategory": "Other",
+   "n": 66,
+   "overturned": 35,
+   "upheld": 31,
+   "rate": 0.53
+  },
+  {
+   "category": "Dental Problems",
+   "subcategory": "Overbite/Underbite",
+   "n": 25,
+   "overturned": 19,
+   "upheld": 6,
+   "rate": 0.76
+  },
+  {
+   "category": "Post Surgical Comp",
+   "subcategory": null,
+   "n": 155,
+   "overturned": 40,
+   "upheld": 115,
+   "rate": 0.258
+  },
+  {
+   "category": "Post Surgical Comp",
+   "subcategory": "Other",
+   "n": 130,
+   "overturned": 34,
+   "upheld": 96,
+   "rate": 0.262
+  },
+  {
+   "category": "Not Applicable",
+   "subcategory": null,
+   "n": 147,
+   "overturned": 57,
+   "upheld": 90,
+   "rate": 0.388
+  },
+  {
+   "category": "Not Applicable",
+   "subcategory": "Not Applicable",
+   "n": 146,
+   "overturned": 57,
+   "upheld": 89,
+   "rate": 0.39
+  },
+  {
+   "category": "Endo/Metabolic",
+   "subcategory": null,
+   "n": 136,
+   "overturned": 113,
+   "upheld": 23,
+   "rate": 0.831
+  },
+  {
+   "category": "Endo/Metabolic",
+   "subcategory": "Overweight/Obesity/Oth",
+   "n": 84,
+   "overturned": 80,
+   "upheld": 4,
+   "rate": 0.952
+  },
+  {
+   "category": "Musculoskeletal",
+   "subcategory": null,
+   "n": 99,
+   "overturned": 64,
+   "upheld": 35,
+   "rate": 0.646
+  },
+  {
+   "category": "Musculoskeletal",
+   "subcategory": "Arthritis/Oth Joint Dis",
+   "n": 40,
+   "overturned": 32,
+   "upheld": 8,
+   "rate": 0.8
+  },
+  {
+   "category": "Musculoskeletal",
+   "subcategory": "Disc Inflam/Pain/Oth Dorsalgia",
+   "n": 35,
+   "overturned": 19,
+   "upheld": 16,
+   "rate": 0.543
+  },
+  {
+   "category": "Pregnancy/Childbirth",
+   "subcategory": null,
+   "n": 88,
+   "overturned": 32,
+   "upheld": 56,
+   "rate": 0.364
+  },
+  {
+   "category": "Pregnancy/Childbirth",
+   "subcategory": "Pregnancy",
+   "n": 42,
+   "overturned": 12,
+   "upheld": 30,
+   "rate": 0.286
+  },
+  {
+   "category": "Pregnancy/Childbirth",
+   "subcategory": "High Risk Pregnancy",
+   "n": 21,
+   "overturned": 9,
+   "upheld": 12,
+   "rate": 0.429
+  },
+  {
+   "category": "Mental Behav Neur",
+   "subcategory": null,
+   "n": 61,
+   "overturned": 43,
+   "upheld": 18,
+   "rate": 0.705
+  },
+  {
+   "category": "Nervous System",
+   "subcategory": null,
+   "n": 44,
+   "overturned": 33,
+   "upheld": 11,
+   "rate": 0.75
+  },
+  {
+   "category": "Nervous System",
+   "subcategory": "Epilepsy/Seizures/Migraine/SD",
+   "n": 26,
+   "overturned": 22,
+   "upheld": 4,
+   "rate": 0.846
+  },
+  {
+   "category": "Skin Subcutaneous",
+   "subcategory": null,
+   "n": 33,
+   "overturned": 24,
+   "upheld": 9,
+   "rate": 0.727
+  },
+  {
+   "category": "Digest System",
+   "subcategory": null,
+   "n": 30,
+   "overturned": 24,
+   "upheld": 6,
+   "rate": 0.8
+  },
+  {
+   "category": "Circulatory System",
+   "subcategory": null,
+   "n": 16,
+   "overturned": 8,
+   "upheld": 8,
+   "rate": 0.5
+  },
+  {
+   "category": "Genitourinary Sys",
+   "subcategory": null,
+   "n": 15,
+   "overturned": 8,
+   "upheld": 7,
+   "rate": 0.533
+  },
+  {
+   "category": "Sym/Sign Ab Find",
+   "subcategory": null,
+   "n": 15,
+   "overturned": 9,
+   "upheld": 6,
+   "rate": 0.6
+  },
+  {
+   "category": "Neoplasms (Tumor)",
+   "subcategory": null,
+   "n": 13,
+   "overturned": 6,
+   "upheld": 7,
+   "rate": 0.462
+  },
+  {
+   "category": "Resp System",
+   "subcategory": null,
+   "n": 13,
+   "overturned": 10,
+   "upheld": 3,
+   "rate": 0.769
+  },
+  {
+   "category": "Injury Poison Oth",
+   "subcategory": null,
+   "n": 9,
+   "overturned": 4,
+   "upheld": 5,
+   "rate": 0.444
+  },
+  {
+   "category": "Hlth Factor/Contact",
+   "subcategory": null,
+   "n": 7,
+   "overturned": 7,
+   "upheld": 0,
+   "rate": 1.0
+  },
+  {
+   "category": "Infect/Parasit Dx",
+   "subcategory": null,
+   "n": 7,
+   "overturned": 1,
+   "upheld": 6,
+   "rate": 0.143
+  },
+  {
+   "category": "Disease Eye Adnexa",
+   "subcategory": null,
+   "n": 5,
+   "overturned": 3,
+   "upheld": 2,
+   "rate": 0.6
+  },
+  {
+   "category": "Malfor/Deform/Abnor",
+   "subcategory": null,
+   "n": 5,
+   "overturned": 3,
+   "upheld": 2,
+   "rate": 0.6
+  },
+  {
+   "category": "Diseases of Blood",
+   "subcategory": null,
+   "n": 3,
+   "overturned": 2,
+   "upheld": 1,
+   "rate": 0.667
+  },
+  {
+   "category": "Ear and Mastoid",
+   "subcategory": null,
+   "n": 1,
+   "overturned": 1,
+   "upheld": 0,
+   "rate": 1.0
+  },
+  {
+   "category": "Other",
+   "subcategory": null,
+   "n": 1,
+   "overturned": 0,
+   "upheld": 1,
+   "rate": 0.0
+  },
+  {
+   "category": "Pregnancy Childbirth",
+   "subcategory": null,
+   "n": 1,
+   "overturned": 0,
+   "upheld": 1,
+   "rate": 0.0
+  }
+ ],
+ "segments": {
+  "cgm": {
+   "label": "Continuous glucose monitors / diabetes supplies",
+   "filter": "Case-level text filter on the request clause of Findings ('has requested ... for X'): X names a CGM or glucose-monitoring product (continuous glucose, CGM/CGMS, Dexcom, FreeStyle Libre/Navigator, Guardian sensor, Enlite, Eversense, glucose monitor/meter/sensor, glucose test strips, HCPCS A9276/A9277). Insulin pumps/pods count only when the same request also names a CGM. For older narrative-format records with no usable request clause: TreatmentSubCategory in {Cont Glucose Monitor, Glucose Monitor, Diabetic Supplies} and Findings mention those terms. TreatmentSubCategory alone is not used for modern records because it is noisy (e.g., Ozempic and insulin pumps filed under Glucose Monitor).",
+   "n": 229,
+   "overturned": 179,
+   "upheld": 50,
+   "rate": 0.782,
+   "year_range": [
+    2004,
+    2026
+   ],
+   "by_type": {
+    "Medical Necessity": {
+     "n": 178,
+     "overturned": 134,
+     "upheld": 44,
+     "rate": 0.753
+    },
+    "Experimental/Investigational": {
+     "n": 51,
+     "overturned": 45,
+     "upheld": 6,
+     "rate": 0.882
+    },
+    "Urgent Care": {
+     "n": 0,
+     "overturned": 0,
+     "upheld": 0,
+     "rate": null
+    }
+   },
+   "recent": {
+    "years": [
+     2022,
+     2026
+    ],
+    "n": 87,
+    "overturned": 61,
+    "upheld": 26,
+    "rate": 0.701
+   },
+   "examples": [
+    {
+     "id": "MN26-46602",
+     "year": 2026,
+     "determination": "Overturned",
+     "type": "Medical Necessity",
+     "diagnosis": "Endo/Metabolic / Type 2 Diabetes",
+     "treatment": "Admin Misc  Invest / Misc Supplies Equipment",
+     "findings": "Findings: The physician reviewer found that a patient has requested authorization and coverage for a Guardian 4 continuous glucose monitoring system (transmitter and sensors). The American Diabetes Association (ADA) recommends offering automated insulin delivery systems to all adults with diabetes who use multiple daily insulin injections, provided they can use the device safely. Per the medical records, the patient has type 2 diabetes mellitus and is using a Medtronic 780G insulin pump, an advanced hybrid closed‑loop system. The Guardian 4 sensor is specifically designed to integrate with…"
+    },
+    {
+     "id": "MN26-46608",
+     "year": 2026,
+     "determination": "Upheld",
+     "type": "Medical Necessity",
+     "diagnosis": "Sym/Sign Ab Find / Blood Examination W/O Diag",
+     "treatment": "Med Surg Supplies / Replacement Batteries",
+     "findings": "Findings: The physician reviewer found that a patient has requested authorization and coverage for a Dexcom G7 continuous glucose monitor (CGM) system. The patient currently presents with prediabetes, defined by a hemoglobin A1c level below 6.5% while not taking prescription medications for diabetes control, and manages this condition with diet and lifestyle choices. The patient has experienced low glucose readings when wearing a CGM. The American Diabetes Association recommends CGM use for adults with diabetes who use insulin, as insulin therapy increases the risk of hypoglycemia and…"
+    },
+    {
+     "id": "MN25-43425",
+     "year": 2025,
+     "determination": "Overturned",
+     "type": "Medical Necessity",
+     "diagnosis": "Endocrine/Metabolic / Diabetes",
+     "treatment": "DME / Glucose Monitor",
+     "findings": "Nature of Statutory Criteria/Case Summary: A patient has requested authorization and coverage for Freestyle Libre 3 Plus sensor. The American Association of Clinical Endocrinology (AACE) clinical practice guidelines on the management of patients with diabetes endorse continuous glucose monitoring use in individuals treated with non-hypoglycemic therapies, noting that patients with diabetes should have uninterrupted access to their supplies to minimize gaps in continuous glucose monitoring. In this case, the patient has type 2 diabetes with an HbA1C of 6.8% and is currently on two medications…"
+    },
+    {
+     "id": "MN25-43568",
+     "year": 2025,
+     "determination": "Upheld",
+     "type": "Medical Necessity",
+     "diagnosis": "CNS/ Neuromusc Dis / Headache",
+     "treatment": "DME / Glucose Monitor",
+     "findings": "Nature of Statutory Criteria/Case Summary: A patient has requested authorization and coverage for a Libre 3 continuous glucose monitor (CGM). Blood glucose monitoring is essential to management of diabetes mellitus. Options for blood glucose monitoring include self-monitoring of blood sugars with finger sticks and use of a glucometer or use of a CGM. The American Diabetes Association and the American Association of Clinical Endocrinology recommend use of CGMs for diabetes management in adults with diabetes who use insulin. There are no guidelines that recommend the use of CGM monitoring in…"
+    },
+    {
+     "id": "MN25-43570",
+     "year": 2025,
+     "determination": "Upheld",
+     "type": "Medical Necessity",
+     "diagnosis": "Endocrine/Metabolic / Hypoglycemia",
+     "treatment": "DME / Glucose Monitor",
+     "findings": "Nature of Statutory Criteria/Case Summary: The patient requested authorization and coverage for the continuous glucose monitor (CGM) Freestyle Libre 2. In this case, the patient is on a low-calorie diet with increased exercise. The patient was given a complementary CGM in her nutrition classes and noted overnight hypoglycemia on the device. However, the requested CGM FreeStyle Libre 2 does not have FDA approval for the management of hypoglycemia. The records establish that the patient previously experienced an episode of fainting which was attributed to possible hypoglycemia. This was an…"
+    },
+    {
+     "id": "MN25-44055",
+     "year": 2025,
+     "determination": "Overturned",
+     "type": "Medical Necessity",
+     "diagnosis": "Pregnancy/Childbirth / Gestational Diabetes",
+     "treatment": "DME / Glucose Monitor",
+     "findings": "Nature of Statutory Criteria/Case Summary: A patient has requested authorization and coverage for a Freestyle Libre 3 Plus Sensor. In this case, the patient has gestational diabetes mellitus (GDM) in her third trimester of pregnancy. A FreeStyle Libre 3 Plus sensor has been recommended as a means of blood glucose monitoring. A review of the record establishes that the patient has a fear of needles and relies on her husband to perform the finger stick blood sugars as her fear prevents the patient from performing the finger stick. Overall, it is critical to monitor sugars during pregnancy and…"
+    }
+   ]
+  },
+  "pap": {
+   "label": "CPAP/BiPAP for obstructive sleep apnea",
+   "filter": "Request clause of Findings names a positive airway pressure device or PAP supplies (CPAP, BiPAP/BPAP, VPAP, auto-PAP, 'positive airway pressure', ASV, AVAPS). Older narrative-format records: TreatmentSubCategory = C-Pap Machine and Findings mention CPAP/BiPAP. Excludes sleep/titration studies (TreatmentCategory Diag Imag & Screen, Sleep Study), EPAP/Provent nasal valves, and APAP (acetaminophen) drug combinations.",
+   "n": 71,
+   "overturned": 38,
+   "upheld": 33,
+   "rate": 0.535,
+   "year_range": [
+    2002,
+    2025
+   ],
+   "by_type": {
+    "Medical Necessity": {
+     "n": 70,
+     "overturned": 38,
+     "upheld": 32,
+     "rate": 0.543
+    },
+    "Experimental/Investigational": {
+     "n": 1,
+     "overturned": 0,
+     "upheld": 1,
+     "rate": 0.0
+    },
+    "Urgent Care": {
+     "n": 0,
+     "overturned": 0,
+     "upheld": 0,
+     "rate": null
+    }
+   },
+   "recent": {
+    "years": [
+     2022,
+     2026
+    ],
+    "n": 6,
+    "overturned": 3,
+    "upheld": 3,
+    "rate": 0.5
+   },
+   "examples": [
+    {
+     "id": "MN23-40297",
+     "year": 2023,
+     "determination": "Overturned",
+     "type": "Medical Necessity",
+     "diagnosis": "CNS/ Neuromusc Dis / Apnea/Sleep Apnea",
+     "treatment": "DME / C-Pap Machine",
+     "findings": "Nature of Statutory Criteria/Case Summary: The patient has requested authorization and coverage for a continuous positive airway pressure (CPAP) device (E0601) and supplies. As noted in the medical literature, a CPAP device is highly effective in treating patients with obstructive sleep apnea (OSA). The patient completed a diagnostic sleep study indicating an apnea-hypopnea index (AHI) ranging from five to 15 events per hour. The patient has comorbid conditions, including hypertension and thyroid disorder which raise the likelihood of OSA that requires ongoing treatment with CPAP as…"
+    },
+    {
+     "id": "MN22-37120",
+     "year": 2022,
+     "determination": "Upheld",
+     "type": "Medical Necessity",
+     "diagnosis": "CNS/ Neuromusc Dis / Apnea/Sleep Apnea",
+     "treatment": "DME / C-Pap Machine",
+     "findings": "Nature of Statutory Criteria/Case Summary: The patient has requested authorization and coverage for a replacement CPAP machine and accessories. The current medical evidence does not support the requested equipment in this clinical setting. The records document that the patient had an AHI of 2.1. Based on the home sleep study, he does not meet the criteria for obstructive sleep apnea. In order to establish the diagnosis of obstructive sleep apnea, AHI should be greater than 5. Based on the patient’s home sleep study in 2019, obstructive sleep apnea is not documented. A new sleep study showing…"
+    },
+    {
+     "id": "MN21-35227",
+     "year": 2021,
+     "determination": "Overturned",
+     "type": "Medical Necessity",
+     "diagnosis": "CNS/ Neuromusc Dis / Apnea/Sleep Apnea",
+     "treatment": "DME / C-Pap Machine",
+     "findings": "Nature of Statutory Criteria/Case Summary: The patient has requested reimbursement for a continuous positive airway pressure (CPAP) machine and supplies. Findings: The physician reviewer found that the use of CPAP therapy for ongoing treatment of obstructive sleep apnea (OSA) in adults. In this case, the patient has a diagnosis of OSA. The records noted that she was using and benefiting from a CPAP machine and was symptomatic when not using it. Given that OSA is a chronic disease requiring treatment, and that CPAP is the first line of treatment for OSA, the equipment at issue was medically…"
+    },
+    {
+     "id": "MN21-36578",
+     "year": 2021,
+     "determination": "Overturned",
+     "type": "Medical Necessity",
+     "diagnosis": "CNS/ Neuromusc Dis / Apnea/Sleep Apnea",
+     "treatment": "DME / C-Pap Machine",
+     "findings": "Nature of Statutory Criteria/Case Summary: The patient has requested authorization and coverage for a continuous positive airway pressure (CPAP) device. The submitted documentation supports the medical necessity of the requested device. The patient reported symptoms of fatigue and sleepiness during the day. Additionally, he has a history of depression and insomnia. Medical literature defines obstructive sleep apnea as a polysomnogram-determined obstructive respiratory disturbance index (RDI) of at least five events per hour associated with the typical symptoms of obstructive sleep apnea…"
+    },
+    {
+     "id": "MN20-33705",
+     "year": 2020,
+     "determination": "Upheld",
+     "type": "Medical Necessity",
+     "diagnosis": "CNS/ Neuromusc Dis / Apnea/Sleep Apnea",
+     "treatment": "DME / C-Pap Machine",
+     "findings": "Nature of Statutory Criteria/Case Summary: The patient has requested authorization and coverage for a continuous positive airway pressure (CPAP) machine. Recommendations on managing obstructive sleep apnea include weight loss, CPAP treatment as initial therapy, and mandibular advancement devices as alternative therapy. In this case, the patient’s sleep study did not show evidence of sleep apnea. Specifically, a sleep study showed normal apnea-hypoxia index and no evidence of nocturnal oxygen desaturation during the night of observation. Based on this, there is insufficient information to…"
+    },
+    {
+     "id": "MN19-31507",
+     "year": 2019,
+     "determination": "Upheld",
+     "type": "Medical Necessity",
+     "diagnosis": "CNS/ Neuromusc Dis / Apnea/Sleep Apnea",
+     "treatment": "DME / Other",
+     "findings": "Nature of Statutory Criteria/ Case Summary: The enrollee is requesting authorization and coverage for SoClean, automated continuous positive airway pressure (CPAP) equipment sanitizer. The enrollee has upper airway resistance syndrome with fragmented nocturnal sleep and excessive daytime sleepiness. She has co-morbidities of hypertension and borderline diabetes. Pulmonology progress notes indicate an automated continuous positive airway pressure (CPAP) machine was prescribed with a re-evaluation in six to eight weeks. The records indicate good objective compliance and resolution of symptoms.…"
+    }
+   ]
+  },
+  "facet": {
+   "label": "Facet joint injections / spinal pain procedures",
+   "filter": "Request clause of Findings names a facet-joint or medial-branch interventional procedure: facet joint injection/block, medial branch block, facet/medial-branch radiofrequency ablation, neurolysis, rhizotomy, denervation, zygapophyseal joint injection. Older narrative-format records: TreatmentCategory Pain Management or Elect/Therm/Radfreq with the same terms in Findings. Excludes facetectomy, facet arthroplasty/replacement (TOPS), and anesthesia-only requests. Epidural steroid injections are NOT included (see by_treatment Pain Management / Epidural Injection).",
+   "n": 138,
+   "overturned": 66,
+   "upheld": 72,
+   "rate": 0.478,
+   "year_range": [
+    2002,
+    2026
+   ],
+   "by_type": {
+    "Medical Necessity": {
+     "n": 111,
+     "overturned": 55,
+     "upheld": 56,
+     "rate": 0.495
+    },
+    "Experimental/Investigational": {
+     "n": 27,
+     "overturned": 11,
+     "upheld": 16,
+     "rate": 0.407
+    },
+    "Urgent Care": {
+     "n": 0,
+     "overturned": 0,
+     "upheld": 0,
+     "rate": null
+    }
+   },
+   "recent": {
+    "years": [
+     2022,
+     2026
+    ],
+    "n": 40,
+    "overturned": 18,
+    "upheld": 22,
+    "rate": 0.45
+   },
+   "examples": [
+    {
+     "id": "MN26-46958",
+     "year": 2026,
+     "determination": "Upheld",
+     "type": "Medical Necessity",
+     "diagnosis": "Musculoskeletal / Disc Inflam/Pain/Oth Dorsalgia",
+     "treatment": "Surgery / CNS Extracranial/Autonomic",
+     "findings": "Findings: The physician reviewer found that a patient has requested authorization and coverage for bilateral lumbar radiofrequency ablation for lumbar facet‑mediated pain. Current clinical standards note that diagnostic accuracy is improved when two medial branch blocks are performed before proceeding with radiofrequency ablation. In this case, although the patient experienced significant pain relief from a medial branch block, the documentation reflects only a single diagnostic block. As a result, the criteria supporting radiofrequency ablation have not been met. Therefore, bilateral lumbar…"
+    },
+    {
+     "id": "MN25-43597",
+     "year": 2025,
+     "determination": "Overturned",
+     "type": "Medical Necessity",
+     "diagnosis": "Orth/Musculoskeletal / Back Pain",
+     "treatment": "Pain Management / Nerve Block",
+     "findings": "Nature of Statutory Criteria/Case Summary: A patient has requested authorization and coverage for facet joints injections in the lower spine. Findings: The physician reviewer found that American Society of Interventional Pain Physicians (ASIPP) guidelines for facet joint interventions support the use of the therapy for those who have failed conservative therapy and do not have radicular symptoms. In this case, given that the records demonstrate that the patient has tried and failed multiple conservative measures, the requested services are medically indicated. Therefore, facet joints…"
+    },
+    {
+     "id": "MN25-44180",
+     "year": 2025,
+     "determination": "Upheld",
+     "type": "Medical Necessity",
+     "diagnosis": "Orth/Musculoskeletal / Joint Problem/Pain",
+     "treatment": "Pain Management / Nerve Block",
+     "findings": "Nature of Statutory Criteria/Case Summary: A patient has requested authorization and coverage for bilateral medial branch blocks (T2-T3 and T3-T4). In this case, the patient has a history of C5-C7 fusion and sharp, burning pain not relieved by thoracic trigger point injections. The provider recommended branch blocks. However, there is a lack of support in the literature for the utilization of thoracic medial branch blocks in this patient’s clinical setting. All told, the requested bilateral medial branch blocks (T2-T3 and T3-T4) are not medically necessary for the treatment of this patient’s…"
+    },
+    {
+     "id": "MN25-44441",
+     "year": 2025,
+     "determination": "Overturned",
+     "type": "Medical Necessity",
+     "diagnosis": "Orth/Musculoskeletal / Back Pain",
+     "treatment": "Elect/Therm/Radfreq / Radiofreq Ablat",
+     "findings": "Nature of Statutory Criteria/Case Summary: A patient has requested authorization and coverage for lumbar and sacral facet joint radiofrequency neurolysis at L3-L4, L4-L5, and L5-S1. In this case, the patient has a history of degenerative disc disease at L3-L4, L4-L5, and L5-S1. Further, the record establishes that the patient has had relief with medial branch blocks with greater than 90% improvement. Overall, radiofrequency ablation (RFA) will provide pain relief compared to other options such as medications, conservative care, and continued facet joint injections. As such, the requested…"
+    },
+    {
+     "id": "MN24-41020",
+     "year": 2024,
+     "determination": "Overturned",
+     "type": "Medical Necessity",
+     "diagnosis": "Orth/Musculoskeletal / Back Pain",
+     "treatment": "Elect/Therm/Radfreq / Radiofreq Ablat",
+     "findings": "Nature of Statutory Criteria/Case Summary: A patient has requested authorization and coverage for T4-5 right sided thoracic facet joint radiofrequency ablation (RFA)/thoracic facet joint radiofrequency neurolysis. Recent American Society of Interventional Pain Physicians (ASIPP) guidelines for facet joint interventions state that there is evidence for thoracic radiofrequency ablation and thoracic facet joint nerve blocks for patients with an appropriate diagnosis. The ASIPP guidelines also recommend repeat ablation procedures for patients who report at least six months of pain relief. Here…"
+    },
+    {
+     "id": "MN24-43417",
+     "year": 2024,
+     "determination": "Upheld",
+     "type": "Medical Necessity",
+     "diagnosis": "Orth/Musculoskeletal / Back Pain",
+     "treatment": "Orthopedic Proc / Ligament/Tendon Repair",
+     "findings": "Nature of Statutory Criteria/Case Summary: The patient requested authorization and coverage for a series of bilateral medial branch blocks to T9-L1 (2 more for a series of 3 total). Overall, there is a paucity of medical literature to support the utilization of thoracic MBB. In addition, MBB at the level of previous fusion are not indicated as there are no functional facet joints present. Therefore, the requested series of bilateral MBB to T9-L1 (2 more for a series of 3 total) is not medically necessary for the treatment of this patient.Final Result: The reviewer determined that the…"
+    }
+   ]
+  },
+  "mri": {
+   "label": "MRI / diagnostic imaging",
+   "filter": "Request clause of Findings names diagnostic magnetic resonance imaging (MRI, MRA, MR neurography, MR spectroscopy, MRCP) and the case is categorized as imaging (TreatmentCategory Diag Imag & Screen or Radio Proc, or TreatmentSubCategory MRI) or MR imaging is the first item requested. Older narrative-format records: TreatmentSubCategory MRI and Findings mention MRI. Excludes MR-guided therapies (focused ultrasound, guided injections/ablation/radiotherapy), MRI-compatible devices, NMR lipid tests, and anesthesia-for-MRI requests. Other imaging (CT, PET, etc.) is in by_treatment.",
+   "n": 1141,
+   "overturned": 489,
+   "upheld": 652,
+   "rate": 0.429,
+   "year_range": [
+    2001,
+    2026
+   ],
+   "by_type": {
+    "Medical Necessity": {
+     "n": 930,
+     "overturned": 385,
+     "upheld": 545,
+     "rate": 0.414
+    },
+    "Experimental/Investigational": {
+     "n": 209,
+     "overturned": 102,
+     "upheld": 107,
+     "rate": 0.488
+    },
+    "Urgent Care": {
+     "n": 2,
+     "overturned": 2,
+     "upheld": 0,
+     "rate": 1.0
+    }
+   },
+   "recent": {
+    "years": [
+     2022,
+     2026
+    ],
+    "n": 260,
+    "overturned": 141,
+    "upheld": 119,
+    "rate": 0.542
+   },
+   "examples": [
+    {
+     "id": "MN26-46589",
+     "year": 2026,
+     "determination": "Upheld",
+     "type": "Medical Necessity",
+     "diagnosis": "Musculoskeletal / Disc Inflam/Pain/Oth Dorsalgia",
+     "treatment": "Radio Proc / Imaging Spine Pelvis",
+     "findings": "Findings: The physician reviewer found that a patient has requested authorization and coverage for magnetic resonance imaging (MRI) of the lumbar spine. The patient has a chronic history of low back pain with spondylotic changes on a prior study. The record establishes that there is a reported remote history of physical therapy following the initial diagnosis of spondylotic changes. However, the record indicates that the patient has not had a recent physical therapy evaluation, treatment, or utilized medications for the conservative management of the condition. Furthermore, the patient has no…"
+    },
+    {
+     "id": "MN26-46640",
+     "year": 2026,
+     "determination": "Overturned",
+     "type": "Medical Necessity",
+     "diagnosis": "Musculoskeletal / Abnormal Spine Curvature/Oth",
+     "treatment": "Radio Proc / Imaging Spine Pelvis",
+     "findings": "Findings: The physician reviewer found that a patient has requested reimbursement for magnetic resonance imaging (MRI) of the lumbar spine. The American College of Radiology (ACR) appropriateness criteria state that lumbar MRI is usually appropriate for patients with chronic or recurrent radiculopathy, particularly when prior imaging is outdated and interventional treatment is being considered. The medical records document L4–5 spondylolisthesis, recurrent bilateral radicular symptoms, outdated prior imaging, and the potential need for a repeat epidural injection. Current medical evidence and…"
+    },
+    {
+     "id": "MN26-46890",
+     "year": 2026,
+     "determination": "Overturned",
+     "type": "Medical Necessity",
+     "diagnosis": "Musculoskeletal / Arthritis/Oth Joint Dis",
+     "treatment": "Radio Proc / Imaging Lower Extremities",
+     "findings": "Findings: The physician reviewer found that a patient has requested reimbursement for magnetic resonance imaging (MRI) of the knees. The American College of Radiology (ACR) appropriateness criteria for the evaluation of chronic knee pain in an adult with initial radiographs demonstrating degenerative changes indicate that MRI may be appropriate as the next imaging examination. MRI is more sensitive than radiographs for evaluating soft tissues around the knee. In this case, cartilage damage or soft tissue injury was suspected following orthopedic evaluation. The results of the MRI could affect…"
+    },
+    {
+     "id": "MN26-46983",
+     "year": 2026,
+     "determination": "Upheld",
+     "type": "Medical Necessity",
+     "diagnosis": "Musculoskeletal / Oth Soft Tissue Dis",
+     "treatment": "Radio Proc / Imaging Spine Pelvis",
+     "findings": "Findings: The physician reviewer found that a patient has requested authorization and coverage for magnetic resonance imaging of the pelvis. The patient presents with suspected hamstring injury and possible tendonitis or bursitis, conditions for which MRI of the hip—not the pelvis—is the appropriate diagnostic study. Therefore, the requested MRI of the pelvis is not medically necessary for the evaluation of this patient.Final Result: The reviewer determined that the requested service is not medically necessary for the evaluation of the patient's medical condition. Therefore, the Health Plan's…"
+    },
+    {
+     "id": "MN25-43467",
+     "year": 2025,
+     "determination": "Upheld",
+     "type": "Medical Necessity",
+     "diagnosis": "GU/ Kidney Disorder / Female Breast Dis/Lump/Cyst",
+     "treatment": "Diag Imag & Screen / MRI",
+     "findings": "Findings: The physician reviewer found that a patient has requested reimbursement for a bilateral breast magnetic resonance imaging (MRI). According to the American College of Radiology appropriateness criteria for breast MRI, there is no data to support the use of breast MRI in the evaluation of breast pain. Diagnostic mammography and sonography are usually considered more appropriate, which this patient underwent. Regarding the use of a screening MRI for high-risk patients, it is recommended for those patients with breast cancer genetic mutations and their untested first degree relatives…"
+    },
+    {
+     "id": "MN25-43577",
+     "year": 2025,
+     "determination": "Overturned",
+     "type": "Medical Necessity",
+     "diagnosis": "Orth/Musculoskeletal / Back Pain",
+     "treatment": "Diag Imag & Screen / MRI",
+     "findings": "Nature of Statutory Criteria/Case Summary: A patient has requested reimbursement for lumbar spine magnetic resonance imaging (MRI). Findings: The physician reviewer found that American College of Radiology (ACR), the initial imaging for the evaluation of patients with low back pain is lumbar radiographs. According to the ACR, if a patient’s pain persists after four to six weeks of optimal medical management, and the patient is a surgical or intervention candidate, then an MRI of the lumbar spine is the usually appropriate next examination. On review of the available records, this patient has…"
+    }
+   ]
+  }
+ }
+}
