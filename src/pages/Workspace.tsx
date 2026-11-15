@@ -18,6 +18,7 @@ import { LetterPanel } from './workspace/Letter'
 import { PatientPanel } from './workspace/Patient'
 import { OddsCard } from './workspace/Odds'
 import { TimeTravelModal } from './workspace/TimeTravel'
+import { PolicyScout } from './workspace/Scout'
 
 type Tab = 'evidence' | 'findings' | 'letter' | 'patient' | 'inputs'
 
@@ -55,7 +56,8 @@ export default function Workspace({ id }: { id?: string }) {
       setStamp(true)
       setTimeout(() => setStamp(false), 3600)
       const fl = computeFlags(fresh)
-      toast(`Appeal drafted · ${fl.filter(f => f.severity === 'violation').length} possible violations found`, 'green')
+      const nv = fl.filter(f => f.severity === 'violation').length
+      toast(`Appeal drafted · ${nv} possible violation${nv === 1 ? '' : 's'} found`, 'green')
     } catch (e) {
       const msg = e instanceof Error ? e.message : String(e)
       setRunError(msg)
@@ -141,6 +143,8 @@ export default function Workspace({ id }: { id?: string }) {
 
       <PipelineRail steps={steps} />
 
+      {d && !family && !running && <PolicyScout c={c} onUse={() => go(false)} />}
+
       {runError && !running && (
         <div className="flex flex-wrap items-center justify-between gap-3 rounded-2xl border border-rose-400/30 bg-rose-500/10 px-4 py-3 text-[13px] text-rose-100">
           <span><b>Run stopped:</b> {runError}</span>
@@ -213,7 +217,7 @@ export default function Workspace({ id }: { id?: string }) {
             <motion.div initial={{ scale: 2.4, rotate: -18, opacity: 0 }} animate={{ scale: 1, rotate: -8, opacity: 1 }} exit={{ scale: 0.9, opacity: 0 }} transition={{ type: 'spring', damping: 13, stiffness: 180 }}
               className="rounded-3xl border-[5px] border-emerald-300 bg-ink-950/70 px-10 py-6 text-center shadow-[0_0_120px_rgba(52,211,153,.45)] backdrop-blur">
               <div className="text-[44px] font-black uppercase leading-none tracking-[0.12em] text-emerald-300 sm:text-[60px]">Overturn it</div>
-              <div className="mt-3 font-mono text-[14px] tracking-wider text-emerald-100">{quoteCount} QUOTES VERIFIED · {violations} VIOLATIONS FOUND</div>
+              <div className="mt-3 font-mono text-[14px] tracking-wider text-emerald-100">{quoteCount} QUOTES VERIFIED · {violations} VIOLATION{violations === 1 ? '' : 'S'} FOUND</div>
             </motion.div>
           </motion.div>
         )}

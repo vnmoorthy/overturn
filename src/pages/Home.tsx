@@ -75,7 +75,7 @@ export default function Home() {
             <Button variant="ghost" size="lg" icon={<ArrowRight className="size-4" />} onClick={() => navigate('/cases')}>Worklist</Button>
           </motion.div>
           <div className="mt-6 flex flex-wrap gap-2">
-            <ModelChip model="gemini-4-hydrogen" /><ModelChip model="gemini-3.8-flash" /><ModelChip model="gemini-3.8-live" /><ModelChip model="gemini-3.8-flash-tts" /><ModelChip model="gemini-embedding-2" />
+            <ModelChip model="gemini-4-hydrogen" /><ModelChip model="gemini-3.8-flash" /><ModelChip model="gemini-3.8-live" /><ModelChip model="gemini-3.8-flash-tts" /><ModelChip model="gemini-embedding-2" /><ModelChip model="antigravity agent" />
           </div>
         </div>
         <div className="overflow-x-clip pb-12 pt-2"><HeroVisual /></div>

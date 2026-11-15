@@ -1,7 +1,7 @@
 // The Overturn agent pipeline. Each step is a focused Gemini call with a strict
 // JSON schema; deterministic code (verifier.ts, rules.ts) checks every output.
 
-import { ai, run, parseJson, thinkingFor } from './gemini'
+import { ai, run, parseJson, thinkingFor, ANTIGRAVITY_AGENT } from './gemini'
 import type { Denial, DenialMapping, Entailment, MatchResult, MatchRow, PolicyFamily, PolicyVersion } from './types'
 import { toLines } from './verifier'
 import { coreCriteria } from './policies'
@@ -352,4 +352,40 @@ export function cosine(a: number[], b: number[]) {
   let d = 0, na = 0, nb = 0
   for (let i = 0; i < a.length; i++) { d += a[i] * b[i]; na += a[i] * a[i]; nb += b[i] * b[i] }
   return d / (Math.sqrt(na) * Math.sqrt(nb) || 1)
+}
+
+// ------------------------------------------------------- Antigravity policy scout
+export interface ScoutResult {
+  policy_id: string; title: string; type: string; contractor: string; effective_date: string; source_url: string
+  criteria: { label: string; quote: string }[]; notes: string
+}
+/**
+ * Sends Google's Antigravity managed agent (remote environment) to research the Medicare
+ * coverage policy for a service that is not in the local library. Long-running: polled.
+ */
+export async function scoutPolicy(denial: Denial, onStatus?: (status: string, seconds: number) => void, signal?: { cancelled: boolean }) {
+  const t0 = performance.now()
+  const input = `You are a Medicare coverage researcher. Find the Medicare coverage policy (an LCD from the relevant MAC, or an NCD) that governs this denied service for a Medicare Advantage member, and the version in effect on the date of service.
+Service: ${denial.service_description}
+Codes: ${denial.codes.map(c => `${c.system} ${c.code} ${c.description}`).join('; ')}
+Date of service: ${denial.date_of_service}
+Denial reason: ${denial.denial_reason_text}
+Use the CMS Medicare Coverage Database (cms.gov/medicare-coverage-database) as the source. Copy each coverage criterion VERBATIM from the policy page.
+Return ONLY a JSON object with keys: policy_id (e.g. "L33822" or "NCD 220.2"), title, type ("LCD" or "NCD"), contractor, effective_date (YYYY-MM-DD), source_url, criteria (array of {label, quote} — 3 to 8 coverage criteria relevant to this service), notes (caveats, e.g. if no specific LCD exists).`
+  const client = ai().interactions as unknown as { create: (r: unknown) => Promise<{ id: string; status: string }>; get: (id: string) => Promise<{ id: string; status: string; output_text?: string }> }
+  const created = await client.create({ agent: ANTIGRAVITY_AGENT, environment: 'remote', background: true, input })
+  let it: { id: string; status: string; output_text?: string } = created
+  const deadline = Date.now() + 8 * 60_000
+  while (!['completed', 'failed', 'cancelled'].includes(it.status)) {
+    if (signal?.cancelled) throw new Error('Research cancelled.')
+    if (Date.now() > deadline) throw new Error('The Antigravity agent is still working after 8 minutes — try again later.')
+    onStatus?.(it.status, Math.round((performance.now() - t0) / 1000))
+    await new Promise(r => setTimeout(r, 4000))
+    it = await client.get(created.id)
+  }
+  if (it.status !== 'completed' || !it.output_text) throw new Error(`The Antigravity agent ${it.status === 'completed' ? 'returned no answer' : it.status}.`)
+  const value = parseJson<ScoutResult>(it.output_text)
+  if (!value.policy_id || !Array.isArray(value.criteria)) throw new Error('The agent’s answer did not include a policy.')
+  value.criteria = value.criteria.filter(c => c?.quote && c.quote.length > 12)
+  return { value, raw: it.output_text, id: created.id, ms: Math.round(performance.now() - t0), model: ANTIGRAVITY_AGENT }
 }

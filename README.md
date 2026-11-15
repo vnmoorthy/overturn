@@ -97,6 +97,7 @@ And the rules are **public**. Medicare Advantage plans are legally bound to Trad
 - **🎙️ Peer-to-peer rehearsal** — practice the P2P call against the plan’s medical director, played live by **Gemini 3.8 Live** over real-time voice, with coach cards built from the verified evidence.
 - **💬 Patient view** — a 6th-grade-level explanation in English or Spanish, read aloud by **Gemini TTS**.
 - **📊 Honest odds** — no invented probabilities: the overturn rate of **42,710 real independent medical reviews** (CA DMHC open data) for similar services, with *n* shown, plus the most similar real cases via **Gemini Embedding 2**.
+- **🛰️ Antigravity policy scout** — denial for a service that isn’t in the library (say, a knee MRI)? One click sends Google’s **Antigravity managed agent** to research the CMS Medicare Coverage Database for the governing LCD/NCD and its criteria; Overturn then continues the appeal on that policy, clearly labeled *agent-sourced — verify before filing*.
 - **🗂️ Worklist + payer playbook** — every denial ranked by dollars × public odds; each win or loss compounds into per-payer intelligence.
 - **⛓️ Hash-chained audit trail** — every AI step and human decision is SHA-256 chained in the browser. Edit history and *Verify chain* pinpoints the break.
 - **🛟 Built for flaky free tiers** — every Gemini call walks a per-task model fallback chain with timeouts (429/503/504 → next model). Demo cases also ship genuine recorded runs, used only as a clearly labeled “cached run” fallback.
@@ -149,6 +150,7 @@ flowchart LR
 | Read aloud | `gemini-3.8-flash-tts` | `gemini-3.8-flash-lite-tts` | Natural narration |
 | P2P rehearsal | `gemini-3.8-live` | — | Real-time bidirectional voice |
 | Similar cases | `gemini-embedding-2` | — | Semantic retrieval over real IMR findings |
+| Policy scout (services not in the library) | **Antigravity** managed agent `antigravity-preview-09-2026` | — | Researches the CMS Medicare Coverage Database for the governing LCD/NCD in a remote environment, returns criteria; the case continues on it, labeled agent-sourced |
 
 ## 🚀 Run it locally (2 minutes)
 
@@ -170,6 +172,16 @@ No key? Open **Settings** in the app and paste one — it is stored only in your
 | `npm run record-runs` | Re-record genuine Gemini runs for the three demo cases into `src/data/cached/` |
 | `npx tsx scripts/check-saved-runs.ts` | Re-verify every recorded run with the current verifier, rules and letter builder |
 | `node scripts/record-demo.mjs` + `scripts/make-demo-video.sh` | Record the captioned demo video from a live run |
+
+### Deploy to Google Cloud Run
+
+The repo ships a [`Dockerfile`](Dockerfile) (static build served by nginx on `:8080`):
+
+```bash
+gcloud run deploy overturn --source . --region us-central1 --allow-unauthenticated
+```
+
+Cloud Run needs a billing-enabled project (the demo fits in the always-free tier). For production, move the Gemini key into a small Cloud Run API service and call Gemini on Vertex AI under a Google Cloud BAA.
 
 ### Deploy (free)
 

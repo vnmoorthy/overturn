@@ -29,7 +29,7 @@ function DropZone({ label, icon, onFile, busy, accept }: { label: string; icon: 
   )
 }
 
-const RESET = { denial: null, extractedText: undefined, match: null, entailments: null, confirmed: {}, letter: null, signedBy: null, patientExplainer: null, versionLabel: null, status: 'new' as const }
+const RESET = { denial: null, extractedText: undefined, familyId: null, match: null, entailments: null, confirmed: {}, letter: null, signedBy: null, patientExplainer: null, versionLabel: null, status: 'new' as const }
 
 export function InputsPanel({ c, onRun, running }: { c: CaseFile; onRun: () => void; running: boolean }) {
   const [busy, setBusy] = useState<'denial' | 'chart' | null>(null)

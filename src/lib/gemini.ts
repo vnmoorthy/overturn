@@ -44,13 +44,13 @@ export function chain(task: Task): string[] {
   const max = getQuality() === 'max'
   switch (task) {
     case 'extract': return ['gemini-3.8-flash', 'gemini-3.5-flash', 'gemini-4-hydrogen', 'gemini-3.5-flash-lite']
-    case 'transcribe': return ['gemini-3.5-flash', 'gemini-3.8-flash', 'gemini-4-hydrogen']
+    case 'transcribe': return ['gemini-3.5-flash', 'gemini-3.8-flash', 'gemini-4-hydrogen', 'gemini-3.5-flash-lite']
     case 'locate': return ['gemini-3.5-flash-lite', 'gemini-3.5-flash', 'gemini-3.1-flash-lite']
     case 'match': return max ? ['gemini-4-hydrogen', 'gemini-3.8-flash', 'gemini-3.5-flash', 'gemini-3.5-flash-lite'] : ['gemini-3.5-flash', 'gemini-3.8-flash', 'gemini-4-hydrogen', 'gemini-3.5-flash-lite']
     case 'entail': return ['gemini-3.5-flash', 'gemini-3.8-flash', 'gemini-4-hydrogen', 'gemini-3.5-flash-lite']
     case 'letter': return max ? ['gemini-4-hydrogen', 'gemini-3.8-flash', 'gemini-3.5-flash', 'gemini-3.5-flash-lite'] : ['gemini-3.5-flash', 'gemini-3.8-flash', 'gemini-4-hydrogen', 'gemini-3.5-flash-lite']
     case 'explain': return ['gemini-3.5-flash', 'gemini-3.8-flash', 'gemini-3.5-flash-lite']
-    case 'coach': return ['gemini-3.5-flash', 'gemini-3.8-flash', 'gemini-4-hydrogen']
+    case 'coach': return ['gemini-3.5-flash', 'gemini-3.8-flash', 'gemini-4-hydrogen', 'gemini-3.5-flash-lite']
     case 'tts': return ['gemini-3.8-flash-tts', 'gemini-3.8-flash-lite-tts']
     case 'embed': return ['gemini-embedding-2']
   }
@@ -58,6 +58,7 @@ export function chain(task: Task): string[] {
 export type Task = 'extract' | 'transcribe' | 'locate' | 'match' | 'entail' | 'letter' | 'explain' | 'coach' | 'tts' | 'embed'
 
 export const LIVE_MODEL = 'gemini-3.8-live'
+export const ANTIGRAVITY_AGENT = 'antigravity-preview-09-2026'
 
 const TIMEOUTS: Record<Task, number> = {
   extract: 45_000, transcribe: 60_000, locate: 20_000, match: 120_000, entail: 60_000,

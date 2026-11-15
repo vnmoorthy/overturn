@@ -29,7 +29,17 @@ try {
   versions = Object.values(mods)
 } catch { /* non-vite runtime: use setPolicyVersions */ }
 
+const LS_CUSTOM = 'overturn_custom_policies'
+function loadCustom(): PolicyVersion[] { try { return JSON.parse(localStorage.getItem(LS_CUSTOM) || '[]') } catch { return [] } }
+versions = versions.concat(loadCustom())
 let families: PolicyFamily[] = build(versions)
+
+/** Add a policy version sourced by the Antigravity research agent (labeled; not CMS-verbatim). */
+export function registerCustomVersion(v: PolicyVersion) {
+  versions = versions.filter(x => !(x.id === v.id && x.version_label === v.version_label)).concat(v)
+  families = build(versions)
+  try { localStorage.setItem(LS_CUSTOM, JSON.stringify(loadCustom().filter(x => !(x.id === v.id && x.version_label === v.version_label)).concat(v))) } catch { /* ignore */ }
+}
 
 function build(list: PolicyVersion[]): PolicyFamily[] {
   const byId = new Map<string, PolicyVersion[]>()

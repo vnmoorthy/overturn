@@ -173,7 +173,7 @@ async function assets() {
 
   // 5 — Demo
   {
-    const s = add(`1:10 – 1:40 — Live demo\n\nSAY: This is Maria’s real run. Gemini 4 read the policy, all three of its historical versions, and her chart in one pass. Two of the plan’s requirements were retired by CMS — in 2021 and 2023. The third appears in no version of the policy at all. And her chart meets all six criteria that actually apply — every quote verified verbatim.” (Optional: switch to the app tab and click Policy time-travel.)\n\nMOTION: Findings screenshot frames in; the three callouts zoom: 3 violations · 12/12 quotes verified · 6/6 criteria met.`)
+    const s = add(`1:10 – 1:40 — Live demo\n\nSAY: This is Maria’s real run. Gemini 4 read the policy, all three of its historical versions, and her chart in one pass. Two of the plan’s requirements were retired by CMS — in 2021 and 2023. The third appears in no version of the policy at all. And her chart meets all six criteria that actually apply — every quote verified verbatim.” (Optional: switch to the app tab and click Policy time-travel.)\n\nMOTION: The recorded live run (embedded video — click it to play) frames in; the three callouts zoom: 3 violations · 12/12 quotes verified · 6/6 criteria met.`)
     eyebrow(s, 'Live demo · Maria’s CGM denial'); title(s, 'They denied her with a rule', 'CMS retired in 2021')
     // Real product footage: the recorded live run plays on click (poster = findings screenshot)
     const vid = path.join(ROOT, 'docs/demo/overturn-demo.mp4')
@@ -218,7 +218,7 @@ async function assets() {
 
   // 7 — Gemini
   {
-    const s = add(`2:02 – 2:15 — Built on Gemini, end to end\n\nSAY: It’s Gemini end to end — 4 Hydrogen for long context, 3.8 Flash for multimodal intake, 3.8 Live to rehearse the peer-to-peer call with the plan’s medical director, TTS for patients in English and Spanish — with fallback chains so it never breaks on stage.\n\nMOTION: Model table fades in row by row; architecture diagram zooms; “Never breaks on stage” card.`)
+    const s = add(`2:02 – 2:15 — Built on Gemini, end to end\n\nSAY: It’s Gemini end to end — 4 Hydrogen for long context, 3.8 Flash for multimodal intake, 3.8 Live to rehearse the peer-to-peer call with the plan’s medical director, TTS for patients in English and Spanish, and Google’s Antigravity agent researches policies we haven’t loaded yet — with fallback chains so it never breaks on stage.\n\nMOTION: Model table fades in row by row; architecture diagram zooms; “Never breaks on stage” card.`)
     eyebrow(s, 'Under the hood'); title(s, 'Built on Gemini,', 'end to end')
     const rows = [
       ['Read the denial', 'gemini-3.8-flash', 'multimodal → JSON schema'],
@@ -228,10 +228,11 @@ async function assets() {
       ['P2P rehearsal', 'gemini-3.8-live', 'real-time voice'],
       ['Patient view', 'gemini-3.8-flash-tts', 'EN / ES narration'],
       ['Similar cases', 'gemini-embedding-2', '42,710 real IMRs'],
+      ['Policy scout', 'Antigravity agent', 'researches new LCDs'],
     ]
     const tbl = [[{ text: 'Task', options: { bold: true, color: COL.dim } }, { text: 'Model', options: { bold: true, color: COL.dim } }, { text: 'How', options: { bold: true, color: COL.dim } }]]
       .concat(rows.map(r => [{ text: r[0], options: { color: COL.ink } }, { text: r[1], options: { color: 'C4B5FD', fontFace: 'Courier New' } }, { text: r[2], options: { color: COL.mute } }]))
-    s.addTable(tbl, { x: 0.6, y: 1.75, w: 6.6, colW: [1.95, 2.45, 2.2], fontSize: 13, fontFace: BODY, rowH: 0.52, border: { type: 'solid', color: COL.line, pt: 0.75 }, fill: { color: '0B0D14' }, valign: 'middle', objectName: name(s, 'model-table') })
+    s.addTable(tbl, { x: 0.6, y: 1.75, w: 6.6, colW: [1.95, 2.45, 2.2], fontSize: 13, fontFace: BODY, rowH: 0.47, border: { type: 'solid', color: COL.line, pt: 0.75 }, fill: { color: '0B0D14' }, valign: 'middle', objectName: name(s, 'model-table') })
     shot(s, path.join(ROOT, 'docs/architecture.png'), 7.6, 1.75, 5.05, 3.35, 'architecture')
     card(s, 7.6, 5.4, 5.05, 1.05, 'fallback-card')
     T(s, [{ text: 'Never breaks on stage. ', options: { bold: true, color: COL.green } }, { text: 'Every call walks a per-task fallback chain (429 / 503 / 504 → next model) with a live agent trace.', options: { color: COL.mute } }], { x: 7.85, y: 5.5, w: 4.6, h: 0.85, fontSize: 12.5, valign: 'middle' }, 'fallback')

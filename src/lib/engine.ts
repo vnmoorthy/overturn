@@ -168,7 +168,7 @@ export async function runCase(caseId: string, opts: { replay?: boolean; from?: S
     // 2 — locate
     setStep(caseId, 'locate', { status: 'running' })
     const t0 = performance.now()
-    let family = P.locateByCode(denial, getFamilies()) || (c.hero || c.id.startsWith('wl-') ? familyById(c.familyId) : null)
+    let family = P.locateByCode(denial, getFamilies()) || (c.hero || c.id.startsWith('wl-') || familyById(c.familyId)?.versions.some(v => v.version_label === 'agent-sourced') ? familyById(c.familyId) : null)
     let locModel = 'code router'
     if (!family) {
       try {
@@ -177,7 +177,7 @@ export async function runCase(caseId: string, opts: { replay?: boolean; from?: S
         locModel = r.model
       } catch { /* fall through */ }
     }
-    if (!family) throw new Error('No matching coverage policy in the library for this service. Supported today: CGM (L33822), PAP for sleep apnea (L33718), facet joint interventions (L38801).')
+    if (!family) throw new Error('No matching coverage policy in the library for this service. Supported today: CGM (L33822), PAP for sleep apnea (L33718), facet joint interventions (L38801) — or send the Antigravity agent to research it.')
     const effective = P.effectiveVersion(family, denial.date_of_service)
     caseStore.update(caseId, { familyId: family.id, versionLabel: effective.version_label })
     setStep(caseId, 'locate', { status: 'done', model: locModel, ms: Math.round(performance.now() - t0), note: `${family.id} · in effect ${effective.effective_date}` })
